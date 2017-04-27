@@ -20,6 +20,7 @@ public class Cylinder extends GridComponent {
         this.charge = charge;
         this.flipVertical = fV;
         this.type = ComponentType.Cylinder;
+        this.surfaceArea = getSurfaceArea();
     }
 
     public double getSurfaceArea() {

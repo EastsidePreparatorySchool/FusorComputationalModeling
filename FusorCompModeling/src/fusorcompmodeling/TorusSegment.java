@@ -26,6 +26,7 @@ public class TorusSegment extends GridComponent {
         this.charge = charge;
         this.flipVertical = fV;
         this.type = ComponentType.TorusSegment;
+        this.surfaceArea = getSurfaceArea();
     }
     
     @Override

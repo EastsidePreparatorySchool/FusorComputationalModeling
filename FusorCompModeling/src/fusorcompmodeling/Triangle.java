@@ -22,6 +22,7 @@ public class Triangle extends GridComponent {
         this.points = points;
         this.charge = charge;
         this.type = ComponentType.Triangle;
+        this.surfaceArea = getSurfaceArea();
     }
     
     

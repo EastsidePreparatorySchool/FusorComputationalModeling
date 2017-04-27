@@ -18,6 +18,7 @@ public abstract class GridComponent {
     public ComponentType type;
     public double height;
     public boolean flipVertical;
+    public double surfaceArea;
     
     public abstract Point getRandomPoint(Random r);
     
