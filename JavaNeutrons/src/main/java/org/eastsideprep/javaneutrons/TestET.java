@@ -5,9 +5,29 @@
  */
 package org.eastsideprep.javaneutrons;
 
+import java.io.IOException;
+import javafx.application.Platform;
+import javafx.geometry.Point3D;
 import javafx.scene.Group;
+import javafx.scene.shape.DrawMode;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.eastsideprep.javaneutrons.assemblies.Assembly;
+import org.eastsideprep.javaneutrons.assemblies.Element;
+import org.eastsideprep.javaneutrons.assemblies.Part;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
-
+import org.eastsideprep.javaneutrons.core.Util;
+import org.eastsideprep.javaneutrons.materials.HumanBodyMaterial;
+import org.eastsideprep.javaneutrons.materials.Hydrogen;
+import org.eastsideprep.javaneutrons.materials.Paraffin;
+import org.eastsideprep.javaneutrons.materials.Steel;
+import org.eastsideprep.javaneutrons.materials.Vacuum;
+import org.eastsideprep.javaneutrons.shapes.Cuboid;
+import org.eastsideprep.javaneutrons.shapes.HumanBody;
+import org.eastsideprep.javaneutrons.shapes.Shape;
+import org.fxyz3d.shapes.primitives.CuboidMesh;
 /**
  *
  * @author gunnar
