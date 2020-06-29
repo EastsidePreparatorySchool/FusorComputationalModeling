@@ -37,7 +37,8 @@ public class CameraControl {
     private double xRot;
     private double yRot;
     private double zTrans;
-    public HBox outer;
+    public Group outer;
+    public SubScene subScene;
 
     public CameraControl(int widthPX, int heightPX) {
         // initial camera values
@@ -65,23 +66,23 @@ public class CameraControl {
         camera = new PerspectiveCamera(true);
         updateCamera();
         camera.setNearClip(0.1);
-        camera.setFarClip(2000);
+        camera.setFarClip(20000);
 
         root.getChildren().add(camera);
 
         // Use a SubScene       
-        SubScene subScene = new SubScene(root, pxX, pxY, true, SceneAntialiasing.BALANCED);
+        subScene = new SubScene(root, pxX, pxY, true, SceneAntialiasing.BALANCED);
         subScene.setFill(Color.WHITE);
         subScene.setCamera(camera);
-        outer = new HBox(subScene);
-        subScene.widthProperty().bind(outer.widthProperty());
-        subScene.heightProperty().bind(outer.heightProperty());
+        outer = new Group(subScene);
+//        subScene.widthProperty().bind(outer.widthProperty());
+//        subScene.heightProperty().bind(outer.heightProperty());
         //subScene.setOnMouseClicked((e) -> focus(e));
 
-        outer.setPrefSize(pxX, pxY);
-        outer.setMaxSize(pxX, pxY);
-        outer.setMinSize(200, 200);
-        outer.setAlignment(Pos.TOP_LEFT);
+//        outer.setPrefSize(pxX, pxY);
+//        outer.setMaxSize(pxX, pxY);
+//        outer.setMinSize(200, 200);
+        //outer.setAlignment(Pos.TOP_LEFT);
         root.setAutoSizeChildren(true);
 
         updateCamera();

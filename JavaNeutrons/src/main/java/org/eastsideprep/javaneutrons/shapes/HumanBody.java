@@ -5,7 +5,7 @@
  */
 package org.eastsideprep.javaneutrons.shapes;
 
-import org.eastsideprep.javaneutrons.Test;
+import org.eastsideprep.javaneutrons.TestGM;
 
 /**
  *

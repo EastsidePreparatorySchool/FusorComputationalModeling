@@ -6,7 +6,6 @@
 package org.eastsideprep.javaneutrons.materials;
 
 import org.eastsideprep.javaneutrons.core.Event;
-import org.eastsideprep.javaneutrons.core.Util;
 
 /**
  *
@@ -32,10 +31,12 @@ public class Air extends Gas {
         super(name, pressure);
         
         // Google answer "density of air"
-        double massDensitySTP = 1.225;
+        double massDensitySTP = 1.205;
 
-        this.addComponent(Nitrogen.getInstance(), 78.08);
-        this.addComponent(Oxygen.getInstance(), 20.09);
+        this.addComponent(Carbon.getInstance(), 0.000150);
+        this.addComponent(Nitrogen.getInstance(), 0.784431);
+        this.addComponent(Oxygen.getInstance(), 0.210748);
+        this.addComponent(Argon.getInstance(), 0.004671);
 
         // that's 100 Pa for STP
         this.calculateAtomicDensities(massDensitySTP * pressure / 100);

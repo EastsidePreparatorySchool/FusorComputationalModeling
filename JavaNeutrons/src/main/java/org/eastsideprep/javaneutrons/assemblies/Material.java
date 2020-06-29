@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -114,7 +115,7 @@ public class Material {
     }
 
     private double randomPathLength(double energy) {
-        double length = -Math.log(Util.Math.random.nextDouble()) / getSigma(energy);
+        double length = -Math.log(ThreadLocalRandom.current().nextDouble()) / getSigma(energy);
         this.lengths.record(1, length);
         synchronized (this) {
             this.totalFreePath += length;
@@ -140,7 +141,7 @@ public class Material {
         }
 
         // random draw from across the combined distribution
-        double rand = Util.Math.random.nextDouble() * sum;
+        double rand = ThreadLocalRandom.current().nextDouble() * sum;
         //System.out.println("sum: "+sum+"draw: "+rand);
 
         // now find the component index

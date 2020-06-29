@@ -5,27 +5,23 @@
  */
 package org.eastsideprep.javaneutrons.core;
 
-import java.util.Random;
 import java.util.concurrent.LinkedTransferQueue;
-import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
+import java.util.concurrent.ThreadLocalRandom;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.DrawMode;
-import javafx.scene.shape.Mesh;
-import javafx.scene.shape.MeshView;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
-import javafx.util.Duration;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.fxyz3d.shapes.primitives.PyramidMesh;
 
 /**
  *
@@ -35,11 +31,9 @@ public class Util {
 
     static public class Math {
 
-        public static Random random = new Random();
-
         public static Vector3D randomDir() {
-            double phi = Util.Math.random.nextDouble() * 2 * java.lang.Math.PI;
-            double z = Util.Math.random.nextDouble() * 2 - 1;
+            double phi = ThreadLocalRandom.current().nextDouble() * 2 * java.lang.Math.PI;
+            double z = ThreadLocalRandom.current().nextDouble() * 2 - 1;
             double theta = java.lang.Math.asin(z);
             return new Vector3D(java.lang.Math.cos(theta) * java.lang.Math.cos(phi), java.lang.Math.cos(theta) * java.lang.Math.sin(phi), z);
         }
@@ -48,7 +42,9 @@ public class Util {
         // similar
         //
         public static Vector3D randomGaussianComponentVector(double sd) {
-            return new Vector3D(random.nextGaussian() * sd, random.nextGaussian() * sd, random.nextGaussian() * sd);
+            return new Vector3D(ThreadLocalRandom.current().nextGaussian() * sd,
+                    ThreadLocalRandom.current().nextGaussian() * sd,
+                    ThreadLocalRandom.current().nextGaussian() * sd);
         }
 
         //
@@ -131,15 +127,26 @@ public class Util {
     static public class Physics {
 
         //final public static double boltzmann = 8.61733333353e-5; //eV/K
-        final public static double boltzmann = 1.38064852e-23; // SI with cm
+        final public static double boltzmann = 1.380649e-19; // SI with cm
         final public static double roomTemp = 293.0; // K
         final public static double protonMass = 1.67262192369e-27; // SI
         final public static double eV = 1.60218e-19 * 1e4; // 1 eV in SI with cm
         final public static double barn = 1e-24; // 1 barn in SI cm
+        final public static double Da = 1.6605e-27; // Dalton amu in kg
         // factor 1e4 is from using cm, not m here - 100^2
     }
 
     static public class Graphics {
+
+        //
+        // setColor for JavaFX shapes
+        //
+        public static void setColor(Shape3D n, String webColor) {
+            final PhongMaterial pm = new PhongMaterial();
+            pm.setSpecularColor(Color.web(webColor));
+            pm.setDiffuseColor(Color.web(webColor));
+            n.setMaterial(pm);
+        }
 
         public static void drawSphere(LinkedTransferQueue<Node> g, Vector3D position, float radius, String webColor) {
             Sphere s = new Sphere(radius);
@@ -153,8 +160,6 @@ public class Util {
 
             g.add(s);
         }
-
-    
 
         public static void drawCube(LinkedTransferQueue<Node> g, Vector3D position, float side, String webColor) {
             Box s = new Box(side, side, side);
@@ -187,6 +192,44 @@ public class Util {
             g.add(line);
         }
 
+        public static void drawLine(LinkedTransferQueue<Node> g, Vector3D p1, Vector3D p2, double size, double energy) {
+            drawLine(g, p1, p2, size, heatColor(energy));
+
+        }
+
+        public static Color heatColor(double energy) {
+            double value = java.lang.Math.log10(energy/Util.Physics.eV);
+            int min = -4;
+            int max = 7;
+
+            double hue = Color.BLUE.getHue() + (Color.RED.getHue() - Color.BLUE.getHue()) * (value - (min)) / (max - min);
+            Color color = Color.hsb(hue, 1.0, 1.0);
+            return color;
+        }
+
+        public static Image createHeatMap(int width, int height) {
+            WritableImage image = new WritableImage(width, height);
+            PixelWriter pixelWriter = image.getPixelWriter();
+            int min = -4;
+            int max = 7;
+
+            for (int y = 0; y < height; y++) {
+                double value = max - (max - min) * y / (double)height;
+                Color color = heatColor(java.lang.Math.pow(10,value)*Util.Physics.eV);
+                for (int x = 0; x < width; x++) {
+                    pixelWriter.setColor(x, y, color);
+                }
+            }
+
+            for (int i = min; i < max; i++) {
+                int y = (int)((i-min)/(double)(max-min)*height);
+                for (int x = 0; x < width; x++) {
+                    pixelWriter.setColor(x, y, Color.BLACK);
+                }
+            }
+            return image;
+        }
+
         //
         // visualizeEvent
         //
@@ -208,7 +251,7 @@ public class Util {
                         break;
                     case Scatter:
                         color = "yellow";
-                        size *=3;
+                        size *= 0.5;
                         break;
                     case EmergencyExit:
                         color = "purple";
@@ -216,7 +259,7 @@ public class Util {
                         break;
                     case Capture:
                         color = "lightblue";
-                        size *= 3;
+                        size *= 2;
                         break;
                     default:
                         color = "black";

@@ -8,7 +8,7 @@ package org.eastsideprep.javaneutrons.materials;
 import org.eastsideprep.javaneutrons.assemblies.Material;
 
 //
-// Water (H2O)
+// Water (H2O) Material # 354
 //
 public class Water extends Material {
 
@@ -16,9 +16,9 @@ public class Water extends Material {
 
     Water() {
         super("Water");
-        this.addComponent(Hydrogen.getInstance(), 2);
-        this.addComponent(Oxygen.getInstance(), 1);
-        this.calculateAtomicDensities(997);
+        this.addComponent(Hydrogen.getInstance(), 0.666657);
+        this.addComponent(Oxygen.getInstance(), 0.333343);
+        this.calculateAtomicDensities(998);
     }
 
     Water(String name) {

@@ -21,11 +21,11 @@ public class Paraffin extends Material {
 
     Paraffin() {
         super("Paraffin");
-        this.addComponent(Carbon.getInstance(), 31);
+        this.addComponent(Carbon.getInstance(), 324689);
         //System.out.println("before adding h");
-        this.addComponent(Hydrogen.getInstance(), 64);
+        this.addComponent(Hydrogen.getInstance(), 675311);
         //System.out.println("before adding h");
-        this.calculateAtomicDensities(781);
+        this.calculateAtomicDensities(930);
     }
 
     Paraffin(String name) {

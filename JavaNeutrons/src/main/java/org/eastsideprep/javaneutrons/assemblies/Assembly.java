@@ -37,15 +37,28 @@ public class Assembly extends Part {
     }
 
     // use this constructor to construct an assembly from an OBJ file
-    public Assembly(String name, URL url, Object material) {
+    public Assembly(String name, URL url, Object material, String unit) {
         super(name, null, material);
 
         material = Material.getRealMaterial(material);
 
         this.g = new AssemblyGroup(this);
 
-        ArrayList<Shape> shapes = Shape.loadOBJ(url);
+        ArrayList<Shape> shapes;
+
+        if (url.toString().toLowerCase().endsWith("obj")) {
+            shapes = Shape.loadOBJ(url, unit);
+        } else if (url.toString().toLowerCase().endsWith("stl")) {
+            shapes = Shape.loadSTL(url, unit);
+        } else {
+            throw new IllegalArgumentException("Assembly contructor: Not OBJ/STL file: " + url);
+        }
         this.addAll(Part.NewPartsFromShapeList(name, shapes, (Material) material));
+    }
+
+    // use this constructor to construct an assembly from an OBJ file
+    public Assembly(String name, URL url, Object material) {
+        this(name, url, material, "cm");
     }
 
     public Group getGroup() {
@@ -95,7 +108,7 @@ public class Assembly extends Part {
                 event = interactionEvent;
                 if (event.position.getNorm() <= Environment.limit) {
                     // scattering / absorption in medium did really happen, process it
-                    n.setPosition(event.position);
+                    n.setPosition(visualizations, event.position);
                     medium.processEvent(event);
                     Util.Graphics.visualizeEvent(event, visualizations);
                 }
@@ -103,7 +116,7 @@ public class Assembly extends Part {
                 // no interaction, we will just enter a new part
                 Util.Graphics.visualizeEvent(partEvent, n.direction, visualizations);
                 Part p = partEvent.part;
-                n.setPosition(partEvent.position);
+                n.setPosition(visualizations, partEvent.position);
                 n.record(partEvent);
                 //System.out.println("Entering part " + p.name);
                 event = p.evolveNeutronPath(n, visualizations, false);
@@ -114,7 +127,8 @@ public class Assembly extends Part {
             // if things happened far enough from the origin, call it gone
             if (event.position.getNorm() > Environment.limit) {
                 Environment.recordEscape(n.energy);
-                event = new Event(n.position.add(n.direction.scalarMultiply(10)), Event.Code.Gone, 10, 0);
+                event = new Event(n.position.add(n.direction.scalarMultiply(Environment.limit)), Event.Code.Gone, Environment.limit, 0);
+                n.setPosition(visualizations, event.position);
             }
             //visualizeEvent(event, visualizations);
         } while (event.code != Event.Code.Capture && event.code != Event.Code.Gone && event.code != Event.Code.EmergencyExit);

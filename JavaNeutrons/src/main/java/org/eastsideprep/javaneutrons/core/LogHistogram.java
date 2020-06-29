@@ -11,6 +11,7 @@ import javafx.scene.chart.XYChart;
 
 public class LogHistogram {
 
+    static final int binsPerDecade = 10;
     int logMin;
     int logMax;
     double[] bins;
@@ -25,7 +26,7 @@ public class LogHistogram {
     public LogHistogram() {
         this.logMin = -6;
         this.logMax = 7;
-        this.bins = new double[(logMax-logMin)*5];
+        this.bins = new double[(logMax - logMin) * LogHistogram.binsPerDecade];
         //this.bins = new double[logMax - logMin + 1];
     }
 
@@ -83,4 +84,30 @@ public class LogHistogram {
 
         return series;
     }
+
+    public XYChart.Series makeSeries(String seriesName, long count) {
+        //System.out.println("Retrieving series "+seriesName+":");
+        XYChart.Series series = new XYChart.Series();
+        ObservableList data = series.getData();
+        series.setName(seriesName);
+
+        // put in all the data
+        double[] counts = new double[this.bins.length];
+
+        synchronized (this) {
+            System.arraycopy(this.bins, 0, counts, 0, counts.length);
+        }
+
+        //System.out.println(""+this.hashCode()+Arrays.toString(bins));
+        for (int i = 0; i < bins.length; i++) {
+            double x = Math.pow(10, logMin + i / ((double) bins.length) * (logMax - logMin));
+            DecimalFormat f = new DecimalFormat("0.##E0");
+            String tick = f.format(x);
+            data.add(new XYChart.Data(tick, counts[i] / (double) count));
+            //System.out.println(""+this.hashCode() +": "+ tick +":"+ counts[i - logMin] + " ");
+        }
+
+        return series;
+    }
+
 }

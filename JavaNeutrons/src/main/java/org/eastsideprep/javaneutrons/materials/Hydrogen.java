@@ -8,7 +8,7 @@ package org.eastsideprep.javaneutrons.materials;
 import org.eastsideprep.javaneutrons.assemblies.Element;
 
 //
-// Molecular hydrogen in molecular form
+// 
 //
 public class Hydrogen extends Element {
 
