@@ -94,33 +94,33 @@ public class AssemblyJSONConverter {
             rivers = e;
         }
 
-        String assembly_name;
-        URL assembly_url;
-        Object assembly_material;
-        String assembly_unit;
-        
-        public HashMap<String, Part> part_namedParts = new HashMap<>();
-        public Shape part_shape;
-        public Material part_material;
-        public String part_name;
-
-        // universal detector functionality
-        public LogEnergyEVHistogram entriesOverEnergy;
-        public LogEnergyEVHistogram fluenceOverEnergy;
-        public LogEnergyEVHistogram scattersOverEnergyBefore;
-        public LogEnergyEVHistogram scattersOverEnergyAfter;
-        public LogEnergyEVHistogram capturesOverEnergy;
-        private double volume = 0;
-        private double currentEntryEnergy = 0;
-        private double totalDepositedEnergy = 0;
-        private double totalFluence = 0;
-        private int totalEvents = 0;
-
-        AssemblyBuilder(String name, URL url, Object material) {
-            assembly_name = name;
-            assembly_url = url;
-            assembly_material = material;
-        }
+//        String assembly_name;
+//        URL assembly_url;
+//        Object assembly_material;
+//        String assembly_unit;
+//        
+//        public HashMap<String, Part> part_namedParts = new HashMap<>();
+//        public Shape part_shape;
+//        public Material part_material;
+//        public String part_name;
+//
+//        // universal detector functionality
+//        public LogEnergyEVHistogram entriesOverEnergy;
+//        public LogEnergyEVHistogram fluenceOverEnergy;
+//        public LogEnergyEVHistogram scattersOverEnergyBefore;
+//        public LogEnergyEVHistogram scattersOverEnergyAfter;
+//        public LogEnergyEVHistogram capturesOverEnergy;
+//        private double volume = 0;
+//        private double currentEntryEnergy = 0;
+//        private double totalDepositedEnergy = 0;
+//        private double totalFluence = 0;
+//        private int totalEvents = 0;
+//
+//        AssemblyBuilder(String name, URL url, Object material) {
+//            assembly_name = name;
+//            assembly_url = url;
+//            assembly_material = material;
+//        }
 
     }
 
