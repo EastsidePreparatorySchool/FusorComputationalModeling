@@ -73,6 +73,7 @@ public class TestET {
         System.out.println(fd.sure);
         System.out.println(fd.what);
         
+
         
         
         
@@ -86,6 +87,7 @@ public class TestET {
 //        Util.Graphics.drawCoordSystem(visualizations);
 //
 //        return new MonteCarloSimulation(igloo2, Vector3D.ZERO, visualizations);
+        
         return simulationTest3(visualizations);
      }
     public static MonteCarloSimulation simulationTest2(Group visualizations) {
