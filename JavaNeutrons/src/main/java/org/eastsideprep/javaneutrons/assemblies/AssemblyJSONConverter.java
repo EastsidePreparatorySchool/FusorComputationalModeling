@@ -76,8 +76,17 @@ public class AssemblyJSONConverter {
     }
 
     AssemblyBuilder jsonbuild(Assembly a) {
-        AssemblyBuilder hope = new AssemblyBuilder(1, 2, "df", true);
-        return null;
+        String name=a.name;
+        URL partorurl=a.getURL();
+        String material=a.material.name;
+        
+//                name
+//                url
+//                material
+        
+        AssemblyBuilder hope = new AssemblyBuilder(name, partorurl, material);
+        
+        return hope;
     }
 
     public class AssemblyBuilder {
@@ -93,12 +102,14 @@ public class AssemblyJSONConverter {
             no = d;
             rivers = e;
         }
-
-        String assembly_name;
-        URL assembly_url;
-        Object assembly_material;
-        String assembly_unit;
         
+        //assembly
+        public String assembly_name;
+        public URL assembly_url;
+        public String assembly_material;
+        public String assembly_unit;
+        
+        //part
         public HashMap<String, Part> part_namedParts = new HashMap<>();
         public Shape part_shape;
         public Material part_material;
@@ -116,7 +127,7 @@ public class AssemblyJSONConverter {
         private double totalFluence = 0;
         private int totalEvents = 0;
 
-        AssemblyBuilder(String name, URL url, Object material) {
+        AssemblyBuilder(String name, URL url, String material) {
             assembly_name = name;
             assembly_url = url;
             assembly_material = material;
@@ -172,8 +183,15 @@ public class AssemblyJSONConverter {
             System.err.println("Error reading JSON file \n" + x + "\n" + e);
         }
 
-        Assembly a = gson.fromJson(input, Assembly.class);
-
-        return a;
+        AssemblyBuilder a = gson.fromJson(input, AssemblyBuilder.class);
+        
+        String x1=a.assembly_name;
+        URL x2=a.assembly_url;
+        Material x3= Material.getRealMaterial(a.assembly_material);
+        
+        Assembly b = new Assembly(x1,x2,x3);
+        
+        //only works with obj
+        return b;
     }
 }

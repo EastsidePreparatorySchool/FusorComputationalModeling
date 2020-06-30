@@ -30,6 +30,7 @@ public class Assembly extends Part {
     // todo: acceleration structure
 
     private AssemblyGroup g;
+    private URL u;
 
     public Assembly(String name) {
         super(name, null, null);
@@ -39,7 +40,7 @@ public class Assembly extends Part {
     // use this constructor to construct an assembly from an OBJ file
     public Assembly(String name, URL url, Object material, String unit) {
         super(name, null, material);
-
+        
         material = Material.getRealMaterial(material);
 
         this.g = new AssemblyGroup(this);
@@ -54,6 +55,9 @@ public class Assembly extends Part {
             throw new IllegalArgumentException("Assembly contructor: Not OBJ/STL file: " + url);
         }
         this.addAll(Part.NewPartsFromShapeList(name, shapes, (Material) material));
+        
+        
+        u=url;
     }
 
     // use this constructor to construct an assembly from an OBJ file
@@ -222,5 +226,9 @@ public class Assembly extends Part {
 
         s.markSurfaceInContactWith(location, direction, (Material) material, null);
         return true;
+    }
+    
+    public URL getURL(){
+        return u;
     }
 }
