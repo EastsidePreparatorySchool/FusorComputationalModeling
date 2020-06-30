@@ -76,17 +76,17 @@ public class TestET {
         
         
         
-        
-        Assembly igloo = new Assembly("igloo", TestET.class.getResource("/meshes/igloo.obj"), "Paraffin");
-        
-        caravan.saveToJSON(igloo, "igloo"); //let's try this
-        
-        Assembly igloo2=caravan.convertFromJSON("igloo");
-        
-        Util.Graphics.drawCoordSystem(visualizations);
-
-        return new MonteCarloSimulation(igloo2, Vector3D.ZERO, visualizations);
-       // return simulationTest3(visualizations);
+//        
+//        Assembly igloo = new Assembly("igloo", TestET.class.getResource("/meshes/igloo.obj"), "Paraffin");
+//        
+//        caravan.saveToJSON(igloo, "igloo"); //let's try this
+//        
+//        Assembly igloo2=caravan.convertFromJSON("igloo");
+//        
+//        Util.Graphics.drawCoordSystem(visualizations);
+//
+//        return new MonteCarloSimulation(igloo2, Vector3D.ZERO, visualizations);
+        return simulationTest3(visualizations);
      }
     public static MonteCarloSimulation simulationTest2(Group visualizations) {
                 //

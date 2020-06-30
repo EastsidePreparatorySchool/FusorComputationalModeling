@@ -49,19 +49,19 @@ public class AssemblyJSONConverter {
 
     final static private Gson gson = new Gson();
 
-    public void saveToJSON(Assembly a, String filename) {
-        String may = System.getProperty("user.dir");
-        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
-        try {
-            FileWriter f = new FileWriter(x);
-            AssemblyBuilder temp = jsonbuild(a);
-
-            f.write(gson.toJson(temp));
-            f.close();
-        } catch (IOException e) {
-            System.err.println("Error saving JSON file \n" + x + "\n" + e);
-        }
-    }
+//    public void saveToJSON(Assembly a, String filename) {
+//        String may = System.getProperty("user.dir");
+//        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+//        try {
+//            FileWriter f = new FileWriter(x);
+//            AssemblyBuilder temp = jsonbuild(a);
+//
+//            f.write(gson.toJson(temp));
+//            f.close();
+//        } catch (IOException e) {
+//            System.err.println("Error saving JSON file \n" + x + "\n" + e);
+//        }
+//    }
 
     public void saveToJSON(AssemblyBuilder a, String filename) {
         String may = System.getProperty("user.dir");
@@ -166,32 +166,32 @@ public class AssemblyJSONConverter {
         return a;
     }
 
-    public Assembly convertFromJSON(String filename) {
-        String may = System.getProperty("user.dir");
-        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
-
-        String input = "";
-        try {
-            FileReader f = new FileReader(x);
-            int i;
-            while ((i = f.read()) != -1) {
-                input += (char) i;
-            }
-            // System.out.println(input);
-            f.close();
-        } catch (IOException e) {
-            System.err.println("Error reading JSON file \n" + x + "\n" + e);
-        }
-
-        AssemblyBuilder a = gson.fromJson(input, AssemblyBuilder.class);
-        
-        String x1=a.assembly_name;
-        URL x2=a.assembly_url;
-        Material x3= Material.getRealMaterial(a.assembly_material);
-        
-        Assembly b = new Assembly(x1,x2,x3);
-        
-        //only works with obj
-        return b;
-    }
+//    public Assembly convertFromJSON(String filename) {
+//        String may = System.getProperty("user.dir");
+//        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+//
+//        String input = "";
+//        try {
+//            FileReader f = new FileReader(x);
+//            int i;
+//            while ((i = f.read()) != -1) {
+//                input += (char) i;
+//            }
+//            // System.out.println(input);
+//            f.close();
+//        } catch (IOException e) {
+//            System.err.println("Error reading JSON file \n" + x + "\n" + e);
+//        }
+//
+//        AssemblyBuilder a = gson.fromJson(input, AssemblyBuilder.class);
+//        
+//        String x1=a.assembly_name;
+//        URL x2=a.assembly_url;
+//        Material x3= Material.getRealMaterial(a.assembly_material);
+//        
+//        Assembly b = new Assembly(x1,x2,x3);
+//        
+//        //only works with obj
+//        return b;
+//    }
 }
