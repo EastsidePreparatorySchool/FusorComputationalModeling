@@ -6,6 +6,7 @@
 package org.eastsideprep.javaneutrons.assemblies;
 
 import com.google.gson.Gson;
+import java.io.FileReader;
 import java.net.URL;
 import java.io.IOException;
 import javafx.application.Platform;
@@ -32,47 +33,147 @@ import org.eastsideprep.javaneutrons.shapes.HumanBody;
 import org.eastsideprep.javaneutrons.shapes.Shape;
 import org.fxyz3d.shapes.primitives.CuboidMesh;
 import java.io.FileWriter;
+import java.util.HashMap;
+import org.eastsideprep.javaneutrons.core.LogEnergyEVHistogram;
 //import org.json.simple.JSONArray;
 //import org.json.simple.JSONObject;
 //import org.json.simple.parser.JSONParser;
 //import org.json.simple.parser.ParseException;
-import org.eastsideprep.javaneutrons.Test;
-import org.eastsideprep.javaneutrons.assemblies.AssemblyBuilder;
+//import org.eastsideprep.javaneutrons.Test;
 
 /**
  *
  * @author etardif
  */
 public class AssemblyJSONConverter {
-    
+
     final static private Gson gson = new Gson();
-    
-    void saveToJSON(Assembly a){
-        String may=System.getProperty("user.dir");
-        String x = may+"/src/main/resources/JSONassemblies";
+
+    public void saveToJSON(Assembly a, String filename) {
+        String may = System.getProperty("user.dir");
+        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
         try {
-            FileWriter f =new FileWriter(x);
+            FileWriter f = new FileWriter(x);
             AssemblyBuilder temp = jsonbuild(a);
-            gson.toJson(2123, f); //should be temp
+
+            f.write(gson.toJson(temp));
+            f.close();
         } catch (IOException e) {
-            System.err.println("Error reading saving JSON file \n" + x+"\n"+e);
+            System.err.println("Error saving JSON file \n" + x + "\n" + e);
         }
     }
-    
-    AssemblyBuilder jsonbuild(Assembly a){
+
+    public void saveToJSON(AssemblyBuilder a, String filename) {
+        String may = System.getProperty("user.dir");
+        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+        try {
+            FileWriter f = new FileWriter(x);
+            f.write(gson.toJson(a));
+            f.close();
+        } catch (IOException e) {
+            System.err.println("Error saving JSON file \n" + x + "\n" + e);
+        }
+    }
+
+    AssemblyBuilder jsonbuild(Assembly a) {
+        AssemblyBuilder hope = new AssemblyBuilder(1, 2, "df", true);
         return null;
     }
-    
-    Assembly assemblybuild(AssemblyBuilder b){
+
+    public class AssemblyBuilder {
+
+        public int sure;
+        public int what;
+        public String no;
+        public Boolean rivers;
+
+        AssemblyBuilder(int w, int s, String d, boolean e) {
+            sure = w;
+            what = s;
+            no = d;
+            rivers = e;
+        }
+
+        String assembly_name;
+        URL assembly_url;
+        Object assembly_material;
+        String assembly_unit;
+        
+        public HashMap<String, Part> part_namedParts = new HashMap<>();
+        public Shape part_shape;
+        public Material part_material;
+        public String part_name;
+
+        // universal detector functionality
+        public LogEnergyEVHistogram entriesOverEnergy;
+        public LogEnergyEVHistogram fluenceOverEnergy;
+        public LogEnergyEVHistogram scattersOverEnergyBefore;
+        public LogEnergyEVHistogram scattersOverEnergyAfter;
+        public LogEnergyEVHistogram capturesOverEnergy;
+        private double volume = 0;
+        private double currentEntryEnergy = 0;
+        private double totalDepositedEnergy = 0;
+        private double totalFluence = 0;
+        private int totalEvents = 0;
+
+        AssemblyBuilder(String name, URL url, Object material) {
+            assembly_name = name;
+            assembly_url = url;
+            assembly_material = material;
+        }
+
+    }
+
+    Assembly assemblybuild(AssemblyBuilder b) {
         return null;
     }
-    
-//    Assembly convertFromJSON(String name){
-//     //   AssemblyObject=rendered=gson.;
-//        URL u = Test.class.getResource("/JSONassemblies/+"+name+".json");
-//        
-//        gson.fromJson(, classOfT)
-//        AssemblyBuilder input = gson.fromJson(u.toString(), AssemblyBuilder);
-//        return null;
-//    }
+
+    public AssemblyBuilder assemblybuildtest(int w, int s, String d, boolean e) {
+        AssemblyBuilder a = new AssemblyBuilder(w, s, d, e);
+        return a;
+    }
+
+    public AssemblyBuilder convertFromJSONtest(String filename) {
+        String may = System.getProperty("user.dir");
+        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+
+        String input = "";
+        try {
+            FileReader f = new FileReader(x);
+            int i;
+            while ((i = f.read()) != -1) {
+                input += (char) i;
+            }
+            // System.out.println(input);
+            f.close();
+        } catch (IOException e) {
+            System.err.println("Error reading JSON file \n" + x + "\n" + e);
+        }
+
+        AssemblyBuilder a = gson.fromJson(input, AssemblyBuilder.class);
+
+        return a;
+    }
+
+    public Assembly convertFromJSON(String filename) {
+        String may = System.getProperty("user.dir");
+        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+
+        String input = "";
+        try {
+            FileReader f = new FileReader(x);
+            int i;
+            while ((i = f.read()) != -1) {
+                input += (char) i;
+            }
+            // System.out.println(input);
+            f.close();
+        } catch (IOException e) {
+            System.err.println("Error reading JSON file \n" + x + "\n" + e);
+        }
+
+        Assembly a = gson.fromJson(input, Assembly.class);
+
+        return a;
+    }
 }
