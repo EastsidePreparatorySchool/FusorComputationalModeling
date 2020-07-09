@@ -16,3 +16,5 @@ JavaNeutrons/.DS_Store
 JavaNeutrons/src/.DS_Store
 FusorCompModeling/nbproject/private/private.properties
 FusorVis/nbproject/private/private.properties
+JavaNeutrons/src/main/resources/JSONassemblies/Here.json
+JavaNeutrons/src/main/resources/JSONassemblies/WhitBuildTest1.json

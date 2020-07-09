@@ -62,18 +62,17 @@ public class TestET {
 //        }
         
         
-        AssemblyBuilder a = caravan.assemblybuildtest(1,2,"No", true);
-        caravan.saveToJSON(a, "pay_no_attention");
-        
-        
-        AssemblyBuilder fd=caravan.convertFromJSONtest("pay_no_attention");
-        
-        System.out.println(fd.no);
-        System.out.println(fd.rivers);
-        System.out.println(fd.sure);
-        System.out.println(fd.what);
-        
-
+//        AssemblyBuilder a = caravan.assemblybuildtest(6302020,100,"Remember this", true); // try saving arrayList 
+//        caravan.saveToJSON(a, "Here");                                                    // of 
+//        AssemblyBuilder fd=caravan.convertFromJSONtest("Here"); 
+//        
+//        System.out.println(fd.no);
+//        System.out.println(fd.rivers);
+//        System.out.println(fd.sure);
+//        System.out.println(fd.what);
+//        
+          AssemblyBuilder a = caravan.assemblybuildtest2();
+          caravan.saveToJSON(a, "WhitBuildTest1");
         
         
         
