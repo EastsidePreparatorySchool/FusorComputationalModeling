@@ -8,6 +8,7 @@ package org.eastsideprep.javaneutrons;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,8 +19,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -27,11 +28,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.StringConverter;
-import org.eastsideprep.javaneutrons.assemblies.Element;
-import org.eastsideprep.javaneutrons.assemblies.Material;
-import org.eastsideprep.javaneutrons.assemblies.Part;
+import org.eastsideprep.javaneutrons.core.Isotope;
+import org.eastsideprep.javaneutrons.core.Material;
+import org.eastsideprep.javaneutrons.core.Part;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
+import org.eastsideprep.javaneutrons.core.Neutron;
+import org.eastsideprep.javaneutrons.core.Util;
 
 /**
  *
@@ -44,6 +48,8 @@ public class StatsDisplay extends Group {
     VBox chartType = new VBox();
     ChoiceBox object = new ChoiceBox();
     Pane chartPane = new Pane();
+    ChoiceBox selectScale = new ChoiceBox();
+    String scale = "Log";
 
     Slider slider = new Slider();
 
@@ -51,7 +57,7 @@ public class StatsDisplay extends Group {
     BorderPane root;
     ToggleGroup tg;
 
-    private class TickConverter extends StringConverter<Number>{
+    private class TickConverter extends StringConverter<Number> {
 
         @Override
         public String toString(Number n) {
@@ -60,13 +66,13 @@ public class StatsDisplay extends Group {
 
         @Override
         public Number fromString(String string) {
-            throw new UnsupportedOperationException("Not supported yet."); 
+            throw new UnsupportedOperationException("Not supported yet.");
         }
-        
+
     }
-    
+
     public StatsDisplay(MonteCarloSimulation sim, BorderPane root) {
-        
+
         this.sim = sim;
         this.root = root;
 
@@ -84,7 +90,8 @@ public class StatsDisplay extends Group {
             if (n != null && n instanceof Chart) {
                 XYChart c = (XYChart) n;
                 double v = new_val.doubleValue();
-                v = v*v/100;
+                int scale = 5;
+                v = Math.pow(v, scale) / Math.pow(100, scale - 1);
                 NumberAxis a = (NumberAxis) c.getYAxis();
                 a.setAutoRanging(false);
                 a.setTickLabelFormatter(new TickConverter());
@@ -98,34 +105,44 @@ public class StatsDisplay extends Group {
                     }
                 }
                 a.setUpperBound(max * v / 100);
-                a.setTickUnit(max * v /(100*10));
+                a.setTickUnit(max * v / (100 * 10));
             }
         });
         object.setPrefWidth(200);
 
-        controls.getChildren().addAll(chartType, slider, object);
+        selectScale.getItems().addAll("Log", "Linear (all)", "Linear (thermal)");
+        selectScale.setValue("Log");
+        selectScale.valueProperty().addListener((a, b, c) -> {
+            this.scale = (String) selectScale.getValue();
+            this.setChart();
+        });
+
+        controls.getChildren().addAll(chartType, new Separator(), selectScale, new Separator(),
+                new Text("Zoom"), slider, new Separator(), object);
         controls.setPadding(new Insets(10, 0, 10, 0));
         hb.getChildren().addAll(controls, chartPane);
         this.getChildren().add(hb);
 
         this.populateRadioButtons();
-        this.populateComboBoxWithParts();
+        this.setComboBox();
         this.setChart();
-        
+
     }
 
     private void populateRadioButtons() {
         RadioButton rb1 = new RadioButton("Escape counts");
         RadioButton rb2 = new RadioButton("Fluence");
         RadioButton rb3 = new RadioButton("Entry counts");
-        RadioButton rb4 = new RadioButton("Event counts");
+        RadioButton rb4 = new RadioButton("Scatter counts");
         RadioButton rb5 = new RadioButton("Path lengths");
         RadioButton rb6 = new RadioButton("Sigmas");
         RadioButton rb7 = new RadioButton("Cross-sections");
+        RadioButton rb8 = new RadioButton("Custom test");
+        RadioButton rb4b = new RadioButton("Capture counts");
 
         rb2.setSelected(true);
 
-        RadioButton[] rbs = new RadioButton[]{rb2, rb3, rb4, rb1, rb5, rb6, rb7};
+        RadioButton[] rbs = new RadioButton[]{rb2, rb3, rb4, rb4b, rb1, rb5, rb6, rb7, rb8};
 
         this.tg = new ToggleGroup();
         for (RadioButton rb : rbs) {
@@ -138,6 +155,7 @@ public class StatsDisplay extends Group {
         chartType.getChildren()
                 .addAll(rbs);
     }
+    
 
     private void populateComboBoxWithParts() {
         this.object.getItems().clear();
@@ -151,7 +169,7 @@ public class StatsDisplay extends Group {
 
     private void populateComboBoxWithElements() {
         this.object.getItems().clear();
-        ArrayList<Element> elements = new ArrayList<>(Element.elements.values());
+        ArrayList<Isotope> elements = new ArrayList<>(Isotope.elements.values());
         elements.sort((a, b) -> (a.atomicNumber - b.atomicNumber));
         List<String> s = elements.stream().map(e -> e.name).collect(Collectors.toList());
         populateComboBox(s);
@@ -161,8 +179,15 @@ public class StatsDisplay extends Group {
         this.object.getItems().clear();
         populateComboBoxWithParts();
         ArrayList<String> ms = new ArrayList<>(Material.materials.keySet());
-        List<String> as = ms.stream().map(s -> "Interstitial " + s).collect(Collectors.toList());
-        populateComboBox(as);
+        populateComboBox(ms);
+    }
+
+    private void populateComboBoxWithPartsAndAir() {
+        this.object.getItems().clear();
+        populateComboBoxWithParts();
+        Set<Material> sm = this.sim.assembly.getContainedMaterials();
+        sm.add(this.sim.interstitialMaterial);
+        populateComboBox(sm.stream().map(m -> m.name).collect(Collectors.toList()));
     }
 
     private void populateComboBox(Collection<String> s) {
@@ -185,11 +210,16 @@ public class StatsDisplay extends Group {
                     break;
 
                 case "Fluence":
+                    this.populateComboBoxWithPartsAndAir();
+                    this.object.setVisible(true);
+                    break;
+
+                case "Scatter counts":
                     this.populateComboBoxWithParts();
                     this.object.setVisible(true);
                     break;
 
-                case "Entry counts":
+                case "Capture counts":
                     this.populateComboBoxWithParts();
                     this.object.setVisible(true);
                     break;
@@ -214,6 +244,15 @@ public class StatsDisplay extends Group {
                     this.object.setVisible(true);
                     break;
 
+                case "Custom test":
+                    ArrayList<String> as = new ArrayList<>();
+                    as.add("Random direction");
+                    as.add("X-axis only");
+                    this.object.getItems().clear();
+                    this.populateComboBox(as);
+                    this.object.setVisible(true);
+                    break;
+
                 default:
                     this.object.setVisible(false);
                     break;
@@ -227,31 +266,41 @@ public class StatsDisplay extends Group {
         if (t != null) {
             switch ((String) t.getUserData()) {
                 case "Escape counts":
-                    root.setCenter(this.sim.makeChart(null, null));
+                    root.setCenter(this.sim.makeChart(null, null, scale));
                     break;
 
                 case "Fluence":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Fluence"));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Fluence", scale));
                     break;
 
                 case "Entry counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Entry counts"));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Entry counts", scale));
                     break;
 
-                case "Event counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Event counts"));
+                case "Scatter counts":
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter counts", scale));
+                    break;
+
+                case "Capture counts":
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Capture counts", scale));
                     break;
 
                 case "Path lengths":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Path lengths"));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Path lengths", scale));
                     break;
 
                 case "Sigmas":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Sigmas"));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Sigmas", scale));
                     break;
 
                 case "Cross-sections":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Cross-sections"));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Cross-sections", scale));
+                    break;
+                case "Custom test":
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Custom test", scale));
+                    System.out.println("Avg room energy: " + (Neutron.totalPE / Neutron.countPE / Util.Physics.eV + " eV"));
+                    System.out.println("Avg neutron energy in: " + (Neutron.totalNE / Neutron.countNE / Util.Physics.eV + " eV"));
+                    System.out.println("Avg neutron energy out : " + (Neutron.totalNE2 / Neutron.countNE2 / Util.Physics.eV + " eV"));
                     break;
 
                 default:
@@ -260,6 +309,7 @@ public class StatsDisplay extends Group {
             }
         }
         slider.setValue(100);
+
     }
 
 }

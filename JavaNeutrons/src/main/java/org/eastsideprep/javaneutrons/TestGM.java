@@ -8,17 +8,25 @@ package org.eastsideprep.javaneutrons;
 import javafx.application.Platform;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
+import javafx.scene.chart.XYChart;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.eastsideprep.javaneutrons.assemblies.Assembly;
-import org.eastsideprep.javaneutrons.assemblies.Part;
+import org.eastsideprep.javaneutrons.core.Assembly;
+import org.eastsideprep.javaneutrons.core.EnergyHistogram;
+import org.eastsideprep.javaneutrons.core.Event;
+import org.eastsideprep.javaneutrons.core.Part;
+import org.eastsideprep.javaneutrons.core.Isotope;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
+import org.eastsideprep.javaneutrons.core.Neutron;
 import org.eastsideprep.javaneutrons.core.Util;
 import org.eastsideprep.javaneutrons.shapes.Cuboid;
 import org.eastsideprep.javaneutrons.shapes.HumanBody;
-import org.eastsideprep.javaneutrons.shapes.Shape;
+import org.eastsideprep.javaneutrons.core.Shape;
+import org.eastsideprep.javaneutrons.materials.E12C;
+import org.eastsideprep.javaneutrons.materials.Vacuum;
 import org.fxyz3d.shapes.primitives.CuboidMesh;
 
 /**
@@ -27,8 +35,61 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
  */
 public class TestGM {
 
+    private static void histTest() {
+        EnergyHistogram test = new EnergyHistogram();
+        test.record(1000, 0.5e-4*Util.Physics.eV);
+        test.record(2000, 1e-3*Util.Physics.eV);
+        test.record(2100, 1.1e-3*Util.Physics.eV);
+        test.record(2500, 1.5e-3*Util.Physics.eV);
+
+        test.record(3333, 2.51e6*Util.Physics.eV);
+
+        test.record(3000, 0.5e7*Util.Physics.eV);
+        test.record(4000, 1e7*Util.Physics.eV);
+        test.record(5000, 2e7*Util.Physics.eV);
+        
+        XYChart.Series<String, Number> xy = test.makeSeries("", 1, "Linear (thermal)");
+        for (XYChart.Data<String, Number> d : xy.getData()) {
+            System.out.println(d.getXValue() + "," + d.getYValue());
+        }
+        System.exit(0);
+    }
+
     public static MonteCarloSimulation simulationTest(Group visualizations) {
-        return simulationTestWhitmer(visualizations);
+        //histTest();
+//        Isotope i = E1H.getInstance();
+//        System.out.println("1H mass: " + i.mass);
+//        double sd = Math.sqrt(Util.Physics.boltzmann * Util.Physics.roomTemp / i.mass);
+//        System.out.println("SD for hydrogen: " + sd);
+//        double e = (3.0/2.0*Util.Physics.boltzmann * Util.Physics.roomTemp/Util.Physics.eV);
+//        System.out.println("Room temp avg energy in eV: " + e);
+//        System.exit(0);
+
+//        histTest(new Histogram(false));
+//        System.out.println("");
+//        histTest(new Histogram(true));
+//        System.exit(0);
+        return spherical(visualizations);
+    }
+
+    public static XYChart.Series customTest(String scale, boolean xOnly) {
+        EnergyHistogram test = new EnergyHistogram();
+        //Histogram test = new Histogram(-102,102,104, false);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(null, null, null);
+        //mcs.trace= true;
+        Neutron n = new Neutron(Vector3D.ZERO, Vector3D.PLUS_I, Neutron.startingEnergyDD, mcs);
+        Isotope is = E12C.getInstance();
+        Event e = new Event(Vector3D.ZERO, Event.Code.Scatter, 0, is, n);
+
+        for (int i = 0; i < 1000000; i++) {
+            n.setDirectionAndEnergy(Vector3D.PLUS_I, 0.037 * Util.Physics.eV);
+            n.processEvent(e);
+            if (n.direction.getX() > 0 && Math.abs(n.direction.getY()) < 0.7 && Math.abs(n.direction.getZ()) < 0.7) {
+                test.record(1, e.energyOut);
+            }
+        }
+
+        return test.makeSeries("test", 1, scale);
     }
 
     public static MonteCarloSimulation simulationTestSmoosh(Group visualizations) {
@@ -37,62 +98,179 @@ public class TestGM {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class.getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor("lightgreen");
 
-        Shape iglooShape = new Shape(TestGM.class.getResource("/smoosh.obj"), "cm");
-        iglooShape.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
-        iglooShape.getTransforms().add(0, new Translate(0, 63, 0));
-        iglooShape.setColor("silver");
-        Part igloo = new Part("Wall1", iglooShape, "Paraffin");
+        Part igloo = new Part("Igloo", new Shape(TestGM.class.getResource("/smoosh.obj"), "cm"), "Paraffin");
+        igloo.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
+        igloo.getTransforms().add(0, new Translate(0, 63, 0));
+        igloo.setColor("ivory");
 
-        Shape detector1Shape = new Shape(new CuboidMesh(2, 100, 100));
-        detector1Shape.getTransforms().add(0, new Translate(-(100 + 1), 0, 0));
-        detector1Shape.setColor("pink");
-        Part detector1 = new Part("Left detector", detector1Shape, "Vacuum");
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Left detector", detectorShape, "Vacuum");
+        detector1.getTransforms().add(0, new Translate(-(100 + 1), 0, 0));
+        detector1.setColor("pink");
 
-        Shape detector2Shape = new Shape(new CuboidMesh(2, 100, 100));
-        detector2Shape.getTransforms().add(0, new Rotate(90, new Point3D(0, 0, 1)));
-        detector2Shape.getTransforms().add(0, new Translate(0, 100 + 1, 0));
-        detector2Shape.setColor("pink");
-        Part detector2 = new Part("Bottom detector", detector2Shape, "Vacuum");
+        Part detector2 = new Part("Bottom detector", detectorShape, "Vacuum");
+        detector2.getTransforms().add(0, new Rotate(90, new Point3D(0, 0, 1)));
+        detector2.getTransforms().add(0, new Translate(0, 100 + 1, 0));
+        detector2.setColor("pink");
 
-        Shape detector3Shape = new Shape(new CuboidMesh(2, 100, 100));
-        detector3Shape.getTransforms().add(0, new Rotate(90, new Point3D(0, 1, 0)));
-        detector3Shape.getTransforms().add(0, new Translate(0, 0, 100 + 1));
-        detector3Shape.setColor("pink");
-        Part detector3 = new Part("Back detector", detector3Shape, "Vacuum");
+        Part detector3 = new Part("Back detector", detectorShape, "Vacuum");
+        detector3.getTransforms().add(0, new Rotate(90, new Point3D(0, 1, 0)));
+        detector3.getTransforms().add(0, new Translate(0, 0, 100 + 1));
+        detector3.setColor("pink");
 
         // assemble the Fusor out of the other stuff
         Assembly smoosh = new Assembly("Smooshed igloo");
         smoosh.addAll(igloo, vacChamber, detector1, detector2, detector3);
+        smoosh.containsMaterialAt("Vacuum", Vector3D.ZERO);
 
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
 
-        return new MonteCarloSimulation(smoosh, Vector3D.ZERO, visualizations);
+        return new MonteCarloSimulation(smoosh, null, visualizations);
+    }
+
+    public static MonteCarloSimulation spherical(Group visualizations) {
+        double thickness = 0.025; //block thickness in cm
+        String m = "HydrogenWax";
+        //String m = "CarbonWax";
+        //String m = "Paraffin";
+
+        Part wall = new Part("Block: " + m, new Shape(new CuboidMesh(thickness, thickness, thickness)), m);
+        wall.getTransforms().add(new Translate(50, 0, 0));
+        wall.setColor("silver");
+
+        Part detector = new Part("Spherical detector", new Shape(TestGM.class.getResource("/meshes/spherical_detector.stl"), "cm"), "HighVacuum");
+        detector.getTransforms().add(new Translate(50, 0, 0));
+        detector.setColor("pink");
+
+        Assembly whitmer = new Assembly("Whitmer");
+        whitmer.addAll(wall, detector);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+                null, Vector3D.PLUS_I, 0.0253 * Util.Physics.eV, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
+                "Vacuum", null, visualizations); // interstitial, initial
+        return mcs;
+    }
+
+    public static MonteCarloSimulation simulationTestWhitmerCarbon(Group visualizations) {
+        double thickness = 25; //block thickness in cm
+        Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
+        String m = "HydrogenWax";
+        //String m = "CarbonWax";
+        //String m = "Paraffin";
+
+        Part wall = new Part("Wall: " + m, blockShape, m);
+        wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
+        wall.setColor("silver");
+
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Detector behind " + m + " wall", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Part detector2 = new Part("Detector opposite " + m + " wall", detectorShape, "HighVacuum");
+        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
+        detector2.setColor("pink");
+
+        Assembly whitmer = new Assembly("Whitmer");
+        whitmer.addAll(wall, detector1, detector2);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+                null, Vector3D.PLUS_I, 2.451e6 * Util.Physics.eV, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
+                "Vacuum", null, visualizations); // interstitial, initial
+        return mcs;
+    }
+
+    public static MonteCarloSimulation simulationTestWhitmerParaffin(Group visualizations) {
+        double thickness = 0.025; //block thickness in cm
+        Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
+        //Part wall = new Part("Wall", blockShape, "CarbonWax");
+        Part wall = new Part("Block", blockShape, "Paraffin");
+        wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
+        wall.setColor("silver");
+
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Detector behind wall", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Assembly whitmer = new Assembly("Whitmer");
+        whitmer.addAll(wall, detector1);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+                null, null, 0, // origin = (0,0,0), random dir, default DD-neutron energy
+                null, null, visualizations);
+        return mcs;
+    }
+
+    public static MonteCarloSimulation simulationTestSettle(Group visualizations) {
+        double gap = 0.025; //block thickness in cm
+
+        Part block1 = new Part("block", new Shape(TestGM.class.getResource("/meshes/baseparaffinblock.obj"), "cm"), "Paraffin");
+        block1.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
+        block1.getTransforms().add(0, new Translate(50, 50, -25));
+        block1.setColor("lightblue");
+
+        Part block2 = new Part("block", new Shape(TestGM.class.getResource("/meshes/baseparaffinblock.obj"), "cm"), "Paraffin");
+        block2.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
+        block2.getTransforms().add(0, new Translate(50, -100, -25));
+        block2.setColor("lightgreen");
+
+        System.out.println("");
+        System.out.println("Distance Y-axis (before settle): " + block2.distance(block1, Vector3D.PLUS_J));
+        Translate tx = block2.settleAgainst(block1, Vector3D.PLUS_J);
+        System.out.println("Transform: " + tx);
+        block2.getTransforms().add(0, tx);
+        System.out.println("Distance X-axis: " + block2.distance(block1, Vector3D.PLUS_I));
+        System.out.println("Distance Y-axis: " + block2.distance(block1, Vector3D.PLUS_J));
+        System.out.println("Distance Z-axis: " + block2.distance(block1, Vector3D.PLUS_K));
+        System.out.println("");
+
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Detector behind wall", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Assembly a = new Assembly("Blocks");
+        a.addAll(block1, block2, detector1);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(a,
+                null, null, 0, // origin = (0,0,0), random dir, default DD-neutron energy
+                null, null, visualizations);
+        return mcs;
     }
 
     public static MonteCarloSimulation simulationTestWhitmer(Group visualizations) {
 
         Shape blockShape = new Shape(new CuboidMesh(25, 100, 100));
-        blockShape.getTransforms().add(new Translate(50 + 12.5, 0, 0));
-        blockShape.setColor("silver");
-        Part wall = new Part("Wall", blockShape, "Paraffin");
+        Part wall = new Part("Block", blockShape, "Paraffin");
+        wall.getTransforms().add(new Translate(50 + 12.5, 0, 0));
+        wall.setColor("silver");
 
-        Shape detector1Shape = new Shape(new CuboidMesh(2, 100, 100));
-        detector1Shape.getTransforms().add(new Translate(100 + 1, 0, 0));
-        detector1Shape.setColor("pink");
-        Part detector1 = new Part("Detector behind paraffin block", detector1Shape, "Vacuum");
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
 
-        Shape detector2Shape = new Shape(new CuboidMesh(2, 100, 100));
-        detector2Shape.getTransforms().add(new Translate(-(100 + 1), 0, 0));
-        detector2Shape.setColor("pink");
-        Part detector2 = new Part("Detector opposite paraffin block", detector2Shape, "Vacuum");
+        Part detector1 = new Part("Detector behind block", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Part detector2 = new Part("Detector opposite block", detectorShape, "HighVacuum");
+        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
+        detector2.setColor("pink");
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class.getResource("/meshes/vac_chamber.obj")), "Steel");
 
         // assemble the Fusor out of the other stuff
         Assembly whitmer = new Assembly("Whitmer");
-        whitmer.addAll(wall, detector1, detector2/*, p*/);
+        whitmer.addAll(wall, detector1, detector2, vacChamber);
+        //whitmer.addTransform(new Translate(0, -100, 0));
 
-        return new MonteCarloSimulation(whitmer, Vector3D.ZERO, visualizations);
+        whitmer.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer, Vector3D.ZERO, visualizations);
+        return mcs;
     }
 
     public static MonteCarloSimulation simulationTest2(Group visualizations) {
@@ -142,19 +320,56 @@ public class TestGM {
 
     public static Group testVisuals() {
         Group g = new Group();
+        double radius = 200;
 
-        Sphere s = new Sphere(100);
-        Util.Graphics.setColor(s, "gray");
+        Sphere s = new Sphere(radius);
+        s.setRotationAxis(new Point3D(0, 0, 1));
+        s.setRotate(90);
+        Util.Graphics.setColor(s, "white");
+        s.setOpacity(0.1);
+        //s.setTranslateX(-500);
+        //s.setDrawMode(DrawMode.LINE);
+        Vector3D orig = new Vector3D(0, 0, 0);
 
-        for (int i = 0; i < 10000; i++) {
-            Vector3D v = Util.Math.randomDir().scalarMultiply(100);
-            Sphere p = new Sphere(1);
-            Util.Graphics.setColor(p, "red");
-            p.getTransforms().add(new Translate(v.getX(), v.getY(), v.getZ()));
-            g.getChildren().add(p);
-            Util.Graphics.drawCoordSystem(g);
+        Isotope is = E12C.getInstance();
+
+        for (int i = 0; i < 5000; i++) {
+            // Vector3D v = Util.Math.randomDir().scalarMultiply(100);
+            Vector3D dir1 = Util.Math.randomDir();
+
+            double t1 = Util.Math.raySphereIntersect(orig, dir1, Vector3D.ZERO, radius);
+            if (t1 >= 0) {
+                Vector3D v = orig.add(dir1.scalarMultiply(t1));
+                Sphere p = new Sphere(1);
+                Util.Graphics.setColor(p, "red");
+                p.getTransforms().add(new Translate(v.getX(), v.getY(), v.getZ()));
+                g.getChildren().add(p);
+            }
+
+            double cos_theta = is.getScatterCosTheta(2.44e6);
+            System.out.println("cos_theta " + cos_theta);
+            Vector3D dir2 = Util.Math.randomDir(cos_theta, 1.0);
+            System.out.println("dir2 " + dir2);
+            if (Math.abs(dir2.getNorm() - 1) > 1e-12) {
+                System.out.println("not normal");
+            }
+
+            //dir2 = Util.Math.randomDir();
+            Rotation r = new Rotation(Vector3D.PLUS_K, Vector3D.PLUS_I);
+            dir2 = r.applyTo(dir2);
+            System.out.println("x1 " + dir2.getX());
+            double t2 = Util.Math.raySphereIntersect(orig, dir2, Vector3D.ZERO, radius);
+            if (t2 >= 0) {
+                System.out.println("dir2 " + dir2 + " t " + t2);
+                Vector3D v = orig.add(dir2.scalarMultiply(t2));
+                Sphere p = new Sphere(1);
+                Util.Graphics.setColor(p, "green");
+                System.out.println("v " + v);
+                p.getTransforms().add(new Translate(v.getX(), v.getY(), v.getZ()));
+                g.getChildren().add(p);
+            }
         }
-
+        Util.Graphics.drawCoordSystem(g);
         g.getChildren().add(s);
         return g;
     }

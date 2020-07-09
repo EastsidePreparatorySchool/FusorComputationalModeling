@@ -1,4 +1,4 @@
-energy (eV), scatter (barn), absorb (barn), total (barn)
+energy (eV),scatter (barn),capture (barn),total (barn)
 9.999999999999999e-06,78.26555,0.1942569,78.4598069
 1.03125e-05,77.07435,0.1912909,77.2656409
 1.0625e-05,75.93615,0.1884568,76.1246068

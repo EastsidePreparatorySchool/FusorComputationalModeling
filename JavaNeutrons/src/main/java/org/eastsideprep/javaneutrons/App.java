@@ -3,6 +3,7 @@ package org.eastsideprep.javaneutrons;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Point3D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Camera;
@@ -24,6 +25,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
+import org.eastsideprep.javaneutrons.core.Neutron;
 import org.eastsideprep.javaneutrons.core.Util;
 
 /**
@@ -42,6 +44,7 @@ public class App extends Application {
     Button bRunET;
 
     Label progress;
+    boolean idleFlag = false;
 
     @Override
     public void start(Stage stage) {
@@ -53,6 +56,7 @@ public class App extends Application {
         CameraControl mainScene = new CameraControl(1000, 500);
         ImageView heatMap = new ImageView(Util.Graphics.createHeatMap(100, 500));
         heatMap.fitHeightProperty().bind(root.heightProperty());
+        heatMap.setVisible(false);
         mainScene.subScene.heightProperty().bind(root.heightProperty());
 
         // prepare sim for later
@@ -60,7 +64,7 @@ public class App extends Application {
         this.sim = TestGM.simulationTest(viewGroup);
 
         // control buttons and progress 
-        TextField tf = new TextField("200");
+        TextField tf = new TextField("10");
         tf.setPrefWidth(200);
 
         bRun = new Button("Start simulation - GM");
@@ -69,7 +73,7 @@ public class App extends Application {
 
         bRun.setOnAction((e) -> {
             sim = TestGM.simulationTest(viewGroup);
-            this.runSim(Long.parseLong(tf.getText()));
+            this.runSim(Integer.parseInt(tf.getText()));
             if (this.sim.lastCount <= 10) {
                 root.setRight(heatMap);
             } else {
@@ -81,7 +85,7 @@ public class App extends Application {
 
         bRunSV.setOnAction((e) -> {
             sim = TestSV.simulationTest(viewGroup);
-            this.runSim(Long.parseLong(tf.getText()));
+            this.runSim(Integer.parseInt(tf.getText()));
             if (this.sim.lastCount <= 10) {
                 root.setRight(heatMap);
             } else {
@@ -92,7 +96,7 @@ public class App extends Application {
 
         bRunET.setOnAction((e) -> {
             sim = TestET.simulationTest(viewGroup);
-            this.runSim(Long.parseLong(tf.getText()));
+            this.runSim(Integer.parseInt(tf.getText()));
             if (this.sim.lastCount <= 10) {
                 root.setRight(heatMap);
             } else {
@@ -175,10 +179,12 @@ public class App extends Application {
         });
         stage.setScene(scene);
         stage.show();
+        idle();
 
+        stage.setOnCloseRequest((e) -> noIdle());
     }
 
-    public void runSim(long count) {
+    public void runSim(int count) {
         if (this.sim == null) {
             return;
         }
@@ -196,25 +202,66 @@ public class App extends Application {
 
         Group p = new Group();
 
+        noIdle();
+        this.progressTimeline(count);
+        sim.simulateNeutrons(count, 100000, true);
+        root.setCenter(view);
+    }
+
+    private Timeline progressTimeline(int count) {
+        root.setCenter(view);
         final Timeline tl = new Timeline();
         tl.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1),
                 (e) -> {
                     long completed;
                     completed = sim.update();
-                    progress.setText("Complete: " + Math.round(100 * completed / count) + " %");
-                    if (completed == count) {
+                    if (count > 0) {
+                        progress.setText("Complete: " + Math.round(100 * completed / count) + " %");
+                    }
+                    if (completed >= count || (count == 0 && sim.scatter)) {
                         tl.stop();
                         bRun.setDisable(false);
                         bRunET.setDisable(false);
                         bRunSV.setDisable(false);
                         progress.setText("Complete: 100 % , time: " + (sim.getElapsedTime() / 1000) + " s");
+                        //sim.checkTallies();
+                        idle();
                     }
                 }));
         tl.setCycleCount(Timeline.INDEFINITE);
         tl.play();
+        return tl;
+    }
 
-        sim.simulateNeutrons(count, 100000);
-        root.setCenter(view);
+    public static void runWithDelay(Runnable r, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+            }
+            Platform.runLater(r);
+        }).start();
+    }
+
+    private void idle() {
+        idleFlag = true;
+  //      idleLoop();
+    }
+
+    private void idleLoop() {
+        if (!idleFlag) {
+            return;
+        }
+        sim.simulateNeutrons(1, 3000, false);
+        sim.update();
+
+        if (this.idleFlag) {
+            runWithDelay(() -> idleLoop(),1000);
+        }
+    }
+
+    private void noIdle() {
+        idleFlag = false;
     }
 
     public static void main(String[] args) {

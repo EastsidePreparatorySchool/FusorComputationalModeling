@@ -5,10 +5,10 @@
  */
 package org.eastsideprep.javaneutrons.materials;
 
-import org.eastsideprep.javaneutrons.assemblies.Material;
+import org.eastsideprep.javaneutrons.core.Material;
 
 //
-// Wood (Material 359, Southern Pine, with omissions
+// Wood (Material 359, Southern Pine, with omissions)
 //
 //
 public class Wood extends Material {
@@ -17,10 +17,10 @@ public class Wood extends Material {
 
     Wood() {
         super("Wood");
-        this.addComponent(Hydrogen.getInstance(), 0.462423);
-        this.addComponent(Carbon.getInstance(), 0.323389);
-        this.addComponent(Nitrogen.getInstance(), 0.002773);
-        this.addComponent(Oxygen.getInstance(), 0.208779);
+        this.addComponent(E1H.getInstance(), 0.462423);
+        this.addComponent(E12C.getInstance(), 0.323389);
+        this.addComponent(E14N.getInstance(), 0.002773);
+        this.addComponent(E16O.getInstance(), 0.208779);
         this.calculateAtomicDensities(640);
     }
 

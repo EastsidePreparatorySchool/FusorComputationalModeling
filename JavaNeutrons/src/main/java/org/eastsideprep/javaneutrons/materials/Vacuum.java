@@ -9,10 +9,16 @@ public class Vacuum extends Air {
 
     private static Vacuum instance;
 
-    Vacuum() {
+    public Vacuum() {
         // Vacuum is just air at really low pressure
         // 1 micron = 0.0001 kPa
         super("Vacuum", 1e-4);
+    }
+
+    public Vacuum(String name) {
+        // Vacuum is just air at really low pressure
+        // 1 micron = 0.0001 kPa
+        super(name, 1e-4);
     }
 
     // we only need one of these objects

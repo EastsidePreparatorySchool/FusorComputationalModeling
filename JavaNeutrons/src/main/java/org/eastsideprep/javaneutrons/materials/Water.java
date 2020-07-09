@@ -5,7 +5,7 @@
  */
 package org.eastsideprep.javaneutrons.materials;
 
-import org.eastsideprep.javaneutrons.assemblies.Material;
+import org.eastsideprep.javaneutrons.core.Material;
 
 //
 // Water (H2O) Material # 354
@@ -16,8 +16,8 @@ public class Water extends Material {
 
     Water() {
         super("Water");
-        this.addComponent(Hydrogen.getInstance(), 0.666657);
-        this.addComponent(Oxygen.getInstance(), 0.333343);
+        this.addComponent(E1H.getInstance(), 0.666657);
+        this.addComponent(E16O.getInstance(), 0.333343);
         this.calculateAtomicDensities(998);
     }
 
