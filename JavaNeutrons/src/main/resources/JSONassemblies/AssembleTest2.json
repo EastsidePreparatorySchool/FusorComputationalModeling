@@ -1,0 +1,29 @@
+{
+    "name": "WeDidNotStartTheFire",
+    "components": [
+        {
+            "material_name": "HumanBodyMaterial",
+            "name": "thedayman",
+            "filelocation": "/meshes/body.obj",
+            "color": "blue",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 200,
+            "y_transform": 0,
+            "z_transform": 0
+        },
+        {
+            "material_name": "HumanBodyMaterial",
+            "name": "thenightman",
+            "filelocation": "/meshes/body.obj",
+            "color": "black",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 0,
+            "z_transform": 0
+        }
+    ]
+}

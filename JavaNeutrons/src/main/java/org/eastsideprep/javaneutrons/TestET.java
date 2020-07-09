@@ -23,18 +23,32 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
 import com.google.gson.Gson;
 import org.eastsideprep.javaneutrons.core.AssemblyJSONConverter;
 import org.eastsideprep.javaneutrons.core.AssemblyJSONConverter.AssemblyBuilder;
+import org.eastsideprep.javaneutrons.materials.Vacuum;
+
 /**
  *
  * @author gunnar
  */
 public class TestET {
+
     final static private Gson gson = new Gson();
- //   final static private GsonBuilder gdaughter = new GsonBuilder();
-    
+    //   final static private GsonBuilder gdaughter = new GsonBuilder();
+
     public static MonteCarloSimulation simulationTest(Group visualizations) {
         AssemblyJSONConverter caravan = new AssemblyJSONConverter();
-        
-        
+
+
+        Assembly basicbodies = caravan.convertFromJSON("AssembleTest3");
+
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(basicbodies);
+        fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
+//        fusor.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+
+        return new MonteCarloSimulation(fusor, Vector3D.ZERO, visualizations);
+       
         
 //        String may=System.getProperty("user.dir");
 //        String filename="Lets_do_this_one_last_time";
@@ -48,8 +62,6 @@ public class TestET {
 //        } catch (IOException e) {
 //            System.err.println("Error saving JSON file \n" + x+"\n"+e);
 //        }
-        
-        
 //        AssemblyBuilder a = caravan.assemblybuildtest(6302020,100,"Remember this", true); // try saving arrayList 
 //        caravan.saveToJSON(a, "Here");                                                    // of 
 //        AssemblyBuilder fd=caravan.convertFromJSONtest("Here"); 
@@ -59,42 +71,17 @@ public class TestET {
 //        System.out.println(fd.sure);
 //        System.out.println(fd.what);
 //        
-          AssemblyBuilder a = caravan.assemblybuildtest2();
-          caravan.saveToJSON(a, "WhitBuildTest1");
-        
-        
-        
-//        
-//        Assembly igloo = new Assembly("igloo", TestET.class.getResource("/meshes/igloo.obj"), "Paraffin");
-//        
-//        caravan.saveToJSON(igloo, "igloo"); //let's try this
-//        
-//        Assembly igloo2=caravan.convertFromJSON("igloo");
-//        
-//        Util.Graphics.drawCoordSystem(visualizations);
-//
-//        return new MonteCarloSimulation(igloo2, Vector3D.ZERO, visualizations);
-        
-        return simulationTest3(visualizations);
-     }
+//         AssemblyBuilder a = caravan.assemblybuildtest2();
+//          caravan.saveToJSON(a, "BuildTest2");
+    }
+
     public static MonteCarloSimulation simulationTest2(Group visualizations) {
-                //
+        //
         // Wall1
         // this cube-shaped wall is loaded from an obj file in resources
         // any obj files need to live their (folder src/main/resources in folder view)
         //
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         double gap = 3; // in cm
         double offset = 2 * gap; // in cm
         //
@@ -116,19 +103,18 @@ public class TestET {
         //
         Shape bodyShape = new HumanBody();
         //bodyShape.getTransforms().add(0,new Rotate(90, new Point3D(1,0,0)));
-        bodyShape.getTransforms().add(0,new Translate(0, 0, -200));
+        bodyShape.getTransforms().add(0, new Translate(0, 0, -200));
         Part body = new Part("Body", bodyShape, "HumanBodyMaterial");
-        
-          
+
         //
-          //
+        //
         // extra bodies
         //
         Shape bodyShape2 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape2.getTransforms().add(new Translate(0, 0, -400));
         bodyShape2.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape2.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape2.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape2.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body2 = new Part("Body", bodyShape2, HumanBodyMaterial.getInstance());
 
@@ -137,7 +123,7 @@ public class TestET {
         bodyShape3.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape3.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
         bodyShape3.getTransforms().add(new Rotate(180, new Point3D(0, 0, 1)));
-        bodyShape3.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape3.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body3 = new Part("Body", bodyShape3, HumanBodyMaterial.getInstance());
 
@@ -146,7 +132,7 @@ public class TestET {
         bodyShape4.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape4.getTransforms().add(new Rotate(0, new Point3D(0, 1, 0)));
         bodyShape4.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape4.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape4.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body4 = new Part("Body", bodyShape4, HumanBodyMaterial.getInstance());
 
@@ -155,68 +141,61 @@ public class TestET {
         bodyShape5.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape5.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
         bodyShape5.getTransforms().add(new Rotate(180, new Point3D(0, 0, 1)));
-        bodyShape5.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape5.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body5 = new Part("Body", bodyShape5, HumanBodyMaterial.getInstance());
 
-        
         Shape bodyShape6 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape6.getTransforms().add(new Translate(-75, 0, -600));
         bodyShape6.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape6.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape6.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape6.getTransforms().add(new Scale(73, 73, 73));
         Part body6 = new Part("Body", bodyShape6, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape7 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape7.getTransforms().add(new Translate(-25, 0, -600));
         bodyShape7.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape7.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape7.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape7.getTransforms().add(new Scale(73, 73, 73));
         Part body7 = new Part("Body", bodyShape7, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape8 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape8.getTransforms().add(new Translate(25, 0, -600));
         bodyShape8.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape8.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape8.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape8.getTransforms().add(new Scale(73, 73, 73));
         Part body8 = new Part("Body", bodyShape8, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape9 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape9.getTransforms().add(new Translate(75, 0, -600));
         bodyShape9.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape9.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape9.getTransforms().add(new Scale(73, 73, 73));   
+        bodyShape9.getTransforms().add(new Scale(73, 73, 73));
         Part body9 = new Part("Body", bodyShape9, HumanBodyMaterial.getInstance());
-        
+
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestET.class.getResource("/meshes/vac_chamber.obj")), "Steel");
-        
-        
+
         // assemble the Fusor out of the other stuff
         Assembly fusor = new Assembly("Fusor");
         fusor.addAll(igloo, detector, body, vacChamber, body2, body3, body4, body5, body6, body7, body8, body9);
         fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
-        
+
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
 
         return new MonteCarloSimulation(fusor, Vector3D.ZERO, visualizations);
 
-      
-        
-                // vac chamber
+        // vac chamber
     }
-        public static MonteCarloSimulation simulationTest3(Group visualizations) {
-                //
+
+    public static MonteCarloSimulation simulationTest3(Group visualizations) {
+        //
         // Wall1
         // this cube-shaped wall is loaded from an obj file in resources
         // any obj files need to live their (folder src/main/resources in folder view)
         //
-       
-        
-        
-        
-        
+
         double gap = 3; // in cm
         double offset = 2 * gap; // in cm
         //
@@ -238,19 +217,18 @@ public class TestET {
         //
         Shape bodyShape = new HumanBody();
         //bodyShape.getTransforms().add(0,new Rotate(90, new Point3D(1,0,0)));
-        bodyShape.getTransforms().add(0,new Translate(0, 0, -200));
+        bodyShape.getTransforms().add(0, new Translate(0, 0, -200));
         Part body = new Part("Body", bodyShape, "HumanBodyMaterial");
-        
-          
+
         //
-          //
+        //
         // extra bodies
         //
         Shape bodyShape2 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape2.getTransforms().add(new Translate(0, 0, -400));
         bodyShape2.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape2.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape2.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape2.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body2 = new Part("Body", bodyShape2, HumanBodyMaterial.getInstance());
 
@@ -259,7 +237,7 @@ public class TestET {
         bodyShape3.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape3.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
         bodyShape3.getTransforms().add(new Rotate(180, new Point3D(0, 0, 1)));
-        bodyShape3.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape3.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body3 = new Part("Body", bodyShape3, HumanBodyMaterial.getInstance());
 
@@ -268,7 +246,7 @@ public class TestET {
         bodyShape4.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape4.getTransforms().add(new Rotate(0, new Point3D(0, 1, 0)));
         bodyShape4.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape4.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape4.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body4 = new Part("Body", bodyShape4, HumanBodyMaterial.getInstance());
 
@@ -277,55 +255,51 @@ public class TestET {
         bodyShape5.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape5.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
         bodyShape5.getTransforms().add(new Rotate(180, new Point3D(0, 0, 1)));
-        bodyShape5.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape5.getTransforms().add(new Scale(73, 73, 73));
         //System.out.println("Body volume in cm^3: " + bodyShape.getVolume());
         Part body5 = new Part("Body", bodyShape5, HumanBodyMaterial.getInstance());
 
-        
         Shape bodyShape6 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape6.getTransforms().add(new Translate(-75, 0, -600));
         bodyShape6.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape6.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape6.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape6.getTransforms().add(new Scale(73, 73, 73));
         Part body6 = new Part("Body", bodyShape6, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape7 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape7.getTransforms().add(new Translate(-25, 0, -600));
         bodyShape7.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape7.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape7.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape7.getTransforms().add(new Scale(73, 73, 73));
         Part body7 = new Part("Body", bodyShape7, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape8 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape8.getTransforms().add(new Translate(25, 0, -600));
         bodyShape8.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape8.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape8.getTransforms().add(new Scale(73, 73, 73));  
+        bodyShape8.getTransforms().add(new Scale(73, 73, 73));
         Part body8 = new Part("Body", bodyShape8, HumanBodyMaterial.getInstance());
-        
+
         Shape bodyShape9 = new Shape(TestET.class.getResource("/body.obj"));
         bodyShape9.getTransforms().add(new Translate(75, 0, -600));
         bodyShape9.getTransforms().add(new Rotate(90, new Point3D(1, 0, 0)));
         bodyShape9.getTransforms().add(new Rotate(90, new Point3D(0, 0, 1)));
-        bodyShape9.getTransforms().add(new Scale(73, 73, 73));   
+        bodyShape9.getTransforms().add(new Scale(73, 73, 73));
         Part body9 = new Part("Body", bodyShape9, HumanBodyMaterial.getInstance());
-        
+
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestET.class.getResource("/meshes/vac_chamber.obj")), "Steel");
-        
-        
+
         // assemble the Fusor out of the other stuff
         Assembly fusor = new Assembly("Fusor");
         fusor.addAll(igloo, detector, body, vacChamber);
         fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
-        
+
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
 
         return new MonteCarloSimulation(fusor, Vector3D.ZERO, visualizations);
 
-      
-        
-                // vac chamber
+        // vac chamber
     }
 }

@@ -1,0 +1,29 @@
+{
+    "name": "Requiem",
+    "components": [
+        {
+            "material_name": "d",
+            "name": "sdf",
+            "filelocation": "sdf",
+            "color": "blue",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 0,
+            "z_transform": 0
+        },
+        {
+            "material_name": "Copper",
+            "name": "LondonCalling",
+            "filelocation": "/meshes/filename.obj",
+            "color": "blue",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 0,
+            "z_transform": 0
+        }
+    ]
+}

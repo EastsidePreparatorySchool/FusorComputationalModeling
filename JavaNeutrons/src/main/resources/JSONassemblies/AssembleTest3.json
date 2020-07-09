@@ -1,0 +1,65 @@
+{
+    "name": "WeDidNotStartTheFire",
+    "components": [
+        {
+            "material_name": "HumanBodyMaterial",
+            "name": "thedayman",
+            "filelocation": "/meshes/body.obj",
+            "color": "blue",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 200,
+            "y_transform": 0,
+            "z_transform": 0,
+            "x_scale": 1,
+            "y_scale": 1,
+            "z_scale": 1
+        },
+        {
+            "material_name": "HumanBodyMaterial",
+            "name": "thenightman",
+            "filelocation": "/meshes/body.obj",
+            "color": "black",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 0,
+            "z_transform": -200,
+            "x_scale": 1,
+            "y_scale": 1,
+            "z_scale": 1
+        },
+        {
+            "material_name": "Steel",
+            "name": "themanofsteel",
+            "filelocation": "/meshes/body.obj",
+            "color": "grey",
+            "x_rotation": 0,
+            "y_rotation": 90,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 200,
+            "z_transform": 200,
+            "x_scale": 1,
+            "y_scale": 1,
+            "z_scale": 1
+        },
+        {
+            "material_name": "HumanBodyMaterial",
+            "name": "TheFleshEnclosure",
+            "filelocation": "/meshes/vac_chamber.obj",
+            "color": "yellow",
+            "x_rotation": 0,
+            "y_rotation": 0,
+            "z_rotation": 0,
+            "x_transform": 0,
+            "y_transform": 0,
+            "z_transform": 0,
+            "x_scale": 5,
+            "y_scale": 5,
+            "z_scale": 5
+        }
+    ]
+}
