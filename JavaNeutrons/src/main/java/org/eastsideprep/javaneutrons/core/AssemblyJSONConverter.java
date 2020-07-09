@@ -3,41 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.eastsideprep.javaneutrons.assemblies;
+package org.eastsideprep.javaneutrons.core;
 
 import com.google.gson.Gson;
 import java.io.FileReader;
 import java.net.URL;
 import java.io.IOException;
-import javafx.application.Platform;
-import javafx.geometry.Point3D;
-import javafx.scene.Group;
-import javafx.scene.shape.DrawMode;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Translate;
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.eastsideprep.javaneutrons.assemblies.Assembly;
-import org.eastsideprep.javaneutrons.assemblies.Element;
-import org.eastsideprep.javaneutrons.shapes.Shape;
-import org.eastsideprep.javaneutrons.assemblies.Part;
-import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
-import org.eastsideprep.javaneutrons.core.Util;
-import org.eastsideprep.javaneutrons.materials.HumanBodyMaterial;
-import org.eastsideprep.javaneutrons.materials.Hydrogen;
-import org.eastsideprep.javaneutrons.materials.Paraffin;
-import org.eastsideprep.javaneutrons.materials.Steel;
-import org.eastsideprep.javaneutrons.materials.Vacuum;
-import org.eastsideprep.javaneutrons.shapes.Cuboid;
-import org.eastsideprep.javaneutrons.shapes.HumanBody;
-import org.eastsideprep.javaneutrons.shapes.Shape;
-import org.fxyz3d.shapes.primitives.CuboidMesh;
+import org.eastsideprep.javaneutrons.core.Assembly;
+import org.eastsideprep.javaneutrons.core.Shape;
+import org.eastsideprep.javaneutrons.core.Part;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import org.eastsideprep.javaneutrons.TestET;
-import org.eastsideprep.javaneutrons.assemblies.AssemblyJSONConverter.AssemblyBuilder.BuilderComp;
-import org.eastsideprep.javaneutrons.core.LogEnergyEVHistogram;
+import org.eastsideprep.javaneutrons.core.AssemblyJSONConverter.AssemblyBuilder.BuilderComp;
 //import org.json.simple.JSONArray;
 //import org.json.simple.JSONObject;
 //import org.json.simple.parser.JSONParser;
