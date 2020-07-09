@@ -42,9 +42,11 @@ public class TestET {
 
         Assembly fusor = new Assembly("Fusor");
         fusor.addAll(basicbodies);
-        fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
+        
+
+//        fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
 //        fusor.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);
-        // make some axes
+
         Util.Graphics.drawCoordSystem(visualizations);
 
         return new MonteCarloSimulation(fusor, Vector3D.ZERO, visualizations);

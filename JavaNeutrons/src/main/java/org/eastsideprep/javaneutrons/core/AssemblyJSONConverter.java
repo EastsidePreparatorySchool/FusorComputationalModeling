@@ -161,7 +161,7 @@ public class AssemblyJSONConverter {
             p.getTransforms().add(0, new Translate(i.x_transform, 0-i.y_transform, i.z_transform));
             p.getTransforms().add(0, new Scale(i.x_scale, i.y_scale, i.z_scale));
             p.setColor(i.color);
-            
+                    System.out.println(p.name+" is made of "+p.material);
             a.add(p);
         }
 //        for (int i=0; i<b.components.size(); i++) {
