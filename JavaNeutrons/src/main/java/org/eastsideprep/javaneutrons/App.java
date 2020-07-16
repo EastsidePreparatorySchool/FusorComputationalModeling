@@ -245,7 +245,7 @@ public class App extends Application {
 
     private void idle() {
         idleFlag = true;
-  //      idleLoop();
+        //      idleLoop();
     }
 
     private void idleLoop() {
@@ -256,7 +256,7 @@ public class App extends Application {
         sim.update();
 
         if (this.idleFlag) {
-            runWithDelay(() -> idleLoop(),1000);
+            runWithDelay(() -> idleLoop(), 1000);
         }
     }
 
@@ -265,6 +265,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println("user.dir" + System.getProperty("user.dir"));
+        System.out.println("user.home" + System.getProperty("user.home"));
+
         launch();
     }
 
