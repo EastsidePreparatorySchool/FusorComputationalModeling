@@ -1,5 +1,8 @@
 package org.eastsideprep.javaneutrons;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -265,10 +268,28 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("user.dir" + System.getProperty("user.dir"));
-        System.out.println("user.home" + System.getProperty("user.home"));
-
-        launch();
+                System.out.println("user.dir" + System.getProperty("user.dir"));
+                System.out.println("user.home" + System.getProperty("user.home"));
+        
+        String may = System.getProperty("user.dir");
+        File temp = new File(may); // Specify the filename
+        System.out.println(temp.getParent());
+        
+        
+        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + "AssembleTest3" + ".json";
+        System.out.println(x);
+        URL u = App.class.getResource("/meshes/igloo.obj");
+        
+        System.out.println(u.toString());
+        String appen = "file:/";
+        try {
+            URL next = new URL("file:/C:/Users/etardif/Documents/GitHub/FusorComputationalModeling/JavaNeutrons/target/classes/meshes/igloo.obj");
+            System.out.println(next);
+            URL trying = new URL(appen+x);
+            System.out.println(trying);
+        } catch (MalformedURLException ex) {
+            System.out.println("error");
+        }
     }
 
     static void processKeyEvent(KeyEvent event, Camera camera) {

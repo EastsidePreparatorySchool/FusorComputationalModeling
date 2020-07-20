@@ -6,6 +6,7 @@
 package org.eastsideprep.javaneutrons.core;
 
 import com.google.gson.Gson;
+import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.io.IOException;
@@ -83,100 +84,115 @@ public class AssemblyJSONConverter {
 //            what = s;
 //            no = d;
 //            rivers = e;
-////            components.add(new BuilderComp());
-////            components.add(new BuilderComp()); //just testing
-////            components.add(new BuilderComp());
+////            parts.add(new BuilderComp());
+////            parts.add(new BuilderComp()); //just testing
+////            parts.add(new BuilderComp());
 //        }
 
         public String name;
-        public ArrayList<BuilderComp> components = new ArrayList<BuilderComp>();
+        public ArrayList<BuilderComp> parts = new ArrayList<BuilderComp>();
 
         AssemblyBuilder(String name) {
             this.name = name;
         }
 
         public void add(BuilderComp b) {
-            components.add(b);
+            parts.add(b);
         }
 
         public class BuilderComp {
 
             String material_name = "Copper";
             String name = "LondonCalling";
-            String filelocation = "/meshes/filename.obj";
+            String filename = "/meshes/filename.obj";
+            String directorylocation = "SpecifyIfYouWant";
             String color = "blue";
             int x_rotation = 0;
             int y_rotation = 0;
             int z_rotation = 0;
-            int x_transform = 0;
-            int y_transform = 0;
-            int z_transform = 0;
-            int x_scale=1;
-            int y_scale=1;
-            int z_scale=1;
+            int x_translate = 0;
+            int y_translate = 0;
+            int z_translate = 0;
+            int x_scale = 1;
+            int y_scale = 1;
+            int z_scale = 1;
 
             public BuilderComp(String a, String b, String c) {
                 material_name = a;
                 name = b;
-                filelocation = c;
+                filename = c;
             }
-            public BuilderComp(String a, String b, String c, int xr, int yr, int zr, int xtran, int ytran, int ztran, int q, int w, int e) {
+
+            public BuilderComp(String a, String b, String c, int xr, int yr, int zr, int xtran, int ytran, int ztran, int q, int w, int e, String ggh) {
                 material_name = a;
                 name = b;
-                filelocation = c;
+                filename = c;
+                directorylocation = ggh;
                 x_rotation = xr;
                 y_rotation = yr;
                 z_rotation = zr;
-                x_transform = xtran;
-                y_transform = ytran;
-                z_transform = ztran;
-                x_scale=q;
-                y_scale=w;
-                z_scale=e;
+                x_translate = xtran;
+                y_translate = ytran;
+                z_translate = ztran;
+                x_scale = q;
+                y_scale = w;
+                z_scale = e;
             }
-            public BuilderComp(){
-            
+
+            public BuilderComp() {
+
             }
         }
+
         AssemblyBuilder(String s, Boolean x) {
             this.name = s;
             BuilderComp b = new BuilderComp("d", "sdf", "sdf");
-            components.add(b);
+            parts.add(b);
             BuilderComp c = new BuilderComp();
-            components.add(c);
+            parts.add(c);
         }
     }
 
     Assembly BuildertoAssembly(AssemblyBuilder b) {
         Assembly a = new Assembly(b.name);
-        for (BuilderComp i : b.components) {
-            Material m = Material.getRealMaterial(i.material_name);
-            URL u = TestET.class.getResource(i.filelocation);
-            Shape s = new Shape(u);
-            Part p = new Part(i.name, s, m);
-            
-            p.getTransforms().add(0, new Rotate(i.x_rotation, new Point3D(1, 0, 0)));
-            p.getTransforms().add(0, new Rotate(i.y_rotation, new Point3D(0, 1, 0)));
-            p.getTransforms().add(0, new Rotate(i.z_rotation, new Point3D(0, 0, 1)));
-            p.getTransforms().add(0, new Translate(i.x_transform, 0-i.y_transform, i.z_transform));
-            p.getTransforms().add(0, new Scale(i.x_scale, i.y_scale, i.z_scale));
-            p.setColor(i.color);
-                    System.out.println(p.name+" is made of "+p.material);
-            a.add(p);
+        for (BuilderComp i : b.parts) {
+            if (i.directorylocation.equals("SpecifyIfYouWant")) {
+                Material m = Material.getRealMaterial(i.material_name);
+
+                URL u = TestET.class.getResource(i.filename);
+                String appen = "file:/";
+                String may = System.getProperty("user.dir");
+                File temp = new File(may); // Specify the filename
+                String newdir = temp.getParent() + "\\" + i.filename + ".obj";
+               
+                Shape s = new Shape(u);
+                Part p = new Part(i.name, s, m);
+
+                p.getTransforms().add(0, new Translate(i.x_translate, 0 - i.y_translate, i.z_translate));
+                p.getTransforms().add(0, new Rotate(i.x_rotation, new Point3D(1, 0, 0)));
+                p.getTransforms().add(0, new Rotate(i.y_rotation, new Point3D(0, 1, 0)));
+                p.getTransforms().add(0, new Rotate(i.z_rotation, new Point3D(0, 0, 1)));
+                p.getTransforms().add(0, new Scale(i.x_scale, i.y_scale, i.z_scale));
+                p.setColor(i.color);
+                System.out.println(p.name + " is made of " + p.material);
+                a.add(p);
+            } else {
+
+            }
         }
-//        for (int i=0; i<b.components.size(); i++) {
-//            Material m = Material.getRealMaterial(b.components.get(i).material_name);
-//            URL u = TestET.class.getResource(b.components.get(i).filelocation);
+//        for (int i=0; i<b.parts.size(); i++) {
+//            Material m = Material.getRealMaterial(b.parts.get(i).material_name);
+//            URL u = TestET.class.getResource(b.parts.get(i).filelocation);
 //            Shape s = new Shape(u);
 //            
-//            s.getTransforms().add(0, new Rotate(b.components.get(i).x_rotation, new Point3D(1, 0, 0)));
-//            s.getTransforms().add(0, new Rotate(b.components.get(i).y_rotation, new Point3D(0, 1, 0)));
-//            s.getTransforms().add(0, new Rotate(b.components.get(i).z_rotation, new Point3D(0, 0, 1)));
-//            s.getTransforms().add(0, new Translate(b.components.get(i).x_transform, b.components.get(i).y_transform, b.components.get(i).z_transform));
+//            s.getTransforms().add(0, new Rotate(b.parts.get(i).x_rotation, new Point3D(1, 0, 0)));
+//            s.getTransforms().add(0, new Rotate(b.parts.get(i).y_rotation, new Point3D(0, 1, 0)));
+//            s.getTransforms().add(0, new Rotate(b.parts.get(i).z_rotation, new Point3D(0, 0, 1)));
+//            s.getTransforms().add(0, new Translate(b.parts.get(i).x_transform, b.parts.get(i).y_transform, b.parts.get(i).z_transform));
 //          //  s.getTransforms().add(0, new Translate(200,0,0));
-//            s.setColor(b.components.get(i).color);
+//            s.setColor(b.parts.get(i).color);
 //            
-//            Part p = new Part(b.components.get(i).name, s, m);
+//            Part p = new Part(b.parts.get(i).name, s, m);
 //            a.add(p);
 //        }
         return a;
@@ -191,11 +207,13 @@ public class AssemblyJSONConverter {
 
     public Assembly convertFromJSON(String filename) {
         String may = System.getProperty("user.dir");
-        String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+        //  String x = may + "\\src\\main\\resources\\JSONassemblies\\" + filename + ".json";
+        File temp = new File(may); // Specify the filename
+        String newdir = temp.getParent() + "\\" + filename + ".json";
 
         String input = "";
         try {
-            FileReader f = new FileReader(x);
+            FileReader f = new FileReader(newdir);
             int i;
             while ((i = f.read()) != -1) {
                 input += (char) i;
@@ -203,7 +221,7 @@ public class AssemblyJSONConverter {
             // System.out.println(input);
             f.close();
         } catch (IOException e) {
-            System.err.println("Error reading JSON file \n" + x + "\n" + e);
+            System.err.println("Error reading JSON file \n" + newdir + "\n" + e);
         }
 
         AssemblyBuilder a = gson.fromJson(input, AssemblyBuilder.class);
