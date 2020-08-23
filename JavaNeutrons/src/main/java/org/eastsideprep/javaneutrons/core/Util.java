@@ -259,6 +259,11 @@ public class Util {
             g.add(s);
         }
 
+        public static void drawSphere(Group g, Vector3D position, float radius, String webColor) {
+            LinkedTransferQueue<Node> q = new LinkedTransferQueue<>();
+            drawSphere(q, position, radius, webColor);
+            q.drainTo(g.getChildren());
+        }
         public static void drawCube(LinkedTransferQueue<Node> g, Vector3D position, float side, String webColor) {
             Box s = new Box(side, side, side);
             s.setTranslateX(position.getX());
