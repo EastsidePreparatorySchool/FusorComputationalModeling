@@ -466,7 +466,7 @@ public class TestSV {
         Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("0mm wax", new Shape(TestSV.class.getResource("/meshes/broken/0mmnewer.stl"), "cm"), "Paraffin");
+        Part wax = new Part("0mm wax", new Shape(TestSV.class.getResource("/meshes/broken/0mmfrontfix.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));
 
@@ -474,8 +474,8 @@ public class TestSV {
         
         //assembling and such  
         Assembly fusor = new Assembly("Fusor");
-        //fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
-        fusor.addAll(vacChamber, wood1, wood2, wood3, wood4, wood5, wood6, wood7, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        //fusor.addAll(vacChamber, wood1, wood2, wood3, wood4, wood5, wood6, wood7, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
 
         Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100); //need to move these.
       //  fusor.addAll(dp);
