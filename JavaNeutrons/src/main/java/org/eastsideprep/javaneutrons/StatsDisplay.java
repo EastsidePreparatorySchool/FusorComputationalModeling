@@ -18,6 +18,7 @@ import javafx.scene.chart.Chart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
@@ -49,6 +50,7 @@ public class StatsDisplay extends Group {
     ChoiceBox object = new ChoiceBox();
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
+    Button ref = new Button ("Compare to reference");
     String scale;
 
     Slider slider = new Slider();
@@ -75,6 +77,7 @@ public class StatsDisplay extends Group {
 
         this.sim = sim;
         this.root = root;
+        ref.setOnAction((e)->{/* todo: Egan Tardif ET: Call a method and compare histogram to ref*/});
 
         slider.setMin(0);
         slider.setMax(100);
@@ -122,7 +125,7 @@ public class StatsDisplay extends Group {
         selectScale.setPrefWidth(200);
 
         controls.getChildren().addAll(chartType, new Separator(), selectScale, new Separator(),
-                new Text("Zoom"), slider, new Separator(), object);
+                new Text("Zoom"), slider, new Separator(), object, ref);
         controls.setPadding(new Insets(10, 0, 10, 0));
         hb.getChildren().addAll(controls, chartPane);
         this.getChildren().add(hb);
