@@ -5,6 +5,7 @@
  */
 package org.eastsideprep.javaneutrons;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +31,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.eastsideprep.javaneutrons.core.Nuclide;
 import org.eastsideprep.javaneutrons.core.Material;
@@ -37,6 +39,10 @@ import org.eastsideprep.javaneutrons.core.Part;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
 import org.eastsideprep.javaneutrons.core.Neutron;
 import org.eastsideprep.javaneutrons.core.Util;
+import java.io.FileReader;
+import java.io.IOException;
+import javafx.stage.Stage;
+
 
 /**
  *
@@ -50,7 +56,7 @@ public class StatsDisplay extends Group {
     ChoiceBox object = new ChoiceBox();
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
-    Button ref = new Button ("Compare to reference");
+    Button ref = new Button("Compare to reference");
     String scale;
 
     Slider slider = new Slider();
@@ -73,11 +79,42 @@ public class StatsDisplay extends Group {
 
     }
 
+    //Create a file chooser
+    final FileChooser fc = new FileChooser();
+
     public StatsDisplay(MonteCarloSimulation sim, BorderPane root) {
 
         this.sim = sim;
         this.root = root;
-        ref.setOnAction((e)->{/* todo: Egan Tardif ET: Call a method and compare histogram to ref*/});
+        ref.setOnAction((e) -> {
+            //Location to open file browser
+            String dir = System.getProperty("user.dir");
+
+            /* todo: Egan Tardif ET: Call a method and compare histogram to ref*/
+            // file explorer pop up for text box
+            
+            Stage s = (Stage)((Node) e.getSource()).getScene().getWindow();
+            File file = fc.showOpenDialog(s);
+            
+           
+            //Read file to String:
+            if (file != null) {
+                String input = "";
+                try {
+                    FileReader f = new FileReader(dir);
+                    int i;
+                    while ((i = f.read()) != -1) {
+                        input += (char) i;
+                    }
+                    f.close();
+                } catch (IOException eer) {
+                    System.err.println("Error reading text file");
+                }
+            }
+            else{
+                System.out.println("File couldn't be selected, loaded, or used");
+            }
+        });
 
         slider.setMin(0);
         slider.setMax(100);
@@ -301,7 +338,7 @@ public class StatsDisplay extends Group {
                     root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter counts", scale));
                     break;
 
-               case "Scatter angles":
+                case "Scatter angles":
                     root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter angles", scale));
                     break;
 
