@@ -90,11 +90,10 @@ public class StatsDisplay extends Group {
             // file explorer pop up for text box
             Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
             FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File(dir+"\\src\\main\\resources"));
+            fc.setInitialDirectory(new File(dir + "\\src\\main\\resources"));
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
-            
-            
+
             //Read file to String:
             String input = "";
             if (file != null) {
@@ -111,8 +110,19 @@ public class StatsDisplay extends Group {
             } else {
                 System.out.println("File couldn't be selected, loaded, or used");
             }
+
+            //Process String
             
-            System.out.println(input.substring(0,10000));
+            
+            //Display results?
+            
+            
+           // this.object.setVisible(false);
+            this.tg.getSelectedToggle().setSelected(false);
+           // this.chartPane.setVisible(false);
+            
+
+            System.out.println(input.substring(0, 2000));
         });
         slider.setMin(0);
         slider.setMax(100);
