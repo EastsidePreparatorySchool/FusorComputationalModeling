@@ -14,6 +14,15 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
     final Map<Particle, TallyOverEV> hMap = new HashMap<>();
     final TallyOverEV sumSquares = new TallyOverEV();
+    double[][] covLog;
+    double[][] covFlat;
+    double[][] covLow;
+
+    public CorrelatedTallyOverEV() {
+        covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
+        covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
+        covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
+    }
 
     public void record(Particle p, double value, double energy) {
         TallyOverEV h;
@@ -49,6 +58,24 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
             sumSquares.addSquares(h);
             sumSquares.hLow.addSquares(h.hLow);
             sumSquares.hFlat.addSquares(h.hFlat);
+
+            for (int i = 0; i < bins.length; i++) {
+                for (int j = 0; j < bins.length; j++) {
+                    covLog[i][j] += bins[i] * bins[j];
+                }
+            }
+
+            for (int i = 0; i < hFlat.bins.length; i++) {
+                for (int j = 0; j < hFlat.bins.length; j++) {
+                    covFlat[i][j] += hFlat.bins[i] * hFlat.bins[j];
+                }
+            }
+
+            for (int i = 0; i < hLow.bins.length; i++) {
+                for (int j = 0; j < hLow.bins.length; j++) {
+                    covLog[i][j] += hLow.bins[i] * hLow.bins[j];
+                }
+            }
         }
 
         synchronized (hMap) {
@@ -84,10 +111,23 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
             double mu = dmu.getYValue().doubleValue();
             double ss = dss.getYValue().doubleValue();
             //System.out.print(""+mu+"("+ss +","+count+") -> ");
-            dss.setYValue(mu > 0 ? Math.sqrt((ss - (mu*mu))/count)/mu:0);
+            dss.setYValue(mu > 0 ? Math.sqrt((ss - (mu * mu)) / count) / mu : 0);
             //System.out.println(""+dss.getYValue());
         }
 
         return sss;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // not null
+
+        // instanceof CTOEV
+        // compute chi^2
+        return false;
+    }
+
+    public static boolean compareToRef(String fileName) {
+        return false;
     }
 }

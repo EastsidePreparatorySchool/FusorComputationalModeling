@@ -197,13 +197,12 @@ public class Part {
         }
 
         return event;
-    } //
+    }
+
+    //
     // detector functionality
     //
-
-    void processPathLength(Particle particle,
-            double length, double energy
-    ) {
+    void processPathLength(Particle particle, double length, double energy) {
         this.fluenceMap.get(particle.type).record(particle, length / volume, energy);
     }
 
