@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<config>
+		<shapes>
+			<shape>
+				<phi>0</phi>
+				<theta>0</theta>
+				<radius>10</radius>
+				<height>60</height>
+				<x>30</x>
+				<y>0</y>
+				<z>0</z>
+				<type>Cylinder</type>
+				<charge>1</charge>
+			</shape>
+			<shape>
+				<phi>0</phi>
+				<theta>Pi/2</theta>
+				<radius>10</radius>
+				<height>60</height>
+				<x>30</x>
+				<y>0</y>
+				<z>0</z>
+				<type>Cylinder</type>
+				<charge>1</charge>
+			</shape>
+			<shape>
+				<phi>Pi/1.5</phi>
+				<theta>Pi/2</theta>
+				<radius>10</radius>
+				<height>60</height>
+				<x>30</x>
+				<y>0</y>
+				<z>0</z>
+				<type>Cylinder</type>
+				<charge>1</charge>
+			</shape>
+		</shapes>
+	</config>
+</root>

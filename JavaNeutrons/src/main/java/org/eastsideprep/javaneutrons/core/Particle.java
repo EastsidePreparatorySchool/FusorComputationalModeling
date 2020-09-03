@@ -1,25 +1,31 @@
 package org.eastsideprep.javaneutrons.core;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.LinkedTransferQueue;
 import javafx.scene.Node;
 import org.apache.commons.math3.geometry.euclidean.threed.*;
 
-public class Particle {
+abstract public class Particle {
 
+    public String type;
     public double energy; // unit: SI for cm
     public Vector3D direction; // no units
     public Vector3D position; // unit: (cm,cm,cm)
     public double entryEnergy = 0;
     public double totalPath = 0;
     public MonteCarloSimulation mcs;
+    public Set<CorrelatedTallyOverEV> fluences;
 
     ArrayList<Event> history = new ArrayList<>();
 
     public Particle(Vector3D position, Vector3D direction, double energy, MonteCarloSimulation mcs) {
         this.position = position;
-        setDirectionAndEnergy(direction, energy);
+        this.direction = direction;
+        this.energy = energy;
         this.mcs = mcs;
+        this.fluences = new HashSet<>();
     }
 
     public void setPosition(LinkedTransferQueue<Node> q, Vector3D position) {
@@ -45,19 +51,16 @@ public class Particle {
     }
 
     public void processEvent(Event event) {
-        if (event.code == Event.Code.Scatter) {
-        } else if (event.code == Event.Code.Capture) {
-            // capture
-            Environment.recordCapture();
-        }
     }
+    
+    abstract Event nextPoint(Material m);
 
     //replace parameters with 1 Neutron object??
     public boolean record(Event e) {
         //System.out.println("Neutron"+this.hashCode()+" recording event "+e);
         history.add(e);
-        if (history.size() > 2000) {
-            dumpEvents("Neturon scattered 2000 times:");
+        if (history.size() > 3000) {
+            dumpEvents("More than 3000 events for particle:");
             return false;
         }
         return true;
@@ -68,9 +71,15 @@ public class Particle {
             System.out.println("");
             System.out.println(reason);
             System.out.println("-- start of particle events:");
-            history.stream().forEach(event -> System.out.println(event));
+            //history.stream().forEach(event -> System.out.println(event));
             System.out.println("-- done");
             System.out.println("");
+        }
+    }
+    
+    public void tally() {
+        for (CorrelatedTallyOverEV h:fluences) {
+            h.tally(this);
         }
     }
 }

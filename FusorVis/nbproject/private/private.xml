@@ -5,15 +5,10 @@
         <group name="Ephemera">
             <file>file:/C:/Users/sfreisem-kirov/Documents/GitHub/FusorComputationalModeling/FusorVis/src/fusorvis/FusorVis.java</file>
         </group>
-        <group name="FusorComputationalModeling">
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorVis/src/fusorvis/Xform.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorVis/cube.json</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorVis/src/fusorvis/FusorVis.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorVis/nbproject/jfx-impl.xml</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorVis/nbproject/project.properties</file>
-        </group>
         <group>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorVis/src/fusorvis/FusorVis.java</file>
         </group>
+        <group name="FusorComputationalModeling"/>
+
     </open-files>
 </project-private>

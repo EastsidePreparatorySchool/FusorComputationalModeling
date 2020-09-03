@@ -1,0 +1,307 @@
+[
+	{
+		"type": "wire",
+		"radius": "0.45",
+		"flip_vertical": true,
+		"charge": 1,
+		"start": {
+			"x": "1.5",
+			"y": "-175",
+			"z": "0",
+			"phi": "0",
+			"theta": "0",
+			"planePhi": "tau/4",
+			"planeTheta": "-tau/4"
+		},
+		"components": [
+			{
+				"type": "straight",
+				"height": "60"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/2"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"invertdegree": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "-tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"invertdegree": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/2"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"angletostart": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "-tau/4",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"invertdegree": true,
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "0"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"angletostart": "tau/4",
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"invertdegree": true,
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/2"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"invertdegree": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "-tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"invertdegree": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/2"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"angletostart": "tau/4",
+				"invert": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/2"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"invertdegree": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"invertdegree": true,
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "0"
+			},
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau/4",
+				"angletostart": "-tau/4"
+			},
+			{
+				"type": "planeredef",
+				"phi": "-tau/4",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"invertdegree": true,
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "8",
+				"angle": "tau/4",
+				"smartinver": true
+			},
+			{
+				"type": "planeredef",
+				"phi": "0",
+				"theta": "-tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "tau/4",
+				"smartinver": true
+			},
+			{
+				"type": "straight",
+				"height": "62"
+			}
+		]
+	},
+	{
+		"type": "stl",
+		"filename": "chamber.stl",
+		"scalefactor": "1.25",
+		"positionadj": {
+			"x": 35,
+			"y": 0,
+			"z": -35
+		},
+		"charge": -1,
+		"flip_yz": true,
+		"flip_vertical": true
+	}
+]

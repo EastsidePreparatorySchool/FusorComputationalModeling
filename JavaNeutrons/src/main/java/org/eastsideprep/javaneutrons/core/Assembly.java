@@ -2,6 +2,7 @@ package org.eastsideprep.javaneutrons.core;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -14,9 +15,9 @@ import javafx.scene.transform.Transform;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
 public class Assembly extends Part {
-    // todo: acceleration structure
 
     private AssemblyGroup g;
+    public ArrayList<Part> parts = new ArrayList<>();
 
     public Assembly(String name) {
         super(name, null, null);
@@ -64,64 +65,92 @@ public class Assembly extends Part {
     }
 
     @Override
-    public Event evolveNeutronPath(Neutron n, LinkedTransferQueue visualizations, boolean outermost) {
-        return this.evolveNeutronPathNoVacuum(n, visualizations, outermost);
-    }
-
-    public Event evolveNeutronPathNoVacuum(Neutron n, LinkedTransferQueue visualizations, boolean outermost) {
+    public Event evolveParticlePath(Particle p, LinkedTransferQueue visualizations, boolean outermost, Grid grid) {
         Event partEvent;
         Event interactionEvent;
-        Event event;
+        Event event = null;
         double t;
+        boolean firstTime = true;
 
-        // we start in a certain medium. Todo: API for either figring that out or setting it
-        Material medium = n.mcs.initialMaterial;
+        // we start in a certain medium.
+        Material medium = p.mcs.initialMaterial;
 
         do {
-            // find the closest part we intersect with
-            partEvent = this.rayIntersect(n.position, n.direction, false, visualizations);
+            if (event != null && event.code == Event.Code.ExitEntry) {
+                // we have an exit/entry event from a prior iteration
+                partEvent = event;
+                partEvent.part = event.part2;
+                partEvent.code = Event.Code.Entry;
+                partEvent.position = event.position;
+                partEvent.t = 0;
+            } else {
+                // find the closest part we intersect with
+                if (grid != null) {
+                    partEvent = grid.rayIntersect(p.position, p.direction, false, p.mcs.traceLevel >= 1 ? visualizations : null, Double.POSITIVE_INFINITY);
+                } else {
+                    partEvent = this.rayIntersect(p.position, p.direction, false, visualizations);
+                }
+            }
             if (partEvent == null && !outermost) {
                 // we found nothing and we are not in the outermost assembly,
                 // return to the containing assembly
-                return new Event(n.position, Event.Code.Exit);
+                return new Event(p.position, Event.Code.Exit);
             }
             // find possible interactions along the way
-            interactionEvent = medium.nextPoint(n);
+            interactionEvent = p.nextPoint(medium);
+
+            // did we not find a part, maybe we started inside a part?
+            if (partEvent == null && outermost && firstTime) {
+                // repeat search looking at triangle meshes from the inside
+                if (grid != null) {
+                    partEvent = grid.rayIntersect(p.position, p.direction, true, p.mcs.traceLevel >= 1 ? visualizations : null, Double.POSITIVE_INFINITY);
+                } else {
+                    partEvent = this.rayIntersect(p.position, p.direction, true, visualizations);
+                }
+                if (partEvent != null) {
+                    // we are already inside the part. 
+                    partEvent.t = 0;
+                }
+            }
+            firstTime = false;
 
             // did we not find a part, or is it further than an air event?
             if (partEvent == null || partEvent.t > interactionEvent.t) {
                 event = interactionEvent;
                 if (event.position.getNorm() <= Environment.limit) {
                     // scattering / absorption in medium did really happen, process it
-                    n.setPosition(visualizations, event.position);
+                    p.setPosition(visualizations, event.position);
                     medium.processEvent(event, true);
                     Util.Graphics.visualizeEvent(event, visualizations);
                 }
             } else {
                 // no interaction, we will just enter a new part
-                Util.Graphics.visualizeEvent(partEvent, n.direction, visualizations);
-                Part p = partEvent.part;
-                n.setPosition(visualizations, partEvent.position);
-                if (!n.record(partEvent)) {
+                Part part = partEvent.part;
+                if (partEvent.t != 0) {
+                    // we entered the part from the outside, visualize it
+                    Util.Graphics.visualizeEvent(partEvent, p.direction, visualizations);
+                    p.setPosition(visualizations, partEvent.position);
+                }
+                if (!p.record(partEvent)) {
                     // to many events, get out
                     return partEvent;
                 }
-                partEvent.neutron = n;
+                partEvent.particle = p;
                 medium.processEvent(partEvent, true);
                 //System.out.println("Entering part " + p.name);
-                event = p.evolveNeutronPath(n, visualizations, false);
+                event = part.evolveParticlePath(p, visualizations, false, grid);
                 // coming out, we might be in a new material
                 medium = event.exitMaterial != null ? event.exitMaterial : medium;
                 //System.out.println("Exit to material: "+medium.name);
             }
             // if things happened far enough from the origin, call it gone
             if (event.position.getNorm() > Environment.limit) {
-                t = Util.Math.raySphereIntersect(n.position, n.direction, Vector3D.ZERO, Environment.limit);
-                event.position = n.position.add(n.direction.scalarMultiply(t));
+                t = Util.Math.raySphereIntersect(p.position, p.direction, Vector3D.ZERO, Environment.limit);
+                event.position = p.position.add(p.direction.scalarMultiply(t));
                 event.t = t;
                 event.code = Event.Code.Gone;
-                event.neutron = n;
-                n.setPosition(visualizations, event.position);
+                event.particle = p;
+                p.setPosition(visualizations, event.position);
                 medium.processEvent(event, true);
                 //n.setPosition(visualizations, event.position);
             }
@@ -140,7 +169,6 @@ public class Assembly extends Part {
     @Override
     Event rayIntersect(Vector3D rayOrigin, Vector3D rayDirection, boolean goingOut, LinkedTransferQueue vis) {
         double tmin = -1;
-        Part closestPart = null;
         Event closestEvent = null;
         Part p = null;
 
@@ -154,7 +182,7 @@ public class Assembly extends Part {
             }
             if (p != null) {
                 // intersect with that part, false means "going in"
-                Event entryEvent = p.rayIntersect(rayOrigin, rayDirection, false, vis);
+                Event entryEvent = p.rayIntersect(rayOrigin, rayDirection, goingOut, vis);
                 // event != null means we found a triangle
                 if (entryEvent != null) {
                     if (tmin == -1 || entryEvent.t < tmin) {
@@ -173,8 +201,10 @@ public class Assembly extends Part {
     public void add(Part part) {
         if (part instanceof Assembly) {
             Assembly a = (Assembly) part;
+            this.addAll(a.parts);
             g.getChildren().add(a.getGroup());
         } else {
+            this.parts.add(part);
             g.getChildren().add(part.shape);
         }
 //        if (part.shape != null) {
@@ -280,14 +310,45 @@ public class Assembly extends Part {
         return parts;
     }
 
-    ;
-    
-    
     public Set<Material> getMaterials() {
         return getParts().stream().map(p -> p.material).filter(m -> m != null).collect(Collectors.toSet());
     }
 
     public Set<Material> getContainedMaterials() {
         return getParts().stream().map(p -> p.shape.containedMaterial).filter(m -> m != null).collect(Collectors.toSet());
+    }
+
+    public Set<Part> verifyPart(Part part) {
+
+        HashSet<Part> intersectingParts = new HashSet<>();
+        ArrayList<Vector3D> points = part.shape.getPoints();
+        for (Part other : parts) {
+            if (other != part) {
+                for (Vector3D point : points) {
+                    if (other.contains(point)) {
+                        // repeat that test with another random ray
+                        if (other.contains(point)) {
+                            if (other.contains(point)) {
+                                intersectingParts.add(other);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return intersectingParts;
+    }
+
+    public Set<String> verifyMeshIntegrity() {
+        Set<String> intersectingPairs = new HashSet<>();
+        for (Part p : this.parts) {
+            Set<Part> intersectingParts = verifyPart(p);
+            for (Part other : intersectingParts) {
+                String conflict = "Parts of " + p.name + " are contained in " + other.name;
+                intersectingPairs.add(conflict);
+            }
+        }
+        return intersectingPairs;
     }
 }

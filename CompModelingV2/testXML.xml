@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shapes>
+   <shape>
+      <phi>43.2</phi>
+      <theta>49.48</theta>
+      <phi2>38.39</phi2>
+      <phi3>48.58</phi3>
+      <radius>3</radius>
+      <radius2>1</radius2>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+      <type>TorusSegment</type>
+      <charge>-1</charge>
+   </shape>
+   <shape>
+     <x>3</x>
+     <y>3</y>
+     <z>3</z>
+     <radius>4</radius>
+     <phi>0</phi>
+     <theta>0</theta>
+     <height>10</height>
+     <type>Cylinder</type>
+     <charge>1</charge>
+   </shape>
+</shapes>

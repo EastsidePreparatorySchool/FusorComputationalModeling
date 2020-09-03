@@ -13,9 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -403,6 +403,9 @@ public class Shape extends MeshView {
     }
 
     void cacheVerticesAndFaces() {
+        if (vertices != null && faces != null) {
+            return;
+        }
         synchronized (this) {
             if (vertices == null) {
                 //System.out.println("Original vertices for " + this.part.name);
@@ -425,7 +428,6 @@ public class Shape extends MeshView {
     //
     // goes through all the triangles in the shape to find the intersection
     // returns t-parameter for the ray, or 0 if not intersecting
-    // todo: acceleration structure like hierarchy of volumes
     //
     public double rayIntersect(Vector3D rayOrigin, Vector3D rayDirection, boolean goingOut, int[] faceIndex, LinkedTransferQueue simVis) {
         double tmin = -1;
@@ -491,7 +493,6 @@ public class Shape extends MeshView {
         int y = 1;
         int z = 2;
 
-      
         cacheVerticesAndFaces();
         int vis = this.mesh.getVertexFormat().getVertexIndexSize();
 
@@ -505,9 +506,6 @@ public class Shape extends MeshView {
                 goingOut ? vertices[3 * faces[face + vis] + z] : vertices[3 * faces[face + 2 * vis] + z]
         );
     }
-    
-    
-    
 
     public Material getContactMaterial(int faceIndex) {
         if (this.facesContainingMaterial.contains(faceIndex)) {
@@ -520,7 +518,8 @@ public class Shape extends MeshView {
     // getVolume
     //
     // calculates the volume of a mesh in O(N)
-    // todo: since the math is so simple, this could be done without creating objects
+    // since the math is so simple, this could be done without creating objects
+    // but we don't call it very often, so no need
     //
     public double getVolume() {
 
@@ -686,6 +685,129 @@ public class Shape extends MeshView {
         }
 
         return tmin;
+    }
+
+    // is a point within the shape?
+    // counts the unique t-parameters for a ray intersection with all triangles
+    // if odd, point is contained in shape
+    public boolean contains(Vector3D point) {
+
+        int x = 0;
+        int y = 1;
+        int z = 2;
+
+        double ox = point.getX();
+        double oy = point.getY();
+        double oz = point.getZ();
+
+        Vector3D d = Util.Math.randomDir();
+        double dx = d.getX();
+        double dy = d.getY();
+        double dz = d.getZ();
+
+        double epsilon = 1e-12;
+
+        cacheVerticesAndFaces();
+        int vis = this.mesh.getVertexFormat().getVertexIndexSize();
+        HashSet<Double> ts = new HashSet<>();
+
+        for (int i = 0; i < faces.length; i += 6) {
+            // test ray "going out" first
+            double t = Util.Math.rayTriangleIntersect(ox, oy, oz, dx, dy, dz,
+                    vertices[3 * faces[i] + x], vertices[3 * faces[i] + y], vertices[3 * faces[i] + z],
+                    vertices[3 * faces[i + 2 * vis] + x],
+                    vertices[3 * faces[i + 2 * vis] + y],
+                    vertices[3 * faces[i + 2 * vis] + z],
+                    vertices[3 * faces[i + vis] + x],
+                    vertices[3 * faces[i + vis] + y],
+                    vertices[3 * faces[i + vis] + z]
+            );
+            if (t != -1 && t > epsilon) {
+                //System.out.println("adding outgoing " + t);
+                ts.add(t);
+
+            }
+
+            // test the "going in" direction
+            t = Util.Math.rayTriangleIntersect(ox, oy, oz, dx, dy, dz,
+                    vertices[3 * faces[i] + x], vertices[3 * faces[i] + y], vertices[3 * faces[i] + z],
+                    vertices[3 * faces[i + vis] + x],
+                    vertices[3 * faces[i + vis] + y],
+                    vertices[3 * faces[i + vis] + z],
+                    vertices[3 * faces[i + 2 * vis] + x],
+                    vertices[3 * faces[i + 2 * vis] + y],
+                    vertices[3 * faces[i + 2 * vis] + z]
+            );
+            if (t != -1) {
+                //System.out.println("adding incoming " + t);
+                if (t < epsilon) {
+                    t = 0.0;
+                }
+                ts.add(t);
+            }
+
+        }
+
+        // catch coincident points on triangles
+        if (ts.size() == 1 && ts.contains(0.0)) {
+            return false;
+        }
+
+        if ((ts.size() % 2) == 1) {
+            //System.out.println("unique t parameters: " + ts.size());
+            //System.out.println("contained: "+point);
+            return true;
+        }
+        //System.out.println("");
+
+        return false;
+    }
+
+    ArrayList<Vector3D> getPoints() {
+        cacheVerticesAndFaces();
+        double[] v = this.getTransformedVertices();
+        ArrayList<Vector3D> result = new ArrayList<>();
+
+        for (int i = 0; i < vertices.length; i += 3) {
+            result.add(new Vector3D(vertices[i], vertices[i + 1], vertices[i + 2]));
+        }
+
+        return result;
+    }
+
+    // utility function for debugging:
+    // does this shape intersect another shape?
+    // computes whether any "this" vertices are inside the other volume
+    // and vice versa
+    public boolean intersects(Shape other) {
+        boolean result = false;
+        ArrayList<Vector3D> points = getPoints();
+        for (Vector3D point : points) {
+            if (other.contains(point)) {
+                if (other.contains(point)) {
+                    if (other.contains(point)) {
+                        System.out.println(this.part.name + " contains " + other.part.name + " : " + point);
+
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        points = other.getPoints();
+        for (Vector3D point : points) {
+            if (this.contains(point)) {
+                if (this.contains(point)) {
+                    if (this.contains(point)) {
+                        System.out.println(this.part.name + " contains " + other.part.name + " : " + point);
+
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
 }

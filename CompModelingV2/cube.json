@@ -1,0 +1,65 @@
+[
+	{
+		"type": "wire",
+		"radius": "0.45",
+		"charge": 1,
+		"start": {
+			"x": "1.5",
+			"y": "-20",
+			"z": "0",
+			"phi": "0",
+			"theta": "0",
+			"planePhi": "tau/4",
+			"planeTheta": "-tau/4"
+		},
+		"components": [
+			{
+				"type": "straight",
+				"height": "20"
+			},
+			{
+				"type": "bend",
+				"radius": "1",
+				"angle": "5*tau/24"
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "tau/4",
+			},
+			{
+				"type": "bend",
+				"radius": "15",
+				"angle": "23*tau/24"
+			},
+			{
+				"type": "planeredef",
+				"phi": "tau/4",
+				"theta": "-tau/4"
+			},
+			{
+				"type": "bend",
+				"radius": "3",
+				"angle": "6*tau/24",
+				"transinver": true
+			},
+			{
+				"type": "straight",
+				"height": "8"
+			}
+		]
+	},
+	{
+		"type": "stl",
+		"filename": "chamber.stl",
+		"scalefactor": "1.25",
+		"positionadj": {
+			"x": 35,
+			"y": 0,
+			"z": -35
+		},
+		"charge": -1,
+		"flip_yz": true,
+		"flip_vertical": true
+	}
+]

@@ -5,21 +5,26 @@ import org.apache.commons.math3.geometry.euclidean.threed.*;
 public class Event {
 
     public enum Code {
-        Entry, Exit, Scatter, Capture, Gone, EmergencyDirectionChange, EmergencyExit
+        Entry, Exit, ExitEntry, Scatter, Capture, Gone, EmergencyDirectionChange, EmergencyExit
     };
 
     public Code code; // what kind of interesting thing happened here
     public Vector3D position;
-    public Neutron neutron;
+    public Particle particle;
 
     // additional info - presence depends on event
-    public Isotope element;
+    public Nuclide scatterParticle;
     public double energyOut;
     public double t; // how far along was this on the vector we took to get here
     public Part part;
+    public Part part2;
     public int face;
     public Material exitMaterial;
+    
+    // debug stuff
     public double cos_theta;
+    public double particleEnergyIn;
+    public double particleEnergyOut;
 
 //    public Event(double x, double y, double z, Event.Code c) {
 //        this.position = new Vector3D(x, y, z);
@@ -49,12 +54,12 @@ public class Event {
         this.face = face;
     }
 
-    public Event(Vector3D position, Event.Code c, double t, Isotope e, Neutron n) {
+    public Event(Vector3D position, Event.Code c, double t, Nuclide e, Neutron n) {
         this.position = new Vector3D(position.getX(), position.getY(), position.getZ());
         this.code = c;
         this.t = t;
-        this.element = e;
-        this.neutron = n;
+        this.scatterParticle = e;
+        this.particle = n;
     }
 
     public Event(Vector3D position, Part p, double t) {
@@ -64,6 +69,22 @@ public class Event {
         this.t = t;
     }
 
+   public Event(Vector3D position, Part p, double t, boolean goingOut, int face) {
+        this.position = new Vector3D(position.getX(), position.getY(), position.getZ());
+        this.part = p;
+        this.code = goingOut?Event.Code.Exit:Event.Code.Entry;
+        this.t = t;
+        this.face = face;
+    }
+   
+    public Event(Vector3D position, Part p, Part p2, double t) {
+        this.position = new Vector3D(position.getX(), position.getY(), position.getZ());
+        this.part = p;
+        this.part2 = p2;
+        this.code = Event.Code.ExitEntry;
+        this.t = t;
+    }
+    
     @Override
     public String toString() {
         return "Event: " + this.hashCode() + ": " + this.code + ": "+this.position;

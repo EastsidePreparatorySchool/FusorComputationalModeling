@@ -1,0 +1,46 @@
+[
+	{
+		"flip_vertical": false,
+		"type": "wire",
+		"radius": "0.45",
+		"charge": 1,
+		"start": {
+			"x": "-10",
+			"y": "0",
+			"z": "0",
+			"phi": "0",
+			"theta": "0",
+			"planePhi": "tau/4",
+			"planeTheta": "-tau/4"
+		},
+		"components": [
+			{
+				"type": "bend",
+				"radius": "10",
+				"angle": "tau"
+			}
+		]
+	},
+	{
+		"flip_vertical": false,
+		"type": "wire",
+		"radius": "0.45",
+		"charge": -1,
+		"start": {
+			"x": "-25",
+			"y": "0",
+			"z": "0",
+			"phi": "0",
+			"theta": "0",
+			"planePhi": "tau/4",
+			"planeTheta": "-tau/4"
+		},
+		"components": [
+			{
+				"type": "bend",
+				"radius": "25",
+				"angle": "tau"
+			}
+		]
+	}
+]

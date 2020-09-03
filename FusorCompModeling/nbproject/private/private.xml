@@ -2,25 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="FusorComputationalModeling">
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/TorusSegment.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Acceleration.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Vector.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/XMLParser.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/StatsGen.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/MathJSONObject.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Wire.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/PointDistributer.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Point.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/GridComponent.java</file>
-            <file>file:/C:/Users/gmein/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/FusorCompModeling.java</file>
-        </group>
+
         <group>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/ComponentType.java</file>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Wire.java</file>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Point.java</file>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/FusorCompModeling.java</file>
             <file>file:/C:/Users/guberti/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Vector.java</file>
+
         </group>
         <group name="Ephemera">
             <file>file:/C:/Users/sfreisem-kirov/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/Point.java</file>
@@ -38,5 +27,6 @@
             <file>file:/C:/Users/sfreisem-kirov/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/PointDistributer.java</file>
             <file>file:/C:/Users/sfreisem-kirov/Documents/GitHub/FusorComputationalModeling/FusorCompModeling/src/fusorcompmodeling/EField.java</file>
         </group>
+        <group name="FusorComputationalModeling"/>
     </open-files>
 </project-private>

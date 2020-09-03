@@ -1,0 +1,17 @@
+com\mycompany\EulersMethod\TableGraphWriter.class
+com\mycompany\EulersMethod\EField.class
+com\mycompany\EulersMethod\MYEulersMethod.class
+com\mycompany\EulersMethod\PJEulersMethod.class
+com\mycompany\EulersMethod\SLRungeKutta.class
+com\mycompany\EulersMethod\Main.class
+com\mycompany\EulersMethod\PJRungeKutta.class
+com\mycompany\EulersMethod\PJInputHandler.class
+com\mycompany\EulersMethod\InputHandler.class
+com\mycompany\EulersMethod\Particle.class
+com\mycompany\EulersMethod\EulersMethod.class
+com\mycompany\EulersMethod\Vector.class
+com\mycompany\EulersMethod\EFieldFileParser.class
+com\mycompany\EulersMethod\Solution.class
+com\mycompany\EulersMethod\MYRungeKutta.class
+com\mycompany\EulersMethod\Charge.class
+com\mycompany\EulersMethod\ParticleFileParser.class

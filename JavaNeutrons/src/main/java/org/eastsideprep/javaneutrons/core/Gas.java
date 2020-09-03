@@ -15,7 +15,7 @@ public abstract class Gas extends Material {
     }
     
     // use this for a single-element gas
-    public Gas(String name, Isotope element, double pressure, double massDensitySTP){
+    public Gas(String name, Nuclide element, double pressure, double massDensitySTP){
         super(name);
         this.pressure = pressure;
         

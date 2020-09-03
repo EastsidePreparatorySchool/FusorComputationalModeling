@@ -5,8 +5,7 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -17,15 +16,13 @@ import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
  */
 public class Material {
 
-    public static HashMap<String, Material> materials = new HashMap<>();
-
     public class Component {
 
-        Isotope e;
+        Nuclide e;
         double density; // atoms/(barn*cm)
         double proportion;
 
-        Component(Isotope e, double proportion) {
+        Component(Nuclide e, double proportion) {
             this.e = e;
             this.density = 0;
             this.proportion = proportion;
@@ -34,28 +31,24 @@ public class Material {
 
     public String name;
     ArrayList<Component> components;
-    public Histogram lengths;
-    public EnergyHistogram scattersOverEnergyBefore;
-    public EnergyHistogram scattersOverEnergyAfter;
-    public EnergyHistogram capturesOverEnergy;
-    public EnergyHistogram lengthOverEnergy;
-    public double totalEvents;
+    public Tally lengths;
+    public TallyOverEV scattersOverEnergyBefore;
+    public TallyOverEV scattersOverEnergyAfter;
+    public TallyOverEV capturesOverEnergy;
+    public TallyOverEV lengthOverEnergy;
+    public TallyOverEV pathCounts;
+    public AtomicLong totalEvents;
     public double totalFreePath;
-    public long pathCount;
+    public AtomicLong pathCount;
 
     //public int temp;
     public Material(String name) {
-        materials.put(name, this);
         components = new ArrayList<>();
         this.name = name;
         resetDetector();
     }
 
-    public static Material getByName(String name) {
-        return materials.get(name);
-    }
-
-    public final void addComponent(Isotope element, double proportion) {
+    public final void addComponent(Nuclide element, double proportion) {
         components.add(new Component(element, proportion));
     }
 
@@ -94,15 +87,16 @@ public class Material {
     }
 
     public final void resetDetector() {
-        this.totalEvents = 0;
-        this.scattersOverEnergyBefore = new EnergyHistogram();
-        this.scattersOverEnergyAfter = new EnergyHistogram();
-        this.capturesOverEnergy = new EnergyHistogram();
-        this.lengthOverEnergy = new EnergyHistogram();
-        this.lengths = new Histogram(-5, 7, 120, false);
-        this.totalEvents = 0;
+        this.scattersOverEnergyBefore = new TallyOverEV();
+        this.scattersOverEnergyAfter = new TallyOverEV();
+        this.capturesOverEnergy = new TallyOverEV();
+        this.lengthOverEnergy = new TallyOverEV();
+        this.pathCounts = new TallyOverEV();
+        this.lengths = new Tally(-5, 7, 120, false);
+        this.totalEvents = new AtomicLong(0);
+        this.totalEvents = new AtomicLong(0);
+        this.pathCount = new AtomicLong(0);
         this.totalFreePath = 0;
-        this.pathCount = 0;
 
     }
 
@@ -117,36 +111,36 @@ public class Material {
     }
 
     // input: SI(cm)
-    public double randomPathLength(double energy) {
-        double length = -Math.log(ThreadLocalRandom.current().nextDouble()) / getSigma(energy / Util.Physics.eV);
+    public double getPathLength(double energy, double rand) {
+        double length = -Math.log(rand) / getSigma(energy / Util.Physics.eV);
         return length;
     }
 
     public void recordLength(double length, double energy) {
         this.lengths.record(1, length);
         this.lengthOverEnergy.record(length, energy);
+        this.pathCounts.record(1, energy);
         synchronized (this) {
             this.totalFreePath += length;
         }
     }
 
     public void recordCollision() {
-        synchronized (this) {
-            this.pathCount++;
-        }
+        this.pathCount.incrementAndGet();
     }
 
     public Event nextPoint(Neutron n) {
         double energy = n.energy;
-        double t = randomPathLength(energy);
-        
+
+        double t = getPathLength(energy, Util.Math.random());
+
         Vector3D location = n.position.add(n.direction.scalarMultiply(t));
 
-        if (t > 2*Environment.limit) {
+        if (t > 2 * Environment.limit) {
             // we don't go that far
             return new Event(location, Event.Code.Gone, t);
         }
-        
+
         if (n.mcs.traceLevel >= 2) {
             //System.out.println("");
             //System.out.println("Neutron at " + n.energy + " in " + this.name + ", t: " + t);
@@ -170,8 +164,8 @@ public class Material {
             sigmas[i + 1] = sum;
         }
 
-        // random draw from across the combined distribution
-        double rand = ThreadLocalRandom.current().nextDouble() * sum;
+        // random draw from earlier scaled up across the combined distribution
+        double rand = sum * Util.Math.random();
         if (n.mcs.traceLevel >= 2) {
             //System.out.println("sum: " + sum + ", draw: " + rand);
         }
@@ -186,7 +180,7 @@ public class Material {
             //System.out.println("Slot " + slot);
         }
 
-        Isotope e = components.get(slot / 2).e;
+        Nuclide e = components.get(slot / 2).e;
         Event.Code code = (slot % 2 == 0) ? Event.Code.Scatter : Event.Code.Capture;
         if (n.mcs.traceLevel >= 2) {
             //System.out.println("Component: " + e.name + ", code: " + code);
@@ -200,10 +194,6 @@ public class Material {
         // try named material instance
         if (material instanceof String) {
             String name = (String) material;
-            material = Material.getByName(name);
-            if (material != null) {
-                return (Material) material;
-            }
 
             // if not named, try the class
             try {
@@ -229,7 +219,11 @@ public class Material {
             material = ((Part) material).material;
         }
 
-        return (Material) material;
+        if (material instanceof Material) {
+            return (Material) material;
+        } else {
+            return null;
+        }
     }
 
     public void processEvent(Event event, boolean processNeutron) {
@@ -237,23 +231,19 @@ public class Material {
         {
             switch (event.code) {
                 case Scatter:
-                    this.scattersOverEnergyBefore.record(1, event.neutron.energy);
+                    this.scattersOverEnergyBefore.record(1, event.particle.energy);
                     this.recordCollision();
                     // record more stats for material
-                    synchronized (this) {
-                        this.totalEvents++;
-                    }
+                    this.totalEvents.incrementAndGet();
                     break;
                 case Capture:
-                    this.capturesOverEnergy.record(1, event.neutron.energy);
-                    this.recordCollision();
+                    this.capturesOverEnergy.record(1, event.particle.energy);
+                    this.recordCollision(); // this needs to be here because it ends a path
                     // record more stats for material
-                    synchronized (this) {
-                        this.totalEvents++;
-                    }
+                    this.totalEvents.incrementAndGet();
                     break;
                 case Gone:
-                    Environment.recordEscape(event.neutron.energy);
+                    Environment.recordEscape(event.particle.energy);
                     break;
                 default:
                     break;
@@ -261,7 +251,7 @@ public class Material {
         }
 
         //if (event.neutron.energy > 2.44e6 * Util.Physics.eV) {
-        this.recordLength(event.t, event.neutron.energy);
+        this.recordLength(event.t, event.particle.energy);
 //        if (this.name.equals("Air"))
 //        synchronized (this) {
 //            if (event.t > 300) {
@@ -271,13 +261,13 @@ public class Material {
 //        }
         //}
 
-        if (event.neutron != null && processNeutron) {
+        if (event.particle != null && processNeutron) {
             // let the neutron do its thing
-            event.neutron.processEvent(event);
+            event.particle.processEvent(event);
         }
 
         if (event.code == Event.Code.Scatter) {
-            this.scattersOverEnergyAfter.record(1, event.neutron.energy);
+            this.scattersOverEnergyAfter.record(1, event.particle.energy);
         }
     }
 
@@ -290,7 +280,7 @@ public class Material {
             DecimalFormat f = new DecimalFormat("0.##E0");
             String tick = f.format(energy);
 
-            data.add(new XYChart.Data(tick, getSigma(energy)));
+            data.add(new XYChart.Data(tick, Math.log(getSigma(energy))));
             //System.out.println(tick + " " + getSigma(energy));
         }
 

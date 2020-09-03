@@ -1,0 +1,170 @@
+solid OpenSCAD_Model
+  facet normal -1 0 0
+    outer loop
+      vertex -25.585 -27.065 -23.09
+      vertex -25.585 24.435 41.91
+      vertex -25.585 24.435 -23.09
+    endloop
+  endfacet
+  facet normal -1 -0 0
+    outer loop
+      vertex -25.585 24.435 41.91
+      vertex -25.585 -27.065 -23.09
+      vertex -25.585 -27.065 41.91
+    endloop
+  endfacet
+  facet normal -0 0 1
+    outer loop
+      vertex -25.585 24.435 41.91
+      vertex 25.585 -27.065 41.91
+      vertex 25.585 24.435 41.91
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 25.585 -27.065 41.91
+      vertex -25.585 24.435 41.91
+      vertex -25.585 -27.065 41.91
+    endloop
+  endfacet
+  facet normal 1 -0 0
+    outer loop
+      vertex 25.585 -27.065 41.91
+      vertex 25.585 24.435 -23.09
+      vertex 25.585 24.435 41.91
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 25.585 24.435 -23.09
+      vertex 25.585 -27.065 41.91
+      vertex 25.585 -27.065 -23.09
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -25.585 -27.065 -23.09
+      vertex 25.585 24.435 -23.09
+      vertex 25.585 -27.065 -23.09
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex 25.585 24.435 -23.09
+      vertex -25.585 -27.065 -23.09
+      vertex -25.585 24.435 -23.09
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -25.585 -27.065 -23.09
+      vertex 25.585 -27.065 41.91
+      vertex -25.585 -27.065 41.91
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 25.585 -27.065 41.91
+      vertex -25.585 -27.065 -23.09
+      vertex 25.585 -27.065 -23.09
+    endloop
+  endfacet
+  facet normal 0 1 -0
+    outer loop
+      vertex 25.585 24.435 -23.09
+      vertex -25.585 24.435 41.91
+      vertex 25.585 24.435 41.91
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -25.585 24.435 41.91
+      vertex 25.585 24.435 -23.09
+      vertex -25.585 24.435 -23.09
+    endloop
+  endfacet
+  facet normal 1 -0 0
+    outer loop
+      vertex -24.95 -26.43 41.275
+      vertex -24.95 23.8 -22.455
+      vertex -24.95 23.8 41.275
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex -24.95 23.8 -22.455
+      vertex -24.95 -26.43 41.275
+      vertex -24.95 -26.43 -22.455
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -24.95 -26.43 41.275
+      vertex 24.95 23.8 41.275
+      vertex 24.95 -26.43 41.275
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex 24.95 23.8 41.275
+      vertex -24.95 -26.43 41.275
+      vertex -24.95 23.8 41.275
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex 24.95 -26.43 -22.455
+      vertex 24.95 23.8 41.275
+      vertex 24.95 23.8 -22.455
+    endloop
+  endfacet
+  facet normal -1 -0 0
+    outer loop
+      vertex 24.95 23.8 41.275
+      vertex 24.95 -26.43 -22.455
+      vertex 24.95 -26.43 41.275
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -24.95 23.8 -22.455
+      vertex 24.95 23.8 41.275
+      vertex -24.95 23.8 41.275
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 24.95 23.8 41.275
+      vertex -24.95 23.8 -22.455
+      vertex 24.95 23.8 -22.455
+    endloop
+  endfacet
+  facet normal -0 0 1
+    outer loop
+      vertex -24.95 23.8 -22.455
+      vertex 24.95 -26.43 -22.455
+      vertex 24.95 23.8 -22.455
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 24.95 -26.43 -22.455
+      vertex -24.95 23.8 -22.455
+      vertex -24.95 -26.43 -22.455
+    endloop
+  endfacet
+  facet normal 0 1 -0
+    outer loop
+      vertex 24.95 -26.43 -22.455
+      vertex -24.95 -26.43 41.275
+      vertex 24.95 -26.43 41.275
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -24.95 -26.43 41.275
+      vertex 24.95 -26.43 -22.455
+      vertex -24.95 -26.43 -22.455
+    endloop
+  endfacet
+endsolid OpenSCAD_Model

@@ -1,6 +1,7 @@
 package org.eastsideprep.javaneutrons;
 
-import javafx.geometry.Pos;
+import java.util.List;
+import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
@@ -11,10 +12,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 
 /**
@@ -47,7 +48,7 @@ public class CameraControl {
         this.zTrans = -800;
         this.pxX = widthPX;
         this.pxY = heightPX;
-        this.focusX = 100;
+        this.focusX = 0;
         this.focusY = 0.0;
 
         this.root = new Group();
@@ -103,9 +104,9 @@ public class CameraControl {
 
     private void updateCamera() {
         camera.getTransforms().setAll(
+                new Rotate(yRot, focusX, focusY, 0, Rotate.Y_AXIS),
+                new Rotate(xRot, focusX, focusY, 0, Rotate.X_AXIS),
                 new Translate(focusX, focusY, 0),
-                new Rotate(yRot, Rotate.Y_AXIS),
-                new Rotate(xRot, Rotate.X_AXIS),
                 new Translate(0, 0, zTrans)
         );
     }
@@ -116,38 +117,38 @@ public class CameraControl {
                 this.xRot = -20;
                 this.yRot = -10;
                 this.zTrans = -800;
-                this.focusX = 100;
+                this.focusX = 0;
                 this.focusY = 0.0;
                 break;
             case PLUS:
             case EQUALS:
-                if (zTrans < 1000) {
+                if (zTrans < 2000) {
                     zTrans += 5;
                 }
                 break;
             case MINUS:
-                if (zTrans > -1000) {
+                if (zTrans > -2000) {
                     zTrans -= 5;
                 }
                 break;
             case RIGHT:
-                focusX += 5;
+                focusX += 5 * Math.abs(zTrans) / 800;
                 break;
             case LEFT:
-                focusX -= 5;
+                focusX -= 5 * Math.abs(zTrans) / 800;
                 break;
             case DOWN:
                 if (e.isShiftDown()) {
                     zTrans -= 5;
                 } else {
-                    focusY += 5;
+                    focusY += 5 * Math.abs(zTrans) / 800;
                 }
                 break;
             case UP:
                 if (e.isShiftDown()) {
                     zTrans += 5;
                 } else {
-                    focusY -= 5;
+                    focusY -= 5 * Math.abs(zTrans) / 800;
                 }
                 break;
 
@@ -185,8 +186,8 @@ public class CameraControl {
             yRot += mouseDeltaX * modifierFactor * 2.0;
             xRot -= mouseDeltaY * modifierFactor * 2.0;
         } else if (me.isSecondaryButtonDown()) {
-            focusX -= mouseDeltaX * modifierFactor;
-            focusY += mouseDeltaY * modifierFactor;
+            focusX -= mouseDeltaX ;//* modifierFactor;
+            focusY -= mouseDeltaY ;//* modifierFactor;
         }
 
         updateCamera();
@@ -212,17 +213,28 @@ public class CameraControl {
     private void focus(MouseEvent e) {
         if (e.getClickCount() > 1) {
             PickResult res = e.getPickResult();
-            if (res.getIntersectedNode() instanceof Shape3D) {
-                Shape3D shape = (Shape3D) res.getIntersectedNode();
-                focusX = shape.getTranslateX() + res.getIntersectedPoint().getX();
-                focusY = shape.getTranslateZ() + res.getIntersectedPoint().getZ();
-            } else {
-                focusX = 0;
-                focusY = 0;
+
+            if (res.getIntersectedNode() != null) {
+                Point3D f = new Point3D(res.getIntersectedPoint().getX(), res.getIntersectedPoint().getY(), res.getIntersectedPoint().getY());
+                try {
+                    List<Transform> l = res.getIntersectedNode().getTransforms();
+                    for (Transform t : l) {
+                        f = t.transform(f);
+                    }
+
+//                    l = this.camera.getTransforms();
+//                    for (Transform t : l) {
+//                        f = t.transform(f);
+//                    }
+
+                    focusX = f.getX();
+                    focusY = f.getY();
+                    //zTrans = -f.getZ();
+                } catch (Exception ex) {
+                }
             }
 
-            zTrans *= 0.7;
-
+            //zTrans *= 0.7;
             updateCamera();
         }
         //e.consume();

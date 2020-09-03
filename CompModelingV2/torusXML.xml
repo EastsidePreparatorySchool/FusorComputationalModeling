@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<config>
+		<shapes>
+			<shape>
+				<phi>Pi/2</phi>
+				<theta>Pi/2</theta>
+				<radius>6.5</radius>
+				<radius2>1</radius2>
+				<phi2>0</phi2>
+				<phi3>0</phi3>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+				<type>TorusSegment</type>
+				<charge>1</charge>
+			</shape>
+			<shape/>
+		</shapes>
+	</config>
+</root>

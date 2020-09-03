@@ -27,10 +27,10 @@ public class Air extends Gas {
 
         double massDensitySTP = 1.205;
 
-        this.addComponent(E12C.getInstance(), 0.000150);
-        this.addComponent(E14N.getInstance(), 0.784431);
-        this.addComponent(E16O.getInstance(), 0.210748);
-        this.addComponent(E40Ar.getInstance(), 0.004671);
+        this.addComponent(N12C.getInstance(), 0.000150);
+        this.addComponent(N14N.getInstance(), 0.784431);
+        this.addComponent(N16O.getInstance(), 0.210748);
+        this.addComponent(N40Ar.getInstance(), 0.004671);
 
         // that's 100 Pa for STP
         this.calculateAtomicDensities(massDensitySTP * pressure / 100);
@@ -49,7 +49,7 @@ public class Air extends Gas {
     public static synchronized Air getInstance(String name) {
         // find or make the named one
         if (name != null) {
-            Material m = Material.getByName(name);
+            Material m = Material.getRealMaterial(name);
             if (m == null) {
                 return new Air(name, 100);
             }

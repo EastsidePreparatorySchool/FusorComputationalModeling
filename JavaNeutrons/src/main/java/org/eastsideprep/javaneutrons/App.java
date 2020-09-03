@@ -3,17 +3,21 @@ package org.eastsideprep.javaneutrons;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.lang.reflect.Method;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Point3D;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
@@ -22,13 +26,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.eastsideprep.javaneutrons.core.MC0D;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
-import org.eastsideprep.javaneutrons.core.Neutron;
 import org.eastsideprep.javaneutrons.core.Util;
 
 /**
@@ -41,10 +47,7 @@ public class App extends Application {
     MonteCarloSimulation sim;
     Group viewGroup;
     Group stats;
-
     Button bRun;
-    Button bRunSV;
-    Button bRunET;
 
     Label progress;
     boolean idleFlag = false;
@@ -59,23 +62,58 @@ public class App extends Application {
         CameraControl mainScene = new CameraControl(1000, 500);
         ImageView heatMap = new ImageView(Util.Graphics.createHeatMap(100, 500));
         heatMap.fitHeightProperty().bind(root.heightProperty());
-        heatMap.setVisible(false);
         mainScene.subScene.heightProperty().bind(root.heightProperty());
 
         // prepare sim for later
         this.viewGroup = new Group();
-        this.sim = TestGM.simulationTest(viewGroup);
 
         // control buttons and progress 
-        TextField tf = new TextField("10");
-        tf.setPrefWidth(200);
+        Label src = new Label("Src: ");
+        TextField tf = new TextField("1");
+        tf.setPrefWidth(85);
+        Label grid = new Label("Grid: ");
+        TextField gridSize = new TextField("2.0");
+        gridSize.setPrefWidth(40);
+        HBox settings = new HBox();
+        settings.getChildren().addAll(src, tf, grid, gridSize);
+        settings.setAlignment(Pos.CENTER);
+        settings.setSpacing(5);
 
-        bRun = new Button("Start simulation - GM");
-        bRunSV = new Button("Start simulation - SV");
-        bRunET = new Button("Start simulation - ET");
+        ChoiceBox cb = new ChoiceBox();
+        addItems(cb, TestGM.class);
+        addItems(cb, TestSV.class);
+        addItems(cb, TestET.class);
+        cb.setPrefWidth(200);
+        cb.setOnAction(e -> {
+            this.progress.setText("");
+            this.sim = fromString((String) cb.getValue(), viewGroup);
+            gridSize.setText("" + this.sim.suggestedGrid);
+            if (this.sim instanceof MC0D) {
+                ((MC0D) sim).init();
+            }
+            if (this.sim.suggestedCount != -1) {
+                tf.setText(Long.toString(this.sim.suggestedCount));
+            }
+            root.setCenter(view);
+            this.stats.getChildren().clear();
+            if (this.sim.lastCount <= 10) {
+                root.setRight(heatMap);
+            } else {
+                root.setRight(null);
+            }
+        });
+        cb.setValue(cb.getItems().get(0));
 
+        bRun = new Button("Start simulation");
         bRun.setOnAction((e) -> {
-            sim = TestGM.simulationTest(viewGroup);
+            if (gridSize.getText().trim().length() > 0) {
+                double side = Double.parseDouble(gridSize.getText());
+                this.sim.grid = null;
+                this.sim.prepareGrid(side, view);
+            } else {
+                this.sim.grid = null;
+                this.sim.prepareGrid(50, view);
+            }
             this.runSim(Integer.parseInt(tf.getText()));
             if (this.sim.lastCount <= 10) {
                 root.setRight(heatMap);
@@ -83,36 +121,28 @@ public class App extends Application {
                 root.setRight(null);
             }
 
-        });
+        }
+        );
         bRun.setPrefWidth(200);
 
-        bRunSV.setOnAction((e) -> {
-            sim = TestSV.simulationTest(viewGroup);
-            this.runSim(Integer.parseInt(tf.getText()));
-            if (this.sim.lastCount <= 10) {
-                root.setRight(heatMap);
-            } else {
-                root.setRight(null);
-            }
+        Button bStop = new Button("Stop");
+        bStop.setOnAction((e) -> {
+            this.sim.stop = true;
+            this.bRun.setDisable(false);
         });
-        bRunSV.setPrefWidth(200);
+        bStop.setPrefWidth(200);
 
-        bRunET.setOnAction((e) -> {
-            sim = TestET.simulationTest(viewGroup);
-            this.runSim(Integer.parseInt(tf.getText()));
-            if (this.sim.lastCount <= 10) {
-                root.setRight(heatMap);
-            } else {
-                root.setRight(null);
-            }
+        Button bLoad = new Button("Load assembly");
+        bLoad.setOnAction((e) -> {
+            // Egan's code goes here.
         });
-        bRunET.setPrefWidth(200);
+        bLoad.setPrefWidth(200);
 
         Button bStats = new Button("Show stats");
         bStats.setOnAction((e) -> {
-            Group stats = new StatsDisplay(sim, root);
+            Group newstats = new StatsDisplay(sim, root);
             this.stats.getChildren().clear();
-            this.stats.getChildren().add(stats);
+            this.stats.getChildren().add(newstats);
             progress.setText("");
             root.setRight(null);
         });
@@ -149,7 +179,7 @@ public class App extends Application {
         bTest.setPrefWidth(200);
 
         VBox buttons = new VBox();
-        buttons.getChildren().addAll(tf, bRun, bRunSV, bRunET, progress, new Separator(),
+        buttons.getChildren().addAll(cb, bLoad, settings, new Separator(), bRun, bStop, progress, new Separator(),
                 bStats, bView, bCopy, bTest, new Separator(),
                 stats);
         root.setLeft(buttons);
@@ -158,7 +188,7 @@ public class App extends Application {
         view = mainScene.outer;
         mainScene.root.getChildren().add(viewGroup);
         root.setCenter(view);
-        root.setRight(heatMap);
+        root.setRight(null);
 
         Scene scene;
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -187,6 +217,37 @@ public class App extends Application {
         stage.setOnCloseRequest((e) -> noIdle());
     }
 
+    void addItems(ChoiceBox cb, Class c
+    ) {
+        Method[] methods = c.getMethods();
+        for (int i = 0; i < methods.length; i++) {
+            if (methods[i].getReturnType() == MonteCarloSimulation.class) {
+                String name = c.getName() + "::" + methods[i].getName();
+                // cut off fully qualified name parts
+                name = name.substring(name.lastIndexOf(".") + 1);
+                System.out.println("public method: " + name);
+                cb.getItems().add(name);
+            }
+        }
+    }
+
+    MonteCarloSimulation fromString(String m, Group g
+    ) {
+        String cname = App.class.getPackageName() + "." + m.substring(0, m.indexOf("::"));
+        String mname = m.substring(m.indexOf("::") + 2);
+        MonteCarloSimulation mcs = null;
+
+        try {
+            Class c = Class.forName(cname);
+            Method method = c.getMethod(mname, Group.class);
+            method.setAccessible(true);
+            mcs = (MonteCarloSimulation) method.invoke(null, g);
+        } catch (Exception e) {
+            System.err.println("Didn't work: " + e);
+        }
+        return mcs;
+    }
+
     public void runSim(int count) {
         if (this.sim == null) {
             return;
@@ -195,9 +256,10 @@ public class App extends Application {
         //
         // here is where we run the actual simulation
         //
+        this.sim.stop = false;
+        this.sim.lastCount = count;
+
         bRun.setDisable(true);
-        bRunSV.setDisable(true);
-        bRunET.setDisable(true);
         progress.setText("Complete: 0 %");
 
         root.setCenter(view);
@@ -206,29 +268,35 @@ public class App extends Application {
         Group p = new Group();
 
         noIdle();
-        this.progressTimeline(count);
+        this.progressTimeline();
         sim.simulateNeutrons(count, 100000, true);
         root.setCenter(view);
     }
 
-    private Timeline progressTimeline(int count) {
+    private Timeline progressTimeline() {
         root.setCenter(view);
         final Timeline tl = new Timeline();
         tl.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1),
                 (e) -> {
                     long completed;
                     completed = sim.update();
-                    if (count > 0) {
-                        progress.setText("Complete: " + Math.round(100 * completed / count) + " %");
+                    if (this.sim.lastCount > 0) {
+                        progress.setText("Complete: " + Math.round(100 * completed / this.sim.lastCount) + " %");
                     }
-                    if (completed >= count || (count == 0 && sim.scatter)) {
+                    if (completed >= this.sim.lastCount || (this.sim.lastCount == 0 && sim.scatter)) {
                         tl.stop();
+                        sim.postProcess();
                         bRun.setDisable(false);
-                        bRunET.setDisable(false);
-                        bRunSV.setDisable(false);
                         progress.setText("Complete: 100 % , time: " + (sim.getElapsedTime() / 1000) + " s");
-                        //sim.checkTallies();
                         idle();
+                        if (sim instanceof MC0D) {
+                            Group newstats = new StatsDisplay(sim, root);
+                            this.stats.getChildren().clear();
+                            this.stats.getChildren().add(newstats);
+                            progress.setText("");
+                            root.setRight(null);
+
+                        }
                     }
                 }));
         tl.setCycleCount(Timeline.INDEFINITE);

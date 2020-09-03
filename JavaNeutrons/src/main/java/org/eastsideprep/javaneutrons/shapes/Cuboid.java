@@ -19,6 +19,16 @@ public class Cuboid extends Shape {
         create(s, s, s);
     }
 
+    // create with side lengths
+    public Cuboid(double dx, double dy, double dz) {
+        create((float) dx, (float) dy, (float) dz);
+    }
+
+    // can also make a cube
+    public Cuboid(double s) {
+        this(s, s, s);
+    }
+
     // to learn more about triangle meshes, 
     // go to https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/TriangleMesh.html
     // we only use vertices and faces here,

@@ -1,0 +1,54 @@
+[
+	{
+	
+		"radius": "0.1",
+		"charge": -1,
+		"start": {
+			"x": "-0.1",
+			"y": "11.4",
+			"z": "0",
+			"phi": "0",
+			"theta": "tau/2",
+			"planePhi": "tau/8",
+			"planeTheta": "tau/4"
+		},
+		"components": [
+			{
+				"type": "straight",
+				"height": "8.9"
+			},
+			{
+				"type": "bend",
+				"radius": "0.37",
+				"angle": "tau/6",
+				
+				"flipdir": true,
+				
+			},
+			{
+				"type": "straight",
+				"height": "1.2",
+			}
+		]
+	},
+	{
+		"radius": "0.2",
+		"charge": 1,
+		"start": {
+			"x": "3",
+			"y": "0",
+			"z": "3",
+			"phi": "0",
+			"theta": "0",
+			"planePhi": "0",
+			"planeTheta": "0"
+		},
+		"components": [
+			{
+				"type": "bend",
+				"radius": "40",
+				"angle": "tau",
+			}
+		]
+	}
+]
