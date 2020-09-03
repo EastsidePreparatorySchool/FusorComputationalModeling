@@ -112,7 +112,7 @@ public class StatsDisplay extends Group {
                 System.out.println("File couldn't be selected, loaded, or used");
             }
             
-            System.out.println(input.substring(0,1000));
+            System.out.println(input.substring(0,10000));
         });
         slider.setMin(0);
         slider.setMax(100);

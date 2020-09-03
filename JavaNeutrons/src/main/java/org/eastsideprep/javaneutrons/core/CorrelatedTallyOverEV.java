@@ -70,10 +70,10 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
                     covFlat[i][j] += hFlat.bins[i] * hFlat.bins[j];
                 }
             }
-
+            
             for (int i = 0; i < hLow.bins.length; i++) {
                 for (int j = 0; j < hLow.bins.length; j++) {
-                    covLog[i][j] += hLow.bins[i] * hLow.bins[j];
+                    covLow[i][j] += hLow.bins[i] * hLow.bins[j];
                 }
             }
         }
