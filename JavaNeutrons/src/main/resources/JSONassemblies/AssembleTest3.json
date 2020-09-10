@@ -1,9 +1,9 @@
 {
-    "name": "WeDidNotStartTheFire",
+    "name": "This is the assembly name",
     "components": [
         {
             "material_name": "HumanBodyMaterial",
-            "name": "thedayman",
+            "name": "this is the part name",
             "filelocation": "/meshes/body.obj",
             "directorylocation": "SpecifyIfYouWant",
             "color": "blue",
