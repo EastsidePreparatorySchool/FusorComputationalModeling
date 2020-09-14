@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -36,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.eastsideprep.javaneutrons.core.CorrelatedTallyOverEV;
@@ -115,18 +117,17 @@ public class StatsDisplay extends Group {
             }
             //parse String input into CorrelatedTally Over EV
 
-   //        CorrelatedTallyOverEV ReferenceHist = CorrelatedTallyOverEV.parseFromString(input);
-           
-   
-
+            //        CorrelatedTallyOverEV ReferenceHist = CorrelatedTallyOverEV.parseFromString(input);
             //display results via new window
-            //root = FXMLLoader.load(getClass().getClassLoader().getResource("path/to/other/view.fxml"), resources);
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("NewWindow.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Tally Reference Stage");
-            stage.setScene(new Scene(root, 450, 450));
-            stage.show();
+                
+                VBox v = new VBox(20);
+                v.getChildren().add(new Text(input.substring(0, 200)));
+                v.setAlignment(Pos.TOP_LEFT);
+                Stage stage = new Stage();
+                stage.initModality(Modality.NONE);
+                stage.setTitle("What would be Reference Results");
+                stage.setScene(new Scene(v, 450, 450));
+                stage.show();
 
             System.out.println(input.substring(0, 200));
         });
