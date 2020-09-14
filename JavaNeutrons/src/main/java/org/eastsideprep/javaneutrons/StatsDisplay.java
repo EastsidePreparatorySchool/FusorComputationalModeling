@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.Chart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -36,6 +38,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.eastsideprep.javaneutrons.core.CorrelatedTallyOverEV;
 import org.eastsideprep.javaneutrons.core.Nuclide;
 import org.eastsideprep.javaneutrons.core.Material;
 import org.eastsideprep.javaneutrons.core.Part;
@@ -110,19 +113,22 @@ public class StatsDisplay extends Group {
             } else {
                 System.out.println("File couldn't be selected, loaded, or used");
             }
+            //parse String input into CorrelatedTally Over EV
 
-            //Process String
-            
-            
-            //Display results?
-            
-            
-           // this.object.setVisible(false);
-            this.tg.getSelectedToggle().setSelected(false);
-           // this.chartPane.setVisible(false);
-            
+   //        CorrelatedTallyOverEV ReferenceHist = CorrelatedTallyOverEV.parseFromString(input);
+           
+   
 
-            System.out.println(input.substring(0, 2000));
+            //display results via new window
+            //root = FXMLLoader.load(getClass().getClassLoader().getResource("path/to/other/view.fxml"), resources);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("NewWindow.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Tally Reference Stage");
+            stage.setScene(new Scene(root, 450, 450));
+            stage.show();
+
+            System.out.println(input.substring(0, 200));
         });
         slider.setMin(0);
         slider.setMax(100);

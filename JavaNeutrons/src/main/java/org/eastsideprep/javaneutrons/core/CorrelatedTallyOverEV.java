@@ -130,4 +130,12 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     public static boolean compareToRef(String fileName) {
         return false;
     }
+    
+    public static CorrelatedTallyOverEV parseFromString (String s){
+        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
+        String[] words = s.split("\n"); //
+        
+        
+        return output;
+    }
 }
