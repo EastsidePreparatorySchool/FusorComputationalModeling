@@ -115,22 +115,39 @@ public class StatsDisplay extends Group {
             } else {
                 System.out.println("File couldn't be selected, loaded, or used");
             }
-            //parse String input into CorrelatedTally Over EV
-
-            //        CorrelatedTallyOverEV ReferenceHist = CorrelatedTallyOverEV.parseFromString(input);
+           
+            //get Current Correlated Tally
+            String key = "";
+            String part = (String) this.object.getValue();
+            for (String k : this.sim.getPartByName(part).fluenceMap.keySet()) {
+                if (k.equals("neutron")) {
+                    key = k;
+                }                                                                                   //way to get the current Correlated Tally being displayed
+            }                                                                                        //more complex than I thought
+            CorrelatedTallyOverEV current = this.sim.getPartByName(part).fluenceMap.get(key);
+            System.out.println(this.object.getValue());
+            current.works(); //just a test
+                      
+            //parse String input into CorrelatedTally Over EV & compare Histograms
+            String results = current.compareToRef(input);
+        
+            
             //display results via new window
-                
-                VBox v = new VBox(20);
-                v.getChildren().add(new Text(input.substring(0, 200)));
-                v.setAlignment(Pos.TOP_LEFT);
-                Stage stage = new Stage();
-                stage.initModality(Modality.NONE);
-                stage.setTitle("What would be Reference Results");
-                stage.setScene(new Scene(v, 450, 450));
-                stage.show();
+            VBox v = new VBox(20);
 
-            System.out.println(input.substring(0, 200));
+            String display;//what we want to show
+
+            v.getChildren().add(new Text(input.substring(0, 200)));
+            v.setAlignment(Pos.TOP_LEFT);
+            Stage stage = new Stage();
+            stage.initModality(Modality.NONE);
+            stage.setTitle("What would be Reference Results");
+            stage.setScene(new Scene(v, 450, 450));
+            stage.show();
+
+            //   System.out.println(input.substring(0, 2000));
         });
+
         slider.setMin(0);
         slider.setMax(100);
         slider.setValue(100);
