@@ -129,14 +129,11 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return false;
     }
 
-    public static String compareToRef(String input) {
-        CorrelatedTallyOverEV hist2 = parseFromString(input);
-        
-        return "";
-    }
-    
-    public static CorrelatedTallyOverEV parseFromString (String s){
-        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
+    public static String compareToRef(String s) {            
+          //maybe I don't need to create another correlatedTallyOverEV
+          //Actually, I don't think I will. I don't think a Correlated Tally was meant to be made
+          //in this context so it would be alot more work to try and create one
+          
         String[] words = s.split("\n"); //
         ArrayList<String> collection = new ArrayList<> ();
         for (int i = 0; i < words.length; i++) {
@@ -152,10 +149,9 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         String CovarianceMatrixDesc = collection.remove(0);
         //the rest should be the covariance matrix
         
-        /** ToDo: Parsing the individual Strings. Checking that it works. Making Matrix in optimal way */
-        System.gc();
-        return output;
+        return "";
     }
+    
     public static void works(){
         System.out.println("YES");
     }
