@@ -95,7 +95,7 @@ public class StatsDisplay extends Group {
             // file explorer pop up for text box
             Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
             FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File(dir + "\\src\\main\\resources"));
+            fc.setInitialDirectory(new File(dir + "\\src\\main\\resources\\Test References"));
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
 
