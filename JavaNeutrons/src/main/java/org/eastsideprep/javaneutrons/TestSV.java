@@ -428,11 +428,13 @@ public class TestSV {
         return mcs;
     }
 
+    
+    
     public static MonteCarloSimulation ThisOneWorks0mm(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
-                .getResource("/meshes/vac_chamber.obj")), "Lead");
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
         vacChamber.setColor(
                 "black");
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
@@ -452,33 +454,23 @@ public class TestSV {
             wright.setColor("gray");
             
         //other stuff
-        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/hi/wood.stl"), "cm"), "Wood");
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
             wood.setColor("yellow");
-        
-//        Part wood1 = new Part("Wood.outerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodouter.stl"), "cm"), "Wood");
-//        Part wood2 = new Part("Wood.innerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodinner.stl"), "cm"), "Wood");
-//        Part wood3 = new Part("Wood.base", new Shape(TestSV.class.getResource("/meshes/broken/woodbase.stl"), "cm"), "Wood");
-//        Part wood4 = new Part("Wood.topShelf", new Shape(TestSV.class.getResource("/meshes/broken/woodtopshelf.stl"), "cm"), "Wood");
-//        Part wood5 = new Part("Wood.frontDoor", new Shape(TestSV.class.getResource("/meshes/broken/woodfrontdoor.stl"), "cm"), "Wood");
-//        Part wood6 = new Part("Wood.innerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodinnerback.stl"), "cm"), "Wood");
-//        Part wood7 = new Part("Wood.outerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodouterback.stl"), "cm"), "Wood");
-        
+           
         Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
             pipes.setColor("gray");
             pipes.getTransforms().add(new Translate(0,0.5,0));
-        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("0mm wax", new Shape(TestSV.class.getResource("/meshes/broken/0mmfrontfix.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+        Part wax = new Part("0mm wax", new Shape(TestSV.class.getResource("/meshes/920/0mmwax.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));
 
-
-        
-        //assembling and such  
+          //assembling and such  
         Assembly fusor = new Assembly("Fusor");
         fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
-        //fusor.addAll(vacChamber, wood1, wood2, wood3, wood4, wood5, wood6, wood7, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        //fusor.addAll(lead, wax);
 
         Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100); //need to move these.
       //  fusor.addAll(dp);
@@ -496,7 +488,7 @@ public class TestSV {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
-                .getResource("/meshes/vac_chamber.obj")), "Lead");
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
         vacChamber.setColor(
                 "black");
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
@@ -516,7 +508,7 @@ public class TestSV {
             wright.setColor("gray");
             
         //other stuff
-        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/hi/wood.stl"), "cm"), "Wood");
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
             wood.setColor("yellow");
         
 //        Part wood1 = new Part("Wood.outerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodouter.stl"), "cm"), "Wood");
@@ -530,20 +522,20 @@ public class TestSV {
         Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
             pipes.setColor("gray");
             pipes.getTransforms().add(new Translate(0,0.5,0.65));
-        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("5mm (blank) wax", new Shape(TestSV.class.getResource("/meshes/broken/5mm2.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/920/5mmwax.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));
         
                 //i was playing around with some things
-//        Part shield1 = new Part("Extra shield wood", new Shape(TestSV.class.getResource("/meshes/extrashield/shieldwood.stl"), "cm"), "Wood"); 
-//            shield1.setColor("yellow");
-//           // shield1.getTransforms().add(0, new Translate(0,0.5,0));
-//        Part shield2 = new Part("Extra shield steel", new Shape(TestSV.class.getResource("/meshes/extrashield/shield5mm.stl"), "cm"), "Steel"); 
-//            shield2.setColor("black");
-//        
+        Part shield1 = new Part("Extra shield wood", new Shape(TestSV.class.getResource("/meshes/extrashield/shieldwood.stl"), "cm"), "Wood"); 
+            shield1.setColor("yellow");
+           // shield1.getTransforms().add(0, new Translate(0,0.5,0));
+        Part shield2 = new Part("Extra shield steel", new Shape(TestSV.class.getResource("/meshes/extrashield/shield5mm.stl"), "cm"), "Steel"); 
+            shield2.setColor("black");
+        
         
         //assembling and such  
         Assembly fusor = new Assembly("Fusor");
