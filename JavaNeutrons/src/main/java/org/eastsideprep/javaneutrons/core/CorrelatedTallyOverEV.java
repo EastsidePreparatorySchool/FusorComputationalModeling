@@ -7,8 +7,10 @@ package org.eastsideprep.javaneutrons.core;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 
@@ -72,7 +74,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
                     covFlat[i][j] += hFlat.bins[i] * hFlat.bins[j];
                 }
             }
-            
+
             for (int i = 0; i < hLow.bins.length; i++) {
                 for (int j = 0; j < hLow.bins.length; j++) {
                     covLow[i][j] += hLow.bins[i] * hLow.bins[j];
@@ -143,10 +145,10 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     static String Title;
     public static CorrelatedTallyOverEV parseFromString (String s){ 
         CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
-        String[] words = s.split("\n"); //
-        ArrayList<String> collection = new ArrayList<> ();
-        for (int i = 0; i < words.length; i++) {
-            collection.add(words[i]);
+        String[] lines = s.split("\n"); //
+        ArrayList<String> collection = new ArrayList<>();
+        for (int i = 0; i < lines.length; i++) {
+            collection.add(lines[i]);
         }
         Title = collection.remove(0);
         System.out.println(Title);
@@ -191,20 +193,34 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         System.out.println(CovarianceMatrixDesc);
         System.gc();
         //the rest of collection should be the Covariance Matrix
-        
-        
-        /** Convert String to Java Matrix here */
-        
-        
-        
-        
-        /** ToDo: Parsing the individual Strings. Checking that it works. Making Matrix in optimal way */
-        //Below we make the CorrelatedTallyOverEV
-        
-        
+
+        output.covLog = null;
+        output.covFlat = null;
+
+        // put values into low tally
+        String[] fluencesStrings = Fluences.split(" ");
+        for (int i = 0; i < output.hLow.bins.length; i++) {
+            double value = Double.parseDouble(fluencesStrings[i]);
+            output.hLow.bins[i] = value;
+        }
+
+        // construct covariance matrix
+        // for every every row, parse it
+        for (int i = 0; i < output.hLow.bins.length; i++) {
+            String[] covStrings = collection.remove(0).split(" ");
+            // for this row, put all the values into the matrix
+            for (int j = 0; j < output.hLow.bins.length; j++) {
+                double value = Double.parseDouble(fluencesStrings[i]);
+                output.covLow[i][j] = value;
+            }
+
+        }
+
+        System.gc();
         return output;
     }
-    public static void works(){
+
+    public static void works() {
         System.out.println("YES");
     }
 }
