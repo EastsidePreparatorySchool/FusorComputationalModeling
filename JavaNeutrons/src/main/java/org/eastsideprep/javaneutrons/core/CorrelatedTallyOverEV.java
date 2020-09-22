@@ -5,6 +5,8 @@
  */
 package org.eastsideprep.javaneutrons.core;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.chart.XYChart;
@@ -70,7 +72,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
                     covFlat[i][j] += hFlat.bins[i] * hFlat.bins[j];
                 }
             }
-
+            
             for (int i = 0; i < hLow.bins.length; i++) {
                 for (int j = 0; j < hLow.bins.length; j++) {
                     covLow[i][j] += hLow.bins[i] * hLow.bins[j];
@@ -127,7 +129,43 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return false;
     }
 
-    public static boolean compareToRef(String fileName) {
-        return false;
+    public static String compareToRef(String input) {
+        CorrelatedTallyOverEV hist2 = parseFromString(input);
+        
+        return "";
+    }
+    
+    public static CorrelatedTallyOverEV parseFromString (String s){ 
+        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
+        String[] words = s.split("\n"); //
+        ArrayList<String> collection = new ArrayList<> ();
+        for (int i = 0; i < words.length; i++) {
+            collection.add(words[i]);
+        }
+        String Title = collection.remove(0);
+        System.out.println(Title);
+        String NeutronCount = collection.remove(0);
+        String BinCount = collection.remove(0);
+        String BinSize = collection.remove(0);
+        String FluencesCount = collection.remove(0);
+        String Fluences = collection.remove(0);
+        String CovarianceMatrixDesc = collection.remove(0);
+        System.out.println(CovarianceMatrixDesc);
+        //the rest of collection should be the Covariance Matrix
+        
+        
+        /** Convert String to Java Matrix here */
+        
+        
+        
+        
+        /** ToDo: Parsing the individual Strings. Checking that it works. Making Matrix in optimal way */
+        
+        
+        System.gc();
+        return output;
+    }
+    public static void works(){
+        System.out.println("YES");
     }
 }

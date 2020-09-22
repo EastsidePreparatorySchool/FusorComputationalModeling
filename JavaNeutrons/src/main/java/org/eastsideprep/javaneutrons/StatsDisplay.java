@@ -5,15 +5,21 @@
  */
 package org.eastsideprep.javaneutrons;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.Chart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -30,7 +36,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.eastsideprep.javaneutrons.core.CorrelatedTallyOverEV;
 import org.eastsideprep.javaneutrons.core.Nuclide;
 import org.eastsideprep.javaneutrons.core.Material;
 import org.eastsideprep.javaneutrons.core.Part;
@@ -50,7 +60,7 @@ public class StatsDisplay extends Group {
     ChoiceBox object = new ChoiceBox();
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
-    Button ref = new Button ("Compare to reference");
+    Button ref = new Button("Compare to reference");
     String scale;
 
     Slider slider = new Slider();
@@ -77,7 +87,66 @@ public class StatsDisplay extends Group {
 
         this.sim = sim;
         this.root = root;
-        ref.setOnAction((e)->{/* todo: Egan Tardif ET: Call a method and compare histogram to ref*/});
+        ref.setOnAction((e) -> {
+            //Location to open file browser
+            String dir = System.getProperty("user.dir");
+
+            /* todo: Egan Tardif ET: Call a method and compare histogram to ref*/
+            // file explorer pop up for text box
+            Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File(dir + "\\src\\main\\resources\\Test References"));
+            File file = fc.showOpenDialog(s);
+//            System.out.println(file.getPath());
+
+            //Read file to String:
+            String input = "";
+            if (file != null) {
+                try {
+                    FileReader f = new FileReader(file.getPath());
+                    int i;
+                    while ((i = f.read()) != -1) {
+                        input += (char) i;
+                    }
+                    f.close();
+                } catch (IOException eer) {
+                    System.err.println("Error reading text file");
+                }
+            } else {
+                System.out.println("File couldn't be selected, loaded, or used");
+            }
+           
+            //get Current Correlated Tally
+            String key = "";
+            String part = (String) this.object.getValue();
+            for (String k : this.sim.getPartByName(part).fluenceMap.keySet()) {
+                if (k.equals("neutron")) {
+                    key = k;
+                }                                                                                   //way to get the current Correlated Tally being displayed
+            }                                                                                        //more complex than I thought
+            CorrelatedTallyOverEV current = this.sim.getPartByName(part).fluenceMap.get(key);
+            System.out.println(this.object.getValue());
+            current.works(); //just a test
+                      
+            //parse String input into CorrelatedTally Over EV & compare Histograms
+            String results = current.compareToRef(input);
+        
+            
+            //display results via new window
+            VBox v = new VBox(20);
+
+            String display;//what we want to show
+
+            v.getChildren().add(new Text(input.substring(0, 200)));
+            v.setAlignment(Pos.TOP_LEFT);
+            Stage stage = new Stage();
+            stage.initModality(Modality.NONE);
+            stage.setTitle("What would be Reference Results");
+            stage.setScene(new Scene(v, 450, 450));
+            stage.show();
+
+            //   System.out.println(input.substring(0, 2000));
+        });
 
         slider.setMin(0);
         slider.setMax(100);
@@ -301,7 +370,7 @@ public class StatsDisplay extends Group {
                     root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter counts", scale));
                     break;
 
-               case "Scatter angles":
+                case "Scatter angles":
                     root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter angles", scale));
                     break;
 
