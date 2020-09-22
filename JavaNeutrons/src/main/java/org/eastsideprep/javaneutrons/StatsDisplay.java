@@ -137,7 +137,7 @@ public class StatsDisplay extends Group {
 
             String display;//what we want to show
 
-            v.getChildren().add(new Text(input.substring(0, 200)));
+            v.getChildren().add(new Text(input.substring(0, 1000)));
             v.setAlignment(Pos.TOP_LEFT);
             Stage stage = new Stage();
             stage.initModality(Modality.NONE);
