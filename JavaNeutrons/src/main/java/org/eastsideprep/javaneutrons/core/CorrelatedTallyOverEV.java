@@ -137,16 +137,15 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return x;
     }
     public String compareToRef(CorrelatedTallyOverEV hist1){
-        double chisq=0;
-        for (int i = 0; i < this.hLow.bins.length; i++) {
-            for(int j = 0; j<hist1.hLow.bins.length;j++){
-                chisq+=2;
-            }                
-        }
-        
-        
+//        double chisq=0;
+//        for (int i = 0; i < this.hLow.bins.length; i++) {
+//            for(int j = 0; j<hist1.hLow.bins.length;j++){
+//                chisq+=2;
+//            }                
+//        }
+        System.out.println("Did we get here?-146");
         String x = "Comparing the fluences of the "+"currently selected part"+" and "+Title;
-        return"";
+        return x;
     }
     
     static String Title;
@@ -179,6 +178,8 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         double binSize = Double.parseDouble(BinSize_String);
         
         //Conditions for text file met
+        System.out.println(binCount);
+        System.out.println(binSize);
         if (binCount != 250 || binSize != 0.001){
             throw new Exception("Unrecognized binCount or binSize");
         }
@@ -195,16 +196,19 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
         output.covLog = null;
         output.covFlat = null;
-
+        
+               System.gc();
         // put values into low tally
         String[] fluencesStrings = Fluences.split(" ");
-        for (int i = 0; i < output.hLow.bins.length; i++) {
+        System.out.println(fluencesStrings.length);
+        for (int i = 0; i < fluencesStrings.length; i++) {
             double value = Double.parseDouble(fluencesStrings[i]);
             output.hLow.bins[i] = value;
         }
-
+        
         // construct covariance matrix
         // for every every row, parse it
+        System.out.println(output.hLow.bins.length+" Should be 250");
         for (int i = 0; i < output.hLow.bins.length; i++) {
             String[] covStrings = collection.remove(0).split(" ");
             // for this row, put all the values into the matrix

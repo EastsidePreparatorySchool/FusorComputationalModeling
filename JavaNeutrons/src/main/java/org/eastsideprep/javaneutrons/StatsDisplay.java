@@ -130,9 +130,11 @@ public class StatsDisplay extends Group {
             System.out.println(this.object.getValue());
             current.works(); //just a test
             
+            String display = "String didn't load";//what we want to show
             //parse String input into CorrelatedTally Over EV & compare Histograms
             try {
                 String results = current.compareToRef(input);
+                display=results;
             } catch (Exception ex) {
                 Logger.getLogger(StatsDisplay.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -141,9 +143,8 @@ public class StatsDisplay extends Group {
             //display results via new window
             VBox v = new VBox(20);
 
-            String display;//what we want to show
-
-            v.getChildren().add(new Text(input.substring(0, 1000)));
+           
+            v.getChildren().add(new Text("  File being read: \n"+input.substring(0, 1000)+"\n Results: \n"+display));
             v.setAlignment(Pos.TOP_LEFT);
             Stage stage = new Stage();
             stage.initModality(Modality.NONE);
