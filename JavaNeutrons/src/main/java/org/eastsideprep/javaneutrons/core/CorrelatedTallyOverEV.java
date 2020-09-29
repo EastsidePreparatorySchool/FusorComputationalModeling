@@ -131,19 +131,26 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return false;
     }
 
-    public static String compareToRef(String input) {
+    public String compareToRef(String input) throws Exception {
         CorrelatedTallyOverEV histogram2 = parseFromString(input);
         String x= compareToRef(histogram2);
         return x;
     }
-    public static String compareToRef(CorrelatedTallyOverEV hist1){
+    public String compareToRef(CorrelatedTallyOverEV hist1){
+        double chisq=0;
+        for (int i = 0; i < this.hLow.bins.length; i++) {
+            for(int j = 0; j<hist1.hLow.bins.length;j++){
+                chisq+=2;
+            }                
+        }
+        
         
         String x = "Comparing the fluences of the "+"currently selected part"+" and "+Title;
         return"";
     }
     
     static String Title;
-    public static CorrelatedTallyOverEV parseFromString (String s){ 
+    public static CorrelatedTallyOverEV parseFromString (String s) throws Exception{ 
         CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
         String[] lines = s.split("\n"); //
         ArrayList<String> collection = new ArrayList<>();
@@ -171,27 +178,19 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         String BinType = BinInfo[1];
         double binSize = Double.parseDouble(BinSize_String);
         
-        String fluencesCount = collection.remove(0);
-        String[] fc = BinSizeandInfo.split(" ");
-        String FluenceCount_String = fc[0];
-        int fluenceCount = Integer.valueOf(FluenceCount_String);
-        
-        //conditions
-//        if(binSize!=0.001||){
-//        
-//        }
-//        
-        
-        String Fluences = collection.remove(0);
-        String[] FluencesArray_String = Fluences.split(" ");
-        double[] FluencesArray = new double[FluencesArray_String.length];
-        for (int i = 0; i < FluencesArray.length; i++) {
-            FluencesArray[i]= Double.parseDouble(FluencesArray_String[i]);
+        //Conditions for text file met
+        if (binCount != 250 || binSize != 0.001){
+            throw new Exception("Unrecognized binCount or binSize");
         }
+        
+        String fluencesCount = collection.remove(0);
+
+        String Fluences = collection.remove(0);
         
         String CovarianceMatrixDesc = collection.remove(0);
         System.out.println(CovarianceMatrixDesc);
-        System.gc();
+           
+        
         //the rest of collection should be the Covariance Matrix
 
         output.covLog = null;
@@ -210,7 +209,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
             String[] covStrings = collection.remove(0).split(" ");
             // for this row, put all the values into the matrix
             for (int j = 0; j < output.hLow.bins.length; j++) {
-                double value = Double.parseDouble(fluencesStrings[i]);
+                double value = Double.parseDouble(covStrings[i]); //I think fluencesStrings should be covStrings
                 output.covLow[i][j] = value;
             }
 

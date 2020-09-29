@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -127,9 +129,13 @@ public class StatsDisplay extends Group {
             CorrelatedTallyOverEV current = this.sim.getPartByName(part).fluenceMap.get(key);
             System.out.println(this.object.getValue());
             current.works(); //just a test
-                      
+            
             //parse String input into CorrelatedTally Over EV & compare Histograms
-            String results = current.compareToRef(input);
+            try {
+                String results = current.compareToRef(input);
+            } catch (Exception ex) {
+                Logger.getLogger(StatsDisplay.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
             
             //display results via new window
