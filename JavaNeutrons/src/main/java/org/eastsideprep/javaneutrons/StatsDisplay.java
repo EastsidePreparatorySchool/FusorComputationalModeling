@@ -28,6 +28,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
@@ -63,6 +64,8 @@ public class StatsDisplay extends Group {
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
     Button ref = new Button("Compare to reference");
+    ProgressBar uploadBar = new ProgressBar(0);
+    
     String scale;
 
     Slider slider = new Slider();
@@ -92,8 +95,8 @@ public class StatsDisplay extends Group {
         ref.setOnAction((e) -> {
             //Location to open file browser
             String dir = System.getProperty("user.dir");
-
-            /* todo: Egan Tardif ET: Call a method and compare histogram to ref*/
+            uploadBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+            
             // file explorer pop up for text box
             Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
             FileChooser fc = new FileChooser();
@@ -101,6 +104,12 @@ public class StatsDisplay extends Group {
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
 
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(StatsDisplay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             //Read file to String:
             String input = "";
             if (file != null) {
@@ -116,6 +125,7 @@ public class StatsDisplay extends Group {
                 }
             } else {
                 System.out.println("File couldn't be selected, loaded, or used");
+                 //to quit
             }
            
             //get Current Correlated Tally
@@ -130,13 +140,13 @@ public class StatsDisplay extends Group {
             System.out.println(this.object.getValue());
             current.works(); //just a test
             
-            String display = "String didn't load";//what we want to show
+            String display = "String didn't load";//what we want to show, placeholder if .compareToRef doesn't work
             //parse String input into CorrelatedTally Over EV & compare Histograms
             try {
                 String results = current.compareToRef(input);
                 display=results;
             } catch (Exception ex) {
-                Logger.getLogger(StatsDisplay.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);                
             }
         
             
@@ -144,14 +154,15 @@ public class StatsDisplay extends Group {
             VBox v = new VBox(20);
 
            
-            v.getChildren().add(new Text("  File being read: \n"+input.substring(0, 1000)+"\n Results: \n"+display));
+            v.getChildren().add(new Text("  File being read: \n"+input.substring(0, 1000)+"\n        Results: \n"+display));
             v.setAlignment(Pos.TOP_LEFT);
             Stage stage = new Stage();
             stage.initModality(Modality.NONE);
-            stage.setTitle("What would be Reference Results");
+            stage.setTitle("Reference Results");
             stage.setScene(new Scene(v, 450, 450));
             stage.show();
 
+            uploadBar.setProgress(1);
             //   System.out.println(input.substring(0, 2000));
         });
 
@@ -201,7 +212,7 @@ public class StatsDisplay extends Group {
         selectScale.setPrefWidth(200);
 
         controls.getChildren().addAll(chartType, new Separator(), selectScale, new Separator(),
-                new Text("Zoom"), slider, new Separator(), object, ref);
+                new Text("Zoom"), slider, new Separator(), object, ref, new Separator(), uploadBar);
         controls.setPadding(new Insets(10, 0, 10, 0));
         hb.getChildren().addAll(controls, chartPane);
         this.getChildren().add(hb);

@@ -130,21 +130,31 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         // compute chi^2
         return false;
     }
-
+    // CompareToRef(String)
     public String compareToRef(String input) throws Exception {
         CorrelatedTallyOverEV histogram2 = parseFromString(input);
         String x= compareToRef(histogram2);
         return x;
     }
+    static int fluences_length;//for some reason hLow.bins has 2 more bins of fluences than the fluences
     public String compareToRef(CorrelatedTallyOverEV hist1){
-//        double chisq=0;
-//        for (int i = 0; i < this.hLow.bins.length; i++) {
-//            for(int j = 0; j<hist1.hLow.bins.length;j++){
-//                chisq+=2;
-//            }                
-//        }
+        double chisq=0;
+        double tempx=1;
+        for (int i = 1; i < this.hLow.bins.length-1; i++) {
+            for(int j = 1; j<hist1.hLow.bins.length-1;j++){
+                tempx=(this.hLow.bins[i]-hist1.hLow.bins[i])*(this.hLow.bins[j]-hist1.hLow.bins[j]);
+                if (covLow[i-1][j-1]==0) {
+                    tempx=0;
+                }
+                else{
+                    tempx=tempx/covLow[i-1][j-1];
+                }
+                chisq+=tempx;
+            }                
+        }
         System.out.println("Did we get here?-146");
-        String x = "Comparing the fluences of the "+"currently selected part"+" and "+Title;
+        String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
+        x+="\nChisq value: " + chisq;
         return x;
     }
     
@@ -156,67 +166,68 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         for (int i = 0; i < lines.length; i++) {
             collection.add(lines[i]);
         }
+        System.out.println("      FOR THE TEST REFERENCE:");
         Title = collection.remove(0);
-        System.out.println(Title);
+        System.out.println("This is the title: "+ Title);
         
         String NeutronCount_pre = collection.remove(0);
         String[] NeutronCountArray= NeutronCount_pre.split(" ");
         String Neutron_String = NeutronCountArray[0];
         int neutronCount = Integer.valueOf(Neutron_String);
-        
-        
+        System.out.println("This is the number of neutrons: "+neutronCount);
+                
         String BinCount_pre = collection.remove(0);
         String[] BinCountArray= BinCount_pre.split(" ");
         String BinCount_String = BinCountArray[0];
         int binCount = Integer.valueOf(BinCount_String);
-        
+        System.out.println("This is the number of bins: "+binCount);
         
         String BinSizeandInfo = collection.remove(0);
         String[] BinInfo = BinSizeandInfo.split(" ");
         String BinSize_String = BinInfo[0];
         String BinType = BinInfo[1];
         double binSize = Double.parseDouble(BinSize_String);
+        System.out.println("This is the binSize: " + binSize);
         
         //Conditions for text file met
-        System.out.println(binCount);
-        System.out.println(binSize);
         if (binCount != 250 || binSize != 0.001){
             throw new Exception("Unrecognized binCount or binSize");
         }
         
         String fluencesCount = collection.remove(0);
-
+        System.out.println("This is the number of fluences: "+fluencesCount);
         String Fluences = collection.remove(0);
-        
+        System.out.println("These are the fluences: "+Fluences);
         String CovarianceMatrixDesc = collection.remove(0);
-        System.out.println(CovarianceMatrixDesc);
+        System.out.println("This is the covariance matrix description: "+CovarianceMatrixDesc);
            
-        
+        System.out.println("\nAfter String parsing & calculations: \n");
         //the rest of collection should be the Covariance Matrix
-
+                    //
+                    //Setting up CTOEV
+                    //
         output.covLog = null;
         output.covFlat = null;
         
-               System.gc();
         // put values into low tally
         String[] fluencesStrings = Fluences.split(" ");
-        System.out.println(fluencesStrings.length);
-        for (int i = 0; i < fluencesStrings.length; i++) {
-            double value = Double.parseDouble(fluencesStrings[i]);
+        System.out.println("The length of fluencesStrings: " +fluencesStrings.length);
+        fluences_length=fluencesStrings.length;
+        for (int i = 1; i < output.hLow.bins.length-1; i++) {
+            double value = Double.parseDouble(fluencesStrings[i-1]);
             output.hLow.bins[i] = value;
         }
-        
+      
         // construct covariance matrix
         // for every every row, parse it
-        System.out.println(output.hLow.bins.length+" Should be 250");
-        for (int i = 0; i < output.hLow.bins.length; i++) {
+        System.out.println("Should be 250");
+        for (int i = 0; i < output.hLow.bins.length-2; i++) { //originall output.Hlow.bins.length
             String[] covStrings = collection.remove(0).split(" ");
-            // for this row, put all the values into the matrix
-            for (int j = 0; j < output.hLow.bins.length; j++) {
+            // for this row, put all the values into the matrix                                                             //1-250
+            for (int j = 0; j <output.hLow.bins.length-2; j++) {
                 double value = Double.parseDouble(covStrings[i]); //I think fluencesStrings should be covStrings
                 output.covLow[i][j] = value;
             }
-
         }
 
         System.gc();

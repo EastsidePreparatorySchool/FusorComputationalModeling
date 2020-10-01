@@ -5,6 +5,5 @@ module org.eastsideprep.javaneutrons {
     requires org.fxyz3d.importers;
     requires gson;
     requires javafx.graphicsEmpty;
-    requires java.logging;
     exports org.eastsideprep.javaneutrons;
 }
