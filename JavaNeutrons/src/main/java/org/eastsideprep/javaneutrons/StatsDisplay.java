@@ -100,8 +100,6 @@ public class StatsDisplay extends Group {
             fc.setInitialDirectory(new File(dir + "\\src\\main\\resources\\Test References"));
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
-
-            
             //Read file to String:
             String input = "";
             if (file != null) {
@@ -135,7 +133,7 @@ public class StatsDisplay extends Group {
             String display = "String didn't load";//what we want to show, placeholder if .compareToRef doesn't work
             //parse String input into CorrelatedTally Over EV & compare Histograms
             try {
-                String results = current.compareToRef(input);
+                String results = current.compareToRef(input,this.sim.lastCount);
                 display=results;
             } catch (Exception ex) {
                 System.out.println(ex);                

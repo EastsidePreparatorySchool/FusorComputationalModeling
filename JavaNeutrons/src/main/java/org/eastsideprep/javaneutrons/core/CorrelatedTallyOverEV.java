@@ -21,7 +21,6 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     double[][] covLog;
     double[][] covFlat;
     double[][] covLow;
-
     public CorrelatedTallyOverEV() {
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
@@ -131,13 +130,13 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return false;
     }
     // CompareToRef(String)
-    public String compareToRef(String input) throws Exception {
+    public String compareToRef(String input, long y) throws Exception {
         CorrelatedTallyOverEV histogram2 = parseFromString(input);
-        String x= compareToRef(histogram2);
+        String x= compareToRef(histogram2,y);
         return x;
     }
     static int fluences_length;//for some reason hLow.bins has 2 more bins of fluences than the fluences
-    public String compareToRef(CorrelatedTallyOverEV hist1){
+    public String compareToRef(CorrelatedTallyOverEV hist1, long neutroncountthis){
         double chisq=0;
         double tempx=1;
         for (int i = 1; i < this.hLow.bins.length-1; i++) {
@@ -152,12 +151,13 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
                 chisq+=tempx;
             }                
         }
+        chisq=chisq*1/neutroncount*1/neutroncountthis;
         System.out.println("Did we get here?-146");
         String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
         x+="\nChisq value: " + chisq;
         return x;
     }
-    
+    static int neutroncount;
     static String Title;
     public static CorrelatedTallyOverEV parseFromString (String s) throws Exception{ 
         CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
@@ -174,6 +174,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         String[] NeutronCountArray= NeutronCount_pre.split(" ");
         String Neutron_String = NeutronCountArray[0];
         int neutronCount = Integer.valueOf(Neutron_String);
+        neutroncount=neutronCount;
         System.out.println("This is the number of neutrons: "+neutronCount);
                 
         String BinCount_pre = collection.remove(0);
