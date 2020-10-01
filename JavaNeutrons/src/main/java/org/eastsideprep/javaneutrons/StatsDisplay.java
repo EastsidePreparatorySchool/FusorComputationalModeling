@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -93,10 +91,9 @@ public class StatsDisplay extends Group {
         this.sim = sim;
         this.root = root;
         ref.setOnAction((e) -> {
+            uploadBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS); //why does it only work here?
             //Location to open file browser
             String dir = System.getProperty("user.dir");
-            uploadBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-            
             // file explorer pop up for text box
             Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
             FileChooser fc = new FileChooser();
@@ -104,11 +101,6 @@ public class StatsDisplay extends Group {
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(StatsDisplay.class.getName()).log(Level.SEVERE, null, ex);
-            }
             
             //Read file to String:
             String input = "";
@@ -125,7 +117,7 @@ public class StatsDisplay extends Group {
                 }
             } else {
                 System.out.println("File couldn't be selected, loaded, or used");
-                 //to quit
+                return;
             }
            
             //get Current Correlated Tally

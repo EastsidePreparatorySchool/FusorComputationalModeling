@@ -143,9 +143,9 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         for (int i = 1; i < this.hLow.bins.length-1; i++) {
             for(int j = 1; j<hist1.hLow.bins.length-1;j++){
                 tempx=(this.hLow.bins[i]-hist1.hLow.bins[i])*(this.hLow.bins[j]-hist1.hLow.bins[j]);
-                if (covLow[i-1][j-1]==0) {
+                if (covLow[i-1][j-1]==0 || Double.isNaN(covLow[i-1][j-1])) {
                     tempx=0;
-                }
+                } 
                 else{
                     tempx=tempx/covLow[i-1][j-1];
                 }
