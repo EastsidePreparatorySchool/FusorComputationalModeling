@@ -151,7 +151,11 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
                 chisq+=tempx;
             }                
         }
-        chisq=chisq*1/neutroncount*1/neutroncountthis;
+        System.out.println(neutroncount+" "+neutroncountthis);
+        
+        chisq=chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis);
+        int df=250;
+        chisq=chisq/df;
         System.out.println("Did we get here?-146");
         String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
         x+="\nChisq value: " + chisq;

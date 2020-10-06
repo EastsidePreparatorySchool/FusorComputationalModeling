@@ -43,9 +43,9 @@ public class TestET {
 //        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
 //                .getResource("/meshes/vac_chamber.obj")), "Steel");
         double thickness = 200; //block thickness in cm
-        //String m = "HydrogenWax";
+        String m = "HydrogenWax";
         //String m = "CarbonWax";
-        String m = "Paraffin";
+        //String m = "Paraffin";
 
         //Part wall = new Part("Prison: " + m, new Shape(TestGM.class.getResource("/meshes/prison.stl"), "cm"), m);
         Part prisonblock = new Part("Prison: " + m, new Cuboid(thickness), m);
