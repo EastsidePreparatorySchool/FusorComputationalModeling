@@ -8,6 +8,9 @@ package org.eastsideprep.javaneutrons;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -85,7 +88,12 @@ public class StatsDisplay extends Group {
         }
 
     }
-
+    static String readfile(String path)
+                        throws IOException
+                {
+                    byte[] encoded = Files.readAllBytes(Paths.get(path));
+                    return new String(encoded);
+                }
     public StatsDisplay(MonteCarloSimulation sim, BorderPane root) {
 
         this.sim = sim;
@@ -101,22 +109,13 @@ public class StatsDisplay extends Group {
             File file = fc.showOpenDialog(s);
 //            System.out.println(file.getPath());
             //Read file to String:
-            String input = "";
-            if (file != null) {
-                try {
-                    FileReader f = new FileReader(file.getPath());
-                    int i;
-                    while ((i = f.read()) != -1) {
-                        input += (char) i;
-                    }
-                    f.close();
-                } catch (IOException eer) {
-                    System.err.println("Error reading text file");
-                }
-            } else {
-                System.out.println("File couldn't be selected, loaded, or used");
-                return;
+            String input="";
+            try {
+                input = readfile(file.getAbsolutePath());
+            } catch (IOException ex) {
+               System.out.println("File couldn't be selected, loaded, or used");
             }
+                
            
             //get Current Correlated Tally
             String key = "";
@@ -126,14 +125,14 @@ public class StatsDisplay extends Group {
                     key = k;
                 }                                                                                   //way to get the current Correlated Tally being displayed
             }                                                                                        //more complex than I thought
-            CorrelatedTallyOverEV current = this.sim.getPartByName(part).fluenceMap.get(key);
+            CorrelatedTallyOverEV SimulationHist = this.sim.getPartByName(part).fluenceMap.get(key);
             System.out.println(this.object.getValue());
-            current.works(); //just a test
+            SimulationHist.works(); //just a test
             
             String display = "String didn't load";//what we want to show, placeholder if .compareToRef doesn't work
             //parse String input into CorrelatedTally Over EV & compare Histograms
             try {
-                String results = current.compareToRef(input,this.sim.lastCount);
+                String results = SimulationHist.compareToRef(input,this.sim.lastCount);
                 display=results;
             } catch (Exception ex) {
                 System.out.println(ex);                

@@ -12,6 +12,7 @@ import org.eastsideprep.javaneutrons.core.Assembly;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
 import org.eastsideprep.javaneutrons.core.Part;
 import org.eastsideprep.javaneutrons.core.Shape;
+import org.eastsideprep.javaneutrons.core.Util;
 import org.eastsideprep.javaneutrons.materials.Vacuum;
 import org.eastsideprep.javaneutrons.shapes.Cuboid;
 import org.fxyz3d.shapes.primitives.CuboidMesh;
@@ -57,9 +58,10 @@ public class TestET {
         whitmer.addAll(prisonblock);
         //whitmer.addTransform(new Translate(0, -100, 0));
 
-        whitmer.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);
+        whitmer.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);                        //2.53e-2
 
-        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer, Vector3D.ZERO, null, 2.53e-2, null, null, visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer, Vector3D.ZERO, null, Util.Physics.thermalEnergy, null, null, visualizations);
+        mcs.suggestedCount=100000;
         return mcs;
     }
 }

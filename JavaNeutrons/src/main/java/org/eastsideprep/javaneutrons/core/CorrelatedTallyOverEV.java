@@ -136,26 +136,20 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         return x;
     }
     static int fluences_length;//for some reason hLow.bins has 2 more bins of fluences than the fluences
-    public String compareToRef(CorrelatedTallyOverEV hist1, long neutroncountthis){
+    public String compareToRef(CorrelatedTallyOverEV other, long neutroncountthis){
         double chisq=0;
-        double tempx=1;
+        double tempx=1;                                         //bin to bin
         for (int i = 1; i < this.hLow.bins.length-1; i++) {
-            for(int j = 1; j<hist1.hLow.bins.length-1;j++){
-                tempx=(this.hLow.bins[i]-hist1.hLow.bins[i])*(this.hLow.bins[j]-hist1.hLow.bins[j]);
-                if (covLow[i-1][j-1]==0 || Double.isNaN(covLow[i-1][j-1])) {
-                    tempx=0;
-                } 
-                else{
-                    tempx=tempx/covLow[i-1][j-1];
-                }
+            for(int j = 1; j<other.hLow.bins.length-1;j++){
+                tempx=(this.hLow.bins[i]/neutroncountthis-other.hLow.bins[i])*(this.hLow.bins[j]/neutroncountthis-other.hLow.bins[j]);
+                                     //Use inverse matrix
+                tempx=tempx*other.covLow[i-1][j-1];
                 chisq+=tempx;
-            }                
+            }                                                                     //divide tally bins by neutron count
         }
         System.out.println(neutroncount+" "+neutroncountthis);
         
         chisq=chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis);
-        int df=250;
-        chisq=chisq/df;
         System.out.println("Did we get here?-146");
         String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
         x+="\nChisq value: " + chisq;
