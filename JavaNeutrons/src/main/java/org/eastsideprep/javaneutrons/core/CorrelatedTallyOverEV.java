@@ -5,6 +5,8 @@
  */
 package org.eastsideprep.javaneutrons.core;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -139,17 +141,19 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     public String compareToRef(CorrelatedTallyOverEV other, long neutroncountthis){
         double chisq=0;
         double tempx=1;                                         //bin to bin
-        for (int i = 1; i < this.hLow.bins.length-1; i++) {
-            for(int j = 1; j<other.hLow.bins.length-1;j++){
+        for (int i=0; i< this.hLow.bins.length-1; i++) {
+            for(int j=0; j<other.hLow.bins.length-1;j++){
                 tempx=(this.hLow.bins[i]/neutroncountthis-other.hLow.bins[i])*(this.hLow.bins[j]/neutroncountthis-other.hLow.bins[j]);
                                      //Use inverse matrix
-                tempx=tempx*other.covLow[i-1][j-1];
+                tempx=tempx*other.covLow[i][j];
                 chisq+=tempx;
-            }                                                                     //divide tally bins by neutron count
+            }
+            System.out.println("Our fluence: "+this.hLow.bins[i]/neutroncountthis+"    "+"Whitmer's fluence: "+other.hLow.bins[i]);//divide tally bins by neutron count
         }
         System.out.println(neutroncount+" "+neutroncountthis);
         
-        chisq=chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis);
+        chisq=Math.abs(chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis));
+       //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
         System.out.println("Did we get here?-146");
         String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
         x+="\nChisq value: " + chisq;
@@ -235,5 +239,48 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
     public static void works() {
         System.out.println("YES");
+    }
+    
+    public void toTextFile(String filename, long neutron_count){ //will expand functionality if needed
+        String output="";
+        String titletext="\"H-wax Neutron Prison, Standard Fluences\"";
+        String neutrontext=neutron_count+" neutrons";
+        String bincounttext=hLow.bins.length-2+" bins";
+        String binsizetext="0.001 linear binsize";
+        String fluencecounttext="250 fluences";
+        String fluences="";
+            for (int i = 1; i < hLow.bins.length-1; i++) {
+                fluences=fluences+hLow.bins[i]/neutron_count+" ";         
+            }
+            fluences=fluences.substring(0, fluences.length());
+       
+        String matrixdesctext=(covLow.length-2)+" by "+(covLow.length-2)+" covariance matrix";
+        String covariancematrix="";
+            System.out.println(covLow.length);
+            for (int i=1; i < (covLow.length-1); i++) {
+                covariancematrix=covariancematrix+System.getProperty("line.separator");
+                for (int j = 1; j<(covLow.length-1); j++) {
+                    covariancematrix=covariancematrix+covLow[i][j]+" ";
+                }
+            }
+       
+        
+        
+        //Combine
+        output=titletext+System.getProperty("line.separator")+neutrontext+
+                System.getProperty("line.separator")+bincounttext+System.getProperty("line.separator")
+                +binsizetext+System.getProperty("line.separator")+fluencecounttext+
+                System.getProperty("line.separator")+fluences+
+                System.getProperty("line.separator")+matrixdesctext+covariancematrix;
+        //write to text file
+        String may = System.getProperty("user.dir");
+        String x = may + "\\src\\main\\resources\\Test References\\" + filename + ".txt";
+        try {
+            FileWriter f = new FileWriter(x);
+            f.write(output);          
+            f.close();
+        } catch (IOException e) {
+            System.err.println("Error saving text file \n" + x + "\n" + e);
+        }        
     }
 }

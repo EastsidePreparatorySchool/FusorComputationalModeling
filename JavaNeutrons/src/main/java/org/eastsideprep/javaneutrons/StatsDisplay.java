@@ -65,6 +65,8 @@ public class StatsDisplay extends Group {
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
     Button ref = new Button("Compare to reference");
+     Button ref2 = new Button("Compare two textfile reference");
+     Button ref3 = new Button("Create text reference");
     ProgressBar uploadBar = new ProgressBar(0);
     
     String scale;
@@ -154,7 +156,91 @@ public class StatsDisplay extends Group {
             uploadBar.setProgress(1);
             //   System.out.println(input.substring(0, 2000));
         });
+        
+        ref2.setOnAction((e)->{
+            uploadBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS); //why does it only work here?
+        //will use as soon as we stop comparing the two fixed files
+//            //Location to open file browser
+//            String dir = System.getProperty("user.dir");
+//            // file explorer pop up for text box
+//            Stage s = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//            FileChooser fc = new FileChooser();
+//            fc.setInitialDirectory(new File(dir + "\\src\\main\\resources\\Test References"));
+//            File file = fc.showOpenDialog(s);
+////            System.out.println(file.getPath());
 
+
+            //Read file 1 to String:
+            String file_ours_loc = System.getProperty("user.dir"+"\\src\\main\\resources\\Test References\\Pesticide_REFERENCE");
+            String input_ours="";
+            try {
+                input_ours = readfile(file_ours_loc);
+            } catch (IOException ex) {
+               System.out.println("Our file couldn't be selected, loaded, or used");
+            }
+            
+            //Read file 2 to String:
+            String file_whit_loc = System.getProperty("user.dir"+"\\src\\main\\resources\\Test References\\hwaxprison");
+            String input_whit="";
+            try {
+                input_whit = readfile(file_whit_loc);
+            } catch (IOException ex) {
+               System.out.println("Our file couldn't be selected, loaded, or used");
+            }
+            
+          
+            String display = "String didn't load";//what we want to show, placeholder if .compareToRef doesn't work
+            //parse String input into CorrelatedTally Over EV & compare Histograms
+            try {
+                String results = CorrelatedTallyOverEV.parseFromString(input_ours)
+                        .compareToRef(CorrelatedTallyOverEV.parseFromString(input_whit), this.sim.lastCount); //order matters;
+                display=results;
+            } catch (Exception ex) {
+                System.out.println(ex);                
+            }
+        
+            
+            //display results via new window
+            VBox v = new VBox(20);
+
+           
+            v.getChildren().add(new Text("    Files being comapred: \n"+input_ours.substring(0, 1000)+"\n"+input_whit.substring(0,1000)+"\n        Results: \n"+display));
+            v.setAlignment(Pos.TOP_LEFT);
+            Stage stage = new Stage();
+            stage.initModality(Modality.NONE);
+            stage.setTitle("Reference Results");
+            stage.setScene(new Scene(v, 450, 450));
+            stage.show();
+
+            uploadBar.setProgress(1);
+            //   System.out.println(input.substring(0, 2000));
+        });
+        
+        ref3.setOnAction((e)->{
+            //finding right CTOEV
+            String key = "";
+            String part = (String) this.object.getValue();
+            for (String k : this.sim.getPartByName(part).fluenceMap.keySet()) {
+                if (k.equals("neutron")) {
+                    key = k;
+                }                                                                                   //way to get the current Correlated Tally being displayed
+            }                                                                                        //more complex than I thought
+            CorrelatedTallyOverEV SimulationHist = this.sim.getPartByName(part).fluenceMap.get(key);
+            System.out.println(this.object.getValue());
+            SimulationHist.works(); //just a test
+            //actually making text file
+            SimulationHist.toTextFile("Pesticide_REFERENCE", this.sim.lastCount);
+            //saying we did it with pop up window
+            VBox v = new VBox(20);
+            v.getChildren().add(new Text("CTOEV saved!"));
+            v.setAlignment(Pos.TOP_LEFT);
+            Stage stage = new Stage();
+            stage.initModality(Modality.NONE);
+            stage.setTitle("Reference Results");
+            stage.setScene(new Scene(v, 100, 100));
+            stage.show();
+        });
+        
         slider.setMin(0);
         slider.setMax(100);
         slider.setValue(100);
@@ -201,7 +287,8 @@ public class StatsDisplay extends Group {
         selectScale.setPrefWidth(200);
 
         controls.getChildren().addAll(chartType, new Separator(), selectScale, new Separator(),
-                new Text("Zoom"), slider, new Separator(), object, ref, new Separator(), uploadBar);
+                new Text("Zoom"), slider, new Separator(), object, ref,ref2, new Separator(), 
+                uploadBar, new Separator(), ref3);
         controls.setPadding(new Insets(10, 0, 10, 0));
         hb.getChildren().addAll(controls, chartPane);
         this.getChildren().add(hb);
