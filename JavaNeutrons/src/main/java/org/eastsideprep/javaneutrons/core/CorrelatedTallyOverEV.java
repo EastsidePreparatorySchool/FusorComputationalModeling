@@ -159,7 +159,28 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         x+="\nChisq value: " + chisq;
         return x;
     }
-    static int neutroncount;
+     public String compareTwoTextFiles(CorrelatedTallyOverEV other, long neutroncountthis){
+        double chisq=0;
+        double tempx=1;                                         //bin to bin
+        for (int i=0; i< this.hLow.bins.length-1; i++) {
+            for(int j=0; j<other.hLow.bins.length-1;j++){
+                tempx=(this.hLow.bins[i]-other.hLow.bins[i])*(this.hLow.bins[j]-other.hLow.bins[j]);
+                                     //Use inverse matrix
+                tempx=tempx*other.covLow[i][j];
+                chisq+=tempx;
+            }
+            System.out.println("Our fluence: "+this.hLow.bins[i]+"    "+"Whitmer's fluence: "+other.hLow.bins[i]);//divide tally bins by neutron count
+        }
+        System.out.println(neutroncount+" "+neutroncountthis);
+        
+        chisq=Math.abs(chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis));
+       //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
+        System.out.println("Did we get here?-146");
+        String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
+        x+="\nChisq value: " + chisq;
+        return x;
+    }
+    public static int neutroncount;
     static String Title;
     public static CorrelatedTallyOverEV parseFromString (String s) throws Exception{ 
         CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
@@ -250,7 +271,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         String fluencecounttext="250 fluences";
         String fluences="";
             for (int i = 1; i < hLow.bins.length-1; i++) {
-                fluences=fluences+hLow.bins[i]/neutron_count+" ";         
+                fluences=fluences+Double.toString(hLow.bins[i]/neutron_count)+" ";   
             }
             fluences=fluences.substring(0, fluences.length());
        
@@ -260,7 +281,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
             for (int i=1; i < (covLow.length-1); i++) {
                 covariancematrix=covariancematrix+System.getProperty("line.separator");
                 for (int j = 1; j<(covLow.length-1); j++) {
-                    covariancematrix=covariancematrix+covLow[i][j]+" ";
+                    covariancematrix=covariancematrix+Double.toString(covLow[i][j])+" ";
                 }
             }
        

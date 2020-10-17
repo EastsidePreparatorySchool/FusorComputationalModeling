@@ -65,7 +65,7 @@ public class StatsDisplay extends Group {
     Pane chartPane = new Pane();
     ChoiceBox selectScale = new ChoiceBox();
     Button ref = new Button("Compare to reference");
-     Button ref2 = new Button("Compare two textfile reference");
+     Button ref2 = new Button("Compare 2 textfile references");
      Button ref3 = new Button("Create text reference");
     ProgressBar uploadBar = new ProgressBar(0);
     
@@ -117,7 +117,7 @@ public class StatsDisplay extends Group {
             } catch (IOException ex) {
                System.out.println("File couldn't be selected, loaded, or used");
             }
-                
+            System.out.println(file.getAbsolutePath());
            
             //get Current Correlated Tally
             String key = "";
@@ -169,9 +169,9 @@ public class StatsDisplay extends Group {
 //            File file = fc.showOpenDialog(s);
 ////            System.out.println(file.getPath());
 
-
+            String filename="Pesticide_REFERENCE.txt";
             //Read file 1 to String:
-            String file_ours_loc = System.getProperty("user.dir"+"\\src\\main\\resources\\Test References\\Pesticide_REFERENCE");
+            String file_ours_loc = System.getProperty("user.dir")+"\\src\\main\\resources\\Test References\\"+filename;
             String input_ours="";
             try {
                 input_ours = readfile(file_ours_loc);
@@ -179,8 +179,9 @@ public class StatsDisplay extends Group {
                System.out.println("Our file couldn't be selected, loaded, or used");
             }
             
+            String filename2="hwaxprison.txt";
             //Read file 2 to String:
-            String file_whit_loc = System.getProperty("user.dir"+"\\src\\main\\resources\\Test References\\hwaxprison");
+            String file_whit_loc = System.getProperty("user.dir")+"\\src\\main\\resources\\Test References\\"+filename2;
             String input_whit="";
             try {
                 input_whit = readfile(file_whit_loc);
@@ -192,8 +193,8 @@ public class StatsDisplay extends Group {
             String display = "String didn't load";//what we want to show, placeholder if .compareToRef doesn't work
             //parse String input into CorrelatedTally Over EV & compare Histograms
             try {
-                String results = CorrelatedTallyOverEV.parseFromString(input_ours)
-                        .compareToRef(CorrelatedTallyOverEV.parseFromString(input_whit), this.sim.lastCount); //order matters;
+                CorrelatedTallyOverEV ours = CorrelatedTallyOverEV.parseFromString(input_ours);
+                String results = ours.compareTwoTextFiles(CorrelatedTallyOverEV.parseFromString(input_whit),ours.neutroncount); //order matters;
                 display=results;
             } catch (Exception ex) {
                 System.out.println(ex);                
@@ -202,9 +203,9 @@ public class StatsDisplay extends Group {
             
             //display results via new window
             VBox v = new VBox(20);
-
            
-            v.getChildren().add(new Text("    Files being comapred: \n"+input_ours.substring(0, 1000)+"\n"+input_whit.substring(0,1000)+"\n        Results: \n"+display));
+            v.getChildren().add(new Text("    Files being comapared: \n" +"      "+filename+System.getProperty("line.separator")+
+                   input_ours.substring(0, 1000)+System.getProperty("line.separator")+"      "+filename2+System.getProperty("line.separator")+input_whit.substring(0,1000)+"\n        Results: \n"+display));
             v.setAlignment(Pos.TOP_LEFT);
             Stage stage = new Stage();
             stage.initModality(Modality.NONE);
