@@ -207,7 +207,8 @@ public class StatsDisplay extends Group {
 
     private void populateRadioButtons() {
         RadioButton rb1 = new RadioButton("Escape counts");
-        RadioButton rb2 = new RadioButton("Fluence");
+        RadioButton rb2 = new RadioButton("Fluence (neutron)");
+        RadioButton rb2b = new RadioButton("Fluence (gamma)");
         RadioButton rb3 = new RadioButton("Entry counts");
         RadioButton rb3b = new RadioButton("Exit counts");
         RadioButton rb4 = new RadioButton("Scatter counts");
@@ -220,7 +221,7 @@ public class StatsDisplay extends Group {
 
         rb2.setSelected(true);
 
-        RadioButton[] rbs = new RadioButton[]{rb2, rb3, rb3b, rb4, rb4b, rb4c, rb1, rb5, rb6, rb7, rb8};
+        RadioButton[] rbs = new RadioButton[]{rb2, rb2b, rb3, rb3b, rb4, rb4b, rb4c, rb1, rb5, rb6, rb7, rb8};
 
         this.tg = new ToggleGroup();
         for (RadioButton rb : rbs) {
@@ -287,7 +288,8 @@ public class StatsDisplay extends Group {
                     this.object.setVisible(false);
                     break;
 
-                case "Fluence":
+                case "Fluence (neutron)":
+                case "Fluence (gamma)":
                     this.populateComboBoxWithPartsAndInterstitial();
                     this.object.setVisible(true);
                     break;
@@ -351,43 +353,47 @@ public class StatsDisplay extends Group {
         if (t != null) {
             switch ((String) t.getUserData()) {
                 case "Escape counts":
-                    root.setCenter(this.sim.makeChart(null, null, scale));
+                    root.setCenter(this.sim.makeChart(null, null, scale, "neutron"));
                     break;
 
-                case "Fluence":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Fluence", scale));
+                case "Fluence (neutron)":
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Fluence", scale, "neutron"));
+                    break;
+
+                case "Fluence (gamma)":
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Fluence", scale, "gamma"));
                     break;
 
                 case "Entry counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Entry counts", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Entry counts", scale, "neutron"));
                     break;
 
                 case "Exit counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Exit counts", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Exit counts", scale, "neutron"));
                     break;
 
                 case "Scatter counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter counts", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter counts", scale, "neutron"));
                     break;
 
                 case "Scatter angles":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter angles", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Scatter angles", scale, "neutron"));
                     break;
 
                 case "Capture counts":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Capture counts", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Capture counts", scale, "neutron"));
                     break;
 
                 case "Path lengths":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Path lengths", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Path lengths", scale, "neutron"));
                     break;
 
                 case "Sigmas":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Sigmas", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Sigmas", scale, "neutron"));
                     break;
 
                 case "Cross-sections":
-                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Cross-sections", scale));
+                    root.setCenter(this.sim.makeChart((String) this.object.getValue(), "Cross-sections", scale, "neutron"));
                     break;
 
                 default:

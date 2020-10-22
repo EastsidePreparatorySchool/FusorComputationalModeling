@@ -374,7 +374,7 @@ public class MonteCarloSimulation {
 
     }
 
-    public Chart makeChart(String detector, String series, String scale) {
+    public Chart makeChart(String detector, String series, String scale, String type) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         XYChart<String, Number> c;
@@ -437,9 +437,9 @@ public class MonteCarloSimulation {
                         yAxis.setTickLabelFormatter(new Formatter());
                         Map<String, CorrelatedTallyOverEV> map = p.fluenceMap;
                         for (String kind : map.keySet()) {
-                            if (kind.equals("neutron")) {
+                            if (kind.equals(type)) {
                                 CorrelatedTallyOverEV h = map.get(kind);
-                                c.getData().add(h.makeSeries("Fluence", this.lastCount, scale));
+                                c.getData().add(h.makeSeries("Fluence ("+type+")", this.lastCount, scale));
                                 sErrors = h.makeErrorSeries("Relative Error", this.lastCount, scale);
                             }
                         }

@@ -23,7 +23,7 @@ public class OpenCLTest {
      */
     public static void main(String[] args) {
         Mandelbrot.mainMandelbrot(args);
-        // listPlatforms();
+        listPlatforms();
     }
 
     static void listPlatforms() {

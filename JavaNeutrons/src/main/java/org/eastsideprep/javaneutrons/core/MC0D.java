@@ -48,11 +48,11 @@ abstract public class MC0D extends MonteCarloSimulation {
     }
 
     @Override
-    public Chart makeChart(String detector, String series, String scale) {
+    public Chart makeChart(String detector, String series, String scale, String type) {
         if (detector != null && detector.equals("Custom")) {
             return makeCustomChart(series, scale);
         }
-        return super.makeChart(detector, series, scale);
+        return super.makeChart(detector, series, scale, type);
 
     }
 
