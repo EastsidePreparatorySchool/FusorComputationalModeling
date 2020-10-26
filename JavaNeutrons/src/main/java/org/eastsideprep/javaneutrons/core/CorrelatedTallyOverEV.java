@@ -23,6 +23,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     double[][] covLog;
     double[][] covFlat;
     double[][] covLow;
+
     public CorrelatedTallyOverEV() {
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
@@ -131,58 +132,93 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         // compute chi^2
         return false;
     }
+
     // CompareToRef(String)
     public String compareToRef(String input, long y) throws Exception {
         CorrelatedTallyOverEV histogram2 = parseFromString(input);
-        String x= compareToRef(histogram2,y);
+        String x = compareToRef(histogram2, y);
         return x;
     }
     static int fluences_length;//for some reason hLow.bins has 2 more bins of fluences than the fluences
-    public String compareToRef(CorrelatedTallyOverEV other, long neutroncountthis){
-        double chisq=0;
-        double tempx=1;                                         //bin to bin
-        for (int i=0; i< this.hLow.bins.length-1; i++) {
-            for(int j=0; j<other.hLow.bins.length-1;j++){
-                tempx=(this.hLow.bins[i]/neutroncountthis-other.hLow.bins[i])*(this.hLow.bins[j]/neutroncountthis-other.hLow.bins[j]);
-                                     //Use inverse matrix
-                tempx=tempx*other.covLow[i][j];
-                chisq+=tempx;
+
+    public String compareToRef(CorrelatedTallyOverEV other, long neutroncountthis) {
+        double chisq = 0;
+        double tempx = 1;                                         //bin to bin
+        for (int i = 0; i < this.hLow.bins.length - 1; i++) {
+            for (int j = 0; j < other.hLow.bins.length - 1; j++) {
+                tempx = (this.hLow.bins[i] / neutroncountthis - other.hLow.bins[i]) * (this.hLow.bins[j] / neutroncountthis - other.hLow.bins[j]);
+                //Use inverse matrix
+                tempx = tempx * other.covLow[i][j];
+                chisq += tempx;
             }
-            System.out.println("Our fluence: "+this.hLow.bins[i]/neutroncountthis+"    "+"Whitmer's fluence: "+other.hLow.bins[i]);//divide tally bins by neutron count
+            System.out.println("Our fluence: " + this.hLow.bins[i] / neutroncountthis + "    " + "Whitmer's fluence: " + other.hLow.bins[i]);//divide tally bins by neutron count
         }
-        System.out.println(neutroncount+" "+neutroncountthis);
-        
-        chisq=Math.abs(chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis));
-       //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
+        System.out.println(neutroncount + " " + neutroncountthis);
+
+        chisq = Math.abs(chisq * neutroncount * neutroncountthis / (neutroncount + neutroncountthis));
+        //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
         System.out.println("Did we get here?-146");
-        String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
-        x+="\nChisq value: " + chisq;
+        String x = "Comparing the fluences of the " + "currently selected part \n" + "and " + Title;
+        x += "\nChisq value: " + chisq;
         return x;
     }
-     public String compareTwoTextFiles(CorrelatedTallyOverEV other, long neutroncountthis){
-        double chisq=0;
-        double tempx=1;                                         //bin to bin
-        for (int i=0; i< this.hLow.bins.length-1; i++) {
-            for(int j=0; j<other.hLow.bins.length-1;j++){
-                tempx=(this.hLow.bins[i]-other.hLow.bins[i])*(this.hLow.bins[j]-other.hLow.bins[j]);
-                                     //Use inverse matrix
-                tempx=tempx*other.covLow[i][j];
-                chisq+=tempx;
+
+    public String compareTwoTextFiles(CorrelatedTallyOverEV other, long neutroncountthis) {
+        double chisq = 0;
+        double tempx = 1;                                         //bin to bin
+        for (int i = 1; i < this.hLow.bins.length - 1; i++) {
+            for (int j = 1; j < other.hLow.bins.length - 1; j++) {
+                tempx = (this.hLow.bins[i] - other.hLow.bins[i]) * (this.hLow.bins[j] - other.hLow.bins[j]);
+                //Use inverse matrix
+                tempx = tempx * other.covLow[i - 1][j - 1];
+                chisq += tempx;
+                if (i == 1 && j == 1) {
+                    System.out.println("Contribution1: " + (this.hLow.bins[1] - other.hLow.bins[1])
+                            * (this.hLow.bins[1] - other.hLow.bins[1]) * other.covLow[0][0]);
+                }
+                if (i == 250 && j == 250) {
+                    System.out.println("Contribution250: " + (this.hLow.bins[250] - other.hLow.bins[250])
+                            * (this.hLow.bins[250] - other.hLow.bins[250]) * other.covLow[249][249]);
+                }
             }
-            System.out.println("Our fluence: "+this.hLow.bins[i]+"    "+"Whitmer's fluence: "+other.hLow.bins[i]);//divide tally bins by neutron count
+            System.out.println("Our fluence: " + this.hLow.bins[i] + "    " + "Whitmer's fluence: " + other.hLow.bins[i]);//divide tally bins by neutron count               
         }
-        System.out.println(neutroncount+" "+neutroncountthis);
-        
-        chisq=Math.abs(chisq*neutroncount*neutroncountthis/(neutroncount+neutroncountthis));
-       //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
+        System.out.println("Before 1/k chisq: " + chisq);
+        System.out.println(neutroncount + " " + neutroncountthis);
+
+        chisq = Math.abs(chisq * neutroncount * neutroncountthis / (neutroncount + neutroncountthis));
+        //chisq = chisq*(1/(1/neutroncount+1/neutroncountthis));
         System.out.println("Did we get here?-146");
-        String x = "Comparing the fluences of the "+"currently selected part \n"+"and "+Title;
-        x+="\nChisq value: " + chisq;
+        String x = "Comparing the fluences of the " + "currently selected part \n" + "and " + Title;
+        x += "\nChisq value: " + chisq;
+        
+        
+        chisq = 0;
+        int loops = 2;
+        for (int i = 1; i < loops + 1; i++) {
+            for (int j = 1; j < loops + 1; j++) {
+                tempx = (this.hLow.bins[i] - other.hLow.bins[i]) * 
+                        (this.hLow.bins[j] - other.hLow.bins[j]);
+                tempx = tempx * other.covLow[i - 1][j - 1];
+                chisq += tempx;
+                System.out.println("Our fluence: " + this.hLow.bins[i] + "  -  " 
+                                 + "Whitmer's fluence: " + other.hLow.bins[i]+"  *  "
+                                 + "Our fluence: " + this.hLow.bins[j] + "  -  " 
+                                 + "Whitmer's fluence: " + other.hLow.bins[j]+" *  "
+                                 + "Covariance Matrix: "+other.covLow[i - 1][j - 1]);
+            }
+        }
+        System.out.println("[0][0] "+other.covLow[0][0]);
+        System.out.println("[1][0] "+other.covLow[1][0]);
+        System.out.println("[0][1] "+other.covLow[0][1]);
+        System.out.println("[1][1] "+other.covLow[1][1]);
+        System.out.println("Before 1/k chisq at loop " + loops + ": " + chisq);
         return x;
     }
     public static int neutroncount;
     static String Title;
-    public static CorrelatedTallyOverEV parseFromString (String s) throws Exception{ 
+
+    public static CorrelatedTallyOverEV parseFromString(String s) throws Exception {
         CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
         String[] lines = s.split("\n"); //
         ArrayList<String> collection = new ArrayList<>();
@@ -191,64 +227,64 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         }
         System.out.println("      FOR THE TEST REFERENCE:");
         Title = collection.remove(0);
-        System.out.println("This is the title: "+ Title);
-        
+        System.out.println("This is the title: " + Title);
+
         String NeutronCount_pre = collection.remove(0);
-        String[] NeutronCountArray= NeutronCount_pre.split(" ");
+        String[] NeutronCountArray = NeutronCount_pre.split(" ");
         String Neutron_String = NeutronCountArray[0];
         int neutronCount = Integer.valueOf(Neutron_String);
-        neutroncount=neutronCount;
-        System.out.println("This is the number of neutrons: "+neutronCount);
-                
+        neutroncount = neutronCount;
+        System.out.println("This is the number of neutrons: " + neutronCount);
+
         String BinCount_pre = collection.remove(0);
-        String[] BinCountArray= BinCount_pre.split(" ");
+        String[] BinCountArray = BinCount_pre.split(" ");
         String BinCount_String = BinCountArray[0];
         int binCount = Integer.valueOf(BinCount_String);
-        System.out.println("This is the number of bins: "+binCount);
-        
+        System.out.println("This is the number of bins: " + binCount);
+
         String BinSizeandInfo = collection.remove(0);
         String[] BinInfo = BinSizeandInfo.split(" ");
         String BinSize_String = BinInfo[0];
         String BinType = BinInfo[1];
         double binSize = Double.parseDouble(BinSize_String);
         System.out.println("This is the binSize: " + binSize);
-        
+
         //Conditions for text file met
-        if (binCount != 250 || binSize != 0.001){
+        if (binCount != 250 || binSize != 0.001) {
             throw new Exception("Unrecognized binCount or binSize");
         }
-        
+
         String fluencesCount = collection.remove(0);
-        System.out.println("This is the number of fluences: "+fluencesCount);
+        System.out.println("This is the number of fluences: " + fluencesCount);
         String Fluences = collection.remove(0);
-        System.out.println("These are the fluences: "+Fluences);
+        System.out.println("These are the fluences: " + Fluences);
         String CovarianceMatrixDesc = collection.remove(0);
-        System.out.println("This is the covariance matrix description: "+CovarianceMatrixDesc);
-           
+        System.out.println("This is the covariance matrix description: " + CovarianceMatrixDesc);
+
         System.out.println("\nAfter String parsing & calculations: \n");
         //the rest of collection should be the Covariance Matrix
-                    //
-                    //Setting up CTOEV
-                    //
+        //
+        //Setting up CTOEV
+        //
         output.covLog = null;
         output.covFlat = null;
-        
+
         // put values into low tally
         String[] fluencesStrings = Fluences.split(" ");
-        System.out.println("The length of fluencesStrings: " +fluencesStrings.length);
-        fluences_length=fluencesStrings.length;
-        for (int i = 1; i < output.hLow.bins.length-1; i++) {
-            double value = Double.parseDouble(fluencesStrings[i-1]);
+        System.out.println("The length of fluencesStrings: " + fluencesStrings.length);
+        fluences_length = fluencesStrings.length;
+        for (int i = 1; i < output.hLow.bins.length - 1; i++) {
+            double value = Double.parseDouble(fluencesStrings[i - 1]);
             output.hLow.bins[i] = value;
         }
-      
+
         // construct covariance matrix
         // for every every row, parse it
         System.out.println("Should be 250");
-        for (int i = 0; i < output.hLow.bins.length-2; i++) { //originall output.Hlow.bins.length
+        for (int i = 0; i < output.hLow.bins.length - 2; i++) { //originall output.Hlow.bins.length
             String[] covStrings = collection.remove(0).split(" ");
             // for this row, put all the values into the matrix                                                             //1-250
-            for (int j = 0; j <output.hLow.bins.length-2; j++) {
+            for (int j = 0; j < output.hLow.bins.length - 2; j++) {
                 double value = Double.parseDouble(covStrings[i]); //I think fluencesStrings should be covStrings
                 output.covLow[i][j] = value;
             }
@@ -261,47 +297,45 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     public static void works() {
         System.out.println("YES");
     }
-    
-    public void toTextFile(String filename, long neutron_count){ //will expand functionality if needed
-        String output="";
-        String titletext="\"H-wax Neutron Prison, Standard Fluences\"";
-        String neutrontext=neutron_count+" neutrons";
-        String bincounttext=hLow.bins.length-2+" bins";
-        String binsizetext="0.001 linear binsize";
-        String fluencecounttext="250 fluences";
-        String fluences="";
-            for (int i = 1; i < hLow.bins.length-1; i++) {
-                fluences=fluences+Double.toString(hLow.bins[i]/neutron_count)+" ";   
+
+    public void toTextFile(String filename, long neutron_count) { //will expand functionality if needed
+        String output = "";
+        String titletext = "\"H-wax Neutron Prison, Standard Fluences\"";
+        String neutrontext = neutron_count + " neutrons";
+        String bincounttext = hLow.bins.length - 2 + " bins";
+        String binsizetext = "0.001 linear binsize";
+        String fluencecounttext = "250 fluences";
+        String fluences = "";
+        for (int i = 1; i < hLow.bins.length - 1; i++) {
+            fluences = fluences + Double.toString(hLow.bins[i] / neutron_count) + " ";
+        }
+        fluences = fluences.substring(0, fluences.length());
+
+        String matrixdesctext = (covLow.length - 2) + " by " + (covLow.length - 2) + " covariance matrix";
+        String covariancematrix = "";
+        System.out.println(covLow.length);
+        for (int i = 1; i < (covLow.length - 1); i++) {
+            covariancematrix = covariancematrix + System.getProperty("line.separator");
+            for (int j = 1; j < (covLow.length - 1); j++) {
+                covariancematrix = covariancematrix + Double.toString(covLow[i][j]) + " ";
             }
-            fluences=fluences.substring(0, fluences.length());
-       
-        String matrixdesctext=(covLow.length-2)+" by "+(covLow.length-2)+" covariance matrix";
-        String covariancematrix="";
-            System.out.println(covLow.length);
-            for (int i=1; i < (covLow.length-1); i++) {
-                covariancematrix=covariancematrix+System.getProperty("line.separator");
-                for (int j = 1; j<(covLow.length-1); j++) {
-                    covariancematrix=covariancematrix+Double.toString(covLow[i][j])+" ";
-                }
-            }
-       
-        
-        
+        }
+
         //Combine
-        output=titletext+System.getProperty("line.separator")+neutrontext+
-                System.getProperty("line.separator")+bincounttext+System.getProperty("line.separator")
-                +binsizetext+System.getProperty("line.separator")+fluencecounttext+
-                System.getProperty("line.separator")+fluences+
-                System.getProperty("line.separator")+matrixdesctext+covariancematrix;
+        output = titletext + System.getProperty("line.separator") + neutrontext
+                + System.getProperty("line.separator") + bincounttext + System.getProperty("line.separator")
+                + binsizetext + System.getProperty("line.separator") + fluencecounttext
+                + System.getProperty("line.separator") + fluences
+                + System.getProperty("line.separator") + matrixdesctext + covariancematrix;
         //write to text file
         String may = System.getProperty("user.dir");
         String x = may + "\\src\\main\\resources\\Test References\\" + filename + ".txt";
         try {
             FileWriter f = new FileWriter(x);
-            f.write(output);          
+            f.write(output);
             f.close();
         } catch (IOException e) {
             System.err.println("Error saving text file \n" + x + "\n" + e);
-        }        
+        }
     }
 }
