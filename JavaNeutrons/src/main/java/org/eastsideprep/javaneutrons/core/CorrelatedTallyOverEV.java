@@ -144,11 +144,11 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     public String compareToRef(CorrelatedTallyOverEV other, long neutroncountthis) {
         double chisq = 0;
         double tempx = 1;                                         //bin to bin
-        for (int i = 0; i < this.hLow.bins.length - 1; i++) {
-            for (int j = 0; j < other.hLow.bins.length - 1; j++) {
+        for (int i = 1; i < this.hLow.bins.length - 1; i++) {
+            for (int j = 1; j < other.hLow.bins.length - 1; j++) {
                 tempx = (this.hLow.bins[i] / neutroncountthis - other.hLow.bins[i]) * (this.hLow.bins[j] / neutroncountthis - other.hLow.bins[j]);
                 //Use inverse matrix
-                tempx = tempx * other.covLow[i][j];
+                tempx = tempx * other.covLow[i-1][j-1];
                 chisq += tempx;
             }
             System.out.println("Our fluence: " + this.hLow.bins[i] / neutroncountthis + "    " + "Whitmer's fluence: " + other.hLow.bins[i]);//divide tally bins by neutron count
@@ -162,7 +162,8 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         x += "\nChisq value: " + chisq;
         return x;
     }
-
+    
+    //right now it has a lot of leftover code from debugging
     public String compareTwoTextFiles(CorrelatedTallyOverEV other, long neutroncountthis) {
         double chisq = 0;
         double tempx = 1;                                         //bin to bin
@@ -285,7 +286,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
             String[] covStrings = collection.remove(0).split(" ");
             // for this row, put all the values into the matrix                                                             //1-250
             for (int j = 0; j < output.hLow.bins.length - 2; j++) {
-                double value = Double.parseDouble(covStrings[i]); //I think fluencesStrings should be covStrings
+                double value = Double.parseDouble(covStrings[j]); //I think fluencesStrings should be covStrings
                 output.covLow[i][j] = value;
             }
         }
