@@ -1,0 +1,26 @@
+Reading data from C:\mcnpdata\Lib80x\C\6012.800nc
+
+MT 102 Photon report for nuclide 6012.00c = C12 Lib80x (jlconlin)  Reference LA-UR-18-24034 by Conlin, J.L., et al
+
+3 photon distributions follow
+Yield Interpolations     1 lines
+     2     1  (histogram) 
+ n-Energy      Yield       2 lines
+1.00000e-11   0.680000
+1.50000e+02   0.680000
+Distribution Law: 2a
+Photon energy 4.94650000 + 0.922442 Ein
+Yield Interpolations     1 lines
+     2     1  (histogram) 
+ n-Energy      Yield       2 lines
+1.00000e-11   0.320000
+1.50000e+02   0.320000
+Distribution Law: 2
+Photon energy 3.68400000
+Yield Interpolations     1 lines
+     2     1  (histogram) 
+ n-Energy      Yield       2 lines
+1.00000e-11   0.320000
+1.50000e+02   0.320000
+Distribution Law: 2a
+Photon energy 1.26250000 + 0.922442 Ein

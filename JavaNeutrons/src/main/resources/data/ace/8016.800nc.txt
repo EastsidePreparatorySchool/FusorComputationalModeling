@@ -1,0 +1,37 @@
+Reading data from C:\mcnpdata\Lib80x\O\8016.800nc
+
+MT 102 Photon report for nuclide 8016.00c = O16 Lib80x (jlconlin)  Reference LA-UR-18-24034 by Conlin, J.L., et al
+
+4 photon distributions follow
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.146000
+3.00000e+01   0.146000
+1.50000e+02   0.146000
+Distribution Law: 2
+Photon energy 3.27220000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.854000
+3.00000e+01   0.854000
+1.50000e+02   0.854000
+Distribution Law: 2
+Photon energy 2.18420000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.854000
+3.00000e+01   0.854000
+1.50000e+02   0.854000
+Distribution Law: 2
+Photon energy 1.08800000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       3 lines
+1.00000e-11   1.000000
+3.00000e+01   1.000000
+1.50000e+02   1.000000
+Distribution Law: 2
+Photon energy 0.87080000

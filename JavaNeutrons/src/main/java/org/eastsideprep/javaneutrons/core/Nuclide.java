@@ -359,7 +359,7 @@ public class Nuclide {
         double epsilon = 0.1;
 
         // read xyz.csv from resources/data
-        InputStream is = Nuclide.class.getResourceAsStream("/data/ace/" + fileName + ".800nc.photon.csv");
+        InputStream is = Nuclide.class.getResourceAsStream("/data/ace/" + fileName + ".800nc.txt");
         if (is == null) {
             System.out.println("Photon Data file " + fileName + " not found for element " + this.name);
             System.out.println("Using isotropic scattering instead");

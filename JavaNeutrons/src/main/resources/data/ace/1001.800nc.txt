@@ -1,0 +1,779 @@
+Reading data from C:\mcnpdata\Lib80x\H\1001.800nc
+
+MT 102 Photon report for nuclide 1001.00c = H1 Lib80x (jlconlin)  Reference LA-UR-18-24034 by Conlin, J.L, et al.
+
+1 photon distributions follow
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       2 lines
+1.00000e-11   1.000000
+2.00000e+01   1.000000
+Distribution Law: 4
+Neutron Energy Interpolation:    1 lines
+     1     2  (linear-linear) 
+153 neutron energy bins and distributions follow
+Neutron E = 1.00000e-11   (1 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-11   (2 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-11   (3 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-10   (4 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-10   (5 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-10   (6 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-09   (7 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-09   (8 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-09   (9 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-08   (10 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 2.53000e-08   (11 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-07   (12 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-07   (13 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-07   (14 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-06   (15 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330100      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-06   (16 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330100      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-06   (17 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330300      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-05   (18 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22330500      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-05   (19 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22331000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-05   (20 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22332500      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-04   (21 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22335000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-04   (22 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22340000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-04   (23 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22355000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-03   (24 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22380000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-03   (25 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22430000      1.00000000e+00    1.000000000
+Neutron E = 3.00000e-03   (26 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22479900      1.00000000e+00    1.000000000
+Neutron E = 4.00000e-03   (27 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22529900      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-03   (28 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22579900      1.00000000e+00    1.000000000
+Neutron E = 6.00000e-03   (29 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22629900      1.00000000e+00    1.000000000
+Neutron E = 7.00000e-03   (30 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22679900      1.00000000e+00    1.000000000
+Neutron E = 8.00000e-03   (31 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22729800      1.00000000e+00    1.000000000
+Neutron E = 9.00000e-03   (32 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22779800      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-02   (33 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22829800      1.00000000e+00    1.000000000
+Neutron E = 1.20000e-02   (34 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.22929800      1.00000000e+00    1.000000000
+Neutron E = 1.40000e-02   (35 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23029700      1.00000000e+00    1.000000000
+Neutron E = 1.60000e-02   (36 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23129700      1.00000000e+00    1.000000000
+Neutron E = 1.80000e-02   (37 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23229600      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-02   (38 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23329600      1.00000000e+00    1.000000000
+Neutron E = 2.20000e-02   (39 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23429500      1.00000000e+00    1.000000000
+Neutron E = 2.40000e-02   (40 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23529500      1.00000000e+00    1.000000000
+Neutron E = 2.60000e-02   (41 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23629500      1.00000000e+00    1.000000000
+Neutron E = 2.80000e-02   (42 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23729400      1.00000000e+00    1.000000000
+Neutron E = 3.00000e-02   (43 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.23829400      1.00000000e+00    1.000000000
+Neutron E = 3.50000e-02   (44 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.24079300      1.00000000e+00    1.000000000
+Neutron E = 4.00000e-02   (45 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.24329200      1.00000000e+00    1.000000000
+Neutron E = 4.50000e-02   (46 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.24579100      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-02   (47 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.24829000      1.00000000e+00    1.000000000
+Neutron E = 5.50000e-02   (48 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.25078900      1.00000000e+00    1.000000000
+Neutron E = 6.00000e-02   (49 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.25328800      1.00000000e+00    1.000000000
+Neutron E = 6.50000e-02   (50 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.25578600      1.00000000e+00    1.000000000
+Neutron E = 7.00000e-02   (51 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.25828500      1.00000000e+00    1.000000000
+Neutron E = 7.50000e-02   (52 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.26078400      1.00000000e+00    1.000000000
+Neutron E = 8.00000e-02   (53 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.26328300      1.00000000e+00    1.000000000
+Neutron E = 8.50000e-02   (54 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.26578200      1.00000000e+00    1.000000000
+Neutron E = 9.00000e-02   (55 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.26828100      1.00000000e+00    1.000000000
+Neutron E = 9.50000e-02   (56 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.27078000      1.00000000e+00    1.000000000
+Neutron E = 1.00000e-01   (57 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.27327900      1.00000000e+00    1.000000000
+Neutron E = 1.10000e-01   (58 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.27827700      1.00000000e+00    1.000000000
+Neutron E = 1.20000e-01   (59 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.28327500      1.00000000e+00    1.000000000
+Neutron E = 1.30000e-01   (60 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.28827300      1.00000000e+00    1.000000000
+Neutron E = 1.40000e-01   (61 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.29327100      1.00000000e+00    1.000000000
+Neutron E = 1.50000e-01   (62 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.29826900      1.00000000e+00    1.000000000
+Neutron E = 1.60000e-01   (63 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.30326700      1.00000000e+00    1.000000000
+Neutron E = 1.70000e-01   (64 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.30826500      1.00000000e+00    1.000000000
+Neutron E = 1.80000e-01   (65 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.31326300      1.00000000e+00    1.000000000
+Neutron E = 1.90000e-01   (66 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.31826000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e-01   (67 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.32325800      1.00000000e+00    1.000000000
+Neutron E = 2.20000e-01   (68 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.33325400      1.00000000e+00    1.000000000
+Neutron E = 2.40000e-01   (69 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.34325000      1.00000000e+00    1.000000000
+Neutron E = 2.60000e-01   (70 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.35324600      1.00000000e+00    1.000000000
+Neutron E = 2.80000e-01   (71 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.36324200      1.00000000e+00    1.000000000
+Neutron E = 3.00000e-01   (72 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.37323800      1.00000000e+00    1.000000000
+Neutron E = 3.20000e-01   (73 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.38323300      1.00000000e+00    1.000000000
+Neutron E = 3.40000e-01   (74 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.39322900      1.00000000e+00    1.000000000
+Neutron E = 3.60000e-01   (75 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.40322500      1.00000000e+00    1.000000000
+Neutron E = 3.80000e-01   (76 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.41322100      1.00000000e+00    1.000000000
+Neutron E = 4.00000e-01   (77 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.42321700      1.00000000e+00    1.000000000
+Neutron E = 4.20000e-01   (78 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.43321300      1.00000000e+00    1.000000000
+Neutron E = 4.40000e-01   (79 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.44320800      1.00000000e+00    1.000000000
+Neutron E = 4.60000e-01   (80 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.45320400      1.00000000e+00    1.000000000
+Neutron E = 4.80000e-01   (81 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.46320000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e-01   (82 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.47319600      1.00000000e+00    1.000000000
+Neutron E = 5.50000e-01   (83 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.49818500      1.00000000e+00    1.000000000
+Neutron E = 6.00000e-01   (84 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.52317500      1.00000000e+00    1.000000000
+Neutron E = 6.50000e-01   (85 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.54816500      1.00000000e+00    1.000000000
+Neutron E = 7.00000e-01   (86 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.57315400      1.00000000e+00    1.000000000
+Neutron E = 7.50000e-01   (87 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.59814400      1.00000000e+00    1.000000000
+Neutron E = 8.00000e-01   (88 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.62313300      1.00000000e+00    1.000000000
+Neutron E = 8.50000e-01   (89 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.64812300      1.00000000e+00    1.000000000
+Neutron E = 9.00000e-01   (90 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.67311300      1.00000000e+00    1.000000000
+Neutron E = 9.50000e-01   (91 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.69810200      1.00000000e+00    1.000000000
+Neutron E = 1.00000e+00   (92 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.72309200      1.00000000e+00    1.000000000
+Neutron E = 1.10000e+00   (93 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.77307100      1.00000000e+00    1.000000000
+Neutron E = 1.20000e+00   (94 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.82305000      1.00000000e+00    1.000000000
+Neutron E = 1.30000e+00   (95 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.87302900      1.00000000e+00    1.000000000
+Neutron E = 1.40000e+00   (96 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.92300800      1.00000000e+00    1.000000000
+Neutron E = 1.50000e+00   (97 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+2.97298800      1.00000000e+00    1.000000000
+Neutron E = 1.60000e+00   (98 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.02296700      1.00000000e+00    1.000000000
+Neutron E = 1.70000e+00   (99 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.07294600      1.00000000e+00    1.000000000
+Neutron E = 1.80000e+00   (100 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.12292500      1.00000000e+00    1.000000000
+Neutron E = 1.90000e+00   (101 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.17290400      1.00000000e+00    1.000000000
+Neutron E = 2.00000e+00   (102 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.22288300      1.00000000e+00    1.000000000
+Neutron E = 2.20000e+00   (103 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.32284200      1.00000000e+00    1.000000000
+Neutron E = 2.40000e+00   (104 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.42280000      1.00000000e+00    1.000000000
+Neutron E = 2.60000e+00   (105 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.52275900      1.00000000e+00    1.000000000
+Neutron E = 2.80000e+00   (106 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.62271700      1.00000000e+00    1.000000000
+Neutron E = 3.00000e+00   (107 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.72267500      1.00000000e+00    1.000000000
+Neutron E = 3.20000e+00   (108 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.82263400      1.00000000e+00    1.000000000
+Neutron E = 3.40000e+00   (109 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+3.92259200      1.00000000e+00    1.000000000
+Neutron E = 3.60000e+00   (110 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.02255000      1.00000000e+00    1.000000000
+Neutron E = 3.80000e+00   (111 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.12250900      1.00000000e+00    1.000000000
+Neutron E = 4.00000e+00   (112 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.22246700      1.00000000e+00    1.000000000
+Neutron E = 4.20000e+00   (113 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.32242500      1.00000000e+00    1.000000000
+Neutron E = 4.40000e+00   (114 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.42238400      1.00000000e+00    1.000000000
+Neutron E = 4.60000e+00   (115 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.52234200      1.00000000e+00    1.000000000
+Neutron E = 4.80000e+00   (116 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.62230000      1.00000000e+00    1.000000000
+Neutron E = 5.00000e+00   (117 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.72225900      1.00000000e+00    1.000000000
+Neutron E = 5.20000e+00   (118 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.82221700      1.00000000e+00    1.000000000
+Neutron E = 5.40000e+00   (119 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+4.92217500      1.00000000e+00    1.000000000
+Neutron E = 5.60000e+00   (120 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.02213400      1.00000000e+00    1.000000000
+Neutron E = 5.80000e+00   (121 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.12209200      1.00000000e+00    1.000000000
+Neutron E = 6.00000e+00   (122 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.22205000      1.00000000e+00    1.000000000
+Neutron E = 6.20000e+00   (123 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.32200900      1.00000000e+00    1.000000000
+Neutron E = 6.40000e+00   (124 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.42196700      1.00000000e+00    1.000000000
+Neutron E = 6.60000e+00   (125 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.52192500      1.00000000e+00    1.000000000
+Neutron E = 6.80000e+00   (126 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.62188400      1.00000000e+00    1.000000000
+Neutron E = 7.00000e+00   (127 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.72184200      1.00000000e+00    1.000000000
+Neutron E = 7.50000e+00   (128 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+5.97173800      1.00000000e+00    1.000000000
+Neutron E = 8.00000e+00   (129 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+6.22163400      1.00000000e+00    1.000000000
+Neutron E = 8.50000e+00   (130 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+6.47153000      1.00000000e+00    1.000000000
+Neutron E = 9.00000e+00   (131 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+6.72142600      1.00000000e+00    1.000000000
+Neutron E = 9.50000e+00   (132 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+6.97132200      1.00000000e+00    1.000000000
+Neutron E = 1.00000e+01   (133 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+7.22121700      1.00000000e+00    1.000000000
+Neutron E = 1.05000e+01   (134 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+7.47111300      1.00000000e+00    1.000000000
+Neutron E = 1.10000e+01   (135 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+7.72100900      1.00000000e+00    1.000000000
+Neutron E = 1.15000e+01   (136 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+7.97090500      1.00000000e+00    1.000000000
+Neutron E = 1.20000e+01   (137 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+8.22080100      1.00000000e+00    1.000000000
+Neutron E = 1.25000e+01   (138 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+8.47069700      1.00000000e+00    1.000000000
+Neutron E = 1.30000e+01   (139 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+8.72059300      1.00000000e+00    1.000000000
+Neutron E = 1.35000e+01   (140 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+8.97048800      1.00000000e+00    1.000000000
+Neutron E = 1.40000e+01   (141 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+9.22038400      1.00000000e+00    1.000000000
+Neutron E = 1.45000e+01   (142 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+9.47028000      1.00000000e+00    1.000000000
+Neutron E = 1.50000e+01   (143 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+9.72017600      1.00000000e+00    1.000000000
+Neutron E = 1.55000e+01   (144 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+9.97007200      1.00000000e+00    1.000000000
+Neutron E = 1.60000e+01   (145 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+10.21997000      1.00000000e+00    1.000000000
+Neutron E = 1.65000e+01   (146 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+10.46986000      1.00000000e+00    1.000000000
+Neutron E = 1.70000e+01   (147 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+10.71976000      1.00000000e+00    1.000000000
+Neutron E = 1.75000e+01   (148 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+10.96966000      1.00000000e+00    1.000000000
+Neutron E = 1.80000e+01   (149 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+11.21955000      1.00000000e+00    1.000000000
+Neutron E = 1.85000e+01   (150 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+11.46945000      1.00000000e+00    1.000000000
+Neutron E = 1.90000e+01   (151 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+11.71934000      1.00000000e+00    1.000000000
+Neutron E = 1.95000e+01   (152 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+11.96924000      1.00000000e+00    1.000000000
+Neutron E = 2.00000e+01   (153 of 153)
+Distribution interpolation:   0  (???)
+Number of Discrete Energies:  1
+   EOUT           PDF              CDF             1 lines
+12.21913000      1.00000000e+00    1.000000000
