@@ -214,8 +214,7 @@ public class App extends Application {
         stage.setOnCloseRequest((e) -> noIdle());
     }
 
-    void addItems(ChoiceBox cb, Class c
-    ) {
+    void addItems(ChoiceBox cb, Class c) {
         Method[] methods = c.getMethods();
         for (int i = 0; i < methods.length; i++) {
             if (methods[i].getReturnType() == MonteCarloSimulation.class) {
@@ -228,8 +227,7 @@ public class App extends Application {
         }
     }
 
-    MonteCarloSimulation fromString(String m, Group g
-    ) {
+    MonteCarloSimulation fromString(String m, Group g) {
         String cname = App.class.getPackageName() + "." + m.substring(0, m.indexOf("::"));
         String mname = m.substring(m.indexOf("::") + 2);
         MonteCarloSimulation mcs = null;
@@ -241,6 +239,7 @@ public class App extends Application {
             mcs = (MonteCarloSimulation) method.invoke(null, g);
         } catch (Exception e) {
             System.err.println("Didn't work: " + e);
+            return null;
         }
         return mcs;
     }

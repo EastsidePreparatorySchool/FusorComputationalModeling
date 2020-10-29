@@ -114,15 +114,14 @@ public class Nuclide {
     private double[] capture;
     private double[] total;
     private double[] angEnergies;
-    
+
     private double[] yieldEnergies;
     private double[] yields;
-    
+
     private double[] ppnEnergies[];
     private double[] pppEnergies[];
     private double[][] pppPDF[];
     private double[][] pppCDF[];
-            
 
     public ArrayList<DistributionEntry> angles;
 
@@ -357,6 +356,10 @@ public class Nuclide {
 
     void readPhotonFile(String fileName) {
         double epsilon = 0.1;
+        String line;
+        String word;
+        int number;
+        int l = 0;
 
         // read xyz.csv from resources/data
         InputStream is = Nuclide.class.getResourceAsStream("/data/ace/" + fileName + ".800nc.txt");
@@ -370,98 +373,129 @@ public class Nuclide {
         sc.nextLine(); // skip ""
         sc.nextLine(); // skip "MT 102 Photon report for ..."
         sc.nextLine(); // skip ""
-        sc.nextLine(); // skip "Yield Interpolations"
-        // todo: interpret interpolation sections
-        String line = sc.nextLine().trim(); // assert "     1     2  (linear-linear)"
-        if (!line.split(" +")[1].equals("2")) {
-            throw new IllegalArgumentException("Photon yield interpolation not linear-linear in " + fileName);
+        line = sc.nextLine();
+        l += 5;
+        if (!line.endsWith(" photon distributions follow")) {
+            throw new IllegalArgumentException("Number of distributions missing in line "+l);
         }
-        sc.nextLine(); // skip " n-Energy      Yield"
+        word = line.split(" ")[0];
+        number = Integer.parseInt(word);
 
-        ArrayList<ValueEntry> newYields = new ArrayList<>(); //reset
-
-        try {
-            while (sc.hasNextLine()) {
-                line = sc.nextLine().trim();
-                if (line.equals("Neutron Energy Interpolation:")) {
-                    break;
+        for (int n = 0; n < number; n++) {
+            line = sc.nextLine(); // "Yield Interpolations"
+            l++;
+            // todo: interpret interpolation sections
+            // assert "     1     2  (linear-linear)"
+            line = sc.nextLine().trim();
+            l++;
+            if (line.equals(angles)) {
+                if (!line.split(" +")[1].equals("2")) {
+                    throw new IllegalArgumentException("Photon yield interpolation not linear-linear in " + fileName +" line "+l);
                 }
-                String[] split = line.split(" +");
-                double energy = Double.parseDouble(split[0]);
-                double yield = Double.parseDouble(split[1]);
-                newYields.add(new ValueEntry(energy, yield));
             }
-        } catch (Exception ex) {
-            System.out.println("ex " + ex);
-        }
 
-        line = sc.nextLine().trim(); // assert "     1     2  (linear-linear)"
-        if (!line.split(" +")[1].equals("2")) {
-            throw new IllegalArgumentException("Neutron energy interpolation linear-linear in " + fileName);
-        }
+            sc.nextLine(); // skip " n-Energy      Yield"
+            l++;
 
-        // parse number of neutron energy photon distribution tables
-        line = sc.nextLine();
-        line = line.substring(0, line.indexOf(" "));
-        int numEnergies = Integer.parseInt(line);
+            ArrayList<ValueEntry> newYields = new ArrayList<>(); //reset
 
-        ArrayList<NeutronPhotonDistribution> npds = new ArrayList<>();
-        // parse neutron energy in MeV
-        line = sc.nextLine();
-        try {
-            for (int iNE = 0; iNE < numEnergies; iNE++) {
-                line = line.substring("Neutron E = ".length());
-                line = line.substring(0, line.indexOf(" "));
-                double neutronEnergy = Double.parseDouble(line.trim());
-
-                line = sc.nextLine(); // assert "Distribution interpolation:   1  (histogram) (or 0)"
-                line = line.substring("Distribution interpolation:".length()).trim();
-                line = line.substring(0, line.indexOf(" ")).trim();
-                if (!line.equals("1") && !line.equals("0")) {
-                    throw new IllegalArgumentException("Photon energy interpolation not 0 or histogram in " + fileName);
-                }
-
-                line = sc.nextLine();
-                line = line.substring("Number of Discrete Energies: ".length());
-                int numDiscretes = Integer.parseInt(line.trim());
-                sc.nextLine(); // skip "   EOUT           PDF              CDF"
-
-                ArrayList<DistributionLine> discretePhotonDistributions = new ArrayList<>();
-                ArrayList<DistributionLine> continuousPhotonDistributions = new ArrayList<>();
-
-                for (int iND = 0; iND < numDiscretes; iND++) {
+            try {
+                while (sc.hasNextLine()) {
                     line = sc.nextLine().trim();
-                    if (line.equals("")) {
+                    l++;
+                    if (line.startsWith("Distribution Law: ")) {
                         break;
                     }
                     String[] split = line.split(" +");
                     double energy = Double.parseDouble(split[0]);
-                    double pdf = Double.parseDouble(split[1]);
-                    double cdf = Double.parseDouble(split[2]);
-                    discretePhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                    double yield = Double.parseDouble(split[1]);
+                    newYields.add(new ValueEntry(energy, yield));
                 }
-                if (sc.hasNextLine()) {
-                    line = sc.nextLine().trim(); // skip blank line
-                    if (!line.startsWith("Neutron E = ")) {
+            } catch (Exception ex) {
+                System.out.println("ex " + ex);
+            }
+            // todo : record distribution law (in "line" at this point)
 
-                        while (sc.hasNext()) {
-                            line = sc.nextLine().trim();
-                            if (line.startsWith("Neutron E = ")) {
-                                break;
-                            }
-                            String[] split = line.split(" +");
-                            double energy = Double.parseDouble(split[0]);
-                            double pdf = Double.parseDouble(split[1]);
-                            double cdf = Double.parseDouble(split[2]);
-                            continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
-                        }
-                    }
-                }
-
-                npds.add(new NeutronPhotonDistribution(neutronEnergy, discretePhotonDistributions, continuousPhotonDistributions));
+            line = sc.nextLine();
+            l++;
+            if (!line.startsWith("Neutron Energy Interpolation:")) {
+                throw new IllegalArgumentException("Neutron energy interpolation expected in " + fileName +" line "+l);
             }
 
-            /*
+            line = sc.nextLine().trim(); // assert "     1     2  (linear-linear)"
+            l++;
+            if (!line.split(" +")[1].equals("2")) {
+                // todo: accept other interpolations
+                throw new IllegalArgumentException("Neutron energy interpolation not linear-linear in " + fileName +" line "+l);
+            }
+
+            // parse number of neutron energy photon distribution tables
+            line = sc.nextLine();
+            l++;
+            line = line.substring(0, line.indexOf(" "));
+            int numEnergies = Integer.parseInt(line);
+
+            ArrayList<NeutronPhotonDistribution> npds = new ArrayList<>();
+            // parse neutron energy in MeV
+            line = sc.nextLine();
+            l++;
+            try {
+                for (int iNE = 0; iNE < numEnergies; iNE++) {
+                    line = line.substring("Neutron E = ".length());
+                    line = line.substring(0, line.indexOf(" "));
+                    double neutronEnergy = Double.parseDouble(line.trim());
+
+                    line = sc.nextLine(); // assert "Distribution interpolation:   1  (histogram) (or 0)"
+                    line = line.substring("Distribution interpolation:".length()).trim();
+                    line = line.substring(0, line.indexOf(" ")).trim();
+                    if (!line.equals("1") && !line.equals("0")) {
+                        throw new IllegalArgumentException("Photon energy interpolation not 0 or histogram in " + fileName +" line "+l);
+                    }
+
+                    line = sc.nextLine();
+                    line = line.substring("Number of Discrete Energies: ".length());
+                    int numDiscretes = Integer.parseInt(line.trim());
+                    sc.nextLine(); // skip "   EOUT           PDF              CDF"
+                    l++;
+
+                    ArrayList<DistributionLine> discretePhotonDistributions = new ArrayList<>();
+                    ArrayList<DistributionLine> continuousPhotonDistributions = new ArrayList<>();
+
+                    for (int iND = 0; iND < numDiscretes; iND++) {
+                        line = sc.nextLine().trim();
+                        if (line.equals("")) {
+                            break;
+                        }
+                        String[] split = line.split(" +");
+                        double energy = Double.parseDouble(split[0]);
+                        double pdf = Double.parseDouble(split[1]);
+                        double cdf = Double.parseDouble(split[2]);
+                        discretePhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                    }
+                    if (sc.hasNextLine()) {
+                        line = sc.nextLine().trim(); // skip blank line
+                        l++;
+                        if (!line.startsWith("Neutron E = ")) {
+
+                            while (sc.hasNext()) {
+                                line = sc.nextLine().trim();
+                                l++;
+                                if (line.startsWith("Neutron E = ")) {
+                                    break;
+                                }
+                                String[] split = line.split(" +");
+                                double energy = Double.parseDouble(split[0]);
+                                double pdf = Double.parseDouble(split[1]);
+                                double cdf = Double.parseDouble(split[2]);
+                                continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                            }
+                        }
+                    }
+
+                    npds.add(new NeutronPhotonDistribution(neutronEnergy, discretePhotonDistributions, continuousPhotonDistributions));
+                }
+
+                /*
             System.out.println("Nuclide: " + this.name);
             System.out.println("  Yields: ");
             for (ValueEntry y : newYields) {
@@ -485,14 +519,13 @@ public class Nuclide {
                 }
             }
             System.out.println("");
-             */
-        } catch (Exception ex) {
-            System.out.println("readPhotonFile exception: " + ex);
-            ex.printStackTrace();
+                 */
+            } catch (Exception ex) {
+                System.out.println("readPhotonFile exception: " + ex);
+                ex.printStackTrace();
+            }
         }
-        
         //this.yieldEnergies = 
-        
         System.out.println("");
 
     }

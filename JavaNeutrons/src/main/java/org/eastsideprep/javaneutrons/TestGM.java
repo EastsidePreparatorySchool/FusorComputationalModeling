@@ -51,7 +51,13 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
 public class TestGM {
 
     public static MonteCarloSimulation current(Group visualizations) {
-        return sandwich(visualizations);
+        try {
+            Nuclide is = N1H.getInstance();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.exit(0);
+        return null;
     }
 
     public static MonteCarloSimulation MC0D_Scatter1(Group vis) {
