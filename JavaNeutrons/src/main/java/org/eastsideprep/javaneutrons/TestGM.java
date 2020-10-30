@@ -58,23 +58,23 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
 public class TestGM {
 
     public static MonteCarloSimulation current(Group visualizations) {
-        //return prison(visualizations);
-        try {
-            Nuclide is = N1H.getInstance();
-            is = N12C.getInstance();
-            is.printPhotonData();
-            is = N14N.getInstance();
-            is = N16O.getInstance();
-            is = N56Fe.getInstance();
-            is = N40Ar.getInstance();
-            is = N206Pb.getInstance();
-            is = N207Pb.getInstance();
-            is = N208Pb.getInstance();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        System.exit(0);
-        return null;
+        return prison(visualizations);
+//        try {
+//            Nuclide is = N1H.getInstance();
+//            is = N12C.getInstance();
+//            is.printPhotonData();
+//            is = N14N.getInstance();
+//            is = N16O.getInstance();
+//            is = N56Fe.getInstance();
+//            is = N40Ar.getInstance();
+//            is = N206Pb.getInstance();
+//            is = N207Pb.getInstance();
+//            is = N208Pb.getInstance();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        System.exit(0);
+//        return null;
     }
 
     public static MonteCarloSimulation MC0D_Scatter1(Group vis) {
