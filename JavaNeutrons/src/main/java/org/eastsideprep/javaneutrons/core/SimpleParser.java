@@ -6,6 +6,7 @@
 package org.eastsideprep.javaneutrons.core;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,10 +32,13 @@ public class SimpleParser {
         throw new IllegalArgumentException(msg + ", file " + fileName + " line " + lineNumber);
     }
 
-    void assertEqual(Object o1, Object o2, String msg) {
-        if (!o1.equals(o2)) {
-            error(msg);
+    void assertEqual(Object o1, Object[] o2, String msg) {
+        for (Object o : o2) {
+            if (o1.equals(o)) {
+                return;
+            }
         }
+        error("Actual: " + o1.toString() + ", expected: " + Arrays.toString(o2) + ", " + msg);
     }
 
     boolean more() {
@@ -65,50 +69,93 @@ public class SimpleParser {
     }
 
     String getString(String p) {
-        Pattern pattern = Pattern.compile(p);
-        String line = readLine();
-        matcher = pattern.matcher(line);
-        if (matcher.find()) {
-            return matcher.group(1);
+        try {
+            Pattern pattern = Pattern.compile(p);
+            String line = readLine();
+            matcher = pattern.matcher(line);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        } catch (Exception e) {
+            error("Did not find pattern '" + p + "': " + e.getMessage());
         }
         error("Did not find pattern '" + p + "'");
         return null;
     }
 
     int getInteger(String p) {
-        String text = getString(p);
-        return Integer.parseInt(text);
+        String text = "";
+        try {
+            p = p.replaceAll("\\$i","([0-9]*)");
+            text = getString(p);
+            return Integer.parseInt(text);
+        } catch (Exception e) {
+            error("Not an integer for pattern '"+p+"': " + text);
+            return 0;
+        }
     }
 
     double getDouble(String p) {
-        String text = getString(p);
-        return Double.parseDouble(text);
+        String text = "";
+        try {
+            p = p.replaceAll("\\$d", "([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)?");
+            text = getString(p);
+            return Double.parseDouble(text);
+        } catch (Exception e) {
+            error("Not a double: " + text);
+            return 0.0;
+        }
     }
 
     double getDouble() {
-        String text = getString("([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)?");
-        String text2 = getString(2);
-        if (text2 != null) {
-            text += text2;
+        String text = "";
+        String text2 = "";
+        try {
+            text = getString("([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)? *([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)?");
+            text2 = getString(2);
+            if (text2 != null) {
+                text += text2;
+            }
+            return Double.parseDouble(text);
+        } catch (Exception e) {
+            error("Not a double: " + text + text2);
+            return 0.0;
         }
-        return Double.parseDouble(text);
     }
 
     String getString(int index) {
-        return matcher.group(index);
+        try {
+            return matcher.group(index);
+        } catch (Exception e) {
+            error("Part " + index + " of pattern not found: " + e.getMessage());
+        }
+        return null;
     }
 
     int getInteger(int index) {
-        String text = getString(index);
-        return Integer.parseInt(text);
+        String text = "";
+        try {
+            text = getString(index);
+            return Integer.parseInt(text);
+        } catch (Exception e) {
+            error("Not an integer for matching group " + index + ": " + text);
+        }
+        return 0;
     }
 
     double getDouble(int index) {
-        String text = getString(2 * index - 1);
-        String text2 = getString(2 * index);
-        if (text2 != null) {
-            text += text2;
+        String text = "";
+        String text2 = "";
+        try {
+            text = getString(2 * index - 1);
+            text2 = getString(2 * index);
+            if (text2 != null) {
+                text += text2;
+            }
+            return Double.parseDouble(text);
+        } catch (Exception e) {
+            error("Not a double: " + text + text2);
+            return 0.0;
         }
-        return Double.parseDouble(text);
     }
 }

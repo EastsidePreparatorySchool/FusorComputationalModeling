@@ -28,11 +28,11 @@ public class Nuclide {
     private class NeutronPhotonDistribution {
 
         double energy;
-        int law;
+        String law;
         ArrayList<DistributionLine> discrete;
         ArrayList<DistributionLine> continuous;
 
-        NeutronPhotonDistribution(double e, int law, ArrayList<DistributionLine> d, ArrayList<DistributionLine> c) {
+        NeutronPhotonDistribution(double e, String law, ArrayList<DistributionLine> d, ArrayList<DistributionLine> c) {
             this.energy = e;
             this.discrete = d;
             this.continuous = c;
@@ -363,6 +363,7 @@ public class Nuclide {
         String line;
         String word;
         int number;
+        String[] knownInterpolationLaws = new String[]{"0", "1", "2", "2a"};
 
         // read xyz.csv from resources/data
         fileName = "/data/ace/" + fileName + ".800nc.txt";
@@ -380,19 +381,19 @@ public class Nuclide {
         sp.skipLine();
 
         // number of photon distributions, then loop over them
-        int pDists = sp.getInteger("(.*) photon distributions follow");
+        int pDists = sp.getInteger("$i photon distributions follow");
 
         for (int n = 0; n < pDists; n++) {
             // get the number of yield interpolation sections and interpolation laws
-            int yieldSections = sp.getInteger("Yield Interpolations *(.*) lines");
+            int yieldSections = sp.getInteger("Yield Interpolations *$i lines");
             assert (yieldSections == 1);
 
-            int sectionStart = sp.getInteger(" *([0-9]*) *([0-9]*) *(.*)");
-            int interpolationLaw = sp.getInteger(2);
-            sp.assertEqual(interpolationLaw, 2, "Photon yield interpolation not linear-linear");
+            int sectionStart = sp.getInteger(" *$i *$i *(.*)");
+            String interpolationLaw = sp.getString(2);
+            sp.assertEqual(interpolationLaw, knownInterpolationLaws, "Photon yield interpolation not known");
 
             // get number of energy buckets
-            int eBuckets = sp.getInteger(" n-Energy      Yield *(.*) lines");
+            int eBuckets = sp.getInteger(" n-Energy      Yield *$i lines");
             ArrayList<ValueEntry> newYields = new ArrayList<>(); //reset
 
             for (int j = 0; j < eBuckets; j++) {
@@ -402,42 +403,57 @@ public class Nuclide {
             }
 
             // todo : record distribution law (in "line" at this point)
-            int distLaw = sp.getInteger("Distribution Law: (.*)");
-            // read the interpolation sections
-            int interpolationSections = sp.getInteger("Neutron Energy Interpolation: *(.*) lines");
-            // todo: handle multiple sections
-            assert (yieldSections == 1);
-            sectionStart = sp.getInteger(" *([0-9]*) *([0-9]*) *(.*)");
-            interpolationLaw = sp.getInteger(2);
-            sp.assertEqual(interpolationLaw, 2, "Distribution interpolation not linear-linear");
-            // todo: record this information
+            String distLaw = sp.getString("Distribution Law: (.*)");
+            switch (distLaw) {
+                case "2a":
+                    // parse: Photon energy 4.94650000 + 0.922442 Ein
+                    double e2a1 = sp.getDouble("Photon energy $d \\+ $d Ein");
+                    double e2a2 = sp.getDouble(2);
+                    // todo: add and do something with this result
+                    break;
+                case "2":
+                    double e21 = sp.getDouble("Photon energy $d");
+                    // todo: add and do something with this result
+                    break;
+                case "4":
+                default:
+                    // read the interpolation sections
+                    int interpolationSections = sp.getInteger("Neutron Energy Interpolation: *$i lines");
+                    // todo: handle multiple sections
+                    assert (yieldSections == 1);
+                    sectionStart = sp.getInteger(" *$i *$i *(.*)");
+                    interpolationLaw = sp.getString(2);
+                    sp.assertEqual(interpolationLaw, knownInterpolationLaws, "Distribution interpolation not known");
+                    // todo: record this information
 
-            // parse number of neutron energy photon distribution tables
-            int numEnergies = sp.getInteger("(.*) neutron energy bins and distributions follow");
-            ArrayList<NeutronPhotonDistribution> npds = new ArrayList<>();
-            // parse neutron energy in MeV
-            for (int iNE = 0; iNE < numEnergies; iNE++) {
-                double neutronEnergy = sp.getDouble("Neutron E = (.*) *\\(");
+                    // parse number of neutron energy photon distribution tables
+                    int numEnergies = sp.getInteger("$i neutron energy bins and distributions follow");
+                    ArrayList<NeutronPhotonDistribution> npds = new ArrayList<>();
+                    // parse neutron energy in MeV
+                    for (int iNE = 0; iNE < numEnergies; iNE++) {
+                        double neutronEnergy = sp.getDouble("Neutron E = $d *\\(");
 
-                int distIntLaw = sp.getInteger("Distribution interpolation: *([^ ]*) *\\(");
-                int numDiscretes = sp.getInteger("Number of Discrete Energies: ");
-                int pEs = sp.getInteger("   EOUT *PDF *CDF *(.*) lines");
+                        String distIntLaw = sp.getString("Distribution interpolation: *([^ ]*) *\\(");
+                        sp.assertEqual(distIntLaw, knownInterpolationLaws, "Distribution interpolation not known");
+                        int numDiscretes = sp.getInteger("Number of Discrete Energies: *(.*)");
+                        int pEs = sp.getInteger("   EOUT *PDF *CDF *$i lines");
 
-                ArrayList<DistributionLine> discretePhotonDistributions = new ArrayList<>();
-                ArrayList<DistributionLine> continuousPhotonDistributions = new ArrayList<>();
+                        ArrayList<DistributionLine> discretePhotonDistributions = new ArrayList<>();
+                        ArrayList<DistributionLine> continuousPhotonDistributions = new ArrayList<>();
 
-                for (int iND = 0; iND < pEs; iND++) {
-                    double energy = sp.getDouble();
-                    double pdf = sp.getDouble(2);
-                    double cdf = sp.getDouble(3);
-                    if (iND >= numDiscretes) {
-                        continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
-                    } else {
-                        discretePhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                        for (int iND = 0; iND < pEs; iND++) {
+                            double energy = sp.getDouble();
+                            double pdf = sp.getDouble(2);
+                            double cdf = sp.getDouble(3);
+                            if (iND >= numDiscretes) {
+                                continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                            } else {
+                                discretePhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                            }
+                        }
+
+                        npds.add(new NeutronPhotonDistribution(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
                     }
-                }
-
-                npds.add(new NeutronPhotonDistribution(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
             }
 
             /*
@@ -470,7 +486,5 @@ public class Nuclide {
         System.out.println("");
 
     }
-
-   
 
 }

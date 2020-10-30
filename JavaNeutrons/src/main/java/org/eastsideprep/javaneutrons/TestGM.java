@@ -54,6 +54,7 @@ public class TestGM {
         //return prison(visualizations);
         try {
             Nuclide is = N1H.getInstance();
+            is = N12C.getInstance();
         } catch (Exception e) {
             System.out.println(e);
         }
