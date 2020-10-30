@@ -62,6 +62,7 @@ public class TestGM {
         try {
             Nuclide is = N1H.getInstance();
             is = N12C.getInstance();
+            is.printPhotonData();
             is = N14N.getInstance();
             is = N16O.getInstance();
             is = N56Fe.getInstance();
