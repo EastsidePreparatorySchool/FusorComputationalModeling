@@ -40,6 +40,13 @@ import org.eastsideprep.javaneutrons.core.Shape;
 import org.eastsideprep.javaneutrons.materials.N12C;
 import org.eastsideprep.javaneutrons.materials.N1H;
 import org.eastsideprep.javaneutrons.materials.HydrogenWax;
+import org.eastsideprep.javaneutrons.materials.N14N;
+import org.eastsideprep.javaneutrons.materials.N16O;
+import org.eastsideprep.javaneutrons.materials.N206Pb;
+import org.eastsideprep.javaneutrons.materials.N207Pb;
+import org.eastsideprep.javaneutrons.materials.N208Pb;
+import org.eastsideprep.javaneutrons.materials.N40Ar;
+import org.eastsideprep.javaneutrons.materials.N56Fe;
 import org.eastsideprep.javaneutrons.materials.Paraffin;
 import org.eastsideprep.javaneutrons.materials.Vacuum;
 import org.fxyz3d.shapes.primitives.CuboidMesh;
@@ -55,6 +62,13 @@ public class TestGM {
         try {
             Nuclide is = N1H.getInstance();
             is = N12C.getInstance();
+            is = N14N.getInstance();
+            is = N16O.getInstance();
+            is = N56Fe.getInstance();
+            is = N40Ar.getInstance();
+            is = N206Pb.getInstance();
+            is = N207Pb.getInstance();
+            is = N208Pb.getInstance();
         } catch (Exception e) {
             System.out.println(e);
         }

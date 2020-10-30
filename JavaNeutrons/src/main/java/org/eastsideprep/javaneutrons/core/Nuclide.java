@@ -363,7 +363,7 @@ public class Nuclide {
         String line;
         String word;
         int number;
-        String[] knownInterpolationLaws = new String[]{"0", "1", "2", "2a"};
+        String[] knownInterpolationLaws = new String[]{"0", "1", "2", "2a", "22", "5"};
 
         // read xyz.csv from resources/data
         fileName = "/data/ace/" + fileName + ".800nc.txt";
@@ -416,6 +416,8 @@ public class Nuclide {
                     // todo: add and do something with this result
                     break;
                 case "4":
+                case "22":
+                case "5":
                 default:
                     // read the interpolation sections
                     int interpolationSections = sp.getInteger("Neutron Energy Interpolation: *$i lines");
@@ -423,7 +425,7 @@ public class Nuclide {
                     assert (yieldSections == 1);
                     sectionStart = sp.getInteger(" *$i *$i *(.*)");
                     interpolationLaw = sp.getString(2);
-                    sp.assertEqual(interpolationLaw, knownInterpolationLaws, "Distribution interpolation not known");
+                    sp.assertEqual(interpolationLaw, knownInterpolationLaws, "Neutron energy interpolation not known");
                     // todo: record this information
 
                     // parse number of neutron energy photon distribution tables
