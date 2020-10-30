@@ -1,0 +1,11 @@
+NE dist 2
+NE dist 22
+PE dist 0
+PE dist 1
+PE dist 2
+Photon energy method law 2
+Photon energy method law 2a
+Photon energy method law 4
+Yield dist 1
+Yield dist 2
+Yield dist 5

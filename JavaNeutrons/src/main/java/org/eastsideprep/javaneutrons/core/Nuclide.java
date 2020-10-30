@@ -77,26 +77,29 @@ public class Nuclide {
 
     private class PhotonDataTable extends PhotonData {
 
+        String interpolationLaw;
         List<NeutronPhotonDistribution> npds;
 
-        PhotonDataTable(List<NeutronPhotonDistribution> npds) {
+        PhotonDataTable(String law, List<NeutronPhotonDistribution> npds) {
+            this.interpolationLaw = law;
             this.npds = npds;
         }
     }
 
     private class PhotonDistribution {
 
-        String neutronLaw;
+        String prodDistLaw;
         String yieldLaw;
         List<ValueEntry> yields;
         PhotonData data;
 
         PhotonDistribution(String distLaw, String yieldLaw, List<ValueEntry> yields, PhotonData data) {
-            this.neutronLaw = distLaw;
+            this.prodDistLaw = distLaw;
             this.yieldLaw = yieldLaw;
             this.yields = yields;
             this.data = data;
         }
+
     }
 
     private class DistributionEntry {
@@ -411,7 +414,12 @@ public class Nuclide {
         String line;
         String word;
         int number;
-        String[] knownInterpolationLaws = new String[]{"0", "1", "2", "2a", "22", "4", "5"};
+
+        // some info at https://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-19-29016
+        String[] knownYieldInterpolationLaws = new String[]{"1", "2", "5"}; // histogram, linear-linear, log-log
+        String[] knownNeutronEnergyInterpolationLaws = new String[]{"2", "22"}; // linear-linear, ??
+        String[] knownPhotonEnergyDescriptionLaws = new String[]{"2", "2a", "4"}; // single value, EIn+offset, tabular
+        String[] knownPhotonEnergyInterpolationLaws = new String[]{"0", "1", "2"}; // ?, histogram, linear-linear
 
         // read xyz.csv from resources/data
         fileName = "/data/ace/" + fileName + ".800nc.txt";
@@ -441,8 +449,8 @@ public class Nuclide {
             // for section 1 only
             int sectionStart = sp.getInteger(" *$i *([0-9]*a?) *(.*)"); // $i is section start, group 2 is law, group 3 is friendly name
             String yieldInterpolationLaw = sp.getString(2);
-            sp.assertEqual(yieldInterpolationLaw, knownInterpolationLaws, "Photon yield interpolation not known");
-
+            sp.assertEqual(yieldInterpolationLaw, knownYieldInterpolationLaws, "Photon yield interpolation not known");
+            //System.out.println("Yield dist " + yieldInterpolationLaw);
             // get number of energy buckets
             int eBuckets = sp.getInteger(" n-Energy      Yield *$i lines");
             ArrayList<ValueEntry> newYields = new ArrayList<>(); //reset
@@ -454,10 +462,12 @@ public class Nuclide {
             }
 
             String distLaw = sp.getString("Distribution Law: (.*)");
-            sp.assertEqual(distLaw, knownInterpolationLaws, "Photon energy distribution law not known");
+            sp.assertEqual(distLaw, knownPhotonEnergyDescriptionLaws, "Photon energy description law not known");
+            //System.out.println("Photon energy method law " + distLaw);
             ArrayList<NeutronPhotonDistribution> npds;
             PhotonData data;
 
+            //System.out.println(distLaw);
             switch (distLaw) {
                 case "2":
                     double e = sp.getDouble("Photon energy $d");
@@ -479,9 +489,9 @@ public class Nuclide {
                     // todo: handle multiple sections
                     sp.assertEqual(interpolationSections, new Integer[]{1}, "Cannot handle multiple interpolation sections yet");
                     sectionStart = sp.getInteger(" *$i *$i *(.*)");
-                    yieldInterpolationLaw = sp.getString(2);
-                    sp.assertEqual(yieldInterpolationLaw, knownInterpolationLaws, "Neutron energy interpolation not known");
-
+                    String neInterpolationLaw = sp.getString(2);
+                    sp.assertEqual(neInterpolationLaw, knownNeutronEnergyInterpolationLaws, "Neutron energy interpolation not known");
+                    //System.out.println("NE dist " + neInterpolationLaw);
                     // parse number of neutron energy photon distribution tables
                     int numEnergies = sp.getInteger("$i neutron energy bins and distributions follow");
                     npds = new ArrayList<>();
@@ -490,7 +500,8 @@ public class Nuclide {
                         double neutronEnergy = sp.getDouble("Neutron E = $d *\\(");
 
                         String distIntLaw = sp.getString("Distribution interpolation: *([^ ]*) *\\(");
-                        sp.assertEqual(distIntLaw, knownInterpolationLaws, "Distribution interpolation not known");
+                        sp.assertEqual(distIntLaw, knownPhotonEnergyInterpolationLaws, "Distribution interpolation not known");
+                        //System.out.println("PE dist " + distIntLaw);
                         int discreteEnergies = sp.getInteger("Number of Discrete Energies: *$i");
                         int totalEnergies = sp.getInteger("   EOUT *PDF *CDF *$i lines");
 
@@ -510,7 +521,7 @@ public class Nuclide {
 
                         npds.add(new NeutronPhotonDistribution(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
                     }
-                    data = new PhotonDataTable(npds);
+                    data = new PhotonDataTable(neInterpolationLaw, npds);
                     break;
             }
             PhotonDistribution pdist = new PhotonDistribution(distLaw, yieldInterpolationLaw, newYields, data);
@@ -528,21 +539,25 @@ public class Nuclide {
             for (ValueEntry y : pdist.yields) {
                 System.out.println("    E: " + y.energy + ", yield: " + y.value);
             }
-            System.out.println("  Neutron energy distribution law: " + pdist.neutronLaw);
-            switch (pdist.neutronLaw) {
+
+            System.out.println("  Production distribution law: " + pdist.prodDistLaw);
+            switch (pdist.prodDistLaw) {
                 case "2":
+                    System.out.println("  (law == constant");
                     System.out.println("  Photon energy " + ((PhotonData2) pdist.data).ePhoton);
                     break;
 
                 case "2a":
+                    System.out.println("  (law == offset from eIn");
                     System.out.println("  Photon energy " + ((PhotonData2a) pdist.data).ePhoton + " EIn " + ((PhotonData2a) pdist.data).eIn);
                     break;
 
                 default:
+                    System.out.println("  (law == function of eIn");
                     System.out.println("  Photon energy distributions:");
                     for (NeutronPhotonDistribution npd : ((PhotonDataTable) pdist.data).npds) {
                         System.out.println("    Neutron energy: " + npd.energy);
-                        System.out.println("      Photon distribution law: " + npd.photonLaw);
+                        System.out.println("      Photon energy distribution law: " + npd.photonLaw);
                         if (npd.discrete.size() > 0) {
                             System.out.println("      Discrete photon energies:");
                             for (DistributionLine dl : npd.discrete) {

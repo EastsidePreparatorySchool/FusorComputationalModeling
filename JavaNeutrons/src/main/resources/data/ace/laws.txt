@@ -1,0 +1,578 @@
+Yield dist 2
+Photon energy method law 4
+NE dist 2
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+PE dist 0
+Yield dist 1
+Photon energy method law 2a
+Yield dist 1
+Photon energy method law 2
+Yield dist 1
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2a
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 4
+NE dist 2
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 2
+Yield dist 2
+Photon energy method law 4
+NE dist 22
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+Yield dist 2
+Photon energy method law 4
+NE dist 22
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+PE dist 2
+Yield dist 2
+Photon energy method law 4
+NE dist 2
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+Yield dist 2
+Photon energy method law 4
+NE dist 2
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+Yield dist 5
+Photon energy method law 4
+NE dist 2
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
+PE dist 1
