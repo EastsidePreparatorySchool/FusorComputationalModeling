@@ -51,6 +51,7 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
 public class TestGM {
 
     public static MonteCarloSimulation current(Group visualizations) {
+        //return prison(visualizations);
         try {
             Nuclide is = N1H.getInstance();
         } catch (Exception e) {
