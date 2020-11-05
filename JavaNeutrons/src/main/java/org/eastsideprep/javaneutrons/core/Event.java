@@ -13,7 +13,7 @@ public class Event {
     public Particle particle;
 
     // additional info - presence depends on event
-    public Nuclide scatterParticle;
+    public Nuclide nuclide;
     public double energyOut;
     public double t; // how far along was this on the vector we took to get here
     public Part part;
@@ -23,8 +23,8 @@ public class Event {
     
     // debug stuff
     public double cos_theta;
-    public double particleEnergyIn;
-    public double particleEnergyOut;
+    public double nuclideEnergyIn;
+    public double nuclideEnergyOut;
 
 //    public Event(double x, double y, double z, Event.Code c) {
 //        this.position = new Vector3D(x, y, z);
@@ -58,7 +58,7 @@ public class Event {
         this.position = new Vector3D(position.getX(), position.getY(), position.getZ());
         this.code = c;
         this.t = t;
-        this.scatterParticle = e;
+        this.nuclide = e;
         this.particle = n;
     }
 

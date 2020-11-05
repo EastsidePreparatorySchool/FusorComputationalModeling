@@ -9,6 +9,7 @@ import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -264,6 +265,9 @@ public class MonteCarloSimulation {
         // and enviroment (will count escaped neutrons)
         Environment.getInstance().reset();
 
+        // collect any gammas produced
+        LinkedList<Gamma> gammas = new LinkedList<>();
+
         NeutronCollection neutrons = new NeutronCollection(count, this.origin, this.direction, this.initialEnergy, this);
         if (count > 0) {
             if (!MonteCarloSimulation.parallel || this.lastCount <= 10) {
@@ -297,24 +301,35 @@ public class MonteCarloSimulation {
                 }
             }
         }
+
+        if (!gammas.isEmpty()) {
+            // simulate lots in parallel
+            for (int i = 1; i < Runtime.getRuntime().availableProcessors(); i++) {
+                new Thread(() -> {
+                    for (Particle p : gammas) {
+                        if (!stop) {
+                            simulateNeutron(p);
+                        }
+                    }
+                }).start();
+            }
+        }
     }
 
     public long getElapsedTime() {
         return System.currentTimeMillis() - this.start;
     }
 
-    public void simulateNeutron(Neutron n) {
-        if (n == null) {
+    public void simulateNeutron(Particle p) {
+        if (p == null) {
             completed.incrementAndGet();
             return;
         }
-        Event e = this.assembly.evolveParticlePath(n, this.visualizations, true, this.grid);
-        n.tally();
+        Event e = this.assembly.evolveParticlePath(p, this.visualizations, true, this.grid);
+        p.tally();
 
-        if (e.code == Event.Code.Capture) {
-            double energyGamma = 0; // todo: What is it? N eed to look up during capture event, from ACE tables
-            Gamma g = new Gamma(e.position, Util.Math.randomDir(), energyGamma, this);
-            // todo: evolve path
+        if (!(p instanceof Gamma) && e.code == Event.Code.Capture) {
+            e.nuclide.generateGammasForCapture(p.position, p.energy);
         }
 
         completed.incrementAndGet();
@@ -439,7 +454,7 @@ public class MonteCarloSimulation {
                         for (String kind : map.keySet()) {
                             if (kind.equals(type)) {
                                 CorrelatedTallyOverEV h = map.get(kind);
-                                c.getData().add(h.makeSeries("Fluence ("+type+")", this.lastCount, scale));
+                                c.getData().add(h.makeSeries("Fluence (" + type + ")", this.lastCount, scale));
                                 sErrors = h.makeErrorSeries("Relative Error", this.lastCount, scale);
                             }
                         }
