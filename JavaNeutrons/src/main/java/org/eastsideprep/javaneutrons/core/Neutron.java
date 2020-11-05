@@ -47,6 +47,7 @@ public final class Neutron extends Particle {
     public Vector3D getScatteredVelocity(Event e, Vector3D neutronVelocity) {
         Nuclide i = e.scatterParticle;
         double cos_theta;
+        /*
         if (i.angles != null) {
             double neutronSpeed = neutronVelocity.getNorm();
             double energyEV = 0.5 * Neutron.mass * neutronSpeed * neutronSpeed / Util.Physics.eV;
@@ -64,8 +65,9 @@ public final class Neutron extends Particle {
             return v;
 
         } else {
+        */
             return getIsotropicScatteredVelocity(e, neutronVelocity);
-        }
+        /*}*/
     }
 
     public Vector3D getIsotropicScatteredVelocity(Event e, Vector3D neutronVelocity) {

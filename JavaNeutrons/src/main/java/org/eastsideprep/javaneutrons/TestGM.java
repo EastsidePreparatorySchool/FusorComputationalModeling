@@ -821,6 +821,7 @@ public class TestGM {
                 g.getChildren().add(p);
             }
 
+            /*
             if (is.angles != null) {
                 double cos_theta = is.getScatterCosTheta(2.44e6);
                 System.out.println("cos_theta " + cos_theta);
@@ -845,6 +846,7 @@ public class TestGM {
                     g.getChildren().add(p);
                 }
             }
+            */
         }
         Util.Graphics.drawCoordSystem(g);
         g.getChildren().add(s);

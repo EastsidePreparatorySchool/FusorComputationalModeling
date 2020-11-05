@@ -20,7 +20,7 @@ import javafx.scene.transform.Translate;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
 public class Util {
-
+    
     static public class Math {
 
         //
@@ -106,6 +106,18 @@ public class Util {
             }
 
             return true;
+        }
+
+        public static double interpolateLinearLinear(double x1, double y1, double x2, double y2, double x) {
+            return y1 + (y2 - y1) * (x - x1) / (x2 - x1);
+        }
+
+        public static double inverseInterpolateLinearLinear(double x1, double y1, double x2, double y2, double y) {
+            return x1 + (x2 - x1) * (y - y1) / (y2 - y1);
+        }
+
+        public static double interpolateLogLog(double x1, double y1, double x2, double y2, double x) {
+            return java.lang.Math.exp(interpolateLinearLinear(java.lang.Math.log(x1), java.lang.Math.log(y1), java.lang.Math.log(x2), java.lang.Math.log(y2), java.lang.Math.log(x)));
         }
 
         //

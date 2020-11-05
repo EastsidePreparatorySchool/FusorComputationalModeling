@@ -6,14 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
 public class Nuclide {
 
-    private class ValueEntry {
+    private static class ValueEntry implements Comparable<ValueEntry> {
 
         double energy;
         double value;
@@ -22,9 +24,15 @@ public class Nuclide {
             this.energy = energy;
             this.value = v;
         }
+
+        @Override
+        public int compareTo(ValueEntry o) {
+            ValueEntry other = (ValueEntry) o;
+            return (int) Math.signum(this.energy - other.energy);
+        }
     }
 
-    private class DistributionLine {
+    private static class DistributionLine implements Comparable<DistributionLine> {
 
         double pdf;
         double cdf;
@@ -35,24 +43,155 @@ public class Nuclide {
             this.cdf = cdf;
             this.value = value;
         }
+
+        private DistributionLine(double cdf) {
+            // for search purposes only
+            this.cdf = cdf;
+        }
+
+        @Override
+        public int compareTo(DistributionLine o) {
+            DistributionLine other = (DistributionLine) o;
+            return (int) Math.signum(this.cdf - o.cdf);
+        }
+
     }
 
-    private class NeutronPhotonDistribution {
+    abstract private static class NeutronPhotonDistribution implements Comparable<NeutronPhotonDistribution> {
 
         double energy;
-        String photonLaw;
-        ArrayList<DistributionLine> discrete;
-        ArrayList<DistributionLine> continuous;
+        String photonInterpolationLaw;  //{"0", "1", "2"}; ?, histogram, linear-linear
+
+        double smallestContinuousCDF;
+        ArrayList<DistributionLine> dist;
+
+        NeutronPhotonDistribution(String law, double e) {
+            this(e, law, null, null);
+        }
 
         NeutronPhotonDistribution(double e, String law, ArrayList<DistributionLine> d, ArrayList<DistributionLine> c) {
             this.energy = e;
-            this.discrete = d;
-            this.continuous = c;
-            this.photonLaw = law;
+            this.dist = d;
+            if (c != null) {
+                this.dist.addAll(c);
+                this.smallestContinuousCDF = (c.size() > 0 ? c.get(c.size() - 1).cdf : 1);
+            }
+            this.photonInterpolationLaw = law;
+        }
+
+        abstract double sampleContinuousPhotonEnergy(double eta);
+
+        double samplePhotonEnergy() {
+            double eta = Util.Math.random();
+            if (eta >= smallestContinuousCDF) {
+                // interpolate by scheme
+                return sampleContinuousPhotonEnergy(eta);
+            } else {
+                // discrete energy, just return the nearest smaller discrete energy
+                int index = Collections.binarySearch(dist, new DistributionLine(eta));
+                index = index < 0 ? -index - 1 : index;
+
+                return dist.get(index).value;
+            }
+        }
+
+        NeutronPhotonDistribution interpolate(NeutronPhotonDistribution other, double eNeutron) {
+            NeutronPhotonDistribution result;
+            if (this instanceof NeutronPhotonDistribution1) {
+                result = new NeutronPhotonDistribution1(this.photonInterpolationLaw, eNeutron);
+            } else {
+                result = new NeutronPhotonDistribution2(this.photonInterpolationLaw, eNeutron);
+            }
+
+            // list merge, interpolating CDF as we go
+            ArrayList<DistributionLine> cont = new ArrayList<>();
+            ArrayList<DistributionLine> left = this.dist;
+            ArrayList<DistributionLine> right = other.dist;
+            int size = Math.min(left.size(), right.size());
+            for (int i = 0; i < size; i++) {
+                cont.add(new DistributionLine(
+                        0, // don't need pdf
+                        Util.Math.interpolateLinearLinear(this.energy, left.get(i).cdf, other.energy, right.get(i).cdf, eNeutron),
+                        left.get(i).value // should be equal values
+                ));
+            }
+            // merge remaining tail
+            if (left.size() > right.size()) {
+                cont.addAll(left.subList(right.size(), left.size()));
+            } else if (right.size() > left.size()) {
+                cont.addAll(right.subList(left.size(), right.size()));
+            }
+            result.dist = cont;
+            return result;
+        }
+
+        @Override
+        public int compareTo(NeutronPhotonDistribution o) {
+            return (int) Math.signum(this.energy - o.energy);
         }
     }
 
+    // class for bSearch only
+    private static class NeutronPhotonDistributionKey extends NeutronPhotonDistribution {
+
+        NeutronPhotonDistributionKey(double e) {
+            super (e, "", null, null);
+        }
+
+        @Override
+        double sampleContinuousPhotonEnergy(double eta) {
+            throw new UnsupportedOperationException("Not supported.");
+        }
+
+    }
+
+    // for histogram photon energy interpolation
+    private static class NeutronPhotonDistribution1 extends NeutronPhotonDistribution {
+
+        NeutronPhotonDistribution1(double e, String law, ArrayList<DistributionLine> d, ArrayList<DistributionLine> c) {
+            super(e, law, d, c);
+        }
+
+        NeutronPhotonDistribution1(String law, double e) {
+            super(law, e);
+        }
+
+        @Override
+        double sampleContinuousPhotonEnergy(double eta) {
+            // hist: just return the nearest smaller discrete energy
+            int index = Collections.binarySearch(dist, new DistributionLine(eta));
+            index = index < 0 ? -index - 1 : index;
+            return dist.get(index).value;
+        }
+
+    }
+
+    // for linear-linear photon energy interpolation
+    private static class NeutronPhotonDistribution2 extends NeutronPhotonDistribution {
+
+        NeutronPhotonDistribution2(double e, String law, ArrayList<DistributionLine> d, ArrayList<DistributionLine> c) {
+            super(e, law, d, c);
+        }
+
+        NeutronPhotonDistribution2(String law, double e) {
+            super(law, e);
+        }
+
+        @Override
+        double sampleContinuousPhotonEnergy(double eta) {
+            // lin-lin
+            int index = Collections.binarySearch(dist, new DistributionLine(eta));
+            index = index < 0 ? -index - 1 : index;
+            DistributionLine left = dist.get(index);
+            DistributionLine right = dist.get(index + 1);
+            return Util.Math.inverseInterpolateLinearLinear(left.value, left.cdf, right.value, right.cdf, eta);
+        }
+
+    }
+
     private abstract class PhotonData {
+
+        abstract double getEnergy(double eNeutron);
     }
 
     private class PhotonData2 extends PhotonData {
@@ -62,16 +201,26 @@ public class Nuclide {
         PhotonData2(double e) {
             ePhoton = e;
         }
+
+        @Override
+        double getEnergy(double eNeutron) {
+            return ePhoton;
+        }
     }
 
     private class PhotonData2a extends PhotonData {
 
-        double ePhoton;
-        double eIn;
+        double c0;
+        double c1;
 
-        PhotonData2a(double e, double eIn) {
-            this.ePhoton = e;
-            this.eIn = eIn;
+        PhotonData2a(double e, double eInCoef) {
+            this.c0 = e;
+            this.c1 = eInCoef;
+        }
+
+        @Override
+        double getEnergy(double eNeutron) {
+            return c0 + c1 * eNeutron;
         }
     }
 
@@ -84,75 +233,96 @@ public class Nuclide {
             this.interpolationLaw = law;
             this.npds = npds;
         }
+
+        @Override
+        double getEnergy(double eNeutron) {
+            int index = Collections.binarySearch(this.npds, new NeutronPhotonDistributionKey(eNeutron));
+            NeutronPhotonDistribution npd;
+            switch (this.interpolationLaw) {
+                case "2":
+                    // make an interpolated distribution for this neutron energy
+                    npd = npds.get(index).interpolate(npds.get(index + 1), eNeutron);
+                    break;
+                case "22":
+                default:
+                    npd = npds.get(index);
+                    break;
+            }
+
+            // sample a photon energy from the chosen distribution
+            return npd.sampleContinuousPhotonEnergy(Util.Math.random());
+        }
     }
 
     private class PhotonDistribution {
 
         String prodDistLaw;
-        String yieldLaw;
+        String yieldInterpolationLaw;
         List<ValueEntry> yields;
         PhotonData data;
 
-        PhotonDistribution(String distLaw, String yieldLaw, List<ValueEntry> yields, PhotonData data) {
+        PhotonDistribution(String distLaw, String yieldInterpolationLaw, List<ValueEntry> yields, PhotonData data) {
             this.prodDistLaw = distLaw;
-            this.yieldLaw = yieldLaw;
+            this.yieldInterpolationLaw = yieldInterpolationLaw;
             this.yields = yields;
             this.data = data;
         }
 
-    }
+        private List<Gamma> yieldGammas(Vector3D position, double yield) {
+            Gamma g = null;
+            LinkedList<Gamma> result = new LinkedList<>();
 
-    private class DistributionEntry {
-
-        double energy;
-        int count;
-        double[] pdf;
-        double[] cdf;
-        double[] value;
-
-        private DistributionEntry(double e, int c, String pdf, String cdf, String cos) {
-            this.energy = e;
-            this.count = c;
-            try {
-                this.pdf = Arrays.stream(pdf.substring(1, pdf.length() - 2).trim().split(" +"))
-                        .mapToDouble(s -> Double.parseDouble(s + (s.endsWith(".") ? "0" : ""))).toArray();
-                this.cdf = Arrays.stream(cdf.substring(1, cdf.length() - 2).trim().split(" +"))
-                        .mapToDouble(s -> Double.parseDouble(s + (s.endsWith(".") ? "0" : ""))).toArray();
-                this.value = Arrays.stream(cos.substring(1, cos.length() - 2).split(" +"))
-                        .mapToDouble(s -> Double.parseDouble(s + (s.endsWith(".") ? "0" : ""))).toArray();
-//                if (this.cdf.length != c || this.cos.length != c) {
-//                    System.out.println("problem with angle line: " + count + " " + cdf + " " + cos);
-//                }
-            } catch (Exception ex) {
-                System.out.println(" ex '" + e + "' " + ex.getMessage());
-                System.out.println(" ex problem with angle line: " + count + " " + cdf + " " + cos);
-
-                //ex.printStackTrace();
+            // depending on the fractional value, add one more
+            if (Util.Math.random() < (yield - Math.floor(yield))) {
+                yield += 1;
             }
+
+            // produce that many neutrons
+            for (int i = 0; i < Math.floor(yield); i++) {
+                g = new Gamma(position);
+                result.add(g);
+            }
+            return result;
         }
 
-        private double lookupCos(double rand) {
-            int bin = Arrays.binarySearch(cdf, rand);
-            bin = bin < 0 ? -bin - 1 : bin;
-            //System.out.println("rand "+rand+": bin is " + bin + " array " + Arrays.toString(this.cdf));
-            //System.out.println("");
+        private List<Gamma> generateGammas(Vector3D position, double eNeutron) {
+            // interpolates yield, calls yieldGammas()
+            int index = Collections.binarySearch(this.yields, new ValueEntry(eNeutron, 0));
+            double yield = 0;
+            ValueEntry yield1;
+            ValueEntry yield2;
+            //String[] knownYieldInterpolationLaws = new String[]{"1", "2", "5"}; // histogram, linear-linear, log-log
+            switch (yieldInterpolationLaw) {
+                case "1":
+                    // hist
+                    yield = yields.get(index).value;
+                    break;
+                case "2":
+                    //lin-lin
+                    yield1 = yields.get(index);
+                    yield2 = yields.get(index);
+                    yield = Util.Math.interpolateLinearLinear(yield1.energy, yield1.value, yield2.energy, yield2.value, eNeutron);
+                    break;
+                case "5":
+                    // log-log
+                    yield1 = yields.get(index);
+                    yield2 = yields.get(index);
+                    yield = Util.Math.interpolateLogLog(yield1.energy, yield1.value, yield2.energy, yield2.value, eNeutron);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown interpolation law " + yieldInterpolationLaw);
+            }
+            List<Gamma> result = yieldGammas(position, yield);
 
-            // how far are we into the bucket, in terms of 0-1:
-            double t = (rand - this.cdf[bin - 1]) / (this.cdf[bin] - this.cdf[bin - 1]);
-            //System.out.println("rand "+rand+": t is "+t);
-
-            // let's go that far into the cos bucket
-            double cos = this.value[bin - 1] + t * (this.value[bin] - this.value[bin - 1]);
-            //System.out.println("rand "+rand+": cos is " + cos + " array " + Arrays.toString(this.cos));
-
-            return cos;
+            //String[] knownPhotonEnergyDistributionLaws = new String[]{"2", "2a", "4"}; // single value, c0 + c1*EIn, tabular
+            // these laws are already encoded here as subclasses of PhotonData
+            for (int i = 0; i < result.size(); i++) {
+                Gamma g = result.get(i);
+                g.setDirectionAndEnergy(Util.Math.randomDir(), data.getEnergy(eNeutron));
+            }
+            return result;
         }
 
-        private int findBin(double rand) {
-            int bin = Arrays.binarySearch(cdf, rand);
-            bin = bin < 0 ? -bin - 1 : bin;
-            return bin - 1;
-        }
     }
 
     // actual Nuclide member variables
@@ -167,17 +337,7 @@ public class Nuclide {
     private double[] elastic;
     private double[] capture;
     private double[] total;
-    private double[] angEnergies;
 
-    private double[] yieldEnergies;
-    private double[] yields;
-
-    private double[] ppnEnergies[];
-    private double[] pppEnergies[];
-    private double[][] pppPDF[];
-    private double[][] pppCDF[];
-
-    public ArrayList<DistributionEntry> angles;
     public List<PhotonDistribution> pDistList;
 
     // for when you are too lazy to look up the correct mass
@@ -233,12 +393,15 @@ public class Nuclide {
         double epsilon = 0.1;
         fileName = "/data/ace/" + fileName + ".800nc.ace.csv";
         // read xyz.csv from resources/data
-        InputStream is = Nuclide.class.getResourceAsStream(fileName);
-        if (is == null) {
+        InputStream is = Nuclide.class
+                .getResourceAsStream(fileName);
+        if (is
+                == null) {
             System.err.println("Data file " + fileName + " not found for element " + this.name);
             return;
         }
         Scanner sc = new Scanner(is);
+
         sc.nextLine(); // skip header
 
         ArrayList<ValueEntry> newScatter = new ArrayList<>(); //reset
@@ -263,108 +426,33 @@ public class Nuclide {
             newCapture.add(new ValueEntry(energy, capture));
             newTotal.add(new ValueEntry(energy, total));
         }
-        Collections.sort(newScatter, (a, b) -> {
-            return (int) Math.signum(a.energy - b.energy);
-        });
-        Collections.sort(newCapture, (a, b) -> {
-            return (int) Math.signum(a.energy - b.energy);
-        });
-        Collections.sort(newTotal, (a, b) -> {
-            return (int) Math.signum(a.energy - b.energy);
-        });
+
+        Collections.sort(newScatter,
+                (a, b) -> {
+                    return (int) Math.signum(a.energy - b.energy);
+                }
+        );
+        Collections.sort(newCapture,
+                (a, b) -> {
+                    return (int) Math.signum(a.energy - b.energy);
+                }
+        );
+        Collections.sort(newTotal,
+                (a, b) -> {
+                    return (int) Math.signum(a.energy - b.energy);
+                }
+        );
 
         this.energies = newScatter.stream().mapToDouble(e -> e.energy).toArray();
+
         this.elastic = newScatter.stream().mapToDouble(e -> e.value).toArray();
+
         this.capture = newCapture.stream().mapToDouble(e -> e.value).toArray();
+
         this.total = newTotal.stream().mapToDouble(e -> e.value).toArray();
     }
 
-    private void fillAngleEntries(String fileName) {
-        double epsilon = 0.1;
-
-        // read xyz.csv from resources/data
-        InputStream is = Nuclide.class.getResourceAsStream("/data/ace/" + fileName + ".800nc.ace_angle.csv");
-        if (is == null) {
-            System.out.println("angle Data file " + fileName + " not found for element " + this.name);
-            System.out.println("Using isotropic scattering instead");
-            return;
-        }
-        Scanner sc = new Scanner(is);
-        sc.nextLine(); // skip header
-
-        ArrayList<DistributionEntry> newAngles = new ArrayList<>(); //reset
-
-        String line = null;
-        try {
-            while (sc.hasNextLine()) {
-                line = sc.nextLine();
-                String[] split = line.split(",");
-                double energy = Double.parseDouble(split[0]);
-                int count = Integer.parseInt(split[1]);
-                String pdf = split[2];
-                String cdf = split[3];
-                String cos = split[4];
-                newAngles.add(new DistributionEntry(energy, count, pdf, cdf, cos));
-            }
-        } catch (Exception ex) {
-            System.out.println("ex " + ex);
-        }
-
-        this.angles = newAngles;
-
-        this.angEnergies = newAngles.stream().mapToDouble(e -> e.energy).toArray();
-
-    }
-
-    public double getScatterCosTheta(double energy) {
-        double mu;
-        // locate energy bin
-        int binAbove = Arrays.binarySearch(this.angEnergies, energy);
-        if (binAbove < 0) {
-            binAbove = -binAbove - 1;
-            int bin = binAbove - 1;
-            // compute how far we are into the energy bin
-            double f = (energy - this.angEnergies[bin]) / (this.angEnergies[binAbove] - this.angEnergies[bin]);
-            double eta1 = Util.Math.random();
-            int l = eta1 > f ? bin : binAbove;
-
-            double eta2 = Util.Math.random();
-            int j = this.angles.get(bin).findBin(eta2);
-
-            // l = energy bin
-            // j = cos bin
-            // todo : mu = mu(l,j)+ (eta2-cdf(l,j))/p(l,j)
-            //or the more complicated linear-linear scheme
-            // the rest here is old
-            // get cos values for low and high bin, then interpolate
-            double cos_theta_low = this.angles.get(bin).lookupCos(eta1);
-            double cos_theta_high = this.angles.get(binAbove).lookupCos(eta2);
-            // then interpolate
-            mu = cos_theta_high * f + cos_theta_low * (1 - f);
-        } else {
-            // found it exactly
-            mu = this.angles.get(binAbove).lookupCos(Util.Math.random());
-        }
-        return mu;
-    }
-
-//    public Vector3D getRandomVeclocity(double energy, Vector3D other) {
-//        do {
-//            // get correctly distributed speed
-//            getRandomSpeed(energy)
-//        }
-//        Vector3D v = Util.Math.randomDir(e.cos_theta, neutronSpeed);
-//        // random vector was scattered around Z, rotate to match axis of incoming neutron
-//        Rotation r = new Rotation(Vector3D.PLUS_K, neutronVelocity);
-//        v = r.applyTo(v);
-//
-//        //System.out.println("v: " + v);
-//        return v;
-//
-//    }
-    //
-    // input: eV, output: barn
-    //
+ 
     private double getArea(double energies[], double[] area, double energy) {
         //System.out.println("Energy: "+energy+" eV");
         int index = Arrays.binarySearch(energies, energy);
@@ -409,6 +497,16 @@ public class Nuclide {
         return series;
     }
 
+    List<Gamma> generateGammasForCapture(Vector3D position, double eNeutron) {
+        LinkedList<Gamma> list = new LinkedList();
+        
+        for (PhotonDistribution dist:this.pDistList) {
+            list.addAll(dist.generateGammas(position, eNeutron));
+        }
+
+        return list;
+    }
+
     void readPhotonFile(String fileName) {
         double epsilon = 0.1;
         String line;
@@ -417,23 +515,28 @@ public class Nuclide {
 
         // some info at https://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-19-29016
         String[] knownYieldInterpolationLaws = new String[]{"1", "2", "5"}; // histogram, linear-linear, log-log
-        String[] knownNeutronEnergyInterpolationLaws = new String[]{"2", "22"}; // linear-linear, ??
-        String[] knownPhotonEnergyDescriptionLaws = new String[]{"2", "2a", "4"}; // single value, EIn+offset, tabular
+        String[] knownNeutronEnergyInterpolationLaws = new String[]{"2", "22"}; // linear-linear, unit-base linear-linear which we will treat like a histogram
+        String[] knownPhotonEnergyDistributionLaws = new String[]{"2", "2a", "4"}; // single value, EIn+offset, tabular
         String[] knownPhotonEnergyInterpolationLaws = new String[]{"0", "1", "2"}; // ?, histogram, linear-linear
 
         // read xyz.csv from resources/data
         fileName = "/data/ace/" + fileName + ".800nc.txt";
-        InputStream is = Nuclide.class.getResourceAsStream(fileName);
-        if (is == null) {
+        InputStream is = Nuclide.class
+                .getResourceAsStream(fileName);
+        if (is
+                == null) {
             System.out.println("Photon Data file " + fileName + " not found for element " + this.name);
             return;
         }
         SimpleParser sp = new SimpleParser(fileName, is);
 
         // read header
-        sp.assertAndSkipLineStart("Reading data from");
+        sp.assertAndSkipLineStart(
+                "Reading data from");
         sp.skipLine();
-        sp.assertAndSkipLineStart("MT 102 Photon report for");
+
+        sp.assertAndSkipLineStart(
+                "MT 102 Photon report for");
         sp.skipLine();
 
         // number of photon distributions, then loop over them
@@ -462,10 +565,10 @@ public class Nuclide {
             }
 
             String distLaw = sp.getString("Distribution Law: (.*)");
-            sp.assertEqual(distLaw, knownPhotonEnergyDescriptionLaws, "Photon energy description law not known");
-            //System.out.println("Photon energy method law " + distLaw);
+            sp.assertEqual(distLaw, knownPhotonEnergyDistributionLaws, "Photon energy distribution law not known");
+            //System.out.println("Photon energy distribution law " + distLaw);
             ArrayList<NeutronPhotonDistribution> npds;
-            PhotonData data;
+            PhotonData data = null;
 
             //System.out.println(distLaw);
             switch (distLaw) {
@@ -478,12 +581,7 @@ public class Nuclide {
                     double e2a2 = sp.getDouble(2);
                     data = new PhotonData2a(e2a1, e2a2);
                     break;
-                case "0":
-                case "1":
                 case "4":
-                case "22":
-                case "5":
-                default:
                     // read the interpolation sections
                     int interpolationSections = sp.getInteger("Neutron Energy Interpolation: *$i lines");
                     // todo: handle multiple sections
@@ -519,14 +617,28 @@ public class Nuclide {
                             }
                         }
 
-                        npds.add(new NeutronPhotonDistribution(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
+                        switch (distIntLaw) {
+                            case "0": // todo: probably. but really?
+                            case "1":
+                                npds.add(new NeutronPhotonDistribution1(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
+                                break;
+                            case "2":
+                                npds.add(new NeutronPhotonDistribution1(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
+                                break;
+                        }
+
                     }
                     data = new PhotonDataTable(neInterpolationLaw, npds);
                     break;
+                default:
+                    sp.error("We should not be here, we checked.");
+                    break;
+
             }
             PhotonDistribution pdist = new PhotonDistribution(distLaw, yieldInterpolationLaw, newYields, data);
             pDistList.add(pdist);
         }
+
         this.pDistList = pDistList;
     }
 
@@ -534,7 +646,7 @@ public class Nuclide {
         System.out.println("Nuclide: " + this.name);
         for (PhotonDistribution pdist : this.pDistList) {
             System.out.println("<Start of photon distribution>");
-            System.out.println("  Yield distribution law: " + pdist.yieldLaw);
+            System.out.println("  Yield distribution law: " + pdist.yieldInterpolationLaw);
             System.out.println("  Yields: ");
             for (ValueEntry y : pdist.yields) {
                 System.out.println("    E: " + y.energy + ", yield: " + y.value);
@@ -549,7 +661,7 @@ public class Nuclide {
 
                 case "2a":
                     System.out.println("  (law == offset from eIn");
-                    System.out.println("  Photon energy " + ((PhotonData2a) pdist.data).ePhoton + " EIn " + ((PhotonData2a) pdist.data).eIn);
+                    System.out.println("  Photon energy " + ((PhotonData2a) pdist.data).c0 + " + " + ((PhotonData2a) pdist.data).c1+" eIn");
                     break;
 
                 default:
@@ -557,16 +669,11 @@ public class Nuclide {
                     System.out.println("  Photon energy distributions:");
                     for (NeutronPhotonDistribution npd : ((PhotonDataTable) pdist.data).npds) {
                         System.out.println("    Neutron energy: " + npd.energy);
-                        System.out.println("      Photon energy distribution law: " + npd.photonLaw);
-                        if (npd.discrete.size() > 0) {
-                            System.out.println("      Discrete photon energies:");
-                            for (DistributionLine dl : npd.discrete) {
-                                System.out.println("      E photon: " + dl.value + ", pdf: " + dl.pdf + ", cdf: " + dl.cdf);
-                            }
-                        }
-                        if (npd.continuous.size() > 0) {
-                            System.out.println("      Continuous photon energies:");
-                            for (DistributionLine dl : npd.continuous) {
+                        System.out.println("      Photon energy distribution law: " + npd.photonInterpolationLaw);
+                        System.out.println("      Smallest continuous CDF: "+npd.smallestContinuousCDF);
+                        if (npd.dist.size() > 0) {
+                            System.out.println("      Photon energies:");
+                            for (DistributionLine dl : npd.dist) {
                                 System.out.println("      E photon: " + dl.value + ", pdf: " + dl.pdf + ", cdf: " + dl.cdf);
                             }
                         }

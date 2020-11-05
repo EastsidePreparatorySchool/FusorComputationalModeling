@@ -10,6 +10,10 @@ public final class Gamma extends Particle {
     public static int countNE = 0;
     public static double totalNE2 = 0.0;
     public static int countNE2 = 0;
+    
+    public Gamma(Vector3D position) {
+        this(position, null, 0, null);
+    }
 
     public Gamma(Vector3D position, Vector3D direction, double energy, MonteCarloSimulation mcs) {
         super(position, direction, energy, mcs);
