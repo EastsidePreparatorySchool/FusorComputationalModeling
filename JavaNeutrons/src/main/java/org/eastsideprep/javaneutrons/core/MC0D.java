@@ -34,7 +34,7 @@ abstract public class MC0D extends MonteCarloSimulation {
     }
 
     @Override
-    public void simulateParticle(Particle n) {
+    public void simulateParticle(Particle n, Material m) {
         if (n == null) {
             return;
         }

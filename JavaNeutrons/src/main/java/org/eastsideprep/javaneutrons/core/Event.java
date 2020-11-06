@@ -54,12 +54,13 @@ public class Event {
         this.face = face;
     }
 
-    public Event(Vector3D position, Event.Code c, double t, Nuclide e, Neutron n) {
+    public Event(Vector3D position, Event.Code c, double t, Nuclide e, Neutron n, Material m) {
         this.position = new Vector3D(position.getX(), position.getY(), position.getZ());
         this.code = c;
         this.t = t;
         this.nuclide = e;
         this.particle = n;
+        this.exitMaterial = m;
     }
 
     public Event(Vector3D position, Part p, double t) {

@@ -191,7 +191,7 @@ public class Material {
             //System.out.println("Component: " + e.name + ", code: " + code);
         }
 
-        return new Event(location, code, t, e, n);
+        return new Event(location, code, t, e, n, this);
     }
 
     public static Material getRealMaterial(Object material) {

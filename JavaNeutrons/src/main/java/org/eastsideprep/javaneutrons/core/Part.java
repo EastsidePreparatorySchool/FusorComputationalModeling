@@ -114,7 +114,7 @@ public class Part {
     // follows the neutron around from entry to exit or absorption
     // outermost will be ignored, this is not an assembly
     // 
-    Event evolveParticlePath(Particle p, LinkedTransferQueue<Node> visualizations, boolean outermost, Grid grid) {
+    Event evolveParticlePath(Particle p, LinkedTransferQueue<Node> visualizations, boolean outermost, Grid grid, Material initialMedium) {
         double t;
         Event exitEvent;
         Event interactionEvent;

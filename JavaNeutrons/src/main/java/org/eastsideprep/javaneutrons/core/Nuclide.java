@@ -561,7 +561,7 @@ public class Nuclide {
             for (int j = 0; j < eBuckets; j++) {
                 double energy = sp.getDouble();
                 double yield = sp.getDouble(2);
-                newYields.add(new ValueEntry(energy, yield));
+                newYields.add(new ValueEntry(Util.Physics.sicmFromMeV(energy), yield));
             }
 
             String distLaw = sp.getString("Distribution Law: (.*)");
@@ -574,12 +574,12 @@ public class Nuclide {
             switch (distLaw) {
                 case "2":
                     double e = sp.getDouble("Photon energy $d");
-                    data = new PhotonData2(e);
+                    data = new PhotonData2(Util.Physics.sicmFromMeV(e));
                     break;
                 case "2a":
                     double e2a1 = sp.getDouble("Photon energy $d \\+ $d Ein");
                     double e2a2 = sp.getDouble(2);
-                    data = new PhotonData2a(e2a1, e2a2);
+                    data = new PhotonData2a(Util.Physics.sicmFromMeV(e2a1), e2a2);
                     break;
                 case "4":
                     // read the interpolation sections
@@ -611,19 +611,19 @@ public class Nuclide {
                             double pdf = sp.getDouble(2);
                             double cdf = sp.getDouble(3);
                             if (iND >= discreteEnergies) {
-                                continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                                continuousPhotonDistributions.add(new DistributionLine(pdf, cdf, Util.Physics.sicmFromMeV(energy)));
                             } else {
-                                discretePhotonDistributions.add(new DistributionLine(pdf, cdf, energy));
+                                discretePhotonDistributions.add(new DistributionLine(pdf, cdf, Util.Physics.sicmFromMeV(energy)));
                             }
                         }
 
                         switch (distIntLaw) {
                             case "0": // todo: probably. but really?
                             case "1":
-                                npds.add(new NeutronPhotonDistribution1(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
+                                npds.add(new NeutronPhotonDistribution1(Util.Physics.sicmFromMeV(neutronEnergy), distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
                                 break;
                             case "2":
-                                npds.add(new NeutronPhotonDistribution1(neutronEnergy, distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
+                                npds.add(new NeutronPhotonDistribution1(Util.Physics.sicmFromMeV(neutronEnergy), distIntLaw, discretePhotonDistributions, continuousPhotonDistributions));
                                 break;
                         }
 

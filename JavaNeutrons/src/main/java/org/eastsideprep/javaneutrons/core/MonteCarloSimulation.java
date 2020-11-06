@@ -273,7 +273,7 @@ public class MonteCarloSimulation {
                 neutrons.stream().forEach(
                         n -> {
                             if (!stop) {
-                                simulateParticle(n);
+                                simulateParticle(n, null);
                             }
                         }
                 );
@@ -283,7 +283,7 @@ public class MonteCarloSimulation {
                     new Thread(() -> {
                         for (Neutron n : neutrons) {
                             if (!stop) {
-                                simulateParticle(n);
+                                simulateParticle(n, null);
                             }
                         }
                     }).start();
@@ -293,7 +293,7 @@ public class MonteCarloSimulation {
             // simulate one by one until one scatters
             this.scatter = false;
             for (Neutron n : neutrons) {
-                simulateParticle(n);
+                simulateParticle(n, null);
                 if (this.scatter || this.stop) {
                     break;
                 }
@@ -306,12 +306,13 @@ public class MonteCarloSimulation {
         return System.currentTimeMillis() - this.start;
     }
 
-    public void simulateParticle(Particle p) {
+    public void simulateParticle(Particle p, Material medium) {
         if (p == null) {
             completed.incrementAndGet();
             return;
         }
-        Event e = this.assembly.evolveParticlePath(p, this.visualizations, true, this.grid);
+        
+        Event e = this.assembly.evolveParticlePath(p, this.visualizations, true, this.grid, medium);
         p.tally();
 
         if (!(p instanceof Gamma) && e.code == Event.Code.Capture) {
@@ -321,7 +322,8 @@ public class MonteCarloSimulation {
                     System.out.println("Processing " + gammas.size() + " photons");
                 }
                 for (Gamma g : gammas) {
-                    simulateParticle(g);
+                    g.mcs = this;
+                    simulateParticle(g, e.exitMaterial);
                 }
             }
         }

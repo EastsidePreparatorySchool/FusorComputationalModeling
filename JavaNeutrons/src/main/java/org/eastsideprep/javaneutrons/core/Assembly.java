@@ -65,7 +65,7 @@ public class Assembly extends Part {
     }
 
     @Override
-    public Event evolveParticlePath(Particle p, LinkedTransferQueue visualizations, boolean outermost, Grid grid) {
+    public Event evolveParticlePath(Particle p, LinkedTransferQueue visualizations, boolean outermost, Grid grid, Material initialMedium) {
         Event partEvent;
         Event interactionEvent;
         Event event = null;
@@ -73,8 +73,10 @@ public class Assembly extends Part {
         boolean firstTime = true;
 
         // we start in a certain medium.
-        Material medium = p.mcs.initialMaterial;
-
+        Material medium = initialMedium;
+        if (medium == null) {
+            medium = p.mcs.initialMaterial;
+        }
         do {
             if (event != null && event.code == Event.Code.ExitEntry) {
                 // we have an exit/entry event from a prior iteration
@@ -138,7 +140,7 @@ public class Assembly extends Part {
                 partEvent.particle = p;
                 medium.processEvent(partEvent, true);
                 //System.out.println("Entering part " + p.name);
-                event = part.evolveParticlePath(p, visualizations, false, grid);
+                event = part.evolveParticlePath(p, visualizations, false, grid, null);
                 // coming out, we might be in a new material
                 medium = event.exitMaterial != null ? event.exitMaterial : medium;
                 //System.out.println("Exit to material: "+medium.name);
