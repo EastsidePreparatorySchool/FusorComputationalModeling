@@ -474,8 +474,8 @@ public class TestGM {
     public static MonteCarloSimulation prison(Group visualizations) {
         double thickness = 200; //block thickness in cm
         //String m = "HydrogenWax";
-        //String m = "CarbonWax";
-        String m = "Paraffin";
+        String m = "CarbonWax";
+        //String m = "Paraffin";
 
         //Part wall = new Part("Prison: " + m, new Shape(TestGM.class.getResource("/meshes/prison.stl"), "cm"), m);
         Part wall = new Part("Prison: " + m, new Cuboid(thickness), m);
