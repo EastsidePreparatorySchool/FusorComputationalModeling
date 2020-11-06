@@ -54,7 +54,7 @@ public class TableGraphWriter {
         }
 
     }
-
+ 
     public String[] pointToCSVString(int lineNumber, Vector point) {
         String[] csvString = {"" + lineNumber, "" + point.x, "" + point.y, "" + point.z};
         return csvString;

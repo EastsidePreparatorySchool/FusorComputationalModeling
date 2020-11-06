@@ -79,19 +79,35 @@ public class Charge {
     public Vector thisToThat(Charge c) {
         return new Vector((c.pos.x - pos.x), (c.pos.y - pos.y), (c.pos.z - pos.z));
     }
-
+    /**
+     * 
+     * @param v input vector
+     * @return distance between this charge and input vector
+     */
     public double distanceTo(Vector v) {
         return Math.sqrt(Math.pow(pos.x - v.x, 2) + Math.pow(pos.y - v.y, 2) + Math.pow(pos.z - v.z, 2));
     }
-
+    /**
+     * 
+     * @param c input charge
+     * @return distance between this charge and input charge
+     */
     public double distanceTo(Charge c) {
         return Math.sqrt(Math.pow(pos.x - c.pos.x, 2) + Math.pow(pos.y - c.pos.y, 2) + Math.pow(pos.z - c.pos.z, 2));
     }
-
+    /**
+     * 
+     * @param v input vector
+     * @return distance squared between this charge and input vector
+     */
     public double distanceSquared(Vector v) {
         return Math.pow(pos.x - v.x, 2) + Math.pow(pos.y - v.y, 2) + Math.pow(pos.z - v.z, 2);
     }
-
+    /**
+     * 
+     * @param c input charge
+     * @return distance squared between this charge and input charge
+     */
     public double distanceSquared(Charge c) {
         return Math.pow(pos.x - c.pos.x, 2) + Math.pow(pos.y - c.pos.y, 2) + Math.pow(pos.z - c.pos.z, 2);
     }
@@ -104,21 +120,32 @@ public class Charge {
         return charge;
     }
 
+    /**
+     * Converts this charge into a string for printing in a CSV file
+     * @return CSV string
+     */
     public String[] toCSVString() {
         String[] csvString = {"" + this.pos.x, "" + this.pos.y, "" + this.pos.z, "" + this.polarity};
         return csvString;
     }
 
-    public void scale(Double s) {
+    /**
+     * Scales this charge's position by a scalar
+     * @param s scalar
+     * @return this charge
+     */
+    public Charge scale(Double s) {
         pos.x *= s;
         pos.y *= s;
         pos.z *= s;
+        return this;
     }
+
 
     /**
      * Adds a scalar to this charge's position vector (the += sign)
      *
-     * @param s the scalar
+     * @param s scalar
      */
     public void plusEquals(Double s) {
         this.pos.x += s;
@@ -129,7 +156,7 @@ public class Charge {
     /**
      * Sets the position of this charge to a vector
      *
-     * @param v the vector
+     * @param v vector
      */
     public void setPosition(Vector v) {
         this.pos.x = v.x;

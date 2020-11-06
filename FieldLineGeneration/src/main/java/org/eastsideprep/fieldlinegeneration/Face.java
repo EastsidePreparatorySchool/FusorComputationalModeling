@@ -54,8 +54,8 @@ public class Face {
 
     Vector intersectsLine(Vector a, Vector b) {
         Vector lineEquation = a.thisToThat(b);
-        Vector v = equation.product(b);
-        Vector u = equation.product(lineEquation);
+        Vector v = equation.multiply(b);
+        Vector u = equation.multiply(lineEquation);
         Double t = u.x + u.y + u.z;
         Double v2 = v.x + v.y + v.z;
         v2 = answer - v2;

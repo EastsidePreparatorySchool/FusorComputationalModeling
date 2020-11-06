@@ -34,7 +34,7 @@ public class PJRungeKutta implements Solution {
     }
     public Particle multiplyAndAdd(Particle a, Particle b, Double c){
         Particle bc = b.clone();
-        bc.multiply(c);
+        bc.scale(c);
         bc.plusEquals(a.clone());
         return bc;
     }
@@ -46,30 +46,30 @@ public class PJRungeKutta implements Solution {
         Particle k1_2 = multiplyAndAdd(p.clone(), k1.clone(), stepSize/2);
         /*Particle k1_2 = p.clone();
         Particle x = k1.clone();
-        x.multiply(stepSize/2);
+        x.scale(stepSize/2);
         k1_2.plusEquals(x);*/
         Particle k2 = f(k1_2.clone());
         
         Particle k2_3 = multiplyAndAdd(p.clone(), k2.clone(), stepSize/2);
         /*Particle y = k2.clone();
-        y.multiply(stepSize/2);
+        y.scale(stepSize/2);
         k2_3.plusEquals(y);*/
         Particle k3 = f(k2_3.clone());
         
         Particle k3_4 = multiplyAndAdd(p.clone(), k3.clone(), stepSize);
         /*Particle z = k3.clone();
-        z.multiply(stepSize);
+        z.scale(stepSize);
         k3_4.plusEquals(z);*/
         Particle k4 = f(k3_4.clone());
                 
         Particle p2 = p.clone();
         
-       /* k2_3.multiply(2.0);
-        k3_4.multiply(2.0);*/
+       /* k2_3.scale(2.0);
+        k3_4.scale(2.0);*/
         
-        Particle[] k5 = {k2.multiply(2),k3.multiply(2),k4};
+        Particle[] k5 = {k2.scale(2),k3.scale(2),k4};
         k1.plusEquals(k5);
-        Particle pFinal = k1.multiply(stepSize/6);
+        Particle pFinal = k1.scale(stepSize/6);
         p2.plusEquals(pFinal);
         p2.time += stepSize;
         p2.totalEnergy(e);

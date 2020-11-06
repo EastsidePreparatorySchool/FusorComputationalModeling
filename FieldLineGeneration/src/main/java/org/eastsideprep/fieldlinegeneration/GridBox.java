@@ -94,7 +94,10 @@ public class GridBox {
         }
         return inBounds;
     }
-
+    /**
+     * Creates a clone of this gridbox with a different memory address
+     * @return clone
+     */
     public GridBox clone() {
         GridBox clone = new GridBox(c1, c2);
         clone.dArrow = this.dArrow;

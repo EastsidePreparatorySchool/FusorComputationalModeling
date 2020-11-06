@@ -19,7 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EFieldFileParser {
-
+    /**
+     * Given a file path, returns an array of three arrays of charges,
+     * the first array with all charges, the second with positive charges,
+     * the third with negative charges
+     * @param filePath file path
+     * @return array of arrays of charges
+     */
     public Charge[][] parseFile(String filePath) {
         Reader reader;
         reader = null;

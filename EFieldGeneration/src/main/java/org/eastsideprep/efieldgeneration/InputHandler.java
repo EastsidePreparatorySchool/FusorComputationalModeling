@@ -102,6 +102,26 @@ public class InputHandler {
         shakeUps = Integer.valueOf(s.nextLine());
 
         geometry = new Geometry(positiveFilePath, negCharge, negativeFilePath, posCharge);
+        /*
+        
+        NOTICE: the following are the offsets
+        for moving the editedchamber.stl into the position for
+        wiregrid.stl
+        
+        Vector offset = new Vector(77.5, -75.0, 240.0);
+        geometry.translatePositiveTriangles(offset);
+        // the factor here flips the direction of the chamber and grid
+        Vector factor = new Vector(1.0, 1.0, -1.0);
+        geometry.multiplyTriangles(factor);
+        
+        
+        */
+        /*
+        Vector offset = new Vector(77.5, -75.0, 240.0);
+        geometry.translatePositiveTriangles(offset);
+        */
+        Vector factor = new Vector(1.0, 1.0, -1.0);
+        geometry.multiplyTriangles(factor);
         geometry.sumUpSurfaceArea();
 
         chargeDistributer = new ChargeDistributer(geometry, scaleDistance, numCharges);
@@ -127,5 +147,32 @@ public class InputHandler {
         }
         TableGraphWriter writer = new TableGraphWriter();
         writer.writeCSV(charges, outputFilePath);
+    }
+    
+    public void move(){
+        String inputFilePath = fileNameGet("Please enter your input file location");
+        outputFilePath = fileCreate("Please enter your output file location");
+        System.out.println("Move over how much?");
+        System.out.println("x: ");
+        Double x = Double.valueOf(s.nextLine());
+
+        System.out.println("y: ");
+        Double y = Double.valueOf(s.nextLine());
+
+        System.out.println("z: ");
+        Double z = Double.valueOf(s.nextLine());
+
+        Vector offset = new Vector(x,y,z);
+        EFieldFileParser efp = new EFieldFileParser();
+        Charge[][] chargeArrayArray = efp.parseFile(inputFilePath);
+        Charge[] charges = chargeArrayArray[0];
+
+        for (Charge c : charges) {
+            c.pos.plusEquals(offset);
+
+        }
+        TableGraphWriter writer = new TableGraphWriter();
+        writer.writeCSV(charges, outputFilePath);
+    
     }
 }
