@@ -265,7 +265,7 @@ public class App extends Application {
 
         noIdle();
         this.progressTimeline();
-        sim.simulateNeutrons(count, 100000, true);
+        sim.simulateParticles(count, 100000, true);
         root.setCenter(view);
     }
 
@@ -319,7 +319,7 @@ public class App extends Application {
         if (!idleFlag) {
             return;
         }
-        sim.simulateNeutrons(1, 3000, false);
+        sim.simulateParticles(1, 3000, false);
         sim.update();
 
         if (this.idleFlag) {

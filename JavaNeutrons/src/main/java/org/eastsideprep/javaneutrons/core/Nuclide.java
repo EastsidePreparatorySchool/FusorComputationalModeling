@@ -135,7 +135,7 @@ public class Nuclide {
     private static class NeutronPhotonDistributionKey extends NeutronPhotonDistribution {
 
         NeutronPhotonDistributionKey(double e) {
-            super (e, "", null, null);
+            super(e, "", null, null);
         }
 
         @Override
@@ -288,6 +288,7 @@ public class Nuclide {
         private List<Gamma> generateGammas(Vector3D position, double eNeutron) {
             // interpolates yield, calls yieldGammas()
             int index = Collections.binarySearch(this.yields, new ValueEntry(eNeutron, 0));
+            index = index < 0 ? -index - 1 : index;
             double yield = 0;
             ValueEntry yield1;
             ValueEntry yield2;
@@ -452,7 +453,6 @@ public class Nuclide {
         this.total = newTotal.stream().mapToDouble(e -> e.value).toArray();
     }
 
- 
     private double getArea(double energies[], double[] area, double energy) {
         //System.out.println("Energy: "+energy+" eV");
         int index = Arrays.binarySearch(energies, energy);
@@ -499,8 +499,8 @@ public class Nuclide {
 
     List<Gamma> generateGammasForCapture(Vector3D position, double eNeutron) {
         LinkedList<Gamma> list = new LinkedList();
-        
-        for (PhotonDistribution dist:this.pDistList) {
+
+        for (PhotonDistribution dist : this.pDistList) {
             list.addAll(dist.generateGammas(position, eNeutron));
         }
 
@@ -661,7 +661,7 @@ public class Nuclide {
 
                 case "2a":
                     System.out.println("  (law == offset from eIn");
-                    System.out.println("  Photon energy " + ((PhotonData2a) pdist.data).c0 + " + " + ((PhotonData2a) pdist.data).c1+" eIn");
+                    System.out.println("  Photon energy " + ((PhotonData2a) pdist.data).c0 + " + " + ((PhotonData2a) pdist.data).c1 + " eIn");
                     break;
 
                 default:
@@ -670,7 +670,7 @@ public class Nuclide {
                     for (NeutronPhotonDistribution npd : ((PhotonDataTable) pdist.data).npds) {
                         System.out.println("    Neutron energy: " + npd.energy);
                         System.out.println("      Photon energy distribution law: " + npd.photonInterpolationLaw);
-                        System.out.println("      Smallest continuous CDF: "+npd.smallestContinuousCDF);
+                        System.out.println("      Smallest continuous CDF: " + npd.smallestContinuousCDF);
                         if (npd.dist.size() > 0) {
                             System.out.println("      Photon energies:");
                             for (DistributionLine dl : npd.dist) {

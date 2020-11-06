@@ -33,6 +33,7 @@ import org.eastsideprep.javaneutrons.core.MC0D;
 import org.eastsideprep.javaneutrons.core.Material;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
 import org.eastsideprep.javaneutrons.core.Neutron;
+import org.eastsideprep.javaneutrons.core.Particle;
 import org.eastsideprep.javaneutrons.core.Util;
 import org.eastsideprep.javaneutrons.shapes.Cuboid;
 import org.eastsideprep.javaneutrons.shapes.HumanBody;
@@ -110,7 +111,7 @@ public class TestGM {
             }
 
             @Override
-            public void run(Neutron n) {
+            public void run(Particle n) {
                 // n is a fresh neutron
 
                 // neutron comes from origin, shell is to the +x,
@@ -226,7 +227,7 @@ public class TestGM {
             }
 
             @Override
-            public void run(Neutron n) {
+            public void run(Particle n) {
                 Event e;
                 // n is a fresh neutron
 
@@ -325,7 +326,7 @@ public class TestGM {
             }
 
             @Override
-            public void run(Neutron n) {
+            public void run(Particle n) {
                 Event e;
                 // n is a fresh neutron
 

@@ -9,7 +9,7 @@ abstract public class MC0D extends MonteCarloSimulation {
 
     abstract public void before();
 
-    abstract public void run(Neutron n);
+    abstract public void run(Particle n);
 
     abstract public void after();
 
@@ -34,7 +34,7 @@ abstract public class MC0D extends MonteCarloSimulation {
     }
 
     @Override
-    public void simulateNeutron(Neutron n) {
+    public void simulateParticle(Particle n) {
         if (n == null) {
             return;
         }

@@ -236,7 +236,7 @@ public class MonteCarloSimulation {
         return completed.get();
     }
 
-    public void simulateNeutrons(int count, int visualObjectLimit, boolean textTrace) {
+    public void simulateParticles(int count, int visualObjectLimit, boolean textTrace) {
         preProcess();
         this.lastCount = count;
         this.traceLevel = count <= 10 ? (1 + (textTrace ? 1 : 0)) : 0;
@@ -266,8 +266,6 @@ public class MonteCarloSimulation {
         Environment.getInstance().reset();
 
         // collect any gammas produced
-        LinkedList<Gamma> gammas = new LinkedList<>();
-
         NeutronCollection neutrons = new NeutronCollection(count, this.origin, this.direction, this.initialEnergy, this);
         if (count > 0) {
             if (!MonteCarloSimulation.parallel || this.lastCount <= 10) {
@@ -275,7 +273,7 @@ public class MonteCarloSimulation {
                 neutrons.stream().forEach(
                         n -> {
                             if (!stop) {
-                                simulateNeutron(n);
+                                simulateParticle(n);
                             }
                         }
                 );
@@ -285,7 +283,7 @@ public class MonteCarloSimulation {
                     new Thread(() -> {
                         for (Neutron n : neutrons) {
                             if (!stop) {
-                                simulateNeutron(n);
+                                simulateParticle(n);
                             }
                         }
                     }).start();
@@ -295,32 +293,20 @@ public class MonteCarloSimulation {
             // simulate one by one until one scatters
             this.scatter = false;
             for (Neutron n : neutrons) {
-                simulateNeutron(n);
+                simulateParticle(n);
                 if (this.scatter || this.stop) {
                     break;
                 }
             }
         }
 
-        if (!gammas.isEmpty()) {
-            // simulate lots in parallel
-            for (int i = 1; i < Runtime.getRuntime().availableProcessors(); i++) {
-                new Thread(() -> {
-                    for (Particle p : gammas) {
-                        if (!stop) {
-                            simulateNeutron(p);
-                        }
-                    }
-                }).start();
-            }
-        }
     }
 
     public long getElapsedTime() {
         return System.currentTimeMillis() - this.start;
     }
 
-    public void simulateNeutron(Particle p) {
+    public void simulateParticle(Particle p) {
         if (p == null) {
             completed.incrementAndGet();
             return;
@@ -329,7 +315,15 @@ public class MonteCarloSimulation {
         p.tally();
 
         if (!(p instanceof Gamma) && e.code == Event.Code.Capture) {
-            e.nuclide.generateGammasForCapture(p.position, p.energy);
+            List<Gamma> gammas = e.nuclide.generateGammasForCapture(p.position, p.energy);
+            if (!gammas.isEmpty()) {
+                if (this.traceLevel > 0) {
+                    System.out.println("Processing " + gammas.size() + " photons");
+                }
+                for (Gamma g : gammas) {
+                    simulateParticle(g);
+                }
+            }
         }
 
         completed.incrementAndGet();

@@ -129,7 +129,12 @@ public class Material {
         this.pathCount.incrementAndGet();
     }
 
-    public Event nextPoint(Neutron n) {
+    public Event nextPoint(Particle p) {
+        if (p instanceof Gamma) {
+            double t = 10000;
+            return new Event(p.position.add(p.direction.scalarMultiply(t)), Event.Code.Gone, t);
+        }
+        Neutron n = (Neutron) p;
         double energy = n.energy;
 
         double t = getPathLength(energy, Util.Math.random());
