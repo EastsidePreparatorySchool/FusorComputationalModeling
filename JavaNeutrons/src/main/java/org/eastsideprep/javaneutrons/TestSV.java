@@ -11,6 +11,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.eastsideprep.javaneutrons.core.Assembly;
+import org.eastsideprep.javaneutrons.core.Material;
 import org.eastsideprep.javaneutrons.core.Part;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
 import org.eastsideprep.javaneutrons.core.Neutron;
@@ -143,7 +144,7 @@ public class TestSV {
         for(int i = 0; i<n; i++){
             Shape test = new Shape(new CuboidMesh(100, 100, 2));
             Shape person = new Shape(TestSV.class.getResource("/meshes/body.obj"));
-            Part p = new Part("Person."+i,person,"Vacuum");
+            Part p = new Part("Person."+i,person,"HumanBodyMaterial");
             double angle = i/((double)n)*around + adjust;
             
             
@@ -430,7 +431,7 @@ public class TestSV {
 
     
     
-    public static MonteCarloSimulation ThisOneWorks0mm(Group visualizations) {
+public static MonteCarloSimulation ThisOneWorks0mm(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -472,8 +473,8 @@ public class TestSV {
         fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
         //fusor.addAll(lead, wax);
 
-        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100); //need to move these.
-      //  fusor.addAll(dp);
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
         
         fusor.containsMaterialAt(
                 "Vacuum", Vector3D.ZERO);
@@ -484,7 +485,7 @@ public class TestSV {
     }
     
     
-    public static MonteCarloSimulation ThisOneWorks5mm(Group visualizations) {
+public static MonteCarloSimulation october(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -525,7 +526,7 @@ public class TestSV {
         Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/920/5mmwax.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/4mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));
         
@@ -550,6 +551,8 @@ public class TestSV {
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
         MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+       // mcs.interstitialMaterial = Material.getRealMaterial("Air");
+       // System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
         return mcs;
     }
  
