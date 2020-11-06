@@ -1,0 +1,86 @@
+solid "top"
+  facet normal 0 0 1
+    outer loop
+      vertex -52 -40.8600006104 44.7299995422
+      vertex 52 -40.8600006104 66.9400024414
+      vertex -52 -40.8600006104 66.9400024414
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 52 -40.8600006104 66.9400024414
+      vertex -52 -40.8600006104 44.7299995422
+      vertex 52 -40.8600006104 44.7299995422
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -52 -40.8600006104 44.7299995422
+      vertex -52 49.1399993896 66.9400024414
+      vertex -52 49.1399993896 44.7299995422
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -52 49.1399993896 66.9400024414
+      vertex -52 -40.8600006104 44.7299995422
+      vertex -52 -40.8600006104 66.9400024414
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -52 49.1399993896 66.9400024414
+      vertex 52 -40.8600006104 66.9400024414
+      vertex 52 49.1399993896 66.9400024414
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 52 -40.8600006104 66.9400024414
+      vertex -52 49.1399993896 66.9400024414
+      vertex -52 -40.8600006104 66.9400024414
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 52 -40.8600006104 66.9400024414
+      vertex 52 49.1399993896 44.7299995422
+      vertex 52 49.1399993896 66.9400024414
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 52 49.1399993896 44.7299995422
+      vertex 52 -40.8600006104 66.9400024414
+      vertex 52 -40.8600006104 44.7299995422
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 52 49.1399993896 44.7299995422
+      vertex -52 49.1399993896 66.9400024414
+      vertex 52 49.1399993896 66.9400024414
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -52 49.1399993896 66.9400024414
+      vertex 52 49.1399993896 44.7299995422
+      vertex -52 49.1399993896 44.7299995422
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -52 -40.8600006104 44.7299995422
+      vertex 52 49.1399993896 44.7299995422
+      vertex 52 -40.8600006104 44.7299995422
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 52 49.1399993896 44.7299995422
+      vertex -52 -40.8600006104 44.7299995422
+      vertex -52 49.1399993896 44.7299995422
+    endloop
+  endfacet
+endsolid "top"

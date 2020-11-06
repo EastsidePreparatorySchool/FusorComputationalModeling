@@ -691,6 +691,10 @@ public class Shape extends MeshView {
     // counts the unique t-parameters for a ray intersection with all triangles
     // if odd, point is contained in shape
     public boolean contains(Vector3D point) {
+        return contains(point, false);
+    }
+
+    public boolean contains(Vector3D point, boolean trace) {
 
         int x = 0;
         int y = 1;
@@ -749,13 +753,16 @@ public class Shape extends MeshView {
         }
 
         // catch coincident points on triangles
-        if (ts.size() == 1 && ts.contains(0.0)) {
+        if ((ts.size() % 2) == 1 && ts.contains(0.0)) {
             return false;
         }
 
         if ((ts.size() % 2) == 1) {
-            //System.out.println("unique t parameters: " + ts.size());
-            //System.out.println("contained: "+point);
+            if (trace) {
+                System.out.println("unique t parameters: " + ts.size());
+                ts.stream().forEach(t -> System.out.println("  " + t));
+                System.out.println("contained: " + point);
+            }
             return true;
         }
         //System.out.println("");
@@ -779,31 +786,37 @@ public class Shape extends MeshView {
     // does this shape intersect another shape?
     // computes whether any "this" vertices are inside the other volume
     // and vice versa
-    public boolean intersects(Shape other) {
+    public boolean intersects(Shape other, int iterations, Group simVis) {
         boolean result = false;
+        int i;
+
         ArrayList<Vector3D> points = getPoints();
         for (Vector3D point : points) {
-            if (other.contains(point)) {
-                if (other.contains(point)) {
-                    if (other.contains(point)) {
-                        System.out.println(this.part.name + " contains " + other.part.name + " : " + point);
-
-                        result = true;
-                    }
+            for (i = 0; i < iterations; i++) {
+                if (!other.contains(point)) {
+                    break;
                 }
+            }
+            if (i == iterations) {
+                System.out.println(other.part.name + " contains " + this.part.name + " vertex : " + point);
+                other.contains(point, true);
+                Util.Graphics.drawSphere(simVis, point, 0.1f, "red");
+                result = true;
             }
         }
 
         points = other.getPoints();
         for (Vector3D point : points) {
-            if (this.contains(point)) {
-                if (this.contains(point)) {
-                    if (this.contains(point)) {
-                        System.out.println(this.part.name + " contains " + other.part.name + " : " + point);
-
-                        result = true;
-                    }
+            for (i = 0; i < iterations; i++) {
+                if (!this.contains(point)) {
+                    break;
                 }
+            }
+            if (i == iterations) {
+                System.out.println(this.part.name + " contains " + other.part.name + " vertex : " + point);
+                this.contains(point, true);
+                Util.Graphics.drawSphere(simVis, point, 0.1f, "red");
+                result = true;
             }
         }
 

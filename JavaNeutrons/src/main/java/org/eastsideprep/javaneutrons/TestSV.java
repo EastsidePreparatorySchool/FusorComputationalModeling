@@ -146,8 +146,11 @@ public class TestSV {
             Part p = new Part("Person."+i,person,"Vacuum");
             double angle = i/((double)n)*around + adjust;
             
-            p.getTransforms().add(0, new Rotate(angle-180, new Point3D(0, 1, 0)));
-            p.getTransforms().add(0, new Translate(distance*Math.sin(angle/360*Math.PI*2), 0, distance*Math.cos(angle/360*Math.PI*2)));
+            
+            p.getTransforms().add(0, new Rotate(-90, new Point3D(1, 0, 0)));
+            p.getTransforms().add(0, new Rotate(180-angle, new Point3D(0, 0, 1)));//new Rotate(angle-180, new Point3D(0, 1, 0)));
+            //p.getTransforms().add(0, new Translate(distance*Math.sin(angle/360*Math.PI*2), 0, distance*Math.cos(angle/360*Math.PI*2)));
+            p.getTransforms().add(0, new Translate(distance*Math.sin(angle/360*Math.PI*2), distance*Math.cos(angle/360*Math.PI*2), 0));
             p.getTransforms().add(0, new Translate(from.getX(), from.getY(), from.getZ()));
             p.setColor("lightblue");
             detectors.addAll(p);
@@ -299,7 +302,8 @@ public class TestSV {
         return mcs;
     }
     
-    public static MonteCarloSimulation ROOM2mm(Group visualizations) {
+
+    public static MonteCarloSimulation ROOMnew(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -309,36 +313,38 @@ public class TestSV {
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
         
         //room walls
-        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/wfront.stl"), "cm"), "Vacuum");
+        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/hi/wfront.stl"), "cm"), "Vacuum");
             wfront.setColor("gray");
-        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/wback.stl"), "cm"), "Vacuum");
+        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/hi/wback.stl"), "cm"), "Vacuum");
             wback.setColor("gray");
-        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/wfloor.stl"), "cm"), "Vacuum");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/hi/wfloor.stl"), "cm"), "Vacuum");
             wfloor.setColor("gray");
-        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/wceiling.stl"), "cm"), "Vacuum");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/hi/wceiling.stl"), "cm"), "Vacuum");
             wceiling.setColor("gray");
-        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/wleft.stl"), "cm"), "Vacuum");
+        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/hi/wleft.stl"), "cm"), "Vacuum");
             wleft.setColor("gray");
-        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/wright.stl"), "cm"), "Vacuum");
+        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/hi/wright.stl"), "cm"), "Vacuum");
             wright.setColor("gray");
             
         //important stuff
-        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/wood.stl"), "cm"), "Wood");
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/hi/wood.stl"), "cm"), "Wood");
             wood.setColor("yellow");
-        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/pipes.stl"), "cm"), "Steel");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
             pipes.setColor("gray");
-        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/leadbox.stl"), "cm"), "Lead");
+            pipes.getTransforms().add(new Translate(0,0.5,0));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
-        Part wax = new Part("Wax", new Shape(TestSV.class.getResource("/meshes/2mmcubes.stl"), "cm"), "Paraffin");
+        Part wax = new Part("Wax", new Shape(TestSV.class.getResource("/meshes/hi/0mm.stl"), "cm"), "Paraffin");
             wax.setColor("lightblue");
+            wax.getTransforms().add(0, new Translate(0,0.5,0));
         Assembly fusor = new Assembly("Fusor");
 
-        fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
-        //fusor.addAll(wood);
-        fusor.addTransform(new Rotate(90, new Point3D(1,0,0)));
+        //fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        fusor.addAll(wood, wax, lead, pipes);
+       // fusor.addTransform(new Rotate(90, new Point3D(1,0,0)));
         
         Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100);
-        fusor.addAll(dp);
+      //  fusor.addAll(dp);
         
         fusor.containsMaterialAt(
                 "Vacuum", Vector3D.ZERO);
@@ -347,8 +353,8 @@ public class TestSV {
         MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
         return mcs;
     }
-
-    public static MonteCarloSimulation ROOM0mm(Group visualizations) {
+    
+    public static MonteCarloSimulation BROKENIGLOO(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -358,36 +364,61 @@ public class TestSV {
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
         
         //room walls
-        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/wfront.stl"), "cm"), "Vacuum");
+        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/hi/wfront.stl"), "cm"), "Vacuum");
             wfront.setColor("gray");
-        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/wback.stl"), "cm"), "Vacuum");
+        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/hi/wback.stl"), "cm"), "Vacuum");
             wback.setColor("gray");
-        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/wfloor.stl"), "cm"), "Vacuum");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/hi/wfloor.stl"), "cm"), "Vacuum");
             wfloor.setColor("gray");
-        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/wceiling.stl"), "cm"), "Vacuum");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/hi/wceiling.stl"), "cm"), "Vacuum");
             wceiling.setColor("gray");
-        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/wleft.stl"), "cm"), "Vacuum");
+        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/hi/wleft.stl"), "cm"), "Vacuum");
             wleft.setColor("gray");
-        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/wright.stl"), "cm"), "Vacuum");
+        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/hi/wright.stl"), "cm"), "Vacuum");
             wright.setColor("gray");
             
-        //important stuff
-        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/wood.stl"), "cm"), "Wood");
-            wood.setColor("yellow");
-        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/pipes.stl"), "cm"), "Steel");
+        //metal
+      //  Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/hi/wood.stl"), "cm"), "Wood");
+      //      wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
             pipes.setColor("gray");
-        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/leadbox.stl"), "cm"), "Lead");
+            pipes.getTransforms().add(new Translate(0,0.5,0));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
-        Part wax = new Part("Wax", new Shape(TestSV.class.getResource("/meshes/0mm.stl"), "cm"), "Paraffin");
-            wax.setColor("lightblue");
-        Assembly fusor = new Assembly("Fusor");
 
-        fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
-        //fusor.addAll(wood);
-        fusor.addTransform(new Rotate(90, new Point3D(1,0,0)));
+        Part ptop = new Part("P.Top", new Shape(TestSV.class.getResource("/meshes/broken/top.stl"), "cm"), "Paraffin");
+        Part pbase = new Part("P.Base", new Shape(TestSV.class.getResource("/meshes/broken/base.stl"), "cm"), "Paraffin");
+        Part pleft = new Part("P.Left", new Shape(TestSV.class.getResource("/meshes/broken/left.stl"), "cm"), "Paraffin");
+        Part pright = new Part("P.Right", new Shape(TestSV.class.getResource("/meshes/broken/right.stl"), "cm"), "Paraffin");
+        Part pfront = new Part("P.Front", new Shape(TestSV.class.getResource("/meshes/broken/front.stl"), "cm"), "Paraffin");
+        Part pback = new Part("P.Back", new Shape(TestSV.class.getResource("/meshes/broken/back.stl"), "cm"), "Paraffin");
+            ptop.setColor("lightblue");
+            pbase.setColor("lightblue");
+            pleft.setColor("lightblue");
+            pright.setColor("lightblue");
+            pfront.setColor("lightblue");
+            pback.setColor("lightblue");
+                pbase.getTransforms().add(0, new Translate(0,0.5,0));
+                ptop.getTransforms().add(0, new Translate(0,0.5,0));
+                pleft.getTransforms().add(0, new Translate(0,0.5,0));
+                pright.getTransforms().add(0, new Translate(0,0.5,0));
+                pfront.getTransforms().add(0, new Translate(0,0.5,0));
+                pback.getTransforms().add(0, new Translate(0,0.5,0));
+
+        //wood
+        Part wood1 = new Part("Wood.outerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodouter.stl"), "cm"), "Wood");
+        Part wood2 = new Part("Wood.innerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodinner.stl"), "cm"), "Wood");
+        Part wood3 = new Part("Wood.base", new Shape(TestSV.class.getResource("/meshes/broken/woodbase.stl"), "cm"), "Wood");
+        Part wood4 = new Part("Wood.topShelf", new Shape(TestSV.class.getResource("/meshes/broken/woodtopshelf.stl"), "cm"), "Wood");
+        Part wood5 = new Part("Wood.frontDoor", new Shape(TestSV.class.getResource("/meshes/broken/woodfrontdoor.stl"), "cm"), "Wood");
+        Part wood6 = new Part("Wood.innerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodinnerback.stl"), "cm"), "Wood");
+        Part wood7 = new Part("Wood.outerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodouterback.stl"), "cm"), "Wood");
         
-        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100);
-        fusor.addAll(dp);
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, pipes, lead, ptop, pbase, pleft, pright, pfront, pback, wfront, wback, wfloor, wceiling, wleft, wright, wood1, wood2, wood3, wood4, wood5, wood6, wood7);
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100); //need to move these.
+      //  fusor.addAll(dp);
         
         fusor.containsMaterialAt(
                 "Vacuum", Vector3D.ZERO);
@@ -397,5 +428,129 @@ public class TestSV {
         return mcs;
     }
 
+    
+    
+    public static MonteCarloSimulation ThisOneWorks0mm(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        //room walls
+        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/hi/wfront.stl"), "cm"), "Vacuum");
+            wfront.setColor("gray");
+        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/hi/wback.stl"), "cm"), "Vacuum");
+            wback.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/hi/wfloor.stl"), "cm"), "Vacuum");
+            wfloor.setColor("gray");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/hi/wceiling.stl"), "cm"), "Vacuum");
+            wceiling.setColor("gray");
+        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/hi/wleft.stl"), "cm"), "Vacuum");
+            wleft.setColor("gray");
+        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/hi/wright.stl"), "cm"), "Vacuum");
+            wright.setColor("gray");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+           
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("0mm wax", new Shape(TestSV.class.getResource("/meshes/920/0mmwax.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));
+
+          //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        //fusor.addAll(lead, wax);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100); //need to move these.
+      //  fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+        return mcs;
+    }
+    
+    
+    public static MonteCarloSimulation ThisOneWorks5mm(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        //room walls
+        Part wfront = new Part("W.front", new Shape(TestSV.class.getResource("/meshes/hi/wfront.stl"), "cm"), "Vacuum");
+            wfront.setColor("gray");
+        Part wback = new Part("W.back", new Shape(TestSV.class.getResource("/meshes/hi/wback.stl"), "cm"), "Vacuum");
+            wback.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/hi/wfloor.stl"), "cm"), "Vacuum");
+            wfloor.setColor("gray");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/hi/wceiling.stl"), "cm"), "Vacuum");
+            wceiling.setColor("gray");
+        Part wleft = new Part("W.left", new Shape(TestSV.class.getResource("/meshes/hi/wleft.stl"), "cm"), "Vacuum");
+            wleft.setColor("gray");
+        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/hi/wright.stl"), "cm"), "Vacuum");
+            wright.setColor("gray");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        
+//        Part wood1 = new Part("Wood.outerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodouter.stl"), "cm"), "Wood");
+//        Part wood2 = new Part("Wood.innerSides", new Shape(TestSV.class.getResource("/meshes/broken/woodinner.stl"), "cm"), "Wood");
+//        Part wood3 = new Part("Wood.base", new Shape(TestSV.class.getResource("/meshes/broken/woodbase.stl"), "cm"), "Wood");
+//        Part wood4 = new Part("Wood.topShelf", new Shape(TestSV.class.getResource("/meshes/broken/woodtopshelf.stl"), "cm"), "Wood");
+//        Part wood5 = new Part("Wood.frontDoor", new Shape(TestSV.class.getResource("/meshes/broken/woodfrontdoor.stl"), "cm"), "Wood");
+//        Part wood6 = new Part("Wood.innerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodinnerback.stl"), "cm"), "Wood");
+//        Part wood7 = new Part("Wood.outerBack", new Shape(TestSV.class.getResource("/meshes/broken/woodouterback.stl"), "cm"), "Wood");
+        
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/920/5mmwax.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));
+        
+                //i was playing around with some things
+        Part shield1 = new Part("Extra shield wood", new Shape(TestSV.class.getResource("/meshes/extrashield/shieldwood.stl"), "cm"), "Wood"); 
+            shield1.setColor("yellow");
+           // shield1.getTransforms().add(0, new Translate(0,0.5,0));
+        Part shield2 = new Part("Extra shield steel", new Shape(TestSV.class.getResource("/meshes/extrashield/shield5mm.stl"), "cm"), "Steel"); 
+            shield2.setColor("black");
+        
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+        return mcs;
+    }
  
 }
