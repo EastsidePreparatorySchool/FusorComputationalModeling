@@ -86,20 +86,25 @@ public class SimpleParser {
     int getInteger(String p) {
         String text = "";
         try {
-            p = p.replaceAll("\\$i","([0-9]*)");
+            p = p.replaceAll("\\$i", "([0-9]*)");
             text = getString(p);
             return Integer.parseInt(text);
         } catch (Exception e) {
-            error("Not an integer for pattern '"+p+"': " + text);
+            error("Not an integer for pattern '" + p + "': " + text);
             return 0;
         }
     }
 
     double getDouble(String p) {
         String text = "";
+        String text2;
         try {
             p = p.replaceAll("\\$d", "([0-9]*\\.?[0-9]+)([eE][-+]?[0-9]+)?");
             text = getString(p);
+            text2 = getString(2);
+            if (text2 != null) {
+                text += text2;
+            }
             return Double.parseDouble(text);
         } catch (Exception e) {
             error("Not a double: " + text);

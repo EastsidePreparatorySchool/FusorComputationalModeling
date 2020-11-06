@@ -125,8 +125,8 @@ public class Part {
         // so that when something else happens, we will be firmly inside
 //        p.setPosition(visualizations, Util.Math.rayPoint(p.position, p.direction, epsilon));
         if (p.mcs.traceLevel >= 2) {
-            System.out.println("Neutron " + p.hashCode() + " entry into part " + this.name);
-            System.out.println(" Neutron energy in: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+            System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " entry into part " + this.name);
+            System.out.println(" "+p.getClass().getSimpleName()+" energy in: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
         }
         this.processEntry(p);
 
@@ -184,15 +184,15 @@ public class Part {
         } while (event.code != Event.Code.Exit && event.code != Event.Code.ExitEntry && event.code != Event.Code.Capture);
         if (event.code == Event.Code.Capture) {
             if (p.mcs.traceLevel >= 2) {
-                System.out.println("Neutron " + p.hashCode() + " captured in part " + this.name);
-                System.out.println(" Neutron energy final: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+                System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " captured in part " + this.name);
+                System.out.println(" "+p.getClass().getSimpleName()+" energy final: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
             }
         } else {
 //            // advance the neutron a bit to the outside
 //            p.setPosition(visualizations, Util.Math.rayPoint(p.position, p.direction, epsilon));
             if (p.mcs.traceLevel >= 2) {
-                System.out.println("Neutron " + p.hashCode() + " exit from part " + this.name);
-                System.out.println(" Neutron energy out: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+                System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " exit from part " + this.name);
+                System.out.println(" "+p.getClass().getSimpleName()+" energy out: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
             }
         }
 

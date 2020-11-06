@@ -311,11 +311,14 @@ public class MonteCarloSimulation {
             completed.incrementAndGet();
             return;
         }
-        
+
         Event e = this.assembly.evolveParticlePath(p, this.visualizations, true, this.grid, medium);
         p.tally();
 
         if (!(p instanceof Gamma) && e.code == Event.Code.Capture) {
+            if (this.traceLevel > 0) {
+                System.out.println("Captured by: " + e.nuclide.name);
+            }
             List<Gamma> gammas = e.nuclide.generateGammasForCapture(p.position, p.energy);
             if (!gammas.isEmpty()) {
                 if (this.traceLevel > 0) {

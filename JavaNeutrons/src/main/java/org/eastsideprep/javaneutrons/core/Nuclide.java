@@ -89,7 +89,7 @@ public class Nuclide {
             } else {
                 // discrete energy, just return the nearest smaller discrete energy
                 int index = Collections.binarySearch(dist, new DistributionLine(eta));
-                index = index < 0 ? -index - 1 : index;
+                index = index < 0 ? Math.max(0, -index - 2) : index;
 
                 return dist.get(index).value;
             }
@@ -160,7 +160,10 @@ public class Nuclide {
         double sampleContinuousPhotonEnergy(double eta) {
             // hist: just return the nearest smaller discrete energy
             int index = Collections.binarySearch(dist, new DistributionLine(eta));
-            index = index < 0 ? -index - 1 : index;
+            index = index < 0 ? Math.max(0, -index - 2) : index;
+            if (index < 0 || index >= dist.size()) {
+                System.out.println("hah!");
+            }
             return dist.get(index).value;
         }
 
@@ -181,7 +184,7 @@ public class Nuclide {
         double sampleContinuousPhotonEnergy(double eta) {
             // lin-lin
             int index = Collections.binarySearch(dist, new DistributionLine(eta));
-            index = index < 0 ? -index - 1 : index;
+            index = index < 0 ? Math.max(0, -index - 2) : index;
             DistributionLine left = dist.get(index);
             DistributionLine right = dist.get(index + 1);
             return Util.Math.inverseInterpolateLinearLinear(left.value, left.cdf, right.value, right.cdf, eta);
@@ -237,6 +240,11 @@ public class Nuclide {
         @Override
         double getEnergy(double eNeutron) {
             int index = Collections.binarySearch(this.npds, new NeutronPhotonDistributionKey(eNeutron));
+            index = index < 0 ? Math.max(0, -index - 2) : index;
+            if (index < 0 || index >= this.npds.size()) {
+                System.out.println("hah!");
+            }
+
             NeutronPhotonDistribution npd;
             switch (this.interpolationLaw) {
                 case "2":
@@ -288,7 +296,7 @@ public class Nuclide {
         private List<Gamma> generateGammas(Vector3D position, double eNeutron) {
             // interpolates yield, calls yieldGammas()
             int index = Collections.binarySearch(this.yields, new ValueEntry(eNeutron, 0));
-            index = index < 0 ? -index - 1 : index;
+            index = index < 0 ? Math.max(0, -index - 2) : index;
             double yield = 0;
             ValueEntry yield1;
             ValueEntry yield2;
@@ -301,13 +309,13 @@ public class Nuclide {
                 case "2":
                     //lin-lin
                     yield1 = yields.get(index);
-                    yield2 = yields.get(index);
+                    yield2 = yields.get(index + 1);
                     yield = Util.Math.interpolateLinearLinear(yield1.energy, yield1.value, yield2.energy, yield2.value, eNeutron);
                     break;
                 case "5":
                     // log-log
                     yield1 = yields.get(index);
-                    yield2 = yields.get(index);
+                    yield2 = yields.get(index + 1);
                     yield = Util.Math.interpolateLogLog(yield1.energy, yield1.value, yield2.energy, yield2.value, eNeutron);
                     break;
                 default:
