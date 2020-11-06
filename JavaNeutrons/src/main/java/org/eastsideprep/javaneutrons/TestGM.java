@@ -472,7 +472,7 @@ public class TestGM {
     }
 
     public static MonteCarloSimulation prison(Group visualizations) {
-        double thickness = 44; //block thickness in cm
+        double thickness = 200; //block thickness in cm
         //String m = "HydrogenWax";
         //String m = "CarbonWax";
         String m = "Paraffin";
@@ -483,12 +483,11 @@ public class TestGM {
 
         Assembly whitmer = new Assembly("Whitmer");
         whitmer.addAll(wall);
-        whitmer.containsMaterialAt("Vacuum", Vector3D.ZERO);
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
-                "Vacuum", null, visualizations); // interstitial, initial
-        mcs.suggestedCount = 10000000;
+                "Air", null, visualizations); // interstitial, initial
+        mcs.suggestedCount = 100000;
         return mcs;
     }
 

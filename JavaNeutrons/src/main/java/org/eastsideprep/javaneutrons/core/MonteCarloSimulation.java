@@ -438,13 +438,13 @@ public class MonteCarloSimulation {
                     p = this.getPartByName(detector);
                     if (p != null) {
                         f = new DecimalFormat("0.###E0");
-                        e = f.format(p.getTotalFluence("neutron") / this.lastCount);
+                        e = f.format(p.getTotalFluence(type) / this.lastCount);
                         c.setTitle("Part \"" + p.name + "\" (" + p.material.name + ")"
                                 + "\nTotal fluence = " + e + " (n/cm^2)/src"
                                 + ", src = " + this.lastCount
                         );
                         xAxis.setLabel("Energy (eV)");
-                        yAxis.setLabel("Fluence (n/cm^2)/src");
+                        yAxis.setLabel("Fluence (particles/cm^2)/src");
                         yAxis.setTickLabelFormatter(new Formatter());
                         Map<String, CorrelatedTallyOverEV> map = p.fluenceMap;
                         for (String kind : map.keySet()) {
