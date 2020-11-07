@@ -59,25 +59,12 @@ import org.fxyz3d.shapes.primitives.CuboidMesh;
 public class TestGM {
 
     public static MonteCarloSimulation current(Group visualizations) {
-        return prison(visualizations);
-        /*
-        try {
-            Nuclide is = N1H.getInstance();
-            is = N12C.getInstance();
-            is.printPhotonData();
-            is = N14N.getInstance();
-            is = N16O.getInstance();
-            is = N56Fe.getInstance();
-            is = N40Ar.getInstance();
-            is = N206Pb.getInstance();
-            is = N207Pb.getInstance();
-            is = N208Pb.getInstance();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        System.exit(0);
-        return null;
-    */
+        //return TestSV.october(visualizations);
+        // return prison(visualizations);
+         return bigBlock(visualizations);
+    
+        //System.exit(0);
+        //return null;
     }
 
     public static MonteCarloSimulation MC0D_Scatter1(Group vis) {
@@ -410,8 +397,8 @@ public class TestGM {
         double thickness = 25; //block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
         //String m = "HydrogenWax";
-        String m = "CarbonWax";
-        //String m = "Paraffin";
+        //String m = "CarbonWax";
+        String m = "Paraffin";
 
         Part wall = new Part("Wall: " + m, blockShape, m);
         wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
@@ -431,9 +418,9 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,
-                "Vacuum", null, visualizations); // interstitial, initial
+                "Air", null, visualizations); // interstitial, initial
         //mcs.prepareGrid(5.0, visualizations);
-        mcs.suggestedCount = 1000000;
+        mcs.suggestedCount = 100000;
         return mcs;
     }
 

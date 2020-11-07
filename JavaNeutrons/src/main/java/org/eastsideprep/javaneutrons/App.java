@@ -335,35 +335,5 @@ public class App extends Application {
         launch();
     }
 
-    static void processKeyEvent(KeyEvent event, Camera camera) {
-        switch (event.getCode()) {
-
-            case PAGE_UP:
-            case EQUALS:
-                camera.translateZProperty().set(camera.getTranslateZ() + 10);
-                break;
-            case PAGE_DOWN:
-            case MINUS:
-                camera.translateZProperty().set(camera.getTranslateZ() - 10);
-                break;
-
-            case UP:
-                camera.setRotationAxis(new Point3D(1, 0, 0));
-                camera.setRotate(camera.getRotate() - 1);
-                break;
-            case LEFT:
-                camera.setRotationAxis(new Point3D(0, 1, 0));
-                camera.setRotate(camera.getRotate() - 1);
-                break;
-            case DOWN:
-                camera.setRotationAxis(new Point3D(1, 0, 0));
-                camera.setRotate(camera.getRotate() + 1);
-                break;
-            case RIGHT:
-                camera.setRotationAxis(new Point3D(0, 1, 0));
-                camera.setRotate(camera.getRotate() + 1);
-                break;
-        }
-    }
-
+ 
 }
