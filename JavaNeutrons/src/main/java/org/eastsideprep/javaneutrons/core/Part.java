@@ -63,7 +63,7 @@ public class Part {
         this.entriesOverEnergy = new TallyOverEV();
 
         CorrelatedTallyOverEV neutronFluence = new CorrelatedTallyOverEV();
-        CorrelatedTallyOverEV gammaFluence = new CorrelatedTallyOverEV();
+        CorrelatedTallyOverEV gammaFluence = new CorrelatedTallyOverEV(5e6,100);
         this.fluenceMap = new HashMap<>();
         this.fluenceMap.put("neutron", neutronFluence);
         this.fluenceMap.put("gamma", gammaFluence);

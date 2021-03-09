@@ -17,7 +17,7 @@ public final class Gamma extends Particle {
 
     public Gamma(Vector3D position, Vector3D direction, double energy, MonteCarloSimulation mcs) {
         super(position, direction, energy, mcs);
-        type = "gamma";
+        this.type = "gamma";
     }
 
     @Override

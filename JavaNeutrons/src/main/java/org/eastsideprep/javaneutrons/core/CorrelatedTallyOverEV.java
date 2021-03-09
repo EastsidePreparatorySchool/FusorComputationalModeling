@@ -17,12 +17,21 @@ import javafx.scene.chart.XYChart.Data;
 public class CorrelatedTallyOverEV extends TallyOverEV {
 
     final Map<Particle, TallyOverEV> hMap = new HashMap<>();
-    final TallyOverEV sumSquares = new TallyOverEV();
+    TallyOverEV sumSquares;
     double[][] covLog;
     double[][] covFlat;
     double[][] covLow;
 
     public CorrelatedTallyOverEV() {
+        sumSquares = new TallyOverEV();
+        covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
+        covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
+        covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
+    }
+
+    public CorrelatedTallyOverEV(double e, int bins) {
+        super(e, bins);
+        sumSquares = new TallyOverEV(e, bins);
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];

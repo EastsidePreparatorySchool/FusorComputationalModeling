@@ -21,6 +21,12 @@ public class TallyOverEV extends Tally {
         hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
     }
 
+    public TallyOverEV(double e, int bins) {
+        super(-3, 7, 100, true);
+        hFlat = new Tally(0, e, bins, false);
+        hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
+    }
+    
     @Override
     public void record(double value, double energy) {
         super.record(value, energy / Util.Physics.eV);
