@@ -488,7 +488,7 @@ public class TestGM {
         vacChamber.setColor(
                 "lightgreen");
 
-        Part igloo = new Part("Igloo", new Shape(TestGM.class.getResource("/smoosh.obj"), "cm"), "Paraffin");
+        Part igloo = new Part("Igloo", new Shape(TestGM.class.getResource("/meshes/smoosh.obj"), "cm"), "Paraffin");
 
         igloo.getTransforms()
                 .add(0, new Rotate(90, new Point3D(1, 0, 0)));

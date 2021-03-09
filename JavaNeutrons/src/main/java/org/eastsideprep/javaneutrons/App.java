@@ -239,7 +239,10 @@ public class App extends Application {
             method.setAccessible(true);
             mcs = (MonteCarloSimulation) method.invoke(null, g);
         } catch (Exception e) {
+            System.err.println();
             System.err.println("Didn't work: " + e);
+            e.printStackTrace();
+            System.err.println();
             return null;
         }
         return mcs;

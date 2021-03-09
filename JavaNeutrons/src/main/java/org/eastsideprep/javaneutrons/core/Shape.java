@@ -80,13 +80,19 @@ public class Shape extends MeshView {
     // use this constructor to construct a shape from an OBJ/STL file
     // will use only the first mesh in the group
     public Shape(URL url, String unit) {
-        ArrayList<Shape> shapes;
+        ArrayList<Shape> shapes = null;
 
-        if (url.toString().toLowerCase().endsWith("obj")) {
-            shapes = loadOBJ(url, unit);
-        } else if (url.toString().toLowerCase().endsWith("stl")) {
-            shapes = loadSTL(url, unit);
-        } else {
+        try {
+            if (url.toString().toLowerCase().endsWith("obj")) {
+                shapes = loadOBJ(url, unit);
+            } else if (url.toString().toLowerCase().endsWith("stl")) {
+                shapes = loadSTL(url, unit);
+            } else {
+                throw new IllegalArgumentException("Shape contructor: Not OBJ/STL file: " + url);
+            }
+        } catch (Exception e) {
+            System.err.println("Could not load shape from url: " + url);
+            e.printStackTrace();
             throw new IllegalArgumentException("Shape contructor: Not OBJ/STL file: " + url);
         }
 
@@ -97,9 +103,9 @@ public class Shape extends MeshView {
         super.setMesh(this.mesh);
         setVisuals("green");
     }
-
     // use this constructor to construct a shape from an OBJ/STL file
     // will use only the first mesh in the group
+
     public Shape(URL url) {
         this(url, "cm");
     }
