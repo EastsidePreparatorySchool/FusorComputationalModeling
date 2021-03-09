@@ -67,6 +67,7 @@ public class App extends Application {
         // control buttons and progress 
         Label src = new Label("Src: ");
         TextField tf = new TextField("1");
+
         tf.setPrefWidth(85);
         Label grid = new Label("Grid: ");
         TextField gridSize = new TextField("2.0");
@@ -265,7 +266,7 @@ public class App extends Application {
 
         noIdle();
         this.progressTimeline();
-        sim.simulateParticles(count, 100000, true);
+        sim.simulateParticles(count, 1000, true);
         root.setCenter(view);
     }
 

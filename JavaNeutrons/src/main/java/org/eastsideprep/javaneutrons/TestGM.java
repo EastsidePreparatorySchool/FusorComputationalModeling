@@ -396,9 +396,9 @@ public class TestGM {
     public static MonteCarloSimulation bigBlock(Group visualizations) {
         double thickness = 25; //block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
-        //String m = "HydrogenWax";
+        String m = "HydrogenWax";
         //String m = "CarbonWax";
-        String m = "Paraffin";
+        //String m = "Paraffin";
 
         Part wall = new Part("Wall: " + m, blockShape, m);
         wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
@@ -418,7 +418,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,
-                "Air", null, visualizations); // interstitial, initial
+                "Vacuum", null, visualizations); // interstitial, initial
         //mcs.prepareGrid(5.0, visualizations);
         mcs.suggestedCount = 100000;
         return mcs;

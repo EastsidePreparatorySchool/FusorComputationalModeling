@@ -17,7 +17,7 @@ public class TallyOverEV extends Tally {
 
     public TallyOverEV() {
         super(-3, 7, 100, true);
-        hFlat = new Tally(0, 3e6, 200, false);
+        hFlat = new Tally(0, 6e6, 200, false);
         hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
     }
 
