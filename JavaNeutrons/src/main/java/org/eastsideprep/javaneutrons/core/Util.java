@@ -444,7 +444,7 @@ public class Util {
                 Scanner sc = new Scanner(is);
                 while (sc.hasNextLine()) {
                     String[] items = sc.nextLine().trim().split(",");
-                    x.add(Double.parseDouble(items[0]));
+                    x.add(Double.parseDouble(items[0])*1e6); // adjusting because table is in MeV
                     y.add(Double.parseDouble(items[1]));
                 }
 
@@ -471,8 +471,7 @@ public class Util {
                 return this.y.get(0);
             }
             // otherwise, interpolate
-            int i2 = i1+1;
-            return Util.Math.interpolateLogLog(this.x.get(i1), this.y.get(i1), this.x.get(i2), this.y.get(i2), x);
+            return Util.Math.interpolateLogLog(this.x.get(i1), this.y.get(i1), this.x.get(i1+1), this.y.get(i1+1), x);
         }
     }
 

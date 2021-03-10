@@ -56,6 +56,12 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
         h.record(value, energy);
         p.fluences.add(this);
+        
+        // record sieverts
+        double sieverts = this.sievertConversionTable.lookup(energy)*value;
+        synchronized (this) {
+            this.totalSieverts += sieverts;
+        }
     }
 
     public void tally(Particle p) {
@@ -151,7 +157,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     }
 
     public static CorrelatedTallyOverEV parseFromString(String s) {
-        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(); //to fill
+        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(null); //to fill
         String[] lines = s.split("\n"); //
         ArrayList<String> collection = new ArrayList<>();
         for (int i = 0; i < lines.length; i++) {
