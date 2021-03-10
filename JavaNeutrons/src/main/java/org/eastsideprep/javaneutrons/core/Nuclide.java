@@ -529,10 +529,8 @@ public class Nuclide {
 
         // read xyz.csv from resources/data
         fileName = "/data/ace/" + fileName + ".800nc.txt";
-        InputStream is = Nuclide.class
-                .getResourceAsStream(fileName);
-        if (is
-                == null) {
+        InputStream is = Nuclide.class.getResourceAsStream(fileName);
+        if (is == null) {
             System.out.println("Photon Data file " + fileName + " not found for element " + this.name);
             return;
         }

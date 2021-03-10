@@ -1,5 +1,9 @@
 package org.eastsideprep.javaneutrons.core;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.geometry.Point3D;
@@ -20,7 +24,7 @@ import javafx.scene.transform.Translate;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
 public class Util {
-    
+
     static public class Math {
 
         //
@@ -243,8 +247,9 @@ public class Util {
         final public static double Da = 1.6605e-27; // Dalton amu in kg
         final public static double thermalEnergy = 4.0535154e-21 * 1e4; // room temp avg. energy in J (cm) eqv to 0.0253eV
         // factor 1e4 is from using cm, not m here - 100^2
+
         public static double sicmFromMeV(double mev) {
-            return mev*eV*1e6;
+            return mev * eV * 1e6;
         }
 
     }
@@ -279,6 +284,7 @@ public class Util {
             drawSphere(q, position, radius, webColor);
             q.drainTo(g.getChildren());
         }
+
         public static void drawCube(LinkedTransferQueue<Node> g, Vector3D position, float side, String webColor) {
             Box s = new Box(side, side, side);
             s.setTranslateX(position.getX());
@@ -425,6 +431,49 @@ public class Util {
             q.drainTo(g.getChildren());
         }
 
+    }
+
+    public static class LogLogTable {
+
+        ArrayList<Double> x;
+        ArrayList<Double> y;
+
+        public LogLogTable(String filename) {
+            try {
+                InputStream is = Part.class.getResourceAsStream("/sieverts/neutron_conversion.csv");
+                Scanner sc = new Scanner(is);
+                while (sc.hasNextLine()) {
+                    String[] items = sc.nextLine().trim().split(",");
+                    x.add(Double.parseDouble(items[0]));
+                    y.add(Double.parseDouble(items[1]));
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error loading table: "+e);
+                throw new IllegalArgumentException("can't load fluence -> sieverts conversion table");
+            }
+        }
+        
+        double lookup(double x) {
+            // todo: binary search, log-log interpolation
+            int i1 = Collections.binarySearch(this.x, x);
+            // if found, return
+            if (i1 >= 0) {
+                return this.y.get(i1);
+            }
+            i1 = -i1-1;
+            // if not, at end? return top value
+            if (i1 == this.x.size()) {
+                return this.y.get(i1-1);
+            }
+            // if not, before start? return bottom value
+            if (i1 == 0) {
+                return this.y.get(0);
+            }
+            // otherwise, interpolate
+            int i2 = i1+1;
+            return Util.Math.interpolateLogLog(this.x.get(i1), this.y.get(i1), this.x.get(i2), this.y.get(i2), x);
+        }
     }
 
 }

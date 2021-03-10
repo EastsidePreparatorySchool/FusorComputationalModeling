@@ -1,9 +1,11 @@
 package org.eastsideprep.javaneutrons.core;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import javafx.collections.ObservableList;
@@ -30,6 +32,9 @@ public class Part {
     private double volume = 0;
     private double totalDepositedEnergy = 0;
     private AtomicLong totalEvents;
+    final private static Integer tableCreationLock = 0;
+    private static Util.LogLogTable neutronConversionTable = null;
+    private static Util.LogLogTable photonConversionTable = null;
 
     public Part(String name, Shape s, Object material) {
         if (s != null) {
@@ -62,8 +67,15 @@ public class Part {
         this.exitsOverEnergy = new TallyOverEV();
         this.entriesOverEnergy = new TallyOverEV();
 
-        CorrelatedTallyOverEV neutronFluence = new CorrelatedTallyOverEV();
-        CorrelatedTallyOverEV gammaFluence = new CorrelatedTallyOverEV(5e6,100);
+        synchronized (Part.tableCreationLock) {
+            if (Part.neutronConversionTable == null) {
+                Part.neutronConversionTable = new Util.LogLogTable("/sieverts/neutron_conversion.csv");
+                Part.photonConversionTable = new Util.LogLogTable("/sieverts/photon_conversion.csv");
+            }
+        }
+
+        CorrelatedTallyOverEV neutronFluence = new CorrelatedTallyOverEV(Part.neutronConversionTable);
+        CorrelatedTallyOverEV gammaFluence = new CorrelatedTallyOverEV(5e6, 100, Part.photonConversionTable);
         this.fluenceMap = new HashMap<>();
         this.fluenceMap.put("neutron", neutronFluence);
         this.fluenceMap.put("gamma", gammaFluence);
@@ -125,8 +137,8 @@ public class Part {
         // so that when something else happens, we will be firmly inside
 //        p.setPosition(visualizations, Util.Math.rayPoint(p.position, p.direction, epsilon));
         if (p.mcs.traceLevel >= 2) {
-            System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " entry into part " + this.name);
-            System.out.println(" "+p.getClass().getSimpleName()+" energy in: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+            System.out.println(p.getClass().getSimpleName() + " " + p.hashCode() + " entry into part " + this.name);
+            System.out.println(" " + p.getClass().getSimpleName() + " energy in: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
         }
         this.processEntry(p);
 
@@ -184,15 +196,15 @@ public class Part {
         } while (event.code != Event.Code.Exit && event.code != Event.Code.ExitEntry && event.code != Event.Code.Capture);
         if (event.code == Event.Code.Capture) {
             if (p.mcs.traceLevel >= 2) {
-                System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " captured in part " + this.name);
-                System.out.println(" "+p.getClass().getSimpleName()+" energy final: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+                System.out.println(p.getClass().getSimpleName() + " " + p.hashCode() + " captured in part " + this.name);
+                System.out.println(" " + p.getClass().getSimpleName() + " energy final: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
             }
         } else {
 //            // advance the neutron a bit to the outside
 //            p.setPosition(visualizations, Util.Math.rayPoint(p.position, p.direction, epsilon));
             if (p.mcs.traceLevel >= 2) {
-                System.out.println(p.getClass().getSimpleName()+" " + p.hashCode() + " exit from part " + this.name);
-                System.out.println(" "+p.getClass().getSimpleName()+" energy out: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
+                System.out.println(p.getClass().getSimpleName() + " " + p.hashCode() + " exit from part " + this.name);
+                System.out.println(" " + p.getClass().getSimpleName() + " energy out: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
             }
         }
 
@@ -296,4 +308,18 @@ public class Part {
         return "Part '" + this.name + "' (" + (this.material != null ? this.material.name : "unknown material") + ")";
     }
 
+    //
+    // exposure measurements in sieverts
+    //
+    double calculateNeutronSieverts() {
+
+        // todo: integrate over linear neutron tally
+        return 0;
+    }
+
+    double calculateGammaSieverts() {
+
+        // todo: integrate over linear gamma tally
+        return 0;
+    }
 }

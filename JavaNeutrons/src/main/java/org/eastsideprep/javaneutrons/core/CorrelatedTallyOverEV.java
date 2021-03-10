@@ -21,20 +21,24 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     double[][] covLog;
     double[][] covFlat;
     double[][] covLow;
+    Util.LogLogTable sievertConversionTable;
+    double totalSieverts;
 
-    public CorrelatedTallyOverEV() {
+    public CorrelatedTallyOverEV(Util.LogLogTable sievertConversionTable) {
         sumSquares = new TallyOverEV();
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
+        this.sievertConversionTable = sievertConversionTable;
     }
 
-    public CorrelatedTallyOverEV(double e, int bins) {
+    public CorrelatedTallyOverEV(double e, int bins, Util.LogLogTable sievertConversionTable) {
         super(e, bins);
         sumSquares = new TallyOverEV(e, bins);
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
+        this.sievertConversionTable = sievertConversionTable;
     }
 
     public void record(Particle p, double value, double energy) {
