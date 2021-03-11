@@ -311,15 +311,9 @@ public class Part {
     //
     // exposure measurements in sieverts
     //
-    double calculateNeutronSieverts() {
+    double getSieverts(String type) {
 
-        // todo: integrate over linear neutron tally
-        return 0;
-    }
-
-    double calculateGammaSieverts() {
-
-        // todo: integrate over linear gamma tally
-        return 0;
+        
+        return this.fluenceMap.get(type).totalSieverts;
     }
 }

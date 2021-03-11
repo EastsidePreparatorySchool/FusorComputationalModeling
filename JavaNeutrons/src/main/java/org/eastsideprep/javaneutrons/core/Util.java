@@ -121,7 +121,12 @@ public class Util {
         }
 
         public static double interpolateLogLog(double x1, double y1, double x2, double y2, double x) {
-            return java.lang.Math.exp(interpolateLinearLinear(java.lang.Math.log(x1), java.lang.Math.log(y1), java.lang.Math.log(x2), java.lang.Math.log(y2), java.lang.Math.log(x)));
+            return java.lang.Math.exp(interpolateLinearLinear(
+                    java.lang.Math.log(x1), 
+                    java.lang.Math.log(y1), 
+                    java.lang.Math.log(x2), 
+                    java.lang.Math.log(y2), 
+                    java.lang.Math.log(x)));
         }
 
         //
@@ -435,13 +440,14 @@ public class Util {
 
     public static class LogLogTable {
 
-        ArrayList<Double> x;
-        ArrayList<Double> y;
+        ArrayList<Double> x = new ArrayList<>();
+        ArrayList<Double> y = new ArrayList<>();
 
         public LogLogTable(String filename) {
             try {
                 InputStream is = Part.class.getResourceAsStream("/sieverts/neutron_conversion.csv");
                 Scanner sc = new Scanner(is);
+                sc.nextLine();
                 while (sc.hasNextLine()) {
                     String[] items = sc.nextLine().trim().split(",");
                     x.add(Double.parseDouble(items[0])*1e6); // adjusting because table is in MeV
@@ -449,6 +455,7 @@ public class Util {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Error loading table: "+e);
                 throw new IllegalArgumentException("can't load fluence -> sieverts conversion table");
             }

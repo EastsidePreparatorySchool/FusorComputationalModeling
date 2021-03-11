@@ -441,10 +441,13 @@ public class MonteCarloSimulation {
                     p = this.getPartByName(detector);
                     if (p != null) {
                         f = new DecimalFormat("0.###E0");
+                        double sv = p.getSieverts(type);
                         e = f.format(p.getTotalFluence(type) / this.lastCount);
                         c.setTitle("Part \"" + p.name + "\" (" + p.material.name + ")"
                                 + "\nTotal fluence = " + e + " (n/cm^2)/src"
-                                + ", src = " + this.lastCount
+                                + ", "
+                                + f.format(sv)+" Sv, "
+                                +"src = " + this.lastCount
                         );
                         xAxis.setLabel("Energy (eV)");
                         yAxis.setLabel("Fluence (particles/cm^2)/src");
