@@ -133,7 +133,7 @@ public class TestSV {
 
            MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
                 null, /*Vector3D.PLUS_I*/ null, 2.45e6 * Util.Physics.eV, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
-                "Air", null, visualizations); // interstitial, initial
+                "Air", null, visualizations, false); // interstitial, initial
            return mcs;
     }
      

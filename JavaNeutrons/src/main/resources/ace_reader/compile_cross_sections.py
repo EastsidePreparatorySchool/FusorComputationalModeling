@@ -17,8 +17,8 @@ table = libFile.tables['1001.800nc']
 #print table.reactions[102]
 #print vars(table.reactions[102]).keys()
 #print table.reactions[102].sigma
-print table.reactions[2]
-print vars(table.reactions[2]).keys()
+#print table.reactions[2]
+#print vars(table.reactions[2]).keys()
 #x= 1/0
 
 # start = 94
@@ -63,7 +63,7 @@ def write_angle_csv(directory, t, mat):
 write_reaction_csv('.', table, '1001')
 write_angle_csv('.', table, '1001')
 
-for filename in glob.glob('../data/ace/*.ace'):
+for filename in glob.glob('../data/ace/11*.ace'):
     mat = os.path.basename(filename)
     try:
         libFile = ace.Library(filename)

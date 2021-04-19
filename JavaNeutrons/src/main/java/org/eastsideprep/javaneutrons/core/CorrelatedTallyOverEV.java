@@ -56,9 +56,9 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
         h.record(value, energy);
         p.fluences.add(this);
-        
+
         // record sieverts
-        double sieverts = this.sievertConversionTable.lookup(energy / Util.Physics.eV)*value;
+        double sieverts = this.sievertConversionTable.lookup(energy / Util.Physics.eV) * value;
         synchronized (this) {
             this.totalSieverts += sieverts;
         }

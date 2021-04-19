@@ -17,7 +17,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
-import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
@@ -61,8 +60,9 @@ public class TestGM {
     public static MonteCarloSimulation current(Group visualizations) {
         //return TestSV.october(visualizations);
         // return prison(visualizations);
-         return bigBlock(visualizations);
-    
+//        return bigBlock(visualizations);
+        return twentyHumans(visualizations);
+
         //System.exit(0);
         //return null;
     }
@@ -418,7 +418,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,
-                "Vacuum", null, visualizations); // interstitial, initial
+                "Vacuum", null, visualizations, false); // interstitial, initial
         //mcs.prepareGrid(5.0, visualizations);
         mcs.suggestedCount = 100000;
         return mcs;
@@ -452,7 +452,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,
-                "Vacuum", null, visualizations); // interstitial, initial
+                "Vacuum", null, visualizations, false); // interstitial, initial
         //mcs.prepareGrid(5.0, visualizations);
         mcs.suggestedCount = 1000000;
         return mcs;
@@ -473,7 +473,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
-                "Air", null, visualizations); // interstitial, initial
+                "Air", null, visualizations, false); // interstitial, initial
         mcs.suggestedCount = 100000;
         return mcs;
     }
@@ -591,7 +591,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, Vector3D.PLUS_I, Util.Physics.thermalEnergy, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
-                "Vacuum", null, visualizations); // interstitial, initial
+                "Vacuum", null, visualizations, false); // interstitial, initial
 
         mcs.prepareGrid(
                 2.0, visualizations);
@@ -630,7 +630,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, 0, // origin = (0,0,0), random dir, default DD-neutron energy
-                null, null, visualizations);
+                null, null, visualizations, false);
         return mcs;
     }
 
@@ -694,7 +694,7 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(a,
                 null, null, 0, // origin = (0,0,0), random dir, default DD-neutron energy
-                null, null, visualizations);
+                null, null, visualizations, false);
         return mcs;
     }
 
@@ -728,6 +728,56 @@ public class TestGM {
         whitmer.containsMaterialAt(Vacuum.getInstance(), Vector3D.ZERO);
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer, Vector3D.ZERO, visualizations);
+        return mcs;
+    }
+
+    public static MonteCarloSimulation twentyHumans(Group visualizations) {
+        //
+        // Wall1
+        // this cube-shaped wall is loaded from an obj file in resources
+        // any obj files need to live their (folder src/main/resources in folder view)
+        //
+
+        double gap = 3; // in cm
+        //
+        // igloo
+        //
+        Assembly igloo = new Assembly("igloo", TestGM.class.getResource("/meshes/igloo.obj"), "Paraffin");
+
+        //
+        // bodies
+        //
+        double hgap = 80;
+        int rows = 3;
+        int count = 21;
+        ArrayList<Part> bodies = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Part body = new Part("Body", new HumanBody(), "HumanBodyMaterial");
+            bodies.add(body);
+            body.getTransforms().add(0, 
+                new Translate(
+                    (i % (count / rows)) * hgap -  hgap *(count/rows)/2,
+                    (i / (count / rows)) * (hgap / 2)-120,
+                    -200+(i / (count/rows))*(hgap/2)));
+        }
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class.getResource("/meshes/vac_chamber.obj")), "Steel");
+
+        // assemble the Fusor out of the other stuff
+        Assembly fusor = new Assembly("Fusor");
+
+        fusor.addAll(igloo, vacChamber);
+        bodies.stream().forEach(body -> fusor.add(body));
+
+        fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
+
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, Vector3D.ZERO, visualizations);
+
+        mcs.prepareGrid(2.0, visualizations);
         return mcs;
     }
 
@@ -833,7 +883,7 @@ public class TestGM {
                     g.getChildren().add(p);
                 }
             }
-            */
+             */
         }
         Util.Graphics.drawCoordSystem(g);
         g.getChildren().add(s);
@@ -991,11 +1041,11 @@ public class TestGM {
         mcs.suggestedGrid = 5.0;
 
         System.out.println("Specific tests:");
-         return mcs;
+        return mcs;
 
     }
-    
-       public static MonteCarloSimulation ROOMnew(Group visualizations) {
+
+    public static MonteCarloSimulation ROOMnew(Group visualizations) {
 
         // vac chamber
 //        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -1017,35 +1067,32 @@ public class TestGM {
 //            wleft.setColor("gray");
 //        Part wright = new Part("W.right", new Shape(TestSV.class.getResource("/meshes/hi/wright.stl"), "cm"), "Vacuum");
 //            wright.setColor("gray");
-            
         //important stuff
         Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/hi/wood.stl"), "cm"), "Wood");
-            wood.setColor("yellow");
+        wood.setColor("yellow");
 //        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.stl"), "cm"), "Steel");
 //            pipes.setColor("gray");
 //            pipes.getTransforms().add(new Translate(0,-0.5,0));
 //        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/hi/leadbox.stl"), "cm"), "Lead");
 //            lead.setColor("gray");
         Part wax = new Part("Wax", new Shape(TestSV.class.getResource("/meshes/hi/0mm.stl"), "cm"), "Paraffin");
-            wax.setColor("lightblue");
-            wax.getTransforms().add(0, new Translate(0,0.6,0));
+        wax.setColor("lightblue");
+        wax.getTransforms().add(0, new Translate(0, 0.6, 0));
         Assembly fusor = new Assembly("Fusor");
 
         //fusor.addAll(vacChamber, wood, pipes, lead, wax, wfront, wback, wfloor, wceiling, wleft, wright);
         fusor.addAll(/*wood,*/wax/*, lead*/);
-       // fusor.addTransform(new Rotate(90, new Point3D(1,0,0)));
-        
+        // fusor.addTransform(new Rotate(90, new Point3D(1,0,0)));
+
 //        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,30,-299), 180, 100);
-      //  fusor.addAll(dp);
-        
+        //  fusor.addAll(dp);
         fusor.containsMaterialAt(
                 "Vacuum", Vector3D.ZERO);
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
         MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
         wood.shape.intersects(wax.shape, 5, visualizations);
-       return mcs;
+        return mcs;
     }
-
 
 }

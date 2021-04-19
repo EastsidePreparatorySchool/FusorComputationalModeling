@@ -138,11 +138,11 @@ public class MonteCarloSimulation {
     }
 
     public MonteCarloSimulation(Assembly assembly, Vector3D origin, Group g) {
-        this(assembly, origin, null, Neutron.startingEnergyDD, null, null, g);
+        this(assembly, origin, null, Neutron.startingEnergyDD, null, null, g, false);
     }
 
     public MonteCarloSimulation(Assembly assembly, Vector3D origin, Vector3D direction, double initialEnergy,
-            Object interstitialMaterial, Object initialMaterial, Group g) {
+            Object interstitialMaterial, Object initialMaterial, Group g, boolean verifyMesh) {
 
         // convert String class names to real objects
         interstitialMaterial = Material.getRealMaterial(interstitialMaterial);
@@ -194,12 +194,13 @@ public class MonteCarloSimulation {
             }
         }
 
-        // check mesh integrity
-        Set<String> conflicts = assembly.verifyMeshIntegrity();
-        for (String conflict : conflicts) {
-            System.out.println("Failes mesh integrity test: " + conflict);
+        if (verifyMesh) {
+            // check mesh integrity
+            Set<String> conflicts = assembly.verifyMeshIntegrity();
+            for (String conflict : conflicts) {
+                System.out.println("Failes mesh integrity test: " + conflict);
+            }
         }
-
     }
 
 //    public void checkTallies() {
@@ -446,8 +447,8 @@ public class MonteCarloSimulation {
                         c.setTitle("Part \"" + p.name + "\" (" + p.material.name + ")"
                                 + "\nTotal fluence = " + e + " (n/cm^2)/src"
                                 + ", "
-                                + f.format(sv)+" Sv, "
-                                +"src = " + this.lastCount
+                                + f.format(sv) + " Sv, "
+                                + "src = " + this.lastCount
                         );
                         xAxis.setLabel("Energy (eV)");
                         yAxis.setLabel("Fluence (particles/cm^2)/src");
