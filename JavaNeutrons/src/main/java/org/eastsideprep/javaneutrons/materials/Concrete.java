@@ -19,6 +19,8 @@ public class Concrete extends Material {
         super("Concrete");
         this.addComponent(N1H.getInstance(), 0.168038);
         this.addComponent(N16O.getInstance(), 0.563183);
+        this.addComponent(N23Na.getInstance(), 0.021365);
+        this.addComponent(N27Al.getInstance(), 0.021343);
         this.addComponent(N28Si.getInstance(), 0.203231);
         this.addComponent(N56Fe.getInstance(), 0.004246);
         this.calculateAtomicDensities(203.231);

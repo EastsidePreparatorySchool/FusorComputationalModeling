@@ -3,11 +3,11 @@ import glob
 
 from pyne import ace
 
-print (glob.glob('../data/ace/1001.*'))
-libFile = ace.Library('../data/ace/1001.800nc.ace')
-libFile.read()
-print (libFile.tables)
-table = libFile.tables['1001.800nc']
+#print (glob.glob('../data/ace/1001.*'))
+#libFile = ace.Library('../data/ace/1001.800nc.ace')
+#libFile.read()
+#print (libFile.tables)
+#table = libFile.tables['1001.800nc']
 # print table.energy
 # print table.sigma_a
 # print table.sigma_t
@@ -60,11 +60,12 @@ def write_angle_csv(directory, t, mat):
         f.write("energy (eV),count,cdf,cos\n")
         f.write(make_angle_csv(t))
 
-write_reaction_csv('.', table, '1001')
-write_angle_csv('.', table, '1001')
+# write_reaction_csv('.', table, '1001')
+# write_angle_csv('.', table, '1001')
 
-for filename in glob.glob('../data/ace/11*.ace'):
+for filename in glob.glob('../data/ace/14*.ace'):
     mat = os.path.basename(filename)
+    print ("processing",mat)
     try:
         libFile = ace.Library(filename)
         libFile.read()
@@ -76,3 +77,4 @@ for filename in glob.glob('../data/ace/11*.ace'):
         write_angle_csv('../data/ace', table, mat)
     except ValueError:
         print('ac_reader failed to parse '+filename)
+print("done")

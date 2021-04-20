@@ -37,6 +37,7 @@ import org.eastsideprep.javaneutrons.core.Util;
 import org.eastsideprep.javaneutrons.shapes.Cuboid;
 import org.eastsideprep.javaneutrons.shapes.HumanBody;
 import org.eastsideprep.javaneutrons.core.Shape;
+import org.eastsideprep.javaneutrons.materials.Concrete;
 import org.eastsideprep.javaneutrons.materials.N12C;
 import org.eastsideprep.javaneutrons.materials.N1H;
 import org.eastsideprep.javaneutrons.materials.HydrogenWax;
@@ -60,8 +61,7 @@ public class TestGM {
     public static MonteCarloSimulation current(Group visualizations) {
         //return TestSV.october(visualizations);
         // return prison(visualizations);
-//        return bigBlock(visualizations);
-        return twentyHumans(visualizations);
+        return bigBlock(visualizations);
 
         //System.exit(0);
         //return null;
@@ -396,7 +396,7 @@ public class TestGM {
     public static MonteCarloSimulation bigBlock(Group visualizations) {
         double thickness = 25; //block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
-        String m = "HydrogenWax";
+        String m = "Concrete";
         //String m = "CarbonWax";
         //String m = "Paraffin";
 

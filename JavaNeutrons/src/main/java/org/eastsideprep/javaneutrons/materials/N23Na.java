@@ -12,18 +12,18 @@ import org.eastsideprep.javaneutrons.core.Util;
  *
  * @author gunnar
  */
-public class N28Si extends Nuclide {
+public class N23Na extends Nuclide {
 
-    private static N28Si instance;
+    private static N23Na instance;
 
-    N28Si() {
-        super("14Si", 14, 14, 27.9769265*Util.Physics.Da);
+    N23Na() {
+        super("23Na", 11, 12, 22.98976928*Util.Physics.Da);
     }
 
     // we only need one of these objects
-    public static synchronized N28Si getInstance() {
+    public static synchronized N23Na getInstance() {
         if (instance == null) {
-            N28Si.instance = new N28Si();
+            N23Na.instance = new N23Na();
         }
         return instance;
     }
