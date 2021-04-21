@@ -508,10 +508,12 @@ public class Nuclide {
     List<Gamma> generateGammasForCapture(Vector3D position, double eNeutron) {
         LinkedList<Gamma> list = new LinkedList();
 
-        for (PhotonDistribution dist : this.pDistList) {
-            list.addAll(dist.generateGammas(position, eNeutron));
+        if (this.pDistList != null) {
+            for (PhotonDistribution dist : this.pDistList) {
+                list.addAll(dist.generateGammas(position, eNeutron));
+            }
         }
-
+        
         return list;
     }
 
