@@ -526,7 +526,7 @@ public static MonteCarloSimulation october(Group visualizations) {
         Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/4mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/5mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));
         
@@ -568,10 +568,10 @@ public static MonteCarloSimulation april21(Group visualizations) {
         //room walls--CHANGE FLOOR AND CEILING TO CONCRETE!!
         Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
             walls.setColor("gray");
-        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/floor4in.stl"), "cm"), "Vacuum");
-            wfloor.setColor("gray");
-        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/ceiling4in.stl"), "cm"), "Vacuum");
-            wceiling.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/floor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/ceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
             
         //other stuff
         Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
@@ -582,7 +582,7 @@ public static MonteCarloSimulation april21(Group visualizations) {
         Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
             lead.setColor("gray");
 
-        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/5mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/0mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
             wax.setColor("lightblue");
                 wax.getTransforms().add(0, new Translate(0,0.5,0));      
         
@@ -599,8 +599,12 @@ public static MonteCarloSimulation april21(Group visualizations) {
         // make some axes
         Util.Graphics.drawCoordSystem(visualizations);
         MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
-       // mcs.interstitialMaterial = Material.getRealMaterial("Air");
-       // System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
         return mcs;
     }
 

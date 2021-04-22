@@ -68,12 +68,12 @@ abstract public class Particle {
 
     public void dumpEvents(String reason) {
         synchronized (Event.class) {
-            System.out.println("");
-            System.out.println(reason);
-            System.out.println("-- start of particle events:");
-            //history.stream().forEach(event -> System.out.println(event));
-            System.out.println("-- done");
-            System.out.println("");
+//            System.out.println("");
+//            System.out.println(reason);
+//            System.out.println("-- start of particle events:");
+//            //history.stream().forEach(event -> System.out.println(event));
+//            System.out.println("-- done");
+//            System.out.println("");
         }
     }
     
