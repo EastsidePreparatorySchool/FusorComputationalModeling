@@ -1,0 +1,3830 @@
+Reading data from F:\mcnpdata\Lib80x\al\13027.800nc
+
+MT 102 Photon report for nuclide 13027.00c = Al27 Lib80x (jlconlin)  Reference LA-UR-18-24034 by Conlin, J.L., et a
+
+291 photon distributions follow
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.290017
+1.00000e-02   0.290017
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.72402600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.035276
+1.00000e-02   0.035276
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.69339700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000567
+1.00000e-02   0.000567
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.40785800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000176
+1.00000e-02   0.000176
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.37722800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000556
+1.00000e-02   0.000556
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.34217600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000322
+1.00000e-02   0.000322
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.26838000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000740
+1.00000e-02   0.000740
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.23775000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001131
+1.00000e-02   0.001131
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.17548800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000498
+1.00000e-02   0.000498
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 7.13510400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001128
+1.00000e-02   0.001128
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.93693700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000283
+1.00000e-02   0.000283
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.89282000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001586
+1.00000e-02   0.001586
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.86219000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000496
+1.00000e-02   0.000496
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.75189500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000868
+1.00000e-02   0.000868
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.72517000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009636
+1.00000e-02   0.009636
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.71069900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001609
+1.00000e-02   0.001609
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.62224800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003448
+1.00000e-02   0.003448
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.61969100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001869
+1.00000e-02   0.001869
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.59161800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.006396
+1.00000e-02   0.006396
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.44065000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000132
+1.00000e-02   0.000132
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.41913000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001388
+1.00000e-02   0.001388
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.35140400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000078
+1.00000e-02   0.000078
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.32883400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.021033
+1.00000e-02   0.021033
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.31602400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000119
+1.00000e-02   0.000119
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.25503500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.008595
+1.00000e-02   0.008595
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.19814300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000109
+1.00000e-02   0.000109
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.16213900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000103
+1.00000e-02   0.000103
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.12175300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.024768
+1.00000e-02   0.024768
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.10152900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001592
+1.00000e-02   0.001592
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 6.01891100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000196
+1.00000e-02   0.000196
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.98828000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000215
+1.00000e-02   0.000215
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.96953400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000391
+1.00000e-02   0.000391
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.92357900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000222
+1.00000e-02   0.000222
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.87946000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001703
+1.00000e-02   0.001703
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.86012000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000111
+1.00000e-02   0.000111
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.82948800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000300
+1.00000e-02   0.000300
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.80283600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001351
+1.00000e-02   0.001351
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.79692800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004176
+1.00000e-02   0.004176
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.76629600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000204
+1.00000e-02   0.000204
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.71965600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.006424
+1.00000e-02   0.006424
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.70985400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.012672
+1.00000e-02   0.012672
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.58565100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000065
+1.00000e-02   0.000065
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.56427300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000732
+1.00000e-02   0.000732
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.52315100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001998
+1.00000e-02   0.001998
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.45281600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000292
+1.00000e-02   0.000292
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.44695000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000126
+1.00000e-02   0.000126
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.44170900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000740
+1.00000e-02   0.000740
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.42727200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.020851
+1.00000e-02   0.020851
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.41107700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000779
+1.00000e-02   0.000779
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.37727200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000145
+1.00000e-02   0.000145
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.34384000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000283
+1.00000e-02   0.000283
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.31439100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.005271
+1.00000e-02   0.005271
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.30264200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000178
+1.00000e-02   0.000178
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.27764300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001772
+1.00000e-02   0.001772
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.26973400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000528
+1.00000e-02   0.000528
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.26945700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002349
+1.00000e-02   0.002349
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.23848200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000158
+1.00000e-02   0.000158
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.20377000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000256
+1.00000e-02   0.000256
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.18475700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000768
+1.00000e-02   0.000768
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.17645400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000126
+1.00000e-02   0.000126
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.14268300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.031273
+1.00000e-02   0.031273
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.13434400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000925
+1.00000e-02   0.000925
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.12996700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004207
+1.00000e-02   0.004207
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.10371100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001554
+1.00000e-02   0.001554
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.06860100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000026
+1.00000e-02   0.000026
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.01492400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000409
+1.00000e-02   0.000409
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 5.00551800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001041
+1.00000e-02   0.001041
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.98429100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.030537
+1.00000e-02   0.030537
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.90311300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001096
+1.00000e-02   0.001096
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.86862600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000097
+1.00000e-02   0.000097
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.78352500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009167
+1.00000e-02   0.009167
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.76447700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003713
+1.00000e-02   0.003713
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.75437700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004672
+1.00000e-02   0.004672
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.73692000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.055366
+1.00000e-02   0.055366
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.73384400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.046512
+1.00000e-02   0.046512
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.69067600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.025956
+1.00000e-02   0.025956
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.66004300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001625
+1.00000e-02   0.001625
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.62153700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000741
+1.00000e-02   0.000741
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.61734600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000135
+1.00000e-02   0.000135
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.61290800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001205
+1.00000e-02   0.001205
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.59611600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002929
+1.00000e-02   0.002929
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.57555200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000230
+1.00000e-02   0.000230
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.56548300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000705
+1.00000e-02   0.000705
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.51185900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000595
+1.00000e-02   0.000595
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.48450600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000357
+1.00000e-02   0.000357
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.46152800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000406
+1.00000e-02   0.000406
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.44658100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.008060
+1.00000e-02   0.008060
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.42841300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003043
+1.00000e-02   0.003043
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.42420400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000496
+1.00000e-02   0.000496
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.39630800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004258
+1.00000e-02   0.004258
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.37761800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000029
+1.00000e-02   0.000029
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.28064800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000443
+1.00000e-02   0.000443
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.27016400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.067585
+1.00000e-02   0.067585
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.25953400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000512
+1.00000e-02   0.000512
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.23750700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000205
+1.00000e-02   0.000205
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.21814500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000486
+1.00000e-02   0.000486
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.21343100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000303
+1.00000e-02   0.000303
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.17693000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001217
+1.00000e-02   0.001217
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.16932800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000161
+1.00000e-02   0.000161
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.16211600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.064824
+1.00000e-02   0.064824
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.13340700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000340
+1.00000e-02   0.000340
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.12091500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000123
+1.00000e-02   0.000123
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.10027700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000068
+1.00000e-02   0.000068
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.08515000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002125
+1.00000e-02   0.002125
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.06896700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000256
+1.00000e-02   0.000256
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.05964300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001525
+1.00000e-02   0.001525
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.05407300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000195
+1.00000e-02   0.000195
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.04469100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001459
+1.00000e-02   0.001459
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.02254000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.007233
+1.00000e-02   0.007233
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.01565800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001570
+1.00000e-02   0.001570
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 4.00149100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000091
+1.00000e-02   0.000091
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.94974100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002925
+1.00000e-02   0.002925
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.93527200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000194
+1.00000e-02   0.000194
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.92680000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001875
+1.00000e-02   0.001875
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.90463800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002191
+1.00000e-02   0.002191
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.90068900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002006
+1.00000e-02   0.002006
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.88967600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.026868
+1.00000e-02   0.026868
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.87548700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000385
+1.00000e-02   0.000385
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.85917900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.030391
+1.00000e-02   0.030391
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.84911100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004861
+1.00000e-02   0.004861
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.82390900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000285
+1.00000e-02   0.000285
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.82169000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000096
+1.00000e-02   0.000096
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.80369800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.007920
+1.00000e-02   0.007920
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.78932600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000107
+1.00000e-02   0.000107
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.76858400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000365
+1.00000e-02   0.000365
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.75462900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000300
+1.00000e-02   0.000300
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.75103400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000218
+1.00000e-02   0.000218
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.72531100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000705
+1.00000e-02   0.000705
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.72159100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003784
+1.00000e-02   0.003784
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.70893900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000724
+1.00000e-02   0.000724
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.70205700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002642
+1.00000e-02   0.002642
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.67830500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003529
+1.00000e-02   0.003529
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.67723100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000650
+1.00000e-02   0.000650
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.67142300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000886
+1.00000e-02   0.000886
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.65908700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000990
+1.00000e-02   0.000990
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.63989000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000087
+1.00000e-02   0.000087
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.63501600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000730
+1.00000e-02   0.000730
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.62386800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001006
+1.00000e-02   0.001006
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.59836300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.043434
+1.00000e-02   0.043434
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.59118900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000323
+1.00000e-02   0.000323
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.57047500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.008953
+1.00000e-02   0.008953
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.56055500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000610
+1.00000e-02   0.000610
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.48052800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000526
+1.00000e-02   0.000526
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.47234100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.063696
+1.00000e-02   0.063696
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.46505800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000274
+1.00000e-02   0.000274
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.44807400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009515
+1.00000e-02   0.009515
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.42494500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000191
+1.00000e-02   0.000191
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.40926800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.005102
+1.00000e-02   0.005102
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.39169800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004979
+1.00000e-02   0.004979
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.34697000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001712
+1.00000e-02   0.001712
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.32738700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000215
+1.00000e-02   0.000215
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.31633600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.010575
+1.00000e-02   0.010575
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.30314700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004732
+1.00000e-02   0.004732
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.26553800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000852
+1.00000e-02   0.000852
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.26305600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000187
+1.00000e-02   0.000187
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.25475200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000238
+1.00000e-02   0.000238
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.23060200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000417
+1.00000e-02   0.000417
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.22275000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000797
+1.00000e-02   0.000797
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.20824300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000515
+1.00000e-02   0.000515
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.19121600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001531
+1.00000e-02   0.001531
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.14179600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001538
+1.00000e-02   0.001538
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.14130600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002359
+1.00000e-02   0.002359
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.12846200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000784
+1.00000e-02   0.000784
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.06799100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000171
+1.00000e-02   0.000171
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.05417700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.078586
+1.00000e-02   0.078586
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.03389600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000113
+1.00000e-02   0.000113
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.02480800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000581
+1.00000e-02   0.000581
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.02023300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000549
+1.00000e-02   0.000549
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 3.01778100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003422
+1.00000e-02   0.003422
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.98764900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000204
+1.00000e-02   0.000204
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.97342400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.084861
+1.00000e-02   0.084861
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.96009000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001839
+1.00000e-02   0.001839
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.95446500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002771
+1.00000e-02   0.002771
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.92684300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002463
+1.00000e-02   0.002463
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.92179700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000096
+1.00000e-02   0.000096
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.90321200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000797
+1.00000e-02   0.000797
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.89364200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001701
+1.00000e-02   0.001701
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.88721300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000220
+1.00000e-02   0.000220
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.88074200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000613
+1.00000e-02   0.000613
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.87641800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000778
+1.00000e-02   0.000778
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.87631600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000322
+1.00000e-02   0.000322
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.86201000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.032875
+1.00000e-02   0.032875
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.82144400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001117
+1.00000e-02   0.001117
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.75315200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000382
+1.00000e-02   0.000382
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.74347800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002607
+1.00000e-02   0.002607
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.73344900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000175
+1.00000e-02   0.000175
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.72521100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000062
+1.00000e-02   0.000062
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.71745800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.006091
+1.00000e-02   0.006091
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.70962400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000251
+1.00000e-02   0.000251
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.69066700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004538
+1.00000e-02   0.004538
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.67693600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000920
+1.00000e-02   0.000920
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.65703900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000414
+1.00000e-02   0.000414
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.65594200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000777
+1.00000e-02   0.000777
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.63772700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.011583
+1.00000e-02   0.011583
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.62585900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.035108
+1.00000e-02   0.035108
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.59019300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000487
+1.00000e-02   0.000487
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.58185200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.017947
+1.00000e-02   0.017947
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.57770100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000943
+1.00000e-02   0.000943
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.56335200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000620
+1.00000e-02   0.000620
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.55205200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001115
+1.00000e-02   0.001115
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.54807800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000972
+1.00000e-02   0.000972
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.53493900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001252
+1.00000e-02   0.001252
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.50266200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001129
+1.00000e-02   0.001129
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.48604400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000304
+1.00000e-02   0.000304
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.45540800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004642
+1.00000e-02   0.004642
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.45156500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000746
+1.00000e-02   0.000746
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.45027200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001185
+1.00000e-02   0.001185
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.41920200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001480
+1.00000e-02   0.001480
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.34723900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000913
+1.00000e-02   0.000913
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.32298600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000657
+1.00000e-02   0.000657
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.31253900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000872
+1.00000e-02   0.000872
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.29983000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.038723
+1.00000e-02   0.038723
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.28279300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002708
+1.00000e-02   0.002708
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.28267300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000750
+1.00000e-02   0.000750
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.27865000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000476
+1.00000e-02   0.000476
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.27795500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.017227
+1.00000e-02   0.017227
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.27168500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004765
+1.00000e-02   0.004765
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.25537000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000333
+1.00000e-02   0.000333
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.24740000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003547
+1.00000e-02   0.003547
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.17070500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000914
+1.00000e-02   0.000914
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.14135700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.018184
+1.00000e-02   0.018184
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.13883300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002764
+1.00000e-02   0.002764
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.12873200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.023423
+1.00000e-02   0.023423
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.10819700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001037
+1.00000e-02   0.001037
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.04777500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001730
+1.00000e-02   0.001730
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 2.02813700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009006
+1.00000e-02   0.009006
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.98397800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000212
+1.00000e-02   0.000212
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.97413700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000737
+1.00000e-02   0.000737
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.96843500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.011254
+1.00000e-02   0.011254
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.92752700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003916
+1.00000e-02   0.003916
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.86432600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001743
+1.00000e-02   0.001743
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.81377500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001564
+1.00000e-02   0.001564
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.73424200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000570
+1.00000e-02   0.000570
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.72021100
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000785
+1.00000e-02   0.000785
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.71954900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000708
+1.00000e-02   0.000708
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.71896800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003476
+1.00000e-02   0.003476
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.70550900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001908
+1.00000e-02   0.001908
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.67340000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003017
+1.00000e-02   0.003017
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.64241700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000817
+1.00000e-02   0.000817
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.62914600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.043023
+1.00000e-02   0.043023
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.62287700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000687
+1.00000e-02   0.000687
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.62025700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003088
+1.00000e-02   0.003088
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.59224000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.010607
+1.00000e-02   0.010607
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.58962000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002011
+1.00000e-02   0.002011
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.57023500
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.014838
+1.00000e-02   0.014838
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.52624600
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001279
+1.00000e-02   0.001279
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.44107700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002212
+1.00000e-02   0.002212
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.43737900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000833
+1.00000e-02   0.000833
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.43049700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.027970
+1.00000e-02   0.027970
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.40834300
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001307
+1.00000e-02   0.001307
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.37295700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002847
+1.00000e-02   0.002847
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.36485700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009092
+1.00000e-02   0.009092
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.34232000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002502
+1.00000e-02   0.002502
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.30521800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.009651
+1.00000e-02   0.009651
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.28369400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000691
+1.00000e-02   0.000691
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.22900400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004220
+1.00000e-02   0.004220
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.19347700
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002882
+1.00000e-02   0.002882
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.17345000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004148
+1.00000e-02   0.004148
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.14225200
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003556
+1.00000e-02   0.003556
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.12528900
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004478
+1.00000e-02   0.004478
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.10205800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000335
+1.00000e-02   0.000335
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.07780400
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.004399
+1.00000e-02   0.004399
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.07397800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000252
+1.00000e-02   0.000252
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.03313000
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.024082
+1.00000e-02   0.024082
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 1.01358800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.039096
+1.00000e-02   0.039096
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.98295120
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003460
+1.00000e-02   0.003460
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.96847630
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002369
+1.00000e-02   0.002369
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.94537590
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.010689
+1.00000e-02   0.010689
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.94174570
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003802
+1.00000e-02   0.003802
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.86584060
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000487
+1.00000e-02   0.000487
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.86322070
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.011675
+1.00000e-02   0.011675
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.83142610
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003262
+1.00000e-02   0.003262
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.78729840
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002363
+1.00000e-02   0.002363
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.71539620
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003189
+1.00000e-02   0.003189
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.70855440
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000230
+1.00000e-02   0.000230
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.64789800
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003198
+1.00000e-02   0.003198
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.59079030
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000601
+1.00000e-02   0.000601
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.58908370
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000301
+1.00000e-02   0.000301
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.57850060
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002317
+1.00000e-02   0.002317
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.54868950
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.003360
+1.00000e-02   0.003360
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.45577330
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002142
+1.00000e-06   0.002142
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.42422160
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.006136
+1.00000e-06   0.006136
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.40058890
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001211
+1.00000e-06   0.001211
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.38195750
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.001272
+1.00000e-06   0.001272
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.31625840
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000023
+1.00000e-06   0.000023
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.31019420
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000559
+1.00000e-06   0.000559
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.29651930
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002592
+1.00000e-06   0.002592
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.29038870
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.002095
+1.00000e-06   0.002095
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.25346910
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.000222
+1.00000e-06   0.000222
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.16190950
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       6 lines
+1.00000e-11   0.283883
+1.00000e-06   0.283883
+1.00000e-02   0.000000
+2.00000e+01   0.000000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 2
+Photon energy 0.03063828
+Yield Interpolations     1 lines
+     1     2  (linear-linear) 
+ n-Energy      Yield       17 lines
+1.00000e-11   0.000000
+1.00000e-02   0.000000
+1.00000e-01   2.230000
+5.00000e-01   2.450000
+1.00000e+00   2.450000
+2.00000e+00   2.470000
+3.00000e+00   2.500000
+4.00000e+00   2.550000
+6.00000e+00   2.610000
+8.00000e+00   2.840000
+1.00000e+01   2.950000
+1.20000e+01   2.980000
+1.40000e+01   3.050000
+1.70000e+01   3.360000
+2.00000e+01   3.910000
+2.00000e+01   0.000000
+1.50000e+02   0.000000
+Distribution Law: 4
+Neutron Energy Interpolation:    1 lines
+     1     2  (linear-linear) 
+17 neutron energy bins and distributions follow
+Neutron E = 1.00000e-11   (1 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             16 lines
+0.00000000      3.14353591e-01    0.000000000
+0.75000000      2.20750793e-01    0.235765193
+1.25000000      1.77100895e-01    0.346140590
+1.75000000      8.10563176e-02    0.434691037
+2.25000000      9.56908672e-02    0.475219196
+2.75000000      5.71973183e-02    0.523064630
+3.25000000      9.25505373e-02    0.551663289
+3.75000000      9.92785971e-02    0.597938557
+4.25000000      9.32722872e-02    0.647577856
+4.75000000      7.51567978e-02    0.694214000
+5.25000000      8.70149174e-02    0.731792398
+5.75000000      7.32749878e-02    0.775299857
+6.25000000      1.07841697e-01    0.811937351
+6.75000000      7.96720877e-03    0.865858199
+7.25000000      2.60316392e-01    0.869841804
+7.75000000      0.00000000e+00    1.000000000
+Neutron E = 1.00000e-02   (2 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             16 lines
+0.00000000      3.14353591e-01    0.000000000
+0.75000000      2.20750793e-01    0.235765193
+1.25000000      1.77100895e-01    0.346140590
+1.75000000      8.10563176e-02    0.434691037
+2.25000000      9.56908672e-02    0.475219196
+2.75000000      5.71973183e-02    0.523064630
+3.25000000      9.25505373e-02    0.551663289
+3.75000000      9.92785971e-02    0.597938557
+4.25000000      9.32722872e-02    0.647577856
+4.75000000      7.51567978e-02    0.694214000
+5.25000000      8.70149174e-02    0.731792398
+5.75000000      7.32749878e-02    0.775299857
+6.25000000      1.07841697e-01    0.811937351
+6.75000000      7.96720877e-03    0.865858199
+7.25000000      2.60316392e-01    0.869841804
+7.75000000      0.00000000e+00    1.000000000
+Neutron E = 1.00000e-01   (3 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             17 lines
+0.00000000      3.00349010e-01    0.000000000
+0.75000000      2.21301308e-01    0.225261758
+1.25000000      1.66557506e-01    0.335912411
+1.75000000      7.93912427e-02    0.419191164
+2.25000000      1.13515704e-01    0.458886786
+2.75000000      5.53446719e-02    0.515644638
+3.25000000      1.32191505e-01    0.543316973
+3.75000000      8.81421830e-02    0.609412726
+4.25000000      8.99150031e-02    0.653483817
+4.75000000      7.56640026e-02    0.698441319
+5.25000000      1.09909404e-01    0.736273320
+5.75000000      6.47370822e-02    0.791228022
+6.25000000      2.69965609e-02    0.823596563
+6.75000000      8.57297129e-02    0.837094843
+7.25000000      1.16592004e-04    0.879959700
+7.75000000      2.39964008e-01    0.880017996
+8.25000000      0.00000000e+00    1.000000000
+Neutron E = 5.00000e-01   (4 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             17 lines
+0.00000000      2.92891908e-01    0.000000000
+0.75000000      2.18615206e-01    0.219668931
+1.25000000      1.64890504e-01    0.328976534
+1.75000000      7.69000120e-02    0.411421786
+2.25000000      1.32112704e-01    0.449871792
+2.75000000      5.33936814e-02    0.515928144
+3.25000000      1.33787204e-01    0.542624984
+3.75000000      3.27330609e-02    0.609518586
+4.25000000      1.08579003e-01    0.625885117
+4.75000000      6.43243817e-02    0.680174618
+5.25000000      9.57714525e-02    0.712336809
+5.75000000      8.46789222e-02    0.760222535
+6.25000000      5.68347215e-02    0.802561996
+6.75000000      1.03958803e-01    0.830979357
+7.25000000      1.02377003e-04    0.882958758
+7.75000000      2.33980106e-01    0.883009947
+8.25000000      0.00000000e+00    1.000000000
+Neutron E = 1.00000e+00   (5 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             18 lines
+0.00000000      2.79182120e-01    0.000000000
+0.75000000      2.12328415e-01    0.209386590
+1.25000000      1.56110211e-01    0.315550797
+1.75000000      7.31560351e-02    0.393605903
+2.25000000      1.41076210e-01    0.430183920
+2.75000000      4.79132634e-02    0.500722025
+3.25000000      1.33495709e-01    0.524678657
+3.75000000      6.17904643e-02    0.591426511
+4.25000000      4.34675330e-02    0.622321744
+4.75000000      1.00297807e-01    0.644055510
+5.25000000      5.53555239e-02    0.694204414
+5.75000000      9.74662768e-02    0.721882176
+6.25000000      7.87982955e-02    0.770615314
+6.75000000      4.79546434e-02    0.810014462
+7.25000000      9.34473066e-02    0.833991783
+7.75000000      2.09746015e-07    0.880715437
+8.25000000      2.38568917e-01    0.880715542
+8.75000000      0.00000000e+00    1.000000000
+Neutron E = 2.00000e+00   (6 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             20 lines
+0.00000000      2.60244304e-01    0.000000000
+0.75000000      2.12958104e-01    0.195183228
+1.25000000      1.43068402e-01    0.301662280
+1.75000000      6.57503711e-02    0.373196481
+2.25000000      1.53453503e-01    0.406071667
+2.75000000      3.98632407e-02    0.482798418
+3.25000000      1.26681402e-01    0.502730038
+3.75000000      5.20795309e-02    0.566070740
+4.25000000      6.59582311e-02    0.592110505
+4.75000000      6.25913111e-02    0.625089621
+5.25000000      4.06143107e-02    0.656385276
+5.75000000      7.66042713e-02    0.676692431
+6.25000000      4.04647007e-02    0.714994567
+6.75000000      9.83122117e-02    0.735226917
+7.25000000      7.09949612e-02    0.784383023
+7.75000000      3.61230106e-02    0.819880504
+8.25000000      8.98712415e-02    0.837942009
+8.75000000      3.62635006e-08    0.882877630
+9.25000000      2.34244704e-01    0.882877648
+9.75000000      0.00000000e+00    1.000000000
+Neutron E = 3.00000e+00   (7 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             22 lines
+0.00000000      2.70416127e-01    0.000000000
+0.75000000      2.10492421e-01    0.202812095
+1.25000000      1.44748115e-01    0.308058306
+1.75000000      6.48765265e-02    0.380432363
+2.25000000      1.36112314e-01    0.412870627
+2.75000000      3.78182138e-02    0.480926783
+3.25000000      1.08422111e-01    0.499835890
+3.75000000      4.46013245e-02    0.554046946
+4.25000000      5.55784656e-02    0.576347608
+4.75000000      5.17941152e-02    0.604136841
+5.25000000      4.87993849e-02    0.630033898
+5.75000000      4.73601548e-02    0.654433591
+6.25000000      3.75734638e-02    0.678113668
+6.75000000      5.29426253e-02    0.696900400
+7.25000000      3.63664837e-02    0.723371713
+7.75000000      8.34769884e-02    0.741554955
+8.25000000      6.83416069e-02    0.783293449
+8.75000000      5.85520259e-02    0.817464252
+9.25000000      7.51646276e-02    0.846740265
+9.75000000      1.87621019e-08    0.884322579
+10.25000000      2.31354823e-01    0.884322588
+10.75000000      0.00000000e+00    1.000000000
+Neutron E = 4.00000e+00   (8 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             24 lines
+0.00000000      2.81028193e-01    0.000000000
+0.75000000      2.11633994e-01    0.210771144
+1.25000000      1.45848196e-01    0.316588142
+1.75000000      6.12106984e-02    0.389512240
+2.25000000      1.09640497e-01    0.420117589
+2.75000000      3.35376691e-02    0.474937837
+3.25000000      9.49528075e-02    0.491706672
+3.75000000      3.72523990e-02    0.539183076
+4.25000000      4.62156488e-02    0.557809275
+4.75000000      4.24644689e-02    0.580917100
+5.25000000      3.92794790e-02    0.602149334
+5.75000000      3.72642390e-02    0.621789074
+6.25000000      3.63894690e-02    0.640421193
+6.75000000      3.65939090e-02    0.658615928
+7.25000000      2.72056893e-02    0.676912882
+7.75000000      5.39655286e-02    0.690515727
+8.25000000      2.68845393e-02    0.717498491
+8.75000000      7.12796281e-02    0.730940761
+9.25000000      6.81684582e-02    0.766580575
+9.75000000      6.68012282e-02    0.800664804
+10.25000000      8.01962579e-02    0.834065418
+10.75000000      1.27087997e-08    0.874163547
+11.25000000      2.51672893e-01    0.874163553
+11.75000000      0.00000000e+00    1.000000000
+Neutron E = 6.00000e+00   (9 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             28 lines
+0.00000000      2.68031207e-01    0.000000000
+0.75000000      2.17832406e-01    0.201023405
+1.25000000      1.48492104e-01    0.309939608
+1.75000000      6.27222816e-02    0.384185660
+2.25000000      1.22003703e-01    0.415546801
+2.75000000      2.92083207e-02    0.476548652
+3.25000000      9.52879424e-02    0.491152812
+3.75000000      3.03274708e-02    0.538796784
+4.25000000      3.86729010e-02    0.553960519
+4.75000000      3.33226508e-02    0.573296969
+5.25000000      2.79757207e-02    0.589958295
+5.75000000      2.56158206e-02    0.603946155
+6.25000000      2.40222906e-02    0.616754066
+6.75000000      2.31940806e-02    0.628765211
+7.25000000      2.44026306e-02    0.640362251
+7.75000000      2.35761306e-02    0.652563567
+8.25000000      2.80971307e-02    0.664351632
+8.75000000      3.33022908e-02    0.678400197
+9.25000000      2.76596807e-02    0.695051343
+9.75000000      7.26999818e-02    0.708881183
+10.25000000      1.34527703e-02    0.745231174
+10.75000000      1.25389403e-01    0.751957559
+11.25000000      3.19084008e-02    0.814652261
+11.75000000      6.59382317e-02    0.830606461
+12.25000000      8.15408321e-02    0.863575577
+12.75000000      9.45426024e-09    0.904345993
+13.25000000      1.91308005e-01    0.904345998
+13.75000000      0.00000000e+00    1.000000000
+Neutron E = 8.00000e+00   (10 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             32 lines
+0.00000000      2.48950407e-01    0.000000000
+0.75000000      1.99944706e-01    0.186712805
+1.25000000      1.54109404e-01    0.286685158
+1.75000000      7.12080220e-02    0.363739860
+2.25000000      1.44145504e-01    0.399343871
+2.75000000      3.31539110e-02    0.471416624
+3.25000000      1.10685203e-01    0.487993579
+3.75000000      3.21075009e-02    0.543336181
+4.25000000      4.20372612e-02    0.559389931
+4.75000000      3.40819210e-02    0.580408562
+5.25000000      2.65507808e-02    0.597449522
+5.75000000      2.26206706e-02    0.610724913
+6.25000000      1.94908406e-02    0.622035248
+6.75000000      1.74469205e-02    0.631780668
+7.25000000      1.75581705e-02    0.640504128
+7.75000000      1.55604704e-02    0.649283214
+8.25000000      1.85023005e-02    0.657063449
+8.75000000      2.19113606e-02    0.666314599
+9.25000000      2.58513007e-02    0.677270279
+9.75000000      3.04469109e-02    0.690195930
+10.25000000      3.58574610e-02    0.705419385
+10.75000000      4.22515612e-02    0.723348116
+11.25000000      4.37931413e-02    0.744473896
+11.75000000      7.64574022e-02    0.766370467
+12.25000000      1.61098105e-02    0.804599168
+12.75000000      1.49317104e-01    0.812654073
+13.25000000      2.04617906e-02    0.887312625
+13.75000000      5.26551915e-02    0.897543521
+14.25000000      5.08870615e-02    0.923871116
+14.75000000      2.69303008e-09    0.949314647
+15.25000000      1.01370703e-01    0.949314649
+15.75000000      0.00000000e+00    1.000000000
+Neutron E = 1.00000e+01   (11 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             36 lines
+0.00000000      2.40939807e-01    0.000000000
+0.75000000      1.82436505e-01    0.180704855
+1.25000000      1.35182904e-01    0.271923108
+1.75000000      7.05722921e-02    0.339514560
+2.25000000      1.35324704e-01    0.374800706
+2.75000000      3.58865510e-02    0.442463058
+3.25000000      1.14098003e-01    0.460406333
+3.75000000      3.60082411e-02    0.517455335
+4.25000000      4.99689315e-02    0.535459456
+4.75000000      4.02391712e-02    0.560443921
+5.25000000      3.02612609e-02    0.580563507
+5.75000000      2.36081707e-02    0.595694137
+6.25000000      1.99162506e-02    0.607498223
+6.75000000      1.63065305e-02    0.617456348
+7.25000000      1.55738905e-02    0.625609613
+7.75000000      1.13808003e-02    0.633396558
+8.25000000      1.34118004e-02    0.639086959
+8.75000000      1.58776805e-02    0.645792859
+9.25000000      1.87292305e-02    0.653731699
+9.75000000      2.20549106e-02    0.663096314
+10.25000000      2.59695208e-02    0.674123770
+10.75000000      3.05946709e-02    0.687108530
+11.25000000      3.59892010e-02    0.702405865
+11.75000000      4.19606612e-02    0.720400466
+12.25000000      4.77170414e-02    0.741380797
+12.75000000      5.16790615e-02    0.765239317
+13.25000000      5.80933217e-02    0.791078848
+13.75000000      5.56803316e-02    0.820125509
+14.25000000      3.56180210e-02    0.847965675
+14.75000000      8.83100726e-02    0.865774685
+15.25000000      2.57846808e-02    0.909929722
+15.75000000      1.17711003e-02    0.922822062
+16.25000000      4.18896712e-02    0.928707612
+16.75000000      1.72274005e-09    0.949652448
+17.25000000      1.00695103e-01    0.949652449
+17.75000000      0.00000000e+00    1.000000000
+Neutron E = 1.20000e+01   (12 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             40 lines
+0.00000000      2.40096403e-01    0.000000000
+0.75000000      1.84962502e-01    0.180072302
+1.25000000      1.28961801e-01    0.272553553
+1.75000000      6.31264407e-02    0.337034454
+2.25000000      1.22800701e-01    0.368597674
+2.75000000      3.39086504e-02    0.429998025
+3.25000000      9.36276511e-02    0.446952350
+3.75000000      3.34040704e-02    0.493766176
+4.25000000      4.35242105e-02    0.510468211
+4.75000000      3.67189104e-02    0.532230316
+5.25000000      2.92561903e-02    0.550589771
+5.75000000      2.44787703e-02    0.565217866
+6.25000000      2.15505002e-02    0.577457252
+6.75000000      1.71999602e-02    0.588232502
+7.25000000      1.55956102e-02    0.596832482
+7.75000000      9.13240510e-03    0.604630287
+8.25000000      1.00429501e-02    0.609196489
+8.75000000      1.18835501e-02    0.614217965
+9.25000000      1.40161702e-02    0.620159740
+9.75000000      1.65038102e-02    0.627167825
+10.25000000      1.94315702e-02    0.635419730
+10.75000000      2.28907103e-02    0.645135515
+11.25000000      2.69249003e-02    0.656580870
+11.75000000      3.13902704e-02    0.670043320
+12.25000000      3.56950004e-02    0.685738455
+12.75000000      3.86583804e-02    0.703585956
+13.25000000      3.91922304e-02    0.722915146
+13.75000000      3.76302204e-02    0.742511261
+14.25000000      3.55979104e-02    0.761326371
+14.75000000      3.44708304e-02    0.779125326
+15.25000000      4.72370305e-02    0.796360742
+15.75000000      3.53939204e-02    0.819979257
+16.25000000      5.11254606e-02    0.837676217
+16.75000000      5.37650006e-02    0.863238947
+17.25000000      2.80640203e-02    0.890121448
+17.75000000      1.40911402e-02    0.904153458
+18.25000000      5.18113406e-02    0.911199028
+18.75000000      2.11773002e-09    0.937104698
+19.25000000      1.25790601e-01    0.937104699
+19.75000000      0.00000000e+00    1.000000000
+Neutron E = 1.40000e+01   (13 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             43 lines
+0.00000000      2.44763587e-01    0.000000000
+0.75000000      1.98025290e-01    0.183572690
+1.25000000      1.32852893e-01    0.282585335
+1.75000000      6.10951068e-02    0.349011782
+2.25000000      1.19733494e-01    0.379559335
+2.75000000      2.87146585e-02    0.439426082
+3.25000000      9.05886852e-02    0.453783411
+3.75000000      2.92298085e-02    0.499077754
+4.25000000      3.49428781e-02    0.513692658
+4.75000000      2.91258985e-02    0.531164097
+5.25000000      2.31745788e-02    0.545727046
+5.75000000      1.87027990e-02    0.557314335
+6.25000000      1.64170991e-02    0.566665735
+6.75000000      1.29537493e-02    0.574874285
+7.25000000      1.32178793e-02    0.581351159
+7.75000000      6.36193166e-03    0.587960099
+8.25000000      7.56536360e-03    0.591141065
+8.75000000      8.95647753e-03    0.594923746
+9.25000000      1.05652894e-02    0.599401985
+9.75000000      1.24412693e-02    0.604684630
+10.25000000      1.46500992e-02    0.610905265
+10.75000000      1.72598091e-02    0.618230314
+11.25000000      2.03038689e-02    0.626860219
+11.75000000      2.36739287e-02    0.637012153
+12.25000000      2.69244486e-02    0.648849118
+12.75000000      2.91660085e-02    0.662311342
+13.25000000      2.95780784e-02    0.676894346
+13.75000000      2.84109985e-02    0.691683385
+14.25000000      2.68888286e-02    0.705888885
+14.75000000      2.60480586e-02    0.719333299
+15.25000000      2.62757386e-02    0.732357328
+15.75000000      2.75954785e-02    0.745495197
+16.25000000      2.99636384e-02    0.759292937
+16.75000000      1.57137992e-02    0.774274756
+17.25000000      3.83195780e-02    0.782131656
+17.75000000      4.56832976e-02    0.801291445
+18.25000000      6.66936565e-02    0.824133093
+18.75000000      5.57763270e-02    0.857479922
+19.25000000      3.70122380e-02    0.885368085
+19.75000000      8.62911954e-02    0.903874204
+20.25000000      2.04315989e-09    0.947019802
+20.75000000      1.05960394e-01    0.947019803
+21.25000000      0.00000000e+00    1.000000000
+Neutron E = 1.70000e+01   (14 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             49 lines
+0.00000000      2.12763699e-01    0.000000000
+0.75000000      1.64063399e-01    0.159572775
+1.25000000      1.33258700e-01    0.241604474
+1.75000000      7.03815098e-02    0.308233824
+2.25000000      1.30276500e-01    0.343424579
+2.75000000      4.01829499e-02    0.408562829
+3.25000000      1.22806000e-01    0.428654304
+3.75000000      3.52306299e-02    0.490057303
+4.25000000      4.46184999e-02    0.507672618
+4.75000000      3.44625999e-02    0.529981868
+5.25000000      2.51564199e-02    0.547213168
+5.75000000      1.85063399e-02    0.559791378
+6.25000000      1.39927000e-02    0.569044548
+6.75000000      1.05914600e-02    0.576040898
+7.25000000      9.88003897e-03    0.581336628
+7.75000000      4.99744498e-03    0.586276648
+8.25000000      5.90437698e-03    0.588775370
+8.75000000      6.93461198e-03    0.591727559
+9.25000000      8.09616597e-03    0.595194865
+9.75000000      9.41183697e-03    0.599242948
+10.25000000      1.06952200e-02    0.603948866
+10.75000000      1.26051300e-02    0.609296476
+11.25000000      1.48339300e-02    0.615599041
+11.75000000      1.73032199e-02    0.623016006
+12.25000000      1.96884799e-02    0.631667616
+12.75000000      2.13408199e-02    0.641511856
+13.25000000      2.16598899e-02    0.652182266
+13.75000000      2.08266299e-02    0.663012211
+14.25000000      1.97338099e-02    0.673425526
+14.75000000      1.91390199e-02    0.683292431
+15.25000000      1.93263299e-02    0.692861941
+15.75000000      2.03141799e-02    0.702525106
+16.25000000      2.20716599e-02    0.712682196
+16.75000000      2.46076099e-02    0.723718026
+17.25000000      2.79875199e-02    0.736021831
+17.75000000      3.23166599e-02    0.750015591
+18.25000000      3.76855799e-02    0.766173921
+18.75000000      4.40394699e-02    0.785016711
+19.25000000      5.09157898e-02    0.807036445
+19.75000000      4.44906399e-02    0.832494340
+20.25000000      6.18669398e-02    0.854739660
+20.75000000      4.38344799e-02    0.885673130
+21.25000000      6.22010898e-02    0.907590370
+21.75000000      4.31111799e-02    0.938690915
+22.25000000      3.23650699e-02    0.960246505
+22.75000000      2.56361099e-02    0.976429040
+23.25000000      3.13733999e-10    0.989247095
+23.75000000      2.15058099e-02    0.989247095
+24.25000000      0.00000000e+00    1.000000000
+Neutron E = 2.00000e+01   (15 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             55 lines
+0.00000000      1.70666097e-01    0.000000000
+0.75000000      1.32193098e-01    0.127999573
+1.25000000      1.00675898e-01    0.194096122
+1.75000000      5.74594490e-02    0.244434071
+2.25000000      1.07483498e-01    0.273163795
+2.75000000      4.25541193e-02    0.326905544
+3.25000000      9.46827883e-02    0.348182604
+3.75000000      4.58096692e-02    0.395523998
+4.25000000      5.44254190e-02    0.418428833
+4.75000000      5.09053691e-02    0.445641542
+5.25000000      3.96939193e-02    0.471094227
+5.75000000      3.39768094e-02    0.490941186
+6.25000000      2.67623095e-02    0.507929591
+6.75000000      1.95472297e-02    0.521310746
+7.25000000      1.71700897e-02    0.531084361
+7.75000000      4.99653191e-03    0.539669406
+8.25000000      5.91901090e-03    0.542167672
+8.75000000      7.03508588e-03    0.545127177
+9.25000000      8.32136185e-03    0.548644720
+9.75000000      9.80658183e-03    0.552805401
+10.25000000      1.15327098e-02    0.557708692
+10.75000000      1.35402798e-02    0.563475047
+11.25000000      1.58379297e-02    0.570245187
+11.75000000      1.83191497e-02    0.578164151
+12.25000000      2.06186196e-02    0.587323726
+12.75000000      2.20509396e-02    0.597633036
+13.25000000      2.16062196e-02    0.608658506
+13.75000000      2.07936396e-02    0.619461616
+14.25000000      1.97214897e-02    0.629858435
+14.75000000      1.91453397e-02    0.639719180
+15.25000000      1.93498597e-02    0.649291850
+15.75000000      2.03548896e-02    0.658966780
+16.25000000      2.21306696e-02    0.669144225
+16.75000000      2.46870896e-02    0.680209560
+17.25000000      2.80903995e-02    0.692553104
+17.75000000      3.24461894e-02    0.706598304
+18.25000000      3.78446093e-02    0.722821399
+18.75000000      4.42286292e-02    0.741743704
+19.25000000      5.11297591e-02    0.763858018
+19.75000000      5.73104890e-02    0.789422898
+20.25000000      6.07197789e-02    0.818078142
+20.75000000      5.95013890e-02    0.848438032
+21.25000000      5.36386191e-02    0.878188726
+21.75000000      4.51069992e-02    0.905008036
+22.25000000      3.62321594e-02    0.927561535
+22.75000000      2.13156596e-02    0.945677615
+23.25000000      2.81168495e-02    0.956335445
+23.75000000      8.27447886e-03    0.970393870
+24.25000000      2.06217696e-02    0.974531109
+24.75000000      6.40068389e-03    0.984841994
+25.25000000      9.70837483e-03    0.988042336
+25.75000000      7.92868086e-03    0.992896523
+26.25000000      4.83105992e-11    0.996860864
+26.75000000      6.27827289e-03    0.996860864
+27.25000000      0.00000000e+00    1.000000000
+Neutron E = 2.00000e+01   (16 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             55 lines
+0.00000000      1.70666097e-01    0.000000000
+0.75000000      1.32193098e-01    0.127999573
+1.25000000      1.00675898e-01    0.194096122
+1.75000000      5.74594490e-02    0.244434071
+2.25000000      1.07483498e-01    0.273163795
+2.75000000      4.25541193e-02    0.326905544
+3.25000000      9.46827883e-02    0.348182604
+3.75000000      4.58096692e-02    0.395523998
+4.25000000      5.44254190e-02    0.418428833
+4.75000000      5.09053691e-02    0.445641542
+5.25000000      3.96939193e-02    0.471094227
+5.75000000      3.39768094e-02    0.490941186
+6.25000000      2.67623095e-02    0.507929591
+6.75000000      1.95472297e-02    0.521310746
+7.25000000      1.71700897e-02    0.531084361
+7.75000000      4.99653191e-03    0.539669406
+8.25000000      5.91901090e-03    0.542167672
+8.75000000      7.03508588e-03    0.545127177
+9.25000000      8.32136185e-03    0.548644720
+9.75000000      9.80658183e-03    0.552805401
+10.25000000      1.15327098e-02    0.557708692
+10.75000000      1.35402798e-02    0.563475047
+11.25000000      1.58379297e-02    0.570245187
+11.75000000      1.83191497e-02    0.578164151
+12.25000000      2.06186196e-02    0.587323726
+12.75000000      2.20509396e-02    0.597633036
+13.25000000      2.16062196e-02    0.608658506
+13.75000000      2.07936396e-02    0.619461616
+14.25000000      1.97214897e-02    0.629858435
+14.75000000      1.91453397e-02    0.639719180
+15.25000000      1.93498597e-02    0.649291850
+15.75000000      2.03548896e-02    0.658966780
+16.25000000      2.21306696e-02    0.669144225
+16.75000000      2.46870896e-02    0.680209560
+17.25000000      2.80903995e-02    0.692553104
+17.75000000      3.24461894e-02    0.706598304
+18.25000000      3.78446093e-02    0.722821399
+18.75000000      4.42286292e-02    0.741743704
+19.25000000      5.11297591e-02    0.763858018
+19.75000000      5.73104890e-02    0.789422898
+20.25000000      6.07197789e-02    0.818078142
+20.75000000      5.95013890e-02    0.848438032
+21.25000000      5.36386191e-02    0.878188726
+21.75000000      4.51069992e-02    0.905008036
+22.25000000      3.62321594e-02    0.927561535
+22.75000000      2.13156596e-02    0.945677615
+23.25000000      2.81168495e-02    0.956335445
+23.75000000      8.27447886e-03    0.970393870
+24.25000000      2.06217696e-02    0.974531109
+24.75000000      6.40068389e-03    0.984841994
+25.25000000      9.70837483e-03    0.988042336
+25.75000000      7.92868086e-03    0.992896523
+26.25000000      4.83105992e-11    0.996860864
+26.75000000      6.27827289e-03    0.996860864
+27.25000000      0.00000000e+00    1.000000000
+Neutron E = 1.50000e+02   (17 of 17)
+Distribution interpolation:    1  (histogram)
+Number of Discrete Energies:   0
+   EOUT           PDF              CDF             55 lines
+0.00000000      1.70666097e-01    0.000000000
+0.75000000      1.32193098e-01    0.127999573
+1.25000000      1.00675898e-01    0.194096122
+1.75000000      5.74594490e-02    0.244434071
+2.25000000      1.07483498e-01    0.273163795
+2.75000000      4.25541193e-02    0.326905544
+3.25000000      9.46827883e-02    0.348182604
+3.75000000      4.58096692e-02    0.395523998
+4.25000000      5.44254190e-02    0.418428833
+4.75000000      5.09053691e-02    0.445641542
+5.25000000      3.96939193e-02    0.471094227
+5.75000000      3.39768094e-02    0.490941186
+6.25000000      2.67623095e-02    0.507929591
+6.75000000      1.95472297e-02    0.521310746
+7.25000000      1.71700897e-02    0.531084361
+7.75000000      4.99653191e-03    0.539669406
+8.25000000      5.91901090e-03    0.542167672
+8.75000000      7.03508588e-03    0.545127177
+9.25000000      8.32136185e-03    0.548644720
+9.75000000      9.80658183e-03    0.552805401
+10.25000000      1.15327098e-02    0.557708692
+10.75000000      1.35402798e-02    0.563475047
+11.25000000      1.58379297e-02    0.570245187
+11.75000000      1.83191497e-02    0.578164151
+12.25000000      2.06186196e-02    0.587323726
+12.75000000      2.20509396e-02    0.597633036
+13.25000000      2.16062196e-02    0.608658506
+13.75000000      2.07936396e-02    0.619461616
+14.25000000      1.97214897e-02    0.629858435
+14.75000000      1.91453397e-02    0.639719180
+15.25000000      1.93498597e-02    0.649291850
+15.75000000      2.03548896e-02    0.658966780
+16.25000000      2.21306696e-02    0.669144225
+16.75000000      2.46870896e-02    0.680209560
+17.25000000      2.80903995e-02    0.692553104
+17.75000000      3.24461894e-02    0.706598304
+18.25000000      3.78446093e-02    0.722821399
+18.75000000      4.42286292e-02    0.741743704
+19.25000000      5.11297591e-02    0.763858018
+19.75000000      5.73104890e-02    0.789422898
+20.25000000      6.07197789e-02    0.818078142
+20.75000000      5.95013890e-02    0.848438032
+21.25000000      5.36386191e-02    0.878188726
+21.75000000      4.51069992e-02    0.905008036
+22.25000000      3.62321594e-02    0.927561535
+22.75000000      2.13156596e-02    0.945677615
+23.25000000      2.81168495e-02    0.956335445
+23.75000000      8.27447886e-03    0.970393870
+24.25000000      2.06217696e-02    0.974531109
+24.75000000      6.40068389e-03    0.984841994
+25.25000000      9.70837483e-03    0.988042336
+25.75000000      7.92868086e-03    0.992896523
+26.25000000      4.83105992e-11    0.996860864
+26.75000000      6.27827289e-03    0.996860864
+27.25000000      0.00000000e+00    1.000000000

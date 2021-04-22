@@ -1,0 +1,437 @@
+Reading data from F:\mcnpdata\Lib80x\si\14028.800nc
+
+MT 102 Photon report for nuclide 14028.00c = Si28 Lib80x (jlconlin)  Reference LA-UR-18-24034 by Conlin, J.L., et a
+
+54 photon distributions follow
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.022410
+2.00000e+01   0.022410
+1.50000e+02   0.022410
+Distribution Law: 2
+Photon energy 8.47220800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000202
+2.00000e+01   0.000202
+1.50000e+02   0.000202
+Distribution Law: 2
+Photon energy 7.99521600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000126
+2.00000e+01   0.000126
+1.50000e+02   0.000126
+Distribution Law: 2
+Photon energy 7.52208200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.073671
+2.00000e+01   0.073671
+1.50000e+02   0.073671
+Distribution Law: 2
+Photon energy 7.19919800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.001608
+2.00000e+01   0.001608
+1.50000e+02   0.001608
+Distribution Law: 2
+Photon energy 7.05701800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000347
+2.00000e+01   0.000347
+1.50000e+02   0.000347
+Distribution Law: 2
+Photon energy 6.90759700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000095
+2.00000e+01   0.000095
+1.50000e+02   0.000095
+Distribution Law: 2
+Photon energy 6.72218400
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000406
+2.00000e+01   0.000406
+1.50000e+02   0.000406
+Distribution Law: 2
+Photon energy 6.71206600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.001263
+2.00000e+01   0.001263
+1.50000e+02   0.001263
+Distribution Law: 2
+Photon energy 6.44470800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.120486
+2.00000e+01   0.120486
+1.50000e+02   0.120486
+Distribution Law: 2
+Photon energy 6.37980000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000131
+2.00000e+01   0.000131
+1.50000e+02   0.000131
+Distribution Law: 2
+Photon energy 6.24902800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.005237
+2.00000e+01   0.005237
+1.50000e+02   0.005237
+Distribution Law: 2
+Photon energy 6.04698400
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000230
+2.00000e+01   0.000230
+1.50000e+02   0.000230
+Distribution Law: 2
+Photon energy 5.96768100
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000171
+2.00000e+01   0.000171
+1.50000e+02   0.000171
+Distribution Law: 2
+Photon energy 5.78394200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000463
+2.00000e+01   0.000463
+1.50000e+02   0.000463
+Distribution Law: 2
+Photon energy 5.56995000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000356
+2.00000e+01   0.000356
+1.50000e+02   0.000356
+Distribution Law: 2
+Photon energy 5.40604600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.037611
+2.00000e+01   0.037611
+1.50000e+02   0.037611
+Distribution Law: 2
+Photon energy 5.10669200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000431
+2.00000e+01   0.000431
+1.50000e+02   0.000431
+Distribution Law: 2
+Photon energy 5.09677300
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.653393
+2.00000e+01   0.653393
+1.50000e+02   0.653393
+Distribution Law: 2
+Photon energy 4.93388800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000227
+2.00000e+01   0.000227
+1.50000e+02   0.000227
+Distribution Law: 2
+Photon energy 4.92900000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000494
+2.00000e+01   0.000494
+1.50000e+02   0.000494
+Distribution Law: 2
+Photon energy 4.87997900
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.002617
+2.00000e+01   0.002617
+1.50000e+02   0.002617
+Distribution Law: 2
+Photon energy 4.83979600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000221
+2.00000e+01   0.000221
+1.50000e+02   0.000221
+Distribution Law: 2
+Photon energy 4.63166700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.026233
+2.00000e+01   0.026233
+1.50000e+02   0.026233
+Distribution Law: 2
+Photon energy 3.95438900
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000109
+2.00000e+01   0.000109
+1.50000e+02   0.000109
+Distribution Law: 2
+Photon energy 3.84125700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.041180
+2.00000e+01   0.041180
+1.50000e+02   0.041180
+Distribution Law: 2
+Photon energy 3.66071200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000300
+2.00000e+01   0.000300
+1.50000e+02   0.000300
+Distribution Law: 2
+Photon energy 3.63306300
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000366
+2.00000e+01   0.000366
+1.50000e+02   0.000366
+Distribution Law: 2
+Photon energy 3.56661600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.694551
+2.00000e+01   0.694551
+1.50000e+02   0.694551
+Distribution Law: 2
+Photon energy 3.53896600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000059
+2.00000e+01   0.000059
+1.50000e+02   0.000059
+Distribution Law: 2
+Photon energy 3.15598600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000059
+2.00000e+01   0.000059
+1.50000e+02   0.000059
+Distribution Law: 2
+Photon energy 3.06188700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000418
+2.00000e+01   0.000418
+1.50000e+02   0.000418
+Distribution Law: 2
+Photon energy 2.90612300
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.002422
+2.00000e+01   0.002422
+1.50000e+02   0.002422
+Distribution Law: 2
+Photon energy 2.50834700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.029340
+2.00000e+01   0.029340
+1.50000e+02   0.029340
+Distribution Law: 2
+Photon energy 2.42576700
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000691
+2.00000e+01   0.000691
+1.50000e+02   0.000691
+Distribution Law: 2
+Photon energy 2.41424600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000236
+2.00000e+01   0.000236
+1.50000e+02   0.000236
+Distribution Law: 2
+Photon energy 2.12351800
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.195431
+2.00000e+01   0.195431
+1.50000e+02   0.195431
+Distribution Law: 2
+Photon energy 2.09290200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.003783
+2.00000e+01   0.003783
+1.50000e+02   0.003783
+Distribution Law: 2
+Photon energy 2.02798400
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000105
+2.00000e+01   0.000105
+1.50000e+02   0.000105
+Distribution Law: 2
+Photon energy 1.97406900
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.007527
+2.00000e+01   0.007527
+1.50000e+02   0.007527
+Distribution Law: 2
+Photon energy 1.86732400
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.006599
+2.00000e+01   0.006599
+1.50000e+02   0.006599
+Distribution Law: 2
+Photon energy 1.79351100
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000406
+2.00000e+01   0.000406
+1.50000e+02   0.000406
+Distribution Law: 2
+Photon energy 1.76058000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.004939
+2.00000e+01   0.004939
+1.50000e+02   0.004939
+Distribution Law: 2
+Photon energy 1.56497200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.003310
+2.00000e+01   0.003310
+1.50000e+02   0.003310
+Distribution Law: 2
+Photon energy 1.54028000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.007924
+2.00000e+01   0.007924
+1.50000e+02   0.007924
+Distribution Law: 2
+Photon energy 1.44617600
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.002235
+2.00000e+01   0.002235
+1.50000e+02   0.002235
+Distribution Law: 2
+Photon energy 1.41556000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.165501
+2.00000e+01   0.165501
+1.50000e+02   0.165501
+Distribution Law: 2
+Photon energy 1.27334900
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.005554
+2.00000e+01   0.005554
+1.50000e+02   0.005554
+Distribution Law: 2
+Photon energy 1.15247200
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.001482
+2.00000e+01   0.001482
+1.50000e+02   0.001482
+Distribution Law: 2
+Photon energy 1.03887000
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000688
+2.00000e+01   0.000688
+1.50000e+02   0.000688
+Distribution Law: 2
+Photon energy 0.95039030
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000286
+2.00000e+01   0.000286
+1.50000e+02   0.000286
+Distribution Law: 2
+Photon energy 0.75467050
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000142
+2.00000e+01   0.000142
+1.50000e+02   0.000142
+Distribution Law: 2
+Photon energy 0.64106640
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.001335
+2.00000e+01   0.001335
+1.50000e+02   0.001335
+Distribution Law: 2
+Photon energy 0.47713280
+Yield Interpolations     1 lines
+     3     1  (histogram) 
+ n-Energy      Yield       3 lines
+1.00000e-11   0.000178
+2.00000e+01   0.000178
+1.50000e+02   0.000178
+Distribution Law: 2
+Photon energy 0.39781310
