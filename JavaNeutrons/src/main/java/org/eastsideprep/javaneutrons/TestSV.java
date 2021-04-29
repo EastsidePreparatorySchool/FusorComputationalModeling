@@ -556,7 +556,7 @@ public static MonteCarloSimulation october(Group visualizations) {
         return mcs;
     }
 
-public static MonteCarloSimulation april21(Group visualizations) {
+public static MonteCarloSimulation april0mmbase(Group visualizations) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
@@ -565,12 +565,11 @@ public static MonteCarloSimulation april21(Group visualizations) {
                 "black");
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
         
-        //room walls--CHANGE FLOOR AND CEILING TO CONCRETE!!
         Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
             walls.setColor("gray");
-        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/floor4in.stl"), "cm"), "Concrete");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
             wfloor.setColor("black");
-        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/ceiling4in.stl"), "cm"), "Concrete");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
             wceiling.setColor("black");
             
         //other stuff
@@ -608,5 +607,260 @@ public static MonteCarloSimulation april21(Group visualizations) {
         return mcs;
     }
 
+public static MonteCarloSimulation april5mmbase(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
+            walls.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/5mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, walls, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        return mcs;
+    }
+
+public static MonteCarloSimulation april1mmbase(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
+            walls.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/october/1mm.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, walls, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        return mcs;
+    }
+
+public static MonteCarloSimulation april0mmNObase(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
+            walls.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/0mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, walls, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        return mcs;
+    }
+
+
+public static MonteCarloSimulation april5mmNObase(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
+            walls.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/5mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, walls, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        return mcs;
+    }
  
+public static MonteCarloSimulation april1mmNObase(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+                .getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor(
+                "black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1,0,0)));
+        
+        Part walls = new Part("W.walls", new Shape(TestSV.class.getResource("/meshes/2021/walls4in.stl"), "cm"), "Vacuum");
+            walls.setColor("gray");
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+            wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+            wceiling.setColor("black");
+            
+        //other stuff
+        Part wood = new Part("Wood", new Shape(TestSV.class.getResource("/meshes/920/plywood.stl"), "cm"), "Wood");
+            wood.setColor("yellow");
+        Part pipes = new Part("Steel Pipes", new Shape(TestSV.class.getResource("/meshes/hi/newpipes.obj"), "cm"), "Steel");
+            pipes.setColor("gray");
+            pipes.getTransforms().add(new Translate(0,0.5,0.65));
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+            lead.setColor("gray");
+
+        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/1mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+            wax.setColor("lightblue");
+                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, wood, pipes, lead, wax, walls, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20,-300,-30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        fusor.addAll(dp);
+        
+        fusor.containsMaterialAt(
+                "Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor, null, visualizations);
+//        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+//                null, null, Neutron.startingEnergyDD, //check energy
+//                "Air", "Vacuum", visualizations, false); 
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        mcs.interstitialMaterial = Material.getRealMaterial("Air");
+        System.out.println("mcs.interstitialMaterial is "+mcs.interstitialMaterial.name);
+        return mcs;
+    }
+
 }
