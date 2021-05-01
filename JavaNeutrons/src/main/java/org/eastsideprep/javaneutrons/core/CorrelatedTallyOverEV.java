@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.DoubleAdder;
 import java.util.stream.Collectors;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
@@ -22,7 +23,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     double[][] covFlat;
     double[][] covLow;
     Util.LogLogTable sievertConversionTable;
-    double totalSieverts;
+    DoubleAdder totalSieverts;
 
     public CorrelatedTallyOverEV(Util.LogLogTable sievertConversionTable) {
         sumSquares = new TallyOverEV();
@@ -30,6 +31,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
         this.sievertConversionTable = sievertConversionTable;
+        this.totalSieverts = new DoubleAdder();
     }
 
     public CorrelatedTallyOverEV(double e, int bins, Util.LogLogTable sievertConversionTable) {
@@ -39,6 +41,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
         this.sievertConversionTable = sievertConversionTable;
+        this.totalSieverts = new DoubleAdder();
     }
 
     public void record(Particle p, double value, double energy) {
@@ -59,9 +62,9 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
         // record sieverts
         double sieverts = this.sievertConversionTable.lookup(energy / Util.Physics.eV) * value;
-        synchronized (this) {
-            this.totalSieverts += sieverts;
-        }
+        //synchronized (this) {
+            this.totalSieverts.add(sieverts);
+        //}
     }
 
     public void tally(Particle p) {
