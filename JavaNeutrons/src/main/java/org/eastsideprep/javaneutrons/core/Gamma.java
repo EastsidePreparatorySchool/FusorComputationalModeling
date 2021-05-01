@@ -23,7 +23,7 @@ public final class Gamma extends Particle {
     @Override
     Event nextPoint(Material m) {
         // return something far out of bounds
-        double t = 10000;
+        double t = 10000000;
         return new Event(Util.Math.rayPoint(position, direction, t), Event.Code.Scatter, t);
     }
 }
