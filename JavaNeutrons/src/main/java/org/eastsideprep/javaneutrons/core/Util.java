@@ -60,7 +60,8 @@ public class Util {
                     .add(n2.scalarMultiply(ThreadLocalRandom.current().nextGaussian() * sd))
                     .normalize();
         }
-
+        
+        
         public static double randomGaussian() {
             return ThreadLocalRandom.current().nextGaussian();
         }

@@ -34,13 +34,15 @@ abstract public class MC0D extends MonteCarloSimulation {
     }
 
     @Override
-    public void simulateParticle(Particle n, Material m) {
+    public void simulateParticle(Particle n, Material m, boolean count) {
         if (n == null) {
             return;
         }
-        
+
         this.run(n);
-        completed.incrementAndGet();
+        if (count) {
+            completed.incrementAndGet();
+        }
     }
 
     public Chart makeCustomChart(String series, String scale) {

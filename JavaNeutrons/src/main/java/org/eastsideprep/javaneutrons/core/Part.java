@@ -199,6 +199,7 @@ public class Part {
                 System.out.println(p.getClass().getSimpleName() + " " + p.hashCode() + " captured in part " + this.name);
                 System.out.println(" " + p.getClass().getSimpleName() + " energy final: " + String.format("%6.3e eV", p.energy / Util.Physics.eV));
             }
+            event.exitMaterial = this.material;
         } else {
 //            // advance the neutron a bit to the outside
 //            p.setPosition(visualizations, Util.Math.rayPoint(p.position, p.direction, epsilon));
@@ -311,9 +312,7 @@ public class Part {
     //
     // exposure measurements in sieverts
     //
-    double getSieverts(String type) {
-
-        
-        return this.fluenceMap.get(type).totalSieverts;
+    public double getSieverts(String type) {
+        return this.fluenceMap.get(type).totalSieverts.doubleValue();
     }
 }

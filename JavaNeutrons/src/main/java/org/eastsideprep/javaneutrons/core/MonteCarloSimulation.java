@@ -125,11 +125,12 @@ public class MonteCarloSimulation {
     public boolean scatter;
     public String lastChartData = "";
     public Grid grid;
-    public boolean stop;
+    public volatile boolean stop;
     public boolean whitmer = false;
     public long suggestedCount = -1;
     public double suggestedGrid = 5;
     public boolean fit = false;
+    public Part designatedDetector = null;
 
     public static boolean visualLimitReached = false;
 
@@ -274,7 +275,7 @@ public class MonteCarloSimulation {
                 neutrons.stream().forEach(
                         n -> {
                             if (!stop) {
-                                simulateParticle(n, null);
+                                simulateParticle(n, null, true);
                             }
                         }
                 );
@@ -284,7 +285,7 @@ public class MonteCarloSimulation {
                     new Thread(() -> {
                         for (Neutron n : neutrons) {
                             if (!stop) {
-                                simulateParticle(n, null);
+                                simulateParticle(n, null, true);
                             }
                         }
                     }).start();
@@ -294,7 +295,7 @@ public class MonteCarloSimulation {
             // simulate one by one until one scatters
             this.scatter = false;
             for (Neutron n : neutrons) {
-                simulateParticle(n, null);
+                simulateParticle(n, null, true);
                 if (this.scatter || this.stop) {
                     break;
                 }
@@ -307,8 +308,8 @@ public class MonteCarloSimulation {
         return System.currentTimeMillis() - this.start;
     }
 
-    public void simulateParticle(Particle p, Material medium) {
-        if (p == null) {
+    public void simulateParticle(Particle p, Material medium, boolean count) {
+        if (p == null && count) {
             completed.incrementAndGet();
             return;
         }
@@ -327,14 +328,16 @@ public class MonteCarloSimulation {
                 }
                 for (Gamma g : gammas) {
                     g.mcs = this;
-                    simulateParticle(g, e.exitMaterial);
+                    simulateParticle(g, e.exitMaterial, false);
                 }
             }
         }
 
-        completed.incrementAndGet();
-        if (traceLevel >= 2) {
-            System.out.println("");
+        if (count) {
+            completed.incrementAndGet();
+            if (traceLevel >= 2) {
+                System.out.println("");
+            }
         }
     }
 

@@ -1,0 +1,86 @@
+solid OpenSCAD_Model
+  facet normal -0 0 1
+    outer loop
+      vertex -108.39 73.7 162.56
+      vertex 69.41 -310.48 162.56
+      vertex 69.41 73.7 162.56
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 69.41 -310.48 162.56
+      vertex -108.39 73.7 162.56
+      vertex -108.39 -310.48 162.56
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -108.39 -310.48 152.4
+      vertex 69.41 73.7 152.4
+      vertex 69.41 -310.48 152.4
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex 69.41 73.7 152.4
+      vertex -108.39 -310.48 152.4
+      vertex -108.39 73.7 152.4
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -108.39 -310.48 152.4
+      vertex 69.41 -310.48 162.56
+      vertex -108.39 -310.48 162.56
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 69.41 -310.48 162.56
+      vertex -108.39 -310.48 152.4
+      vertex 69.41 -310.48 152.4
+    endloop
+  endfacet
+  facet normal 1 -0 0
+    outer loop
+      vertex 69.41 -310.48 162.56
+      vertex 69.41 73.7 152.4
+      vertex 69.41 73.7 162.56
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 69.41 73.7 152.4
+      vertex 69.41 -310.48 162.56
+      vertex 69.41 -310.48 152.4
+    endloop
+  endfacet
+  facet normal 0 1 -0
+    outer loop
+      vertex 69.41 73.7 152.4
+      vertex -108.39 73.7 162.56
+      vertex 69.41 73.7 162.56
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -108.39 73.7 162.56
+      vertex 69.41 73.7 152.4
+      vertex -108.39 73.7 152.4
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -108.39 -310.48 152.4
+      vertex -108.39 73.7 162.56
+      vertex -108.39 73.7 152.4
+    endloop
+  endfacet
+  facet normal -1 -0 0
+    outer loop
+      vertex -108.39 73.7 162.56
+      vertex -108.39 -310.48 152.4
+      vertex -108.39 -310.48 162.56
+    endloop
+  endfacet
+endsolid OpenSCAD_Model
