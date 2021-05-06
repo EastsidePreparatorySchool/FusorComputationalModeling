@@ -394,33 +394,62 @@ public class TestGM {
     // world simulations
     //
     public static MonteCarloSimulation bigBlock(Group visualizations) {
-        double thickness = 25; //block thickness in cm
+        double thickness = 0.1; // block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
-        String m = "Concrete";
+        //String m = "Concrete";
         //String m = "CarbonWax";
-        //String m = "Paraffin";
+        String m = "Paraffin";
 
-        Part wall = new Part("Wall: " + m, blockShape, m);
+        Part wall = new Part("Right Wall: " + m, blockShape, m);
         wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
         wall.setColor("silver");
 
-        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part wall2 = new Part("Left Wall: " + m, blockShape, m);
+        wall2.getTransforms().add(new Translate(-50 - thickness / 2, 0, 0));
+        wall2.setColor("silver");
+
+        Part wall3 = new Part("Front Wall: " + m, blockShape, m);
+        wall3.getTransforms().add(0, new Rotate(90, new Point3D(0, 1, 0)));
+        wall3.getTransforms().add(0, new Translate(0, 0, -50 - thickness / 2));
+        wall3.setColor("silver");
+
+        Part wall4 = new Part("Back Wall: " + m, blockShape, m);
+        wall4.getTransforms().add(0, new Rotate(90, new Point3D(0, 1, 0)));
+        wall4.getTransforms().add(0, new Translate(0, 0, 50 + thickness / 2));
+        wall4.setColor("silver");
+
+        Part wall5 = new Part("Bottom Wall: " + m, blockShape, m);
+        wall5.getTransforms().add(0, new Rotate(90, new Point3D(0, 0, 1)));
+        wall5.getTransforms().add(0, new Translate(0, 50 + thickness / 2, 0));
+        wall5.setColor("silver");
+
+        Part wall6 = new Part("Top Wall: " + m, blockShape, m);
+        wall6.getTransforms().add(0, new Rotate(90, new Point3D(0, 0, 1)));
+        wall6.getTransforms().add(0, new Translate(0, -50 - thickness / 2, 0));
+        wall6.setColor("silver");
+
+        //Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Shape detectorShape = new Shape(new HumanBody());
         Part detector1 = new Part("Detector behind " + m + " wall", detectorShape, "HighVacuum");
-        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.getTransforms().add(new Translate(0, 0, -300 - 1));
         detector1.setColor("pink");
 
-        Part detector2 = new Part("Detector opposite " + m + " wall", detectorShape, "HighVacuum");
-        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
-        detector2.setColor("pink");
-
+//        Part detector2 = new Part("Detector opposite " + m + " wall", detectorShape, "HighVacuum");
+//        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
+//        detector2.setColor("pink");
+        // vac chamber
+//        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class
+//                .getResource("/meshes/vac_chamber.obj")), "Steel");
         Assembly whitmer = new Assembly("Whitmer");
-        whitmer.addAll(wall, detector1, detector2);
+        whitmer.addAll(wall, wall2, wall3, wall4, wall5, wall6, detector1);
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,
                 "Vacuum", null, visualizations, false); // interstitial, initial
         //mcs.prepareGrid(5.0, visualizations);
-        mcs.suggestedCount = 100000;
+        mcs.suggestedCount = 1000000;
+        mcs.designatedDetector = detector1;
+
         return mcs;
     }
 
@@ -754,11 +783,11 @@ public class TestGM {
         for (int i = 0; i < count; i++) {
             Part body = new Part("Body", new HumanBody(), "HumanBodyMaterial");
             bodies.add(body);
-            body.getTransforms().add(0, 
-                new Translate(
-                    (i % (count / rows)) * hgap -  hgap *(count/rows)/2,
-                    (i / (count / rows)) * (hgap / 2)-120,
-                    -200+(i / (count/rows))*(hgap/2)));
+            body.getTransforms().add(0,
+                    new Translate(
+                            (i % (count / rows)) * hgap - hgap * (count / rows) / 2,
+                            (i / (count / rows)) * (hgap / 2) - 120,
+                            -200 + (i / (count / rows)) * (hgap / 2)));
         }
 
         // vac chamber

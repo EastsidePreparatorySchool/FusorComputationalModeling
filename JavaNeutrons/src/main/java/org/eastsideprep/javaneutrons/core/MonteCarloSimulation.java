@@ -130,6 +130,7 @@ public class MonteCarloSimulation {
     public long suggestedCount = -1;
     public double suggestedGrid = 5;
     public boolean fit = false;
+    public Part designatedDetector = null;
 
     public static boolean visualLimitReached = false;
 

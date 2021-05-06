@@ -1,6 +1,7 @@
 package org.eastsideprep.javaneutrons;
 
 import java.lang.reflect.Method;
+import java.text.DecimalFormat;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -12,7 +13,10 @@ import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -32,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.eastsideprep.javaneutrons.core.MC0D;
 import org.eastsideprep.javaneutrons.core.MonteCarloSimulation;
+import org.eastsideprep.javaneutrons.core.Part;
 import org.eastsideprep.javaneutrons.core.Util;
 
 /**
@@ -288,6 +293,31 @@ public class App extends Application {
                         sim.postProcess();
                         bRun.setDisable(false);
                         progress.setText("Complete: 100 % , time: " + (sim.getElapsedTime() / 1000) + " s");
+                        if (sim.designatedDetector != null) {
+                            Platform.runLater(() -> {
+                                // collect exposure in Sievert from designated detector part
+                                Part p = sim.designatedDetector;
+                                double n = p.getSieverts("neutron");
+                                double g = p.getSieverts("gamma");
+                                
+                                // make a nice string
+                                DecimalFormat f = new DecimalFormat("0.###E0");
+                                String text = "Designated Detector exposure:\n";
+                                text += f.format(n) + " Sv (neutron)\n";
+                                text += f.format(g) + " Sv (gamma)\n";
+                                text += f.format(g + n) + " Sv (total)\n";
+
+                                // put onto clipboard
+                                Clipboard clipboard = Clipboard.getSystemClipboard();
+                                ClipboardContent content = new ClipboardContent();
+                                content.putString(text);
+                                clipboard.setContent(content);
+
+                                // show in alert
+                                Alert alert = new Alert(AlertType.INFORMATION, text, ButtonType.OK);
+                                alert.showAndWait();
+                            });
+                        }
                         idle();
                         if (sim instanceof MC0D) {
                             Group newstats = new StatsDisplay(sim, root);
@@ -339,5 +369,4 @@ public class App extends Application {
         launch();
     }
 
- 
 }

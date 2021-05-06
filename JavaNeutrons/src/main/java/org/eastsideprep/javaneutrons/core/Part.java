@@ -312,7 +312,7 @@ public class Part {
     //
     // exposure measurements in sieverts
     //
-    double getSieverts(String type) {
+    public double getSieverts(String type) {
         return this.fluenceMap.get(type).totalSieverts.doubleValue();
     }
 }
