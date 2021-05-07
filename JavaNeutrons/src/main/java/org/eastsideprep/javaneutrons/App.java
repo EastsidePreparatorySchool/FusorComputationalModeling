@@ -302,7 +302,7 @@ public class App extends Application {
                                 
                                 // make a nice string
                                 DecimalFormat f = new DecimalFormat("0.###E0");
-                                String text = "Designated Detector exposure:\n";
+                                String text = "Designated Detector \""+p.name+"\":\n\n";
                                 text += f.format(n) + " Sv (neutron)\n";
                                 text += f.format(g) + " Sv (gamma)\n";
                                 text += f.format(g + n) + " Sv (total)\n";
@@ -315,6 +315,8 @@ public class App extends Application {
 
                                 // show in alert
                                 Alert alert = new Alert(AlertType.INFORMATION, text, ButtonType.OK);
+                                alert.setTitle("Simulation finished");
+                                alert.setHeaderText("Exposure summary");
                                 alert.showAndWait();
                             });
                         }

@@ -6,6 +6,7 @@
 package org.eastsideprep.javaneutrons;
 
 import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
@@ -451,6 +452,52 @@ public class TestGM {
         mcs.designatedDetector = detector1;
 
         return mcs;
+    }
+
+    public static MonteCarloSimulation exposureNoShielding(Group visualizations) {
+
+        // vac chamber
+        Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class.getResource("/meshes/vac_chamber.obj")), "Steel");
+        vacChamber.setColor("black");
+        vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
+
+        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
+        wfloor.setColor("black");
+        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
+        wceiling.setColor("black");
+
+        //other stuff
+        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
+        lead.setColor("gray");
+
+//        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/0mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
+//            wax.setColor("lightblue");
+//                wax.getTransforms().add(0, new Translate(0,0.5,0));      
+        //assembling and such  
+        Assembly fusor = new Assembly("Fusor");
+        fusor.addAll(vacChamber, lead, wfloor, wceiling);
+        //fusor.addAll(vacChamber, wax, wfront, wback);
+
+        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20, -300, -30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
+        Part dd = null;
+        for (Part p : dp.getParts()) {
+            if (p.name.equals("Person.0")) {
+                dd = p;
+            }
+        }
+        fusor.addAll(dp);
+
+        fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
+        // make some axes
+        Util.Graphics.drawCoordSystem(visualizations);
+        MonteCarloSimulation mcs = new MonteCarloSimulation(fusor,
+                null, null, Neutron.startingEnergyDD, //check energy
+                "Air", "Vacuum", visualizations, false);
+        mcs.suggestedCount = 10000;
+        mcs.suggestedGrid = 5.0;
+        mcs.designatedDetector = dd;
+        return mcs;
+
     }
 
     //
