@@ -507,9 +507,9 @@ public class TestGM {
 //        Part box = new Part("Box", new Cuboid(boxExtentX, boxExtentY, boxExtentZ), "Vacuum", "red")
 //                .translate(boxCenterX, boxCenterY, boxCenterZ);
         // concrete floor and ceiling
-        Part floor = new Part("Floor", new Cuboid(2000, 2000, floorThickness), "Paraffin", "grey")
+        Part floor = new Part("Floor", new Cuboid(2000, 2000, floorThickness), "ConcreteNIST", "grey")
                 .translate(0, 0, floorLevel - floorThickness / 2);
-        Part ceiling = new Part("Ceiling", new Cuboid(2000, 2000, ceilingThickness), "Paraffin", "grey")
+        Part ceiling = new Part("Ceiling", new Cuboid(2000, 2000, ceilingThickness), "ConcreteNIST", "grey")
                 .translate(0, 0, floorLevel + 12.0 * foot + ceilingThickness / 2);
 
         // lead box

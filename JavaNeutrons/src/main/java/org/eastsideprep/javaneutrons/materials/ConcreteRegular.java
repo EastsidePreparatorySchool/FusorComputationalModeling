@@ -11,11 +11,11 @@ import org.eastsideprep.javaneutrons.core.Material;
 // Concrete, regular (material 99)
 //
 //
-public class Concrete extends Material {
+public class ConcreteRegular extends Material {
 
-    static Concrete instance;
+    static ConcreteRegular instance;
 
-    Concrete() {
+    ConcreteRegular() {
         super("Concrete");
         this.addComponent(N1H.getInstance(), 0.168038);
         this.addComponent(N16O.getInstance(), 0.563183);
@@ -26,14 +26,14 @@ public class Concrete extends Material {
         this.calculateAtomicDensities(2300.0);
     }
 
-    Concrete(String name) {
+    ConcreteRegular(String name) {
         super(name);
     }
 
     // we only need one of these objects
-    public static synchronized Concrete getInstance() {
+    public static synchronized ConcreteRegular getInstance() {
         if (instance == null) {
-            Concrete.instance = new Concrete();
+            ConcreteRegular.instance = new ConcreteRegular();
         }
         return instance;
     }
