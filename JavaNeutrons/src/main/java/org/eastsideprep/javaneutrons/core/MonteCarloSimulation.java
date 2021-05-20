@@ -131,6 +131,8 @@ public class MonteCarloSimulation {
     public double suggestedGrid = 5;
     public boolean fit = false;
     public Part designatedDetector = null;
+    public double srcRate = 10E8;
+    public String name;
 
     public static boolean visualLimitReached = false;
 
@@ -331,6 +333,10 @@ public class MonteCarloSimulation {
                     simulateParticle(g, e.exitMaterial, false);
                 }
             }
+        } else {
+            if (this.traceLevel > 0) {
+                System.out.println("Particle complete, event code " + e.code);
+            }
         }
 
         if (count) {
@@ -470,7 +476,7 @@ public class MonteCarloSimulation {
                         //c.getData().add(p.capturesOverEnergy.makeSeries("Capture", log));
                     } else {
                         // this is only for the interstitial medium
-                        factor = (4.0 / 3.0 * Math.PI * Math.pow(1000, 3) - this.assembly.getVolume());
+                        factor = (4.0 / 3.0 * Math.PI * Math.pow(Environment.limit, 3) - this.assembly.getVolume());
                         m = this.getMaterialByName(detector);
                         f = new DecimalFormat("0.###E0");
                         e = f.format(m.totalFreePath / (this.lastCount * factor));
@@ -623,55 +629,59 @@ public class MonteCarloSimulation {
 
     public static String makeChartCSV(XYChart<String, Number> c, Series<String, Number> sErrors) {
         String chartData = "'" + c.getXAxis().getLabel() + "'";
-        // make header
+        try {
+            // make header
 
-        for (Series<String, Number> s : c.getData()) {
-            chartData += " '" + s.getName() + "'";
-        }
-        if (sErrors != null) {
-            chartData += " '" + sErrors.getName() + "'";
-        }
-        chartData += "\n";
-
-        // check if we need to insert a 0 row
-        Series<String, Number> s0 = c.getData().get(0);
-        String firstBin = s0.getData().get(0).getXValue();
-        if (firstBin.equals("<")) {
-            firstBin = s0.getData().get(1).getXValue();
-        }
-        if (Double.parseDouble(firstBin) > 0) {
-            // make row for 0s
-            chartData += "0";
             for (Series<String, Number> s : c.getData()) {
-                chartData += " 0";
+                chartData += " '" + s.getName() + "'";
             }
             if (sErrors != null) {
-                chartData += " 0";
+                chartData += " '" + sErrors.getName() + "'";
             }
             chartData += "\n";
-        }
 
-        // go through x-values
-        for (int i = 0; i < s0.getData().size(); i++) {
-            chartData += s0.getData().get(i).getXValue();
-            // go through the y-values
-            for (Series<String, Number> s : c.getData()) {
-                if (s.getData().size() > i) {
-                    Data<String, Number> d2 = s.getData().get(i);
-                    chartData += " " + d2.getYValue();
-                } else {
-                    chartData += " NA";
-                }
+            // check if we need to insert a 0 row
+            Series<String, Number> s0 = c.getData().get(0);
+            String firstBin = s0.getData().get(0).getXValue();
+            if (firstBin.startsWith("<")) {
+                firstBin = s0.getData().get(1).getXValue();
             }
-            if (sErrors != null) {
-                if (sErrors.getData().size() > i) {
-                    Data<String, Number> d2 = sErrors.getData().get(i);
-                    chartData += " " + d2.getYValue();
-                } else {
-                    chartData += " NA";
+            if (Double.parseDouble(firstBin) > 0) {
+                // make row for 0s
+                chartData += "0";
+                for (Series<String, Number> s : c.getData()) {
+                    chartData += " 0";
                 }
+                if (sErrors != null) {
+                    chartData += " 0";
+                }
+                chartData += "\n";
             }
-            chartData += "\n";
+
+            // go through x-values
+            for (int i = 0; i < s0.getData().size(); i++) {
+                chartData += s0.getData().get(i).getXValue();
+                // go through the y-values
+                for (Series<String, Number> s : c.getData()) {
+                    if (s.getData().size() > i) {
+                        Data<String, Number> d2 = s.getData().get(i);
+                        chartData += " " + d2.getYValue();
+                    } else {
+                        chartData += " NA";
+                    }
+                }
+                if (sErrors != null) {
+                    if (sErrors.getData().size() > i) {
+                        Data<String, Number> d2 = sErrors.getData().get(i);
+                        chartData += " " + d2.getYValue();
+                    } else {
+                        chartData += " NA";
+                    }
+                }
+                chartData += "\n";
+            }
+        } catch (Exception e) {
+            System.out.println("Exception while trying to create chart CSV: " + e);
         }
         return chartData;
     }

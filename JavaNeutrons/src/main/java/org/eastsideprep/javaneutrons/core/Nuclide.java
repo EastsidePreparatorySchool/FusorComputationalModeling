@@ -276,7 +276,7 @@ public class Nuclide {
             this.data = data;
         }
 
-        private List<Gamma> yieldGammas(Vector3D position, double yield) {
+        private List<Gamma> yieldGammas(Vector3D position, double yield, Nuclide nuclide, double ne) {
             Gamma g = null;
             LinkedList<Gamma> result = new LinkedList<>();
 
@@ -285,15 +285,15 @@ public class Nuclide {
                 yield += 1;
             }
 
-            // produce that many neutrons
+            // produce that many gammas
             for (int i = 0; i < Math.floor(yield); i++) {
-                g = new Gamma(position);
+                g = new Gamma(position, nuclide, ne);
                 result.add(g);
             }
             return result;
         }
 
-        private List<Gamma> generateGammas(Vector3D position, double eNeutron) {
+        private List<Gamma> generateGammas(Vector3D position, double eNeutron, Nuclide producer) {
             // interpolates yield, calls yieldGammas()
             int index = Collections.binarySearch(this.yields, new ValueEntry(eNeutron, 0));
             index = index < 0 ? Math.max(0, -index - 2) : index;
@@ -321,7 +321,11 @@ public class Nuclide {
                 default:
                     throw new IllegalArgumentException("Unknown interpolation law " + yieldInterpolationLaw);
             }
-            List<Gamma> result = yieldGammas(position, yield);
+            List<Gamma> result = yieldGammas(position, yield, producer, eNeutron);
+//            if (result.size() > 1) {
+//                DecimalFormat f = new DecimalFormat("0.##E0");
+//                System.out.println("Multiple gamma emission: " + producer.name + ", e(n): " + f.format(eNeutron / Util.Physics.eV)+", gammas: "+result.size());
+//            }
 
             //String[] knownPhotonEnergyDistributionLaws = new String[]{"2", "2a", "4"}; // single value, c0 + c1*EIn, tabular
             // these laws are already encoded here as subclasses of PhotonData
@@ -510,10 +514,10 @@ public class Nuclide {
 
         if (this.pDistList != null) {
             for (PhotonDistribution dist : this.pDistList) {
-                list.addAll(dist.generateGammas(position, eNeutron));
+                list.addAll(dist.generateGammas(position, eNeutron, this));
             }
         }
-        
+
         return list;
     }
 

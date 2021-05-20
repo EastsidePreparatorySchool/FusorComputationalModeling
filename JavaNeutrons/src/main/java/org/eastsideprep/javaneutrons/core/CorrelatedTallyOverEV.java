@@ -5,13 +5,11 @@
  */
 package org.eastsideprep.javaneutrons.core;
 
-import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.DoubleAdder;
-import java.util.stream.Collectors;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 
@@ -23,25 +21,27 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     double[][] covFlat;
     double[][] covLow;
     Util.LogLogTable sievertConversionTable;
-    DoubleAdder totalSieverts;
-
-    public CorrelatedTallyOverEV(Util.LogLogTable sievertConversionTable) {
-        sumSquares = new TallyOverEV();
-        covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
-        covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
-        covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
-        this.sievertConversionTable = sievertConversionTable;
-        this.totalSieverts = new DoubleAdder();
-    }
+    DoubleAdder totalSievert;
+    double param_e;
+    int param_bins;
 
     public CorrelatedTallyOverEV(double e, int bins, Util.LogLogTable sievertConversionTable) {
         super(e, bins);
+
+        this.param_bins = bins;
+        this.param_e = e;
+
         sumSquares = new TallyOverEV(e, bins);
         covLog = new double[sumSquares.bins.length][sumSquares.bins.length];
         covFlat = new double[sumSquares.hFlat.bins.length][sumSquares.hFlat.bins.length];
         covLow = new double[sumSquares.hLow.bins.length][sumSquares.hLow.bins.length];
         this.sievertConversionTable = sievertConversionTable;
-        this.totalSieverts = new DoubleAdder();
+        this.totalSievert = new DoubleAdder();
+    }
+
+    @Override
+    public void record(double value, double energy) {
+        throw new UnsupportedOperationException();
     }
 
     public void record(Particle p, double value, double energy) {
@@ -52,7 +52,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
 
         if (h == null) {
             synchronized (hMap) {
-                h = new TallyOverEV();
+                h = new TallyOverEV(this.param_e, this.param_bins);
                 hMap.put(p, h);
             }
         }
@@ -60,11 +60,31 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         h.record(value, energy);
         p.fluences.add(this);
 
-        // record sieverts
-        double sieverts = this.sievertConversionTable.lookup(energy / Util.Physics.eV) * value;
-        //synchronized (this) {
-            this.totalSieverts.add(sieverts);
-        //}
+        if (this.sievertConversionTable != null) {
+            // record sieverts
+            double sieverts = this.sievertConversionTable.lookup(energy / Util.Physics.eV) * value;
+            this.totalSievert.add(sieverts);
+
+            // debug code
+            if (p.mcs.traceLevel >= 2) {
+                DecimalFormat f = new DecimalFormat("0.###E0");
+
+                if (p instanceof Gamma) {
+                    Gamma g = (Gamma) p;
+                    System.out.println("------ Gamma recorded, eV: " + f.format((energy / Util.Physics.eV))
+                            + ", Sv: " + f.format(sieverts)
+                            + ", Sv for 1 cm: " + f.format(sieverts / value)
+                            + ", producer: " + g.producer.name
+                            + ", e(n): " + f.format(g.neutronEnergy / Util.Physics.eV) + " eV"
+                    );
+                } else {
+                    System.out.println("------ Neutron recorded, eV: " + f.format((energy / Util.Physics.eV))
+                            + ", Sv: " + f.format(sieverts)
+                            + ", Sv for 1 cm: " + f.format(sieverts / value)
+                    );
+                }
+            }
+        }
     }
 
     public void tally(Particle p) {
@@ -74,7 +94,12 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
         }
 
         if (h == null) {
+            System.out.println("What?");
             return;
+        }
+
+        if (p instanceof Gamma && p.energy > 1.e7 * Util.Physics.eV) {
+            System.out.println("   What?");
         }
 
         synchronized (this) {
@@ -160,7 +185,7 @@ public class CorrelatedTallyOverEV extends TallyOverEV {
     }
 
     public static CorrelatedTallyOverEV parseFromString(String s) {
-        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(null); //to fill
+        CorrelatedTallyOverEV output = new CorrelatedTallyOverEV(5e6, 100, null); //to fill
         String[] lines = s.split("\n"); //
         ArrayList<String> collection = new ArrayList<>();
         for (int i = 0; i < lines.length; i++) {

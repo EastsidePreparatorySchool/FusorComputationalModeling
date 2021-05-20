@@ -5,12 +5,16 @@
  */
 package org.eastsideprep.javaneutrons;
 
+import unittests.AllTests;
+
 /**
  *
  * @author svernon
  */
-public class Main  {
-    public static void main(String[] args){
+public class Main {
+
+    public static void main(String[] args) {
+        AllTests.run();
         App.main(args);
         System.exit(0);
     }

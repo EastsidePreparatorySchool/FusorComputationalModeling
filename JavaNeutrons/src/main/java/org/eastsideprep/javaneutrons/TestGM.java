@@ -6,7 +6,6 @@
 package org.eastsideprep.javaneutrons;
 
 import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Platform;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
@@ -38,17 +37,9 @@ import org.eastsideprep.javaneutrons.core.Util;
 import org.eastsideprep.javaneutrons.shapes.Cuboid;
 import org.eastsideprep.javaneutrons.shapes.HumanBody;
 import org.eastsideprep.javaneutrons.core.Shape;
-import org.eastsideprep.javaneutrons.materials.Concrete;
 import org.eastsideprep.javaneutrons.materials.N12C;
 import org.eastsideprep.javaneutrons.materials.N1H;
 import org.eastsideprep.javaneutrons.materials.HydrogenWax;
-import org.eastsideprep.javaneutrons.materials.N14N;
-import org.eastsideprep.javaneutrons.materials.N16O;
-import org.eastsideprep.javaneutrons.materials.N206Pb;
-import org.eastsideprep.javaneutrons.materials.N207Pb;
-import org.eastsideprep.javaneutrons.materials.N208Pb;
-import org.eastsideprep.javaneutrons.materials.N40Ar;
-import org.eastsideprep.javaneutrons.materials.N56Fe;
 import org.eastsideprep.javaneutrons.materials.Paraffin;
 import org.eastsideprep.javaneutrons.materials.Vacuum;
 import org.fxyz3d.shapes.primitives.CuboidMesh;
@@ -62,7 +53,7 @@ public class TestGM {
     public static MonteCarloSimulation current(Group visualizations) {
         //return TestSV.october(visualizations);
         // return prison(visualizations);
-        return bigBlock(visualizations);
+        return exposure30(visualizations);
 
         //System.exit(0);
         //return null;
@@ -92,8 +83,8 @@ public class TestGM {
 
             @Override
             public void before() {
-                maxwell = new TallyOverEV();
-                adjusted = new TallyOverEV();
+                maxwell = new TallyOverEV(1e7, 100);
+                adjusted = new TallyOverEV(1e7, 100);
                 angles = new Tally(-1.0, 1.0, 100, false);
                 pairs = new ArrayList<>();
             }
@@ -209,7 +200,7 @@ public class TestGM {
 
             @Override
             public void before() {
-                adjusted = new TallyOverEV();
+                adjusted = new TallyOverEV(1e7,100);
                 angles = new Tally(-1.0, 1.0, 100, false);
                 pairs = new ArrayList<>();
             }
@@ -308,7 +299,7 @@ public class TestGM {
 
             @Override
             public void before() {
-                adjusted = new TallyOverEV();
+                adjusted = new TallyOverEV(1e7,100);
                 angles = new Tally(-1.0, 1.0, 100, false);
                 pairs = new ArrayList<>();
             }
@@ -454,38 +445,119 @@ public class TestGM {
         return mcs;
     }
 
-    public static MonteCarloSimulation exposureNoShielding(Group visualizations) {
+    public static MonteCarloSimulation exposure0(Group vis) {
+        return exposure(vis, 0);
+    }
+
+    public static MonteCarloSimulation exposure10(Group vis) {
+        return exposure(vis, 10);
+    }
+
+    public static MonteCarloSimulation exposure30(Group vis) {
+        return exposure(vis, 30);
+    }
+
+    public static MonteCarloSimulation exposure(Group visualizations, int param1) {
 
         // vac chamber
         Part vacChamber = new Part("Vacuum chamber", new Shape(TestGM.class.getResource("/meshes/vac_chamber.obj")), "Steel");
         vacChamber.setColor("black");
         vacChamber.getTransforms().add(0, new Rotate(90, new Point3D(1, 0, 0)));
 
-        Part wfloor = new Part("W.floor", new Shape(TestSV.class.getResource("/meshes/2021/expandedfloor4in.stl"), "cm"), "Concrete");
-        wfloor.setColor("black");
-        Part wceiling = new Part("W.ceiling", new Shape(TestSV.class.getResource("/meshes/2021/expandedceiling4in.stl"), "cm"), "Concrete");
-        wceiling.setColor("black");
+        // convention: width = x, height = z, depth = y
+        double inch = 2.54;
+        double foot = 12.0 * inch;
+        double meter = 100.0;
 
-        //other stuff
-        Part lead = new Part("Lead Box", new Shape(TestSV.class.getResource("/meshes/920/leadbox.stl"), "cm"), "Lead");
-        lead.setColor("gray");
+        double vacChamberBaseHeight = 38.5 * inch;
+        double vacChamberInnerDiameter = 18.0;
+        double vacChamberInnerHeight = 18.0;
+        double vacChamberOuterDiameter = 20.0;
+        double vacChamberOuterHeight = 20.0;
+        double vacChamberCenterFromBoxBack = 10.0 * inch;
 
-//        Part wax = new Part("5mm wax", new Shape(TestSV.class.getResource("/meshes/2021/0mmnobase.stl"), "cm"), "Paraffin"); //alternate 0mmnewer.stl
-//            wax.setColor("lightblue");
-//                wax.getTransforms().add(0, new Translate(0,0.5,0));      
-        //assembling and such  
+        double boxExtentX = 18.0 * inch;
+        double boxExtentY = 20.0 * inch;
+        double boxExtentZ = 28.0 * inch;
+        double boxBottom = 37.0 * inch;
+
+        double paraffinThickness = param1; // We will vary this.
+        System.out.println("Paraffin thickness = " + paraffinThickness);
+
+        double targetHeightAboveFloor = 100.0;
+        double targetThickness = 1.0;
+        double targetExtentY = 100.0;
+        double targetExtentZ = 100.0;
+        double targetFaceFromSource = 5.0 * meter;
+
+        double floorThickness = 8.0 * inch;
+        double ceilingThickness = 4.0 * inch;
+        double ceilingHeight = 12.0 * foot;
+
+        double leadThickness = 0.25 * inch;
+
+        // calculated
+        double floorLevel = -vacChamberBaseHeight - vacChamberOuterHeight / 2;
+        double boxLevel = floorLevel + boxBottom;
+
+        double boxCenterX = 0; // assumed vac chamber centered in x dimension
+        double boxCenterY = vacChamberCenterFromBoxBack - boxExtentY / 2;
+        double boxCenterZ = boxLevel + boxExtentZ / 2;
+
+//        Part box = new Part("Box", new Cuboid(boxExtentX, boxExtentY, boxExtentZ), "Vacuum", "red")
+//                .translate(boxCenterX, boxCenterY, boxCenterZ);
+        // concrete floor and ceiling
+        Part floor = new Part("Floor", new Cuboid(2000, 2000, floorThickness), "Paraffin", "grey")
+                .translate(0, 0, floorLevel - floorThickness / 2);
+        Part ceiling = new Part("Ceiling", new Cuboid(2000, 2000, ceilingThickness), "Paraffin", "grey")
+                .translate(0, 0, floorLevel + 12.0 * foot + ceilingThickness / 2);
+
+        // lead box
+        Part leadLeft = new Part("Lead left", new Cuboid(leadThickness, boxExtentY, boxExtentZ - 2 * leadThickness), "Lead", "darkgrey")
+                .translate(boxCenterX - boxExtentX / 2 + leadThickness / 2, boxCenterY, boxCenterZ);
+        Part leadRight = new Part("Lead right", new Cuboid(leadThickness, boxExtentY, boxExtentZ - 2 * leadThickness), "Lead", "darkgrey")
+                .translate(+boxExtentX / 2 - leadThickness / 2, boxCenterY, boxCenterZ);
+
+        Part leadBack = new Part("Lead back", new Cuboid(boxExtentX - 2 * leadThickness, leadThickness, boxExtentZ - 2 * leadThickness), "Lead", "darkgrey")
+                .translate(boxCenterX, boxCenterY + boxExtentY / 2 - leadThickness / 2, boxCenterZ);
+        Part leadFront = new Part("Lead front", new Cuboid(boxExtentX - 2 * leadThickness, leadThickness, boxExtentZ - 2 * leadThickness), "Lead", "darkgrey")
+                .translate(boxCenterX, boxCenterY - boxExtentY / 2 + leadThickness / 2, boxCenterZ);
+
+        Part leadBottom = new Part("Lead bottom", new Cuboid(boxExtentX, boxExtentY, leadThickness), "Lead", "darkgrey")
+                .translate(boxCenterX, boxCenterY, boxCenterZ - boxExtentZ / 2 + leadThickness / 2);
+        Part leadTop = new Part("Lead top", new Cuboid(boxExtentX, boxExtentY, leadThickness), "Lead", "darkgrey")
+                .translate(boxCenterX, boxCenterY, boxCenterZ + boxExtentZ / 2 - leadThickness / 2);
+
+        // detector target
+        Part target = new Part("Target", new Cuboid(targetExtentY, targetThickness, targetExtentZ), "HighVacuum", "green")
+                .translate(0, -targetFaceFromSource, floorLevel + targetHeightAboveFloor+targetExtentZ/2);
+
         Assembly fusor = new Assembly("Fusor");
-        fusor.addAll(vacChamber, lead, wfloor, wceiling);
-        //fusor.addAll(vacChamber, wax, wfront, wback);
+        fusor.addAll(vacChamber,
+                floor, ceiling,
+                leadLeft, leadRight, leadBack, leadFront, leadBottom, leadTop,
+                target
+        );
 
-        Assembly dp = detectorPeople(7, 152.4, new Vector3D(-20, -300, -30), 180, 100);//new Vector3D(-20,30,-299), 180, 100);
-        Part dd = null;
-        for (Part p : dp.getParts()) {
-            if (p.name.equals("Person.0")) {
-                dd = p;
-            }
+        // paraffin shield
+        if (param1 != 0) {
+            Part pLeft, pRight, pBack, pFront, pBottom, pTop;
+            pLeft = new Part("Paraffin left", new Cuboid(paraffinThickness, boxExtentY + 2 * paraffinThickness, boxExtentZ), "Paraffin", "lightblue")
+                    .translate(boxCenterX - boxExtentX / 2 - paraffinThickness / 2, boxCenterY, boxCenterZ);
+            pRight = new Part("Paraffin right", new Cuboid(paraffinThickness, boxExtentY + 2 * paraffinThickness, boxExtentZ), "Paraffin", "lightblue")
+                    .translate(boxCenterX + boxExtentX / 2 + paraffinThickness / 2, boxCenterY, boxCenterZ);
+
+            pBack = new Part("Paraffin back", new Cuboid(boxExtentX, paraffinThickness, boxExtentZ), "Paraffin", "lightblue")
+                    .translate(boxCenterX, boxCenterY + boxExtentY / 2 + paraffinThickness / 2, boxCenterZ);
+            pFront = new Part("Paraffin front", new Cuboid(boxExtentX, paraffinThickness, boxExtentZ), "Paraffin", "lightblue")
+                    .translate(boxCenterX, boxCenterY - boxExtentY / 2 - paraffinThickness / 2, boxCenterZ);
+
+            pBottom = new Part("Paraffin bottom", new Cuboid(boxExtentX + 2 * paraffinThickness, boxExtentY + 2 * paraffinThickness, paraffinThickness), "Paraffin", "lightblue")
+                    .translate(boxCenterX, boxCenterY, boxCenterZ - boxExtentZ / 2 - paraffinThickness / 2);
+            pTop = new Part("Paraffin top", new Cuboid(boxExtentX + 2 * paraffinThickness, boxExtentY + 2 * paraffinThickness, paraffinThickness), "Paraffin", "lightblue")
+                    .translate(boxCenterX, boxCenterY, boxCenterZ + boxExtentZ / 2 + paraffinThickness / 2);
+            fusor.addAll(pLeft, pRight, pBack, pFront, pBottom, pTop);
         }
-        fusor.addAll(dp);
 
         fusor.containsMaterialAt("Vacuum", Vector3D.ZERO);
         // make some axes
@@ -494,10 +566,11 @@ public class TestGM {
                 null, null, Neutron.startingEnergyDD, //check energy
                 "Air", "Vacuum", visualizations, false);
         mcs.suggestedCount = 10000;
-        mcs.suggestedGrid = 5.0;
-        mcs.designatedDetector = dd;
+        mcs.suggestedGrid = 15.0;
+        mcs.designatedDetector = target;
+        mcs.srcRate = 1E8;
+        mcs.name = "Paraffin: " + (int) param1 + " cm";
         return mcs;
-
     }
 
     //
@@ -537,20 +610,21 @@ public class TestGM {
     public static MonteCarloSimulation prison(Group visualizations) {
         double thickness = 200; //block thickness in cm
         //String m = "HydrogenWax";
-        String m = "CarbonWax";
-        //String m = "Paraffin";
+        //String m = "CarbonWax";
+        String m = "Paraffin";
 
         //Part wall = new Part("Prison: " + m, new Shape(TestGM.class.getResource("/meshes/prison.stl"), "cm"), m);
         Part wall = new Part("Prison: " + m, new Cuboid(thickness), m);
         wall.setColor("silver");
 
-        Assembly whitmer = new Assembly("Whitmer");
-        whitmer.addAll(wall);
+        Assembly prison = new Assembly("Prison");
+        prison.addAll(wall);
 
-        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+        MonteCarloSimulation mcs = new MonteCarloSimulation(prison,
                 null, null, Neutron.startingEnergyDD, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
                 "Air", null, visualizations, false); // interstitial, initial
         mcs.suggestedCount = 100000;
+        mcs.designatedDetector = wall;
         return mcs;
     }
 
@@ -1040,7 +1114,7 @@ public class TestGM {
     }
 
     private static void histTest() {
-        TallyOverEV test = new TallyOverEV();
+        TallyOverEV test = new TallyOverEV(1e7,100);
         test.record(1000, 0.5e-4 * Util.Physics.eV);
         test.record(2000, 1e-3 * Util.Physics.eV);
         test.record(2100, 1.1e-3 * Util.Physics.eV);

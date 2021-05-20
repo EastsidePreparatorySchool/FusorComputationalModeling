@@ -43,9 +43,9 @@ public class CameraControl {
 
     public CameraControl(int widthPX, int heightPX) {
         // initial camera values
-        this.xRot = -20;
-        this.yRot = -10;
-        this.zTrans = -800;
+        this.xRot = -100;
+        this.yRot = 0;
+        this.zTrans = -2100;
         this.pxX = widthPX;
         this.pxY = heightPX;
         this.focusX = 0;
@@ -67,7 +67,7 @@ public class CameraControl {
         camera = new PerspectiveCamera(true);
         updateCamera();
         camera.setNearClip(0.1);
-        camera.setFarClip(20000);
+        camera.setFarClip(30000);
 
         root.getChildren().add(camera);
 
@@ -109,6 +109,12 @@ public class CameraControl {
                 new Translate(focusX, focusY, 0),
                 new Translate(0, 0, zTrans)
         );
+//        System.out.println("xRot "+xRot);
+//        System.out.println("yRot "+yRot);
+//        System.out.println("zTrans "+zTrans);
+//        System.out.println("focusX "+focusX);
+//        System.out.println("focusY "+focusY);
+//        System.out.println("");
     }
 
     public void handleKeyPress(KeyEvent e) {

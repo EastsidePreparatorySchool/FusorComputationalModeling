@@ -22,31 +22,12 @@ public class Tally {
         this.max = max;
         this.bins = new double[bins + 2];
         this.log = log;
-        //this.bins = new double[logMax - logMin + 1];
     }
 
     public Tally() {
-        this.min = -3;
-        this.max = 7;
-        this.bins = new double[(int) Math.ceil((max - min) * this.binsPerDecade)];
-        this.log = true;
-        //this.bins = new double[logMax - logMin + 1];
+        this(-3,7,100, true);
     }
 
-//    public Histogram(boolean log) {
-//        this.log = log;
-//
-//        if (log) {
-//            this.min = -3;
-//            this.max = 7;
-//            this.bins = new double[(max - min) * this.binsPerDecade];
-//        } else {
-//            this.min = 25000;
-//            this.max = 2525000;
-//            this.bins = new double[(int)(this.max - this.min) / 25000];
-//
-//        }
-//    }
     public void record(double value, double x) {
         int bin;
 
@@ -66,13 +47,11 @@ public class Tally {
             bin = (int) Math.ceil(x / (max - min) * (this.bins.length - 2));
         }
 
-//        // cut of stuff that is too small
-//        bin = Math.max(bin, 0);
-//        // cut off stuff that is too big
-//        bin = Math.min(bin, this.bins.length - 1);
-        //System.out.println(""+this.hashCode()+": recording "+(x+min)+":"+value);
         synchronized (this) {
             this.bins[bin] += value;
+//            if (this.bins[bin] > 1.e7) {
+//                System.out.println("big guy at energy "+x);
+//            }
         }
     }
 
@@ -83,7 +62,7 @@ public class Tally {
 
     public XYChart.Series makeSeries(String seriesName, double count) {
 
-        return this.makeSeries(seriesName, count, 10e10);
+        return this.makeSeries(seriesName, count, 1e12);
     }
 
     public XYChart.Series makeSeries(String seriesName, double count, double limit) {
@@ -91,6 +70,7 @@ public class Tally {
         XYChart.Series series = new XYChart.Series();
         ObservableList data = series.getData();
         series.setName(seriesName);
+        String tick ="";
 
         // put in all the data
         double[] counts = new double[this.bins.length];
@@ -102,27 +82,66 @@ public class Tally {
         //System.out.println("");
         //System.out.println(""+this.hashCode()+Arrays.toString(bins));
         if (counts[0] > 0) {
-            data.add(new XYChart.Data("<", counts[0] / count));
+            tick = String.format("%6.3e", counts[0]);
+            data.add(new XYChart.Data("< "+tick, counts[0] / count));
         }
 
         for (int i = 1; i < bins.length - 1; i++) {
             double x = min + i / ((double) bins.length - 2) * (max - min);
+
             if (this.log) {
                 x = Math.pow(10, x);
             }
-            if (x > limit) {
-                break;
-            }
-            String tick = String.format("%6.3e", x);
+
+            tick = String.format("%6.3e", x);
             data.add(new XYChart.Data(tick, counts[i] / count));
             //System.out.println(tick + " " + String.format("%6.3e", counts[i] / count));
         }
-        if (counts[bins.length - 1] > 0) {
-            data.add(new XYChart.Data(">", counts[bins.length - 1] / count));
-        }
+        data.add(new XYChart.Data("> "+tick, counts[bins.length - 1] / count));
         //System.out.println("");
 
         return series;
+    }
+
+    @Override
+    public String toString() {
+        return toString(false);
+    }
+
+    public String toString(boolean all) {
+        StringBuilder sb = new StringBuilder(20000);
+        // put in all the data
+        double[] counts = new double[this.bins.length];
+
+        synchronized (this) {
+            System.arraycopy(this.bins, 0, counts, 0, counts.length);
+        }
+
+        //System.out.println("");
+        //System.out.println(""+this.hashCode()+Arrays.toString(bins));
+        if (counts[0] > 0 || all) {
+            sb.append("<," + counts[0] + "\n");
+        }
+
+        for (int i = 1; i < bins.length - 1; i++) {
+            double x = min + i / ((double) bins.length - 2) * (max - min);
+
+            if (this.log) {
+                x = Math.pow(10, x);
+            }
+
+            if (counts[i] > 0 || all) {
+                String tick = String.format("%6.3e", x);
+                sb.append(tick + "," + counts[i] + "\n");
+            }
+
+        }
+        if (counts[bins.length - 1] > 0 || all) {
+            sb.append(">," + counts[bins.length - 1] + "\n");
+        }
+        //System.out.println("");
+
+        return sb.toString();
     }
 
     public XYChart.Series makeFittedSeries(String seriesName, ParametricUnivariateFunction f, double[] params, double count, double limit) {

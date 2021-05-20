@@ -87,11 +87,11 @@ public class Material {
     }
 
     public final void resetDetector() {
-        this.scattersOverEnergyBefore = new TallyOverEV();
-        this.scattersOverEnergyAfter = new TallyOverEV();
-        this.capturesOverEnergy = new TallyOverEV();
-        this.lengthOverEnergy = new TallyOverEV();
-        this.pathCounts = new TallyOverEV();
+        this.scattersOverEnergyBefore = new TallyOverEV(1e7,100);
+        this.scattersOverEnergyAfter = new TallyOverEV(1e7,100);
+        this.capturesOverEnergy = new TallyOverEV(1e7,100);
+        this.lengthOverEnergy = new TallyOverEV(1e7,100);
+        this.pathCounts = new TallyOverEV(1e7,100);
         this.lengths = new Tally(-5, 7, 120, false);
         this.totalEvents = new AtomicLong(0);
         this.totalEvents = new AtomicLong(0);

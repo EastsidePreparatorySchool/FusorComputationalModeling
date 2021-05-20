@@ -10,19 +10,19 @@ public class TallyOverEV extends Tally {
     static double LOW_TRACKING_LIMIT = 0.25;
     static double LOW_BIN_SIZE = 1e-3;
 
-    Tally hFlat;
-    Tally hLow;
+    public Tally hFlat;
+    public Tally hLow;
     double [] energyFitParams = new double[] {0,0};
     double [] fluxFitParams = new double[] {0,0};
 
-    public TallyOverEV() {
-        super(-3, 7, 100, true);
-        hFlat = new Tally(0, 6e6, 200, false);
-        hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
-    }
+//    public TallyOverEV() {
+//        super(-3, 7, 100, true);
+//        hFlat = new Tally(0, 5e6, 200, false); // 5e6 is enough for our neutrons, gammas use the other constructor
+//        hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
+//    }
 
     public TallyOverEV(double e, int bins) {
-        super(-3, 7, 100, true);
+        super(-3, Math.ceil(Math.log10(e)), 100, true);
         hFlat = new Tally(0, e, bins, false);
         hLow = new Tally(0, LOW_TRACKING_LIMIT, (int) (LOW_TRACKING_LIMIT / LOW_BIN_SIZE), false);
     }
@@ -170,7 +170,7 @@ public class TallyOverEV extends Tally {
 
 
     public TallyOverEV normalizeBy(TallyOverEV other) {
-        TallyOverEV h = new TallyOverEV();
+        TallyOverEV h = new TallyOverEV(this.max, bins.length-2);
         h.mutateClone(this);
         h.mutateNormalizeBy(other);
         h.hFlat.mutateClone(this.hFlat);

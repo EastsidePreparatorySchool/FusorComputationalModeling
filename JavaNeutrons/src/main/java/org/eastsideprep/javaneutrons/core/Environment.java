@@ -2,7 +2,7 @@ package org.eastsideprep.javaneutrons.core;
 
 public class Environment {
 
-    public static final double limit = 1000; // 1000cm = 10m
+    public static final double limit = 2000; // 2000cm = 20m
     private static Environment instance;
     public TallyOverEV counts;
     private long totalEscapes;
@@ -35,7 +35,7 @@ public class Environment {
     }
 
     public void reset() {
-        counts = new TallyOverEV();
+        counts = new TallyOverEV(1e7, 100);
         totalEscapes = 0;
         totalCaptures = 0;
     }

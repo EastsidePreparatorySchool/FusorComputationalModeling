@@ -446,7 +446,7 @@ public class Util {
 
         public LogLogTable(String filename) {
             try {
-                InputStream is = Part.class.getResourceAsStream("/sieverts/neutron_conversion.csv");
+                InputStream is = Part.class.getResourceAsStream(filename);
                 Scanner sc = new Scanner(is);
                 sc.nextLine();
                 while (sc.hasNextLine()) {
@@ -458,7 +458,7 @@ public class Util {
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Error loading table: "+e);
-                throw new IllegalArgumentException("can't load fluence -> sieverts conversion table");
+                throw new IllegalArgumentException("can't load fluence -> sieverts conversion table "+filename);
             }
         }
         

@@ -274,7 +274,7 @@ public class App extends Application {
 
         noIdle();
         this.progressTimeline();
-        sim.simulateParticles(count, 1000, true);
+        sim.simulateParticles(count, count<=10?100000:1000, true);
         root.setCenter(view);
     }
 
@@ -293,19 +293,29 @@ public class App extends Application {
                         sim.postProcess();
                         bRun.setDisable(false);
                         progress.setText("Complete: 100 % , time: " + (sim.getElapsedTime() / 1000) + " s");
-                        if (sim.designatedDetector != null) {
+                        if (this.sim.designatedDetector != null && this.sim.lastCount > 10) {
                             Platform.runLater(() -> {
                                 // collect exposure in Sievert from designated detector part
                                 Part p = sim.designatedDetector;
-                                double n = p.getSieverts("neutron");
-                                double g = p.getSieverts("gamma");
-                                
+                                double n = p.getSieverts("neutron") / this.sim.lastCount;
+                                double g = p.getSieverts("gamma") / this.sim.lastCount;
+
+                                // want per hour
+                                n *= this.sim.srcRate * 3600;
+                                g *= this.sim.srcRate * 3600;
+
                                 // make a nice string
                                 DecimalFormat f = new DecimalFormat("0.###E0");
-                                String text = "Designated Detector \""+p.name+"\":\n\n";
-                                text += f.format(n) + " Sv (neutron)\n";
-                                text += f.format(g) + " Sv (gamma)\n";
-                                text += f.format(g + n) + " Sv (total)\n";
+                                String text = "";
+                                if (this.sim.name != null) {
+                                    text += "Simulation name: \"" + this.sim.name + "\"\n";
+                                }
+                                text += "Source rate: " + f.format(this.sim.srcRate) + " n/s\n";
+                                text += "Neutrons simulated: " + this.sim.lastCount + "\n";
+                                text += "Designated Detector \"" + p.name + "\":\n\n";
+                                text += f.format(n) + " Sv/hr (neutron)\n";
+                                text += f.format(g) + " Sv/hr (gamma)\n";
+                                text += f.format(g + n) + " Sv/hr (total)\n";
 
                                 // put onto clipboard
                                 Clipboard clipboard = Clipboard.getSystemClipboard();
