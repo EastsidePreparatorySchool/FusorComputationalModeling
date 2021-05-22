@@ -19,7 +19,7 @@ public class Steel extends Material {
         super("Steel");
         this.addComponent(N12C.getInstance(), 0.022831);
         this.addComponent(N56Fe.getInstance(), 0.977169);
-        this.calculateAtomicDensities(7820);
+        this.calculateAtomicDensities(7.820);
     }
 
     // we only need one of these objects

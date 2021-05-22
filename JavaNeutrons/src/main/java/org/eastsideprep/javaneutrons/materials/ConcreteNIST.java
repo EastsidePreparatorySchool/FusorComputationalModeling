@@ -27,7 +27,7 @@ public class ConcreteNIST extends Material {
         //this.addComponent(N__K.getInstance(), 0.003578);
         //this.addComponent(N__Ca.getInstance(), 0.014924);
         this.addComponent(N56Fe.getInstance(), 0.001605);
-        this.calculateAtomicDensities(2300.0);
+        this.calculateAtomicDensities(2.300);
     }
 
     ConcreteNIST(String name) {

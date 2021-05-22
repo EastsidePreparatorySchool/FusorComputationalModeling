@@ -33,7 +33,7 @@ public class Air extends Gas {
         this.addComponent(N40Ar.getInstance(), 0.004671);
 
         // that's 100 Pa for STP
-        this.calculateAtomicDensities(massDensitySTP * pressure / 100);
+        this.calculateAtomicDensities(massDensitySTP * pressure / 100 / 1000);
     }
 
     // we only need one of these objects

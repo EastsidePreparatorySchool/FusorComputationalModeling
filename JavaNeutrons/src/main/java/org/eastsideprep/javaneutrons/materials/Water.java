@@ -18,7 +18,7 @@ public class Water extends Material {
         super("Water");
         this.addComponent(N1H.getInstance(), 0.666657);
         this.addComponent(N16O.getInstance(), 0.333343);
-        this.calculateAtomicDensities(998);
+        this.calculateAtomicDensities(0.998);
     }
 
     Water(String name) {

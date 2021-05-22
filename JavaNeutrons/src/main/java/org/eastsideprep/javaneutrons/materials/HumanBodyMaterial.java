@@ -16,7 +16,7 @@ public class HumanBodyMaterial extends Material {
         this.addComponent(N16O.getInstance(), 0.24);
         this.addComponent(N12C.getInstance(), 0.12);
         this.addComponent(N14N.getInstance(), 0.11);
-        this.calculateAtomicDensities(1000);
+        this.calculateAtomicDensities(1.000);
     }
 
     HumanBodyMaterial(String name) {

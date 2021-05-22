@@ -16,7 +16,7 @@ public class Paraffin extends Material {
         super("Paraffin");
         this.addComponent(N1H.getInstance(), 0.675311);
         this.addComponent(N12C.getInstance(), 0.324689);
-        this.calculateAtomicDensities(930.0);
+        this.calculateAtomicDensities(0.930);
     }
 
     Paraffin(String name) {

@@ -18,7 +18,7 @@ public class CarbonWax extends Material {
     CarbonWax(String name) {
         super(name);
         
-        double massDensity = 930-138.1; 
+        double massDensity = (930-138.1)/1000; 
         this.addComponent(N12C.getInstance(), 1);
         this.calculateAtomicDensities(massDensity);
     }

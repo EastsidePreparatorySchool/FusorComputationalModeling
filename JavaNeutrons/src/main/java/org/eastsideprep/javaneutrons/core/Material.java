@@ -64,12 +64,15 @@ public class Material {
         }
 
         // how many of these make up a cubic centimeter?
-        double volume = 1e-6; // 1 cubic centimeter in m
-        double densityAtoms = densityMass * volume / massMolecule * Util.Physics.barn;
+        // densityMass (input) is g//cm^3, correct to kg
+        densityMass /= 1000;
+        
+        double volume = Util.Physics.barn * Util.Physics.cm;// 1 barn-cm
+        double densityAtoms = densityMass / massMolecule * volume;
 
-        // if there is n units per volume, 
+        // if there are n units per volume, 
         // then are are n*proportion units of the component
-        System.out.println("Material " + this.name + " mass density " + densityMass + " Kg / m^3");
+        System.out.println("Material " + this.name + " mass density " + densityMass + " g / cm^3");
         System.out.println(" atomic density " + String.format("%6.3e", densityAtoms) + " / b-cm");
         for (Component c : components) {
             c.density = densityAtoms * c.proportion;

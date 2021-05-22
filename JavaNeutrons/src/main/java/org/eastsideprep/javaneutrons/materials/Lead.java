@@ -18,7 +18,7 @@ public class Lead extends Material {
     public Lead() {
         super("Lead");
         this.addComponent(N207Pb.getInstance(), 1.0);
-        this.calculateAtomicDensities(11350);
+        this.calculateAtomicDensities(11.350);
     }
     
     // we only need one of these objects

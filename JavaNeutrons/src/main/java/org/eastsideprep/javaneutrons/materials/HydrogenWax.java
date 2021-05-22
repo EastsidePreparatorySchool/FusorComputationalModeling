@@ -18,7 +18,7 @@ public class HydrogenWax extends Gas {
     HydrogenWax(String name, double pressure) {
         super(name, pressure);
         
-        double massDensitySTP = 138.1; //930.0*2.0/3.0/4.4894;  // to equal 1H density in paraffin wax
+        double massDensitySTP = 138.1 / 1000; //930.0*2.0/3.0/4.4894;  // to equal 1H density in paraffin wax
 
         this.addComponent(N1H.getInstance(), 1);
 

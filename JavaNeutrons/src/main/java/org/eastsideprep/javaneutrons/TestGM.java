@@ -387,14 +387,17 @@ public class TestGM {
     //
     public static MonteCarloSimulation bigBlock(Group visualizations) {
         double thickness = 25; //block thickness in cm
-        Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
         //String m = "HydrogenWax";
         //String m = "CarbonWax";
         String m = "Paraffin";
 
-        Part wall = new Part("Wall: " + m, blockShape, m);
+        Part wall = new Part("Paraffin Wall: " + m, new Cuboid(thickness, 100, 100), m);
         wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
         wall.setColor("silver");
+
+        Part wall2 = new Part("HWax Wall: " + m, new Cuboid(thickness, 100, 100), "HydrogenWax");
+        wall2.getTransforms().add(new Translate(-50 - thickness / 2, 0, 0));
+        wall2.setColor("pink");
 
         Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
         Part detector1 = new Part("Detector behind " + m + " wall", detectorShape, "HighVacuum");
@@ -406,7 +409,7 @@ public class TestGM {
         detector2.setColor("pink");
 
         Assembly whitmer = new Assembly("Whitmer");
-        whitmer.addAll(wall, detector1, detector2);
+        whitmer.addAll(wall, wall2, detector1, detector2);
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
                 null, null, Neutron.startingEnergyDD,

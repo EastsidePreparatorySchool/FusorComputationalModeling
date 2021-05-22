@@ -23,7 +23,7 @@ public class ConcreteRegular extends Material {
         this.addComponent(N27Al.getInstance(), 0.021343);
         this.addComponent(N28Si.getInstance(), 0.203231);
         this.addComponent(N56Fe.getInstance(), 0.004246);
-        this.calculateAtomicDensities(2300.0);
+        this.calculateAtomicDensities(2.300);
     }
 
     ConcreteRegular(String name) {

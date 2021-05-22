@@ -21,7 +21,7 @@ public class Wood extends Material {
         this.addComponent(N12C.getInstance(), 0.323389);
         this.addComponent(N14N.getInstance(), 0.002773);
         this.addComponent(N16O.getInstance(), 0.208779);
-        this.calculateAtomicDensities(640);
+        this.calculateAtomicDensities(0.640);
     }
 
     Wood(String name) {
