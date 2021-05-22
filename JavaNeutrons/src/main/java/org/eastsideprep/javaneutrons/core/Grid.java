@@ -237,7 +237,6 @@ public class Grid {
                 Part p = null;
                 Part p2 = null;
                 int face = -1;
-                int face2 = -1;
 
                 for (Triangle tr : cell.triangles) {
                     // find intersecting triangles
@@ -262,7 +261,6 @@ public class Grid {
                         if (tminNew2 < tmin2 || (tmin2 == -1.0 && tminNew2 != -1.0)) {
                             tmin2 = tminNew2;
                             p2 = tr.part;
-                            face2 = tr.face;
                         }
                     }
                 }
@@ -300,7 +298,7 @@ public class Grid {
                 cy += Math.signum(dy) * side;
             }
             if (tz == tmin) {
-                // exit in y direction
+                // exit in z direction
                 cz += Math.signum(dz) * side;
             }
 

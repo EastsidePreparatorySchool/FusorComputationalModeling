@@ -315,7 +315,8 @@ public class App extends Application {
                                 text += "Designated Detector \"" + p.name + "\":\n\n";
                                 text += f.format(n) + " Sv/hr (neutron)\n";
                                 text += f.format(g) + " Sv/hr (gamma)\n";
-                                text += f.format(g + n) + " Sv/hr (total)\n";
+                                text += f.format(g + n) + " Sv/hr (total)\n\n";
+                                text += "(\"Banana criterion\": total < 1.2E-6 Sv/h)";
 
                                 // put onto clipboard
                                 Clipboard clipboard = Clipboard.getSystemClipboard();

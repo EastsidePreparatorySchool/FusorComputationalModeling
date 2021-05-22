@@ -386,7 +386,7 @@ public class TestGM {
     // world simulations
     //
     public static MonteCarloSimulation bigBlock(Group visualizations) {
-        double thickness = 0.1; // block thickness in cm
+        double thickness = 25; // block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
         //String m = "Concrete";
         //String m = "CarbonWax";

@@ -5,7 +5,6 @@ import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
-import javafx.scene.PointLight;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.input.KeyEvent;
@@ -13,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
@@ -25,14 +23,13 @@ import javafx.scene.transform.Translate;
 public class CameraControl {
 
     // window
-    private int pxX;
-    private int pxY;
+    private final int pxX;
+    private final int pxY;
 
     public Group root;
 
     // camera
-    private PerspectiveCamera camera;
-    private PointLight pLight;
+    private final PerspectiveCamera camera;
     private double focusX;
     private double focusY;
     private double xRot;
@@ -54,13 +51,6 @@ public class CameraControl {
         this.root = new Group();
 
         AmbientLight aLight = new AmbientLight(Color.rgb(200, 200, 200));
-//        pLight = new PointLight(Color.ANTIQUEWHITE);
-//        pLight.getTransforms().setAll(
-//                new Translate(focusX, 0, focusY),
-//                new Rotate(yRot, Rotate.Y_AXIS),
-//                new Rotate(xRot, Rotate.X_AXIS),
-//                new Translate(0, 0, zTrans)
-//        );
         root.getChildren().addAll(aLight/*, pLight*/);
 
         // Create and position camera
@@ -76,14 +66,6 @@ public class CameraControl {
         subScene.setFill(Color.WHITE);
         subScene.setCamera(camera);
         outer = new Group(subScene);
-//        subScene.widthProperty().bind(outer.widthProperty());
-//        subScene.heightProperty().bind(outer.heightProperty());
-        //subScene.setOnMouseClicked((e) -> focus(e));
-
-//        outer.setPrefSize(pxX, pxY);
-//        outer.setMaxSize(pxX, pxY);
-//        outer.setMinSize(200, 200);
-        //outer.setAlignment(Pos.TOP_LEFT);
         root.setAutoSizeChildren(true);
 
         updateCamera();
@@ -120,9 +102,9 @@ public class CameraControl {
     public void handleKeyPress(KeyEvent e) {
         switch (e.getCode()) {
             case ESCAPE:
-                this.xRot = -20;
-                this.yRot = -10;
-                this.zTrans = -800;
+                this.xRot = -100;
+                this.yRot = 0;
+                this.zTrans = -2100;
                 this.focusX = 0;
                 this.focusY = 0.0;
                 break;
@@ -168,12 +150,6 @@ public class CameraControl {
         }
 
         updateCamera();
-        /*pLight.getTransforms().setAll(
-                new Translate(focusX, 0, focusY),
-                new Rotate(yRot, Rotate.Y_AXIS),
-                new Rotate(xRot, Rotate.X_AXIS),
-                new Translate(0, 0, zTrans)
-        );*/
 
         e.consume();
     }
@@ -192,8 +168,8 @@ public class CameraControl {
             yRot += mouseDeltaX * modifierFactor * 2.0;
             xRot -= mouseDeltaY * modifierFactor * 2.0;
         } else if (me.isSecondaryButtonDown()) {
-            focusX -= mouseDeltaX ;//* modifierFactor;
-            focusY -= mouseDeltaY ;//* modifierFactor;
+            focusX -= mouseDeltaX;//* modifierFactor;
+            focusY -= mouseDeltaY;//* modifierFactor;
         }
 
         updateCamera();
@@ -228,11 +204,6 @@ public class CameraControl {
                         f = t.transform(f);
                     }
 
-//                    l = this.camera.getTransforms();
-//                    for (Transform t : l) {
-//                        f = t.transform(f);
-//                    }
-
                     focusX = f.getX();
                     focusY = f.getY();
                     //zTrans = -f.getZ();
@@ -240,10 +211,8 @@ public class CameraControl {
                 }
             }
 
-            //zTrans *= 0.7;
             updateCamera();
         }
-        //e.consume();
     }
 
 }
