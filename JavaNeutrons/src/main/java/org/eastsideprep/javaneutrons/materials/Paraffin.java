@@ -7,7 +7,7 @@ package org.eastsideprep.javaneutrons.materials;
 
 import org.eastsideprep.javaneutrons.core.Material;
 
-// paraffin wax material ???
+// paraffin wax material 358
 public class Paraffin extends Material {
 
     private static Paraffin instance;

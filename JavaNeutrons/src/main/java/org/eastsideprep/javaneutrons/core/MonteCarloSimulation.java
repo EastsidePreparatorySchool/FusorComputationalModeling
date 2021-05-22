@@ -131,7 +131,7 @@ public class MonteCarloSimulation {
     public double suggestedGrid = 5;
     public boolean fit = false;
     public Part designatedDetector = null;
-    public double srcRate = 10E8;
+    public double srcRate = 1E8;
     public String name;
 
     public static boolean visualLimitReached = false;

@@ -53,7 +53,7 @@ public class TestGM {
     public static MonteCarloSimulation current(Group visualizations) {
         //return TestSV.october(visualizations);
         // return prison(visualizations);
-        return exposure30(visualizations);
+        return bigBlock(visualizations);
 
         //System.exit(0);
         //return null;
@@ -200,7 +200,7 @@ public class TestGM {
 
             @Override
             public void before() {
-                adjusted = new TallyOverEV(1e7,100);
+                adjusted = new TallyOverEV(1e7, 100);
                 angles = new Tally(-1.0, 1.0, 100, false);
                 pairs = new ArrayList<>();
             }
@@ -299,7 +299,7 @@ public class TestGM {
 
             @Override
             public void before() {
-                adjusted = new TallyOverEV(1e7,100);
+                adjusted = new TallyOverEV(1e7, 100);
                 angles = new Tally(-1.0, 1.0, 100, false);
                 pairs = new ArrayList<>();
             }
@@ -386,6 +386,39 @@ public class TestGM {
     // world simulations
     //
     public static MonteCarloSimulation bigBlock(Group visualizations) {
+        double thickness = 25; //block thickness in cm
+        Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
+        //String m = "HydrogenWax";
+        //String m = "CarbonWax";
+        String m = "Paraffin";
+
+        Part wall = new Part("Wall: " + m, blockShape, m);
+        wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
+        wall.setColor("silver");
+
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Detector behind " + m + " wall", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Part detector2 = new Part("Detector opposite " + m + " wall", detectorShape, "HighVacuum");
+        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
+        detector2.setColor("pink");
+
+        Assembly whitmer = new Assembly("Whitmer");
+        whitmer.addAll(wall, detector1, detector2);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+                null, null, Neutron.startingEnergyDD,
+                "Vacuum", null, visualizations, false); // interstitial, initial
+        //mcs.prepareGrid(5.0, visualizations);
+        mcs.suggestedCount = 100000;
+        mcs.designatedDetector = detector1;
+        
+        return mcs;
+    }
+
+    public static MonteCarloSimulation blocksAllAround(Group visualizations) {
         double thickness = 25; // block thickness in cm
         Shape blockShape = new Shape(new CuboidMesh(thickness, 100, 100));
         //String m = "Concrete";
@@ -530,7 +563,7 @@ public class TestGM {
 
         // detector target
         Part target = new Part("Target", new Cuboid(targetExtentY, targetThickness, targetExtentZ), "HighVacuum", "green")
-                .translate(0, -targetFaceFromSource, floorLevel + targetHeightAboveFloor+targetExtentZ/2);
+                .translate(0, -targetFaceFromSource, floorLevel + targetHeightAboveFloor + targetExtentZ / 2);
 
         Assembly fusor = new Assembly("Fusor");
         fusor.addAll(vacChamber,
@@ -1114,7 +1147,7 @@ public class TestGM {
     }
 
     private static void histTest() {
-        TallyOverEV test = new TallyOverEV(1e7,100);
+        TallyOverEV test = new TallyOverEV(1e7, 100);
         test.record(1000, 0.5e-4 * Util.Physics.eV);
         test.record(2000, 1e-3 * Util.Physics.eV);
         test.record(2100, 1.1e-3 * Util.Physics.eV);

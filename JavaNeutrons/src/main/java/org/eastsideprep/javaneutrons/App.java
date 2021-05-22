@@ -301,6 +301,7 @@ public class App extends Application {
                                 double g = p.getSieverts("gamma") / this.sim.lastCount;
 
                                 // want per hour
+                                double nSimple = n;
                                 n *= this.sim.srcRate * 3600;
                                 g *= this.sim.srcRate * 3600;
 
