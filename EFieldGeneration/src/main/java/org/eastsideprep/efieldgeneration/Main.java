@@ -12,10 +12,10 @@ package org.eastsideprep.efieldgeneration;
 public class Main {
 
     public static void main(String[] args) {
-
         InputHandler input = new InputHandler();
         input.getInput();
         //input.scaleOver(); 
+        //input.move();
     }
 
 }

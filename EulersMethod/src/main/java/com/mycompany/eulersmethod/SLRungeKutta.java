@@ -12,19 +12,21 @@ package com.mycompany.EulersMethod;
 public class SLRungeKutta {
 
     EField e;
-    SLRungeKutta(EField e){
+
+    SLRungeKutta(EField e) {
         this.e = e;
     }
+
     public Particle f(Particle p) {
         Particle p1 = p.clone();
         p1.pos = p.vel.clone();
-        p1.vel = e.forceOnCharge(p).scale(1/p.mass);
+        p1.vel = e.forceOnCharge(p).scale(1 / p.mass);
         return p1;
     }
 
     public Particle scaleAdd(Particle y, Particle k, Double h) {
-        Particle hk = k.clone();
-        hk.multiply(h);
+        Particle hk = k.clone();        
+        hk.scale(h);
         hk.plusEquals(y.clone());
         return hk;
 
@@ -40,11 +42,11 @@ public class SLRungeKutta {
         Particle hk3 = scaleAdd(p.clone(), k3.clone(), stepSize);
         Particle k4 = f(hk3.clone());
         Particle p2 = p.clone();
-        Particle[] k_2_4 = {k2.multiply(2), k3.multiply(2), k4};
+        Particle[] k_2_4 = {k2.scale(2), k3.scale(2), k4};
         k1.plusEquals(k_2_4);
-        Particle k = k1.multiply(stepSize / 6);
+        Particle k = k1.scale(stepSize / 6);
         p2.plusEquals(k);
-        p2.time +=stepSize;
+        p2.time += stepSize;
         p2.totalEnergy(e);
         return p2;
 
@@ -69,12 +71,12 @@ public class SLRungeKutta {
             }
             particles[i] = p.clone();
             System.out.println("Batches Completed: " + i + "/" + batchNumber);
-            System.out.println("Percentage: " + (i / batchNumber)*100 + "%");
+            System.out.println("Percentage: " + (i / batchNumber) * 100 + "%");
             long currentTime = System.currentTimeMillis();
             System.out.println("Time this Batch: " + (currentTime - batchStart));
         }
         System.out.println("Epoch Time: " + (System.currentTimeMillis() - epochStart));
-        
+
         return particles;
     }
 

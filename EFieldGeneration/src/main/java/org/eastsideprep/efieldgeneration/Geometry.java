@@ -52,7 +52,7 @@ public class Geometry {
         meshImporter.close();
         return mesh;
     }
-
+    
     public void getTriangles() {
 
         // .getfaces/.getPoints/whatever all return Observable(Object)Arrays
@@ -130,7 +130,7 @@ public class Geometry {
             Vector C = new Vector((double) negativePoints[negativeFaceIndeces[i + 4] * 3], (double) negativePoints[negativeFaceIndeces[i + 4] * 3 + 1], (double) negativePoints[negativeFaceIndeces[i + 4] * 3 + 2]);
 
             Triangle t = new Triangle(A, B, C, -1);
-            triangles[(i+positiveFaceIndeces.length) / 6] = t;
+            triangles[(i + positiveFaceIndeces.length) / 6] = t;
             negativeTriangles[i / 6] = t;
 
         }
@@ -159,6 +159,31 @@ public class Geometry {
         }
     }
 
+    public void multiplyNegativeTriangles(Vector factor) {
+        for (Triangle t : triangles) {
+            if (t.polarity < 0) {
+                t.multiply(factor);
+            }
+        }
+
+    }
+
+    public void multiplyPositiveTriangles(Vector factor) {
+        for (Triangle t : triangles) {
+            if (t.polarity > 0) {
+                t.multiply(factor);
+            }
+        }
+
+    }
+
+    public void multiplyTriangles(Vector factor) {
+        for (Triangle t : triangles) {
+            t.multiply(factor);
+        }
+
+    }
+
     // for each polarity
     // make two lists
     // one with triangles, which you add to for each triangle of that polarity
@@ -176,8 +201,8 @@ public class Geometry {
 
             } else if (triangles[i].polarity < 0) {
                 negativeSA += triangles[i].surfaceArea;
-                negativeTriangles[i-positiveTriangles.length] = triangles[i];
-                negativeSumSA[i-positiveTriangles.length] = negativeSA;
+                negativeTriangles[i - positiveTriangles.length] = triangles[i];
+                negativeSumSA[i - positiveTriangles.length] = negativeSA;
             }
             triangleSumSA[i] = triangles[i].surfaceArea;
         }

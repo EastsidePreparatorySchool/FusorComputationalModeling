@@ -251,15 +251,22 @@ public class EField {
         }
         return ePotential * chargeFactor;
     }
-
+    /**
+     * Returns the kinetic energy of a particle
+     * @param p particle
+     * @return kinetic energy
+     */
     public double kineticEnergy(Particle p) {
         Vector zero = new Vector(0.0, 0.0, 0.0);
         return 0.5 * p.mass * p.vel.distanceSquared(zero);
     }
-
+    /**
+     * Returns the total energy of a particle, and updates that particle's
+     * kinetic and potential energy
+     * @param p particle
+     * @return total energy
+     */
     public double totalEnergy(Particle p) {
-        double ePotentialEnergy = electricPotentialEnergy(p);
-        double kineticEnergy = kineticEnergy(p);
-        return ePotentialEnergy + kineticEnergy;
+        return p.totalEnergy(this);
     }
 }

@@ -222,6 +222,7 @@ public class App extends Application {
         for (int i = 0; i < charges.length; i++) {
             Charge c = charges[i];
             if (c.polarity < 0) {
+                //System.out.println("hieh");
                 final Sphere s = new Sphere(0.4);
                 s.setMaterial(RedColor);
                 s.setTranslateX(c.pos.x);

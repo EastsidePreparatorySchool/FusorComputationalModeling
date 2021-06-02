@@ -108,29 +108,29 @@ public class InputHandler {
         boolean inputRecieved = false;
         GridBox bounds;
         Double stepSize = 0.001;
-        Double threshold = 0.001;
-        int numberOfGaps = 12;
+        Double threshold = 0.002;
+        int numberOfGaps = 14;
         int checkerBoard = 2;
-        Double vAnnode = 1.0;
+        Double vAnnode = 0.0;
         Double vCathode = -40000.0;
         Boolean skipInput = false;
-        inputFilePath = "outputChamberGrid20kCharges1kShakes.csv";
-        String outputFilePath = "testFieldLine1.csv";
-        /*
+        inputFilePath = "scaledChamberGrid20kc1ks.csv";
+        String outputFilePath = "scaleXYFieldLines.csv";
+       
         outputFilePath = fileCreate("please enter the output file location: ");
         
         System.out.println("skip input? (Y/N)");
         String input = "";
-        inputReceived = false;
-        while (!inputReceived) {
+        inputRecieved = false;
+        while (!inputRecieved) {
             input = s.nextLine();
             if (input.equals("Y") || input.equals("y")) {
                 skipInput = true;
-                inputReceived = true;
+                inputRecieved = true;
                 break;
             } else if (input.equals("N") || input.equals("n")) {
                 skipInput = false;
-                inputReceived = true;
+                inputRecieved = true;
                 break;
             } else {
                 System.out.println("Please enter (Y) or (N)");
@@ -162,8 +162,8 @@ public class InputHandler {
 
         }
         
-        inputReceived = false;
-         */
+        inputRecieved = false;
+         
         EFieldFileParser parser = new EFieldFileParser();
 
         Charge[][] chargeArrayArray = parser.parseFile(inputFilePath);
@@ -188,7 +188,7 @@ public class InputHandler {
         System.out.println("testPosition force: " + eField.fieldAtPoint(testPosition));
         System.out.println("testPosition2 force: " + eField.fieldAtPoint(testPosition2));
         */
-        /*bounds = makeBoundingBox(scaleDistance);
+        bounds = makeBoundingBox(scaleDistance);
         System.out.println("bounds: " + bounds);
         FieldLineGenerator flGenerator = new FieldLineGenerator(eField, bounds,
                 stepSize, threshold, numberOfGaps, checkerBoard);
@@ -196,9 +196,9 @@ public class InputHandler {
         LinkedList<LinkedList<Vector>> fieldLines = flGenerator.drawFieldLines();
         String[] headers = {"Line", "X", "Y", "Z"};
         tgw.writeCSV(fieldLines, headers, outputFilePath);
-        inputReceived = false;
+        inputRecieved = false;
         input = "";
-         */
+         
     }
 
 }

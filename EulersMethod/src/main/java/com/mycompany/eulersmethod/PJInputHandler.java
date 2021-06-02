@@ -207,7 +207,7 @@ public class PJInputHandler {
         Double time = Double.valueOf(s.nextLine());
 
         System.out.println("Mass (in Atomic Mass Units, for Deuterium this is 2.0141)");
-        Double mass = Double.valueOf(s.nextLine()) * 1.66E-27;
+        Double mass = 2.014102 * 1.66053906660E-27;;
 
         return new Particle(x, y, z, Vx, Vy, Vz, polarity, charge, time, mass);
     }
@@ -221,32 +221,43 @@ public class PJInputHandler {
         int batchSize = 0;
         Double numberOfSteps;
         Particle initial;
-        boolean inputRecieved;
+        boolean inputReceived;
         Double vAnnode = null;
         Double vCathode = null;
-        
-        
+        int i = 0;
+                
+
         inputFilePath = "outputChamberGrid20kCharges1kShakes.csv";
-        outputFilePath = "pjrktestPJinput.csv";
+
         System.out.println("Do you want to skip the input process?");
         String input;
         input = s.nextLine();
         
         if (input.equals("Y") || input.equals("y")) {
-            inputRecieved = true;
-            skipInput = true;
+            inputReceived = true;
+            skipInput = true;      
+
         } else if (input.equals("N") || input.equals("n")) {
-            inputRecieved = true;
+            inputReceived = true;
             skipInput = false;
         } else{
             System.out.println("Please respond with a (Y) or (N)");
+        }
+        
+        outputFilePath = "PJinputrktest" + i + ".csv";
+        File fileExists = new File(outputFilePath);
+        while(fileExists.exists()){
+        i++;
+        System.out.println("hello");
+        outputFilePath = "PJinputrktest" + i + ".csv";
         }
         
         if (skipInput) {
             
 
             EFieldFileParser parser = new EFieldFileParser();
-            Charge[][] chargeArrayArray = parser.parseFile("outputChamberGrid20kCharges1kShakes.csv");
+            Charge[][] chargeArrayArray = parser.parseFile(inputFilePath);
+
             charges = chargeArrayArray[0];
             positiveCharges = chargeArrayArray[1];
             negativeCharges = chargeArrayArray[2];
@@ -258,7 +269,8 @@ public class PJInputHandler {
             Particle Partikel = new Particle (70.0, 70.0, 70.0, 0.0, 0.0, 0.0, 1, 1.0, 0.0); //you can decide the values of the velocity, position, etc. of the particle here
             //Particle(Double x, Double y, Double z, Double vx, Double vy,Double vz, int polarity, Double charge, Double time)
             
-            orbitStuff(true,false, Partikel, 100000.0, 1.0, outputFilePath,true, 100, true, false); 
+            orbitStuff(true,false, Partikel, 1000.0, 1e-10, outputFilePath,true, 100, false, true); 
+
             //orbitStuff(Boolean PJ, Boolean MY, Particle initial, Double numberOfSteps, Double stepSize, String outputFilePath, Boolean batch, int batchSize, Boolean eu, Boolean rk) {
             // you can also decide what values to put in 
         
@@ -276,7 +288,7 @@ public class PJInputHandler {
             System.out.println("What is the distance, in meters, of 1 unit in the stl files?");
             scaleDistance = Double.valueOf(s.nextLine());
 
-            inputRecieved = false;
+            inputReceived = false;
 
             EFieldFileParser parser = new EFieldFileParser();
 
@@ -288,23 +300,23 @@ public class PJInputHandler {
             eField = new EField(charges, vAnnode, vCathode, scaleDistance, new Vector(0.0, 0.0, 0.0));
             Boolean calculateOrbit = false;
             input = "";
-            inputRecieved = false;
-            while (!inputRecieved) {
+            inputReceived = false;
+            while (!inputReceived) {
                 System.out.println("Do you want to calculate an orbit?(Y/N)");
 
                 input = s.nextLine();
                 if (input.equals("Y") || input.equals("y")) {
-                    inputRecieved = true;
+                    inputReceived = true;
                     calculateOrbit = true;
                 } else if (input.equals("N") || input.equals("n")) {
-                    inputRecieved = true;
+                    inputReceived = true;
                     calculateOrbit = false;
                 } else {
                     System.out.println("Please respond with (Y) or (N)");
                 }
 
             }
-            inputRecieved = false;
+            inputReceived = false;
             input = "";
             if (calculateOrbit) {
                 initial = getInitialParticle();
@@ -317,16 +329,16 @@ public class PJInputHandler {
                 System.out.println("Number of Steps:");
                 numberOfSteps = Double.valueOf(s.nextLine());
 
-                inputRecieved = false;
+                inputReceived = false;
 
-                while (!inputRecieved) {
+                while (!inputReceived) {
                     System.out.println("Who's Orbit do you want? Praveer (PJ) Maggie (MY)");
                     input = s.nextLine();
                     if (input.equals("PJ") || input.equals("Pj") || input.equals("pJ") || input.equals("pj")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         PJ = true;
                     } else if (input.equals("MY") || input.equals("My") || input.equals("mY") || input.equals("my")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         MY = true;
                     } else {
                         System.out.println("Please respond with (PJ) or (MY)");
@@ -334,15 +346,15 @@ public class PJInputHandler {
                 }
 
                 input = "";
-                inputRecieved = false;
-                while (!inputRecieved) {
+                inputReceived = false;
+                while (!inputReceived) {
                     System.out.println("Which method do you want? Eulers (EU) Runge Kutta (RK)");
                     input = s.nextLine();
                     if (input.equals("EU") || input.equals("Eu") || input.equals("eU") || input.equals("eu")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         eu = true;
                     } else if (input.equals("RK") || input.equals("Rk") || input.equals("rK") || input.equals("rk")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         rk = true;
                     } else {
                         System.out.println("Please respond with (EU) or (RK)");
@@ -350,16 +362,16 @@ public class PJInputHandler {
                 }
 
                 input = "";
-                inputRecieved = false;
-                while (!inputRecieved && numberOfSteps < 100000) {
+                inputReceived = false;
+                while (!inputReceived && numberOfSteps < 100000) {
                     System.out.println("Do want to split them into batches? (Y/N)");
 
                     input = s.nextLine();
                     if (input.equals("Y") || input.equals("y")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         batch = true;
                     } else if (input.equals("N") || input.equals("n")) {
-                        inputRecieved = true;
+                        inputReceived = true;
                         batch = false;
                     } else {
                         System.out.println("Please respond with (Y) or (N)");
@@ -378,7 +390,7 @@ public class PJInputHandler {
                 orbitStuff(PJ, MY, initial, numberOfSteps, stepSize, outputFilePath, batch, batchSize, eu, rk);
             }
 
-            inputRecieved = false;
+            inputReceived = false;
             input = "";
 
 
