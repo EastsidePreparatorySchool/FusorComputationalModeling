@@ -42,8 +42,7 @@ public class Part {
         this(name, s, material);
         this.setColor(color);
     }
- 
-    
+
     public Part(String name, Shape s, Object material) {
         if (s != null) {
             this.shape = new Shape(s);
@@ -72,25 +71,35 @@ public class Part {
     public final void resetDetector() {
         this.totalDepositedEnergy = 0;
         this.totalEvents = new AtomicLong(0);
-        this.exitsOverEnergy = new TallyOverEV(1e7,100);
-        this.entriesOverEnergy = new TallyOverEV(1e7,100);
+        this.exitsOverEnergy = new TallyOverEV(1e7, 100);
+        this.entriesOverEnergy = new TallyOverEV(1e7, 100);
 
         synchronized (Part.tableCreationLock) {
             if (Part.neutronConversionTable == null) {
                 Part.neutronConversionTable = new Util.LogLogTable("/sieverts/neutron_conversion.csv");
                 Part.photonConversionTable = new Util.LogLogTable("/sieverts/photon_conversion.csv");
+
+                // DEBUG
+                for (double e = 0.05; e <= 1.01; e += 0.05) {
+                    double y = Part.photonConversionTable.lookup(e * 1000000);
+                    System.out.println("Photon Energy " + String.format("%6.3e", e) + " MeV, Sv-cm^2: " + y);
+                }
+                double e = 2.23;
+                double y = Part.photonConversionTable.lookup(e * 1000000);
+                System.out.println("Photon Energy " + String.format("%6.3e", e) + " MeV, Sv-cm^2: " + y);
+                //System.exit(0);
             }
         }
 
-        CorrelatedTallyOverEV neutronFluence = new CorrelatedTallyOverEV(5e6,100, Part.neutronConversionTable);
+        CorrelatedTallyOverEV neutronFluence = new CorrelatedTallyOverEV(5e6, 100, Part.neutronConversionTable);
         CorrelatedTallyOverEV gammaFluence = new CorrelatedTallyOverEV(12e6, 100, Part.photonConversionTable);
         this.fluenceMap = new HashMap<>();
         this.fluenceMap.put("neutron", neutronFluence);
         this.fluenceMap.put("gamma", gammaFluence);
 
-        this.scattersOverEnergyBefore = new TallyOverEV(1e7,100);
-        this.capturesOverEnergy = new TallyOverEV(1e7,100);
-        this.scattersOverEnergyAfter = new TallyOverEV(1e7,100);
+        this.scattersOverEnergyBefore = new TallyOverEV(1e7, 100);
+        this.capturesOverEnergy = new TallyOverEV(1e7, 100);
+        this.scattersOverEnergyAfter = new TallyOverEV(1e7, 100);
         this.angles = new Tally(-1, 1, 100, false);
     }
 
@@ -324,15 +333,15 @@ public class Part {
     public double getSieverts(String type) {
         return this.fluenceMap.get(type).totalSievert.doubleValue();
     }
-    
-    public Part translate(double x,double y,double z) {
+
+    public Part translate(double x, double y, double z) {
         this.getTransforms().add(0, new Translate(x, y, z));
         return this;
     }
-    
-   public Part rotate(double angle, double x,double y,double z) {
+
+    public Part rotate(double angle, double x, double y, double z) {
         this.getTransforms().add(0, new Rotate(angle, new Point3D(x, y, z)));
         return this;
-    }                 
+    }
 
 }

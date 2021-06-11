@@ -386,6 +386,37 @@ public class TestGM {
     // world simulations
     //
     public static MonteCarloSimulation bigBlock(Group visualizations) {
+        double thickness = 30; //block thickness in cm
+        //String m = "HydrogenWax";
+        //String m = "CarbonWax";
+        String m = "Paraffin";
+
+        Part wall = new Part("Paraffin Wall: " + m, new Cuboid(thickness, 100, 100), m);
+        wall.getTransforms().add(new Translate(50 + thickness / 2, 0, 0));
+        wall.setColor("silver");
+
+        Shape detectorShape = new Shape(new CuboidMesh(2, 100, 100));
+        Part detector1 = new Part("Detector behind " + m + " wall", detectorShape, "HighVacuum");
+        detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
+        detector1.setColor("pink");
+
+        Part detector2 = new Part("Detector opposite wall ", detectorShape, "HighVacuum");
+        detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
+        detector2.setColor("pink");
+
+        Assembly whitmer = new Assembly("Whitmer");
+        whitmer.addAll(wall, detector1, detector2);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(whitmer,
+                null, null, Neutron.startingEnergyDD,
+                "Vacuum", null, visualizations, false); // interstitial, initial
+        //mcs.prepareGrid(5.0, visualizations);
+        mcs.suggestedCount = 100000;
+        mcs.designatedDetector = detector1;
+        
+        return mcs;
+    }
+  public static MonteCarloSimulation bigBlock2(Group visualizations) {
         double thickness = 25; //block thickness in cm
         //String m = "HydrogenWax";
         //String m = "CarbonWax";
@@ -404,7 +435,7 @@ public class TestGM {
         detector1.getTransforms().add(new Translate(100 + 1, 0, 0));
         detector1.setColor("pink");
 
-        Part detector2 = new Part("Detector opposite " + m + " wall", detectorShape, "HighVacuum");
+        Part detector2 = new Part("Detector behind HWax wall ", detectorShape, "HighVacuum");
         detector2.getTransforms().add(new Translate(-(100 + 1), 0, 0));
         detector2.setColor("pink");
 
@@ -658,6 +689,25 @@ public class TestGM {
 
         MonteCarloSimulation mcs = new MonteCarloSimulation(prison,
                 null, null, Neutron.startingEnergyDD, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
+                "Air", null, visualizations, false); // interstitial, initial
+        mcs.suggestedCount = 100000;
+        mcs.designatedDetector = wall;
+        return mcs;
+    }
+
+     public static MonteCarloSimulation prisonHWax(Group visualizations) {
+        double thickness = 200; //block thickness in cm
+        String m = "HydrogenWax";
+
+        //Part wall = new Part("Prison: " + m, new Shape(TestGM.class.getResource("/meshes/prison.stl"), "cm"), m);
+        Part wall = new Part("Prison: " + m, new Cuboid(thickness), m);
+        wall.setColor("silver");
+
+        Assembly prison = new Assembly("Prison");
+        prison.addAll(wall);
+
+        MonteCarloSimulation mcs = new MonteCarloSimulation(prison,
+                null, null, Util.Physics.thermalEnergy, // origin = (0,0,0), random dir, default DD-neutron energy+1 KeV
                 "Air", null, visualizations, false); // interstitial, initial
         mcs.suggestedCount = 100000;
         mcs.designatedDetector = wall;

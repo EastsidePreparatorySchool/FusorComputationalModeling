@@ -60,8 +60,7 @@ public class Util {
                     .add(n2.scalarMultiply(ThreadLocalRandom.current().nextGaussian() * sd))
                     .normalize();
         }
-        
-        
+
         public static double randomGaussian() {
             return ThreadLocalRandom.current().nextGaussian();
         }
@@ -123,10 +122,10 @@ public class Util {
 
         public static double interpolateLogLog(double x1, double y1, double x2, double y2, double x) {
             return java.lang.Math.exp(interpolateLinearLinear(
-                    java.lang.Math.log(x1), 
-                    java.lang.Math.log(y1), 
-                    java.lang.Math.log(x2), 
-                    java.lang.Math.log(y2), 
+                    java.lang.Math.log(x1),
+                    java.lang.Math.log(y1),
+                    java.lang.Math.log(x2),
+                    java.lang.Math.log(y2),
                     java.lang.Math.log(x)));
         }
 
@@ -452,17 +451,17 @@ public class Util {
                 sc.nextLine();
                 while (sc.hasNextLine()) {
                     String[] items = sc.nextLine().trim().split(",");
-                    x.add(Double.parseDouble(items[0])*1e6); // adjusting because table is in MeV
+                    x.add(Double.parseDouble(items[0]) * 1e6); // adjusting because table is in MeV
                     y.add(Double.parseDouble(items[1]));
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Error loading table: "+e);
-                throw new IllegalArgumentException("can't load fluence -> sieverts conversion table "+filename);
+                System.out.println("Error loading table: " + e);
+                throw new IllegalArgumentException("can't load fluence -> sieverts conversion table " + filename);
             }
         }
-        
+
         double lookup(double x) {
             // todo: binary search, log-log interpolation
             int i1 = Collections.binarySearch(this.x, x);
@@ -470,17 +469,18 @@ public class Util {
             if (i1 >= 0) {
                 return this.y.get(i1);
             }
-            i1 = -i1-1;
+            i1 = -i1 - 1;
             // if not, at end? return top value
             if (i1 == this.x.size()) {
-                return this.y.get(i1-1);
+                return this.y.get(i1 - 1);
             }
             // if not, before start? return bottom value
             if (i1 == 0) {
-                return this.y.get(0);
+                // return this.y.get(0);
+                return 0.0; // per Dr. Whitmer 
             }
             // otherwise, interpolate
-            return Util.Math.interpolateLogLog(this.x.get(i1), this.y.get(i1), this.x.get(i1+1), this.y.get(i1+1), x);
+            return Util.Math.interpolateLogLog(this.x.get(i1), this.y.get(i1), this.x.get(i1 + 1), this.y.get(i1 + 1), x);
         }
     }
 
